@@ -6,13 +6,19 @@
       "id": 1790965644904.4963,
       "ko": "보증금도",
       "autoPl": "Błąd pobierania",
-      "custom": ""
+      "custom": "Bezpieczeństwo"
     },
     {
       "id": 1790965644908.8533,
       "ko": "애완동물을",
       "autoPl": "Błąd pobierania",
-      "custom": ""
+      "custom": "Zwierzę domowe"
+    },
+    {
+      "id": 1790971572930.908,
+      "ko": "살펴봤어요",
+      "autoPl": "Błąd pobierania",
+      "custom": "To examine / rozejrzeć się"
     }
   ],
   "flashcards": [
@@ -3651,6 +3657,33 @@
       "interval": 0,
       "ef": 2.5,
       "nextReview": "2026-09-30T15:17:25.800Z"
+    },
+    {
+      "id": 1790970755893.256,
+      "front": "보증금도",
+      "back": "Bezpieczeństwo",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "nextReview": "2026-10-02T19:52:35.893Z"
+    },
+    {
+      "id": 1790971276350.665,
+      "front": "애완동물을",
+      "back": "Zwierzę domowe",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "nextReview": "2026-10-02T20:01:16.350Z"
+    },
+    {
+      "id": 1790971887089.701,
+      "front": "To examine / rozejrzeć się",
+      "back": "살펴봤어요",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "nextReview": "2026-10-02T20:11:27.089Z"
     }
   ],
   "library": [
