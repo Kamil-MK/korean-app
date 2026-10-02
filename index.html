@@ -11,6 +11,46 @@
 <body>
 
     <main class="app-container">
+        
+        <!-- ZAKŁADKA: AKTYWNOŚĆ -->
+        <section id="tab-aktywnosc" class="tab-content">
+            <header class="section-header">
+                <h2>Aktywność</h2>
+            </header>
+            
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <span style="color: var(--warning); font-size: 24px;">🔥</span><br>
+                    <span id="streak-current" style="font-size: 28px; color: var(--text-dark);">0</span><br>
+                    <span style="font-size: 13px; font-weight: 500; color: var(--text-light);">Seria nauki</span>
+                </div>
+                <div class="stat-box">
+                    <span style="color: var(--primary); font-size: 24px;">🏆</span><br>
+                    <span id="streak-max" style="font-size: 28px; color: var(--text-dark);">0</span><br>
+                    <span style="font-size: 13px; font-weight: 500; color: var(--text-light);">Najdłuższa seria</span>
+                </div>
+            </div>
+            
+            <div class="stat-box full-width mb-3">
+                <span style="color: var(--primary); font-size: 18px;">✔️</span> 
+                <span id="streak-total" style="font-size: 18px; font-weight: bold;">0</span> 
+                <span style="font-size: 14px; font-weight: 500; color: var(--text-light);">Aktywnych dni</span>
+            </div>
+            
+            <div class="card pb-0">
+                <div class="chart-container" id="chart-7days"></div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="flex-between">
+                    <button class="btn btn-outline btn-sm" onclick="changeMonth(-1)">❮</button>
+                    <h3 id="calendar-month-label" style="margin:0;">-</h3>
+                    <button class="btn btn-outline btn-sm" onclick="changeMonth(1)">❯</button>
+                </div>
+                <div id="calendar-grid" class="calendar-grid mt-4"></div>
+            </div>
+        </section>
+
         <!-- ZAKŁADKA: CZYTELNIA -->
         <section id="tab-czytelnia" class="tab-content active">
             <header class="section-header flex-between">
@@ -111,7 +151,7 @@
 
                 <div id="study-empty" class="study-container text-center">
                     <h3>Brak fiszek do powtórki! 🎉</h3>
-                    <p class="hint">Wszystkie zaległości zostały nadrobione.</p>
+                    <p class="hint">Wszystkie zaległości zostały nadrobione. Dzisiejszy cel zaliczony!</p>
                     <button class="btn btn-primary mt-2" onclick="refreshStudySession()">Odśwież sesję</button>
                 </div>
             </div>
@@ -229,6 +269,8 @@
     </div>
 
     <nav class="bottom-nav">
+        <!-- Dodano przycisk aktywności -->
+        <button class="nav-btn" data-target="tab-aktywnosc"><span>📈</span> Aktywność</button>
         <button class="nav-btn active" data-target="tab-czytelnia"><span>📖</span> Czytelnia</button>
         <button class="nav-btn" data-target="tab-slowka"><span>📝</span> Słówka</button>
         <button class="nav-btn" data-target="tab-fiszki"><span>⚡</span> Fiszki</button>
