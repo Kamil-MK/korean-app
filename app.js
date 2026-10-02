@@ -34,7 +34,6 @@ function loadState() {
     
     const today = getLocalToday();
     
-    // Inicjalizacja nowej sesji na nowy dzień
     if (!appState.sessionStats || appState.sessionStats.date !== today) {
         appState.sessionStats = { date: today, again: [], hard: [], good: [], easy: [] };
         saveState();
@@ -50,7 +49,6 @@ function loadState() {
         const totalHist = hist.again + hist.hard + hist.good + hist.easy;
         const totalSess = (sess.again?.length || 0) + (sess.hard?.length || 0) + (sess.good?.length || 0) + (sess.easy?.length || 0);
         
-        // Jeśli wykres jest pusty, ale pasek z fiszkami ma dzisiejsze wyniki - skopiuj je!
         if (totalHist === 0 && totalSess > 0) {
             hist.again = sess.again?.length || 0;
             hist.hard = sess.hard?.length || 0;
@@ -63,8 +61,7 @@ function loadState() {
     updateSettingsUI();
     renderWordsTable();
     renderDeckTable();
-    // Odświeżenie sesji na końcu automatycznie wykryje brak fiszek i oznaczy dzień jako ZALICZONY (completedAll = true)
-    refreshStudySession(); 
+    refreshStudySession();
 }
 
 function saveState() {
@@ -443,7 +440,8 @@ function setupReaderContent(text) {
             container.appendChild(document.createTextNode(token));
         } else {
             const cleanWord = token.replace(/[.,!?()\[\]"'“”]/g, '').trim();
-            const isFiszka = appState.flashcards.some(f => f.front === cleanWord);
+            // Czytelnia musi sprawdzić, czy słówko znajduje się na rewersie
+            const isFiszka = appState.flashcards.some(f => f.back === cleanWord || f.front === cleanWord);
             
             const span = document.createElement('span');
             span.className = 'word-span';
@@ -510,7 +508,8 @@ function renderWordsTable() {
     const tbody = document.getElementById('words-tbody');
     tbody.innerHTML = "";
     appState.words.forEach(w => {
-        const isAdded = appState.flashcards.some(f => f.front === w.ko);
+        // Sprawdzamy rewers (oraz awers dla wstecznej kompatybilności ze starymi fiszkami)
+        const isAdded = appState.flashcards.some(f => f.back === w.ko || f.front === w.ko);
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td><strong>${w.ko}</strong></td>
@@ -543,7 +542,10 @@ function updateCustomTranslation(id, val) {
 function addWordToSRS(id) {
     const w = appState.words.find(item => item.id == id);
     if (!w) return;
-    const isAdded = createFlashcardData(w.ko, w.custom.trim() !== "" ? w.custom : w.autoPl, 0, 0, 2.5);
+    
+    // Tłumaczenie na Awers, słówko (w.ko) na Rewers
+    const frontTranslation = w.custom.trim() !== "" ? w.custom : w.autoPl;
+    const isAdded = createFlashcardData(frontTranslation, w.ko, 0, 0, 2.5);
     
     if (isAdded) {
         saveState();
@@ -558,7 +560,7 @@ function addWordToSRS(id) {
 
 // --- ZARZĄDZANIE FISZKAMI I SRS ---
 function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = null) {
-    if(!front || !back || appState.flashcards.some(f => f.front === front)) return false;
+    if(!front || !back || appState.flashcards.some(f => f.front === front && f.back === back)) return false;
     appState.flashcards.push({
         id: Date.now() + Math.random(),
         front: front.trim(),
@@ -789,282 +791,4 @@ function openStatsModal() {
     ];
 
     let html = '';
-    cats.forEach(c => {
-        if(c.data.length > 0) {
-            html += `<h4 style="color: ${c.color}; margin-top: 10px;">${c.name} (${c.data.length})</h4>`;
-            html += `<ul class="stats-list">`;
-            c.data.forEach(card => { html += `<li><b>${card.front}</b> - ${card.back}</li>`; });
-            html += `</ul>`;
-        }
-    });
-
-    if(html === '') html = '<p class="text-center hint">Brak danych w dzisiejszej sesji.</p>';
-    container.innerHTML = html;
-    document.getElementById('modal-stats').classList.remove('hidden');
-}
-
-// --- NOWA LOGIKA: ZAKŁADKA AKTYWNOŚĆ ---
-function updateActivityStats() {
-    if (!appState.history) return;
-    const today = getLocalToday();
-    
-    const dates = Object.keys(appState.history).sort();
-    const completedDates = dates.filter(d => appState.history[d].completedAll);
-    
-    let currentStreak = 0;
-    let maxStreak = 0;
-    let totalDays = completedDates.length;
-    
-    let tempStreak = 0;
-    let prevDate = null;
-    
-    for (let i = 0; i < completedDates.length; i++) {
-        const d = completedDates[i];
-        if (!prevDate) {
-            tempStreak = 1;
-        } else {
-            const diffTime = Math.abs(new Date(d) - new Date(prevDate));
-            const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-            if (diffDays === 1) {
-                tempStreak++;
-            } else {
-                tempStreak = 1;
-            }
-        }
-        if (tempStreak > maxStreak) maxStreak = tempStreak;
-        prevDate = d;
-        
-        if (i === completedDates.length - 1) {
-            const diffToday = Math.round(Math.abs(new Date(today) - new Date(d)) / (1000 * 60 * 60 * 24));
-            if (diffToday === 0 || diffToday === 1) {
-                currentStreak = tempStreak;
-            }
-        }
-    }
-    
-    document.getElementById('streak-current').textContent = currentStreak;
-    document.getElementById('streak-max').textContent = maxStreak;
-    document.getElementById('streak-total').textContent = totalDays;
-    
-    render7DayChart();
-    renderCalendar();
-}
-
-function render7DayChart() {
-    const container = document.getElementById('chart-7days');
-    container.innerHTML = "";
-    const todayObj = new Date(getLocalToday());
-    
-    let daysData = [];
-    let maxWords = 0;
-    for (let i = 6; i >= 0; i--) {
-        let d = new Date(todayObj);
-        d.setDate(d.getDate() - i);
-        let ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-        let stats = appState.history[ds] || { again: 0, hard: 0, good: 0, easy: 0 };
-        let total = stats.again + stats.hard + stats.good + stats.easy;
-        if (total > maxWords) maxWords = total;
-        daysData.push({ date: ds, short: d.toLocaleDateString('pl-PL', {weekday: 'short'}), stats, total });
-    }
-    
-    daysData.forEach(day => {
-        const col = document.createElement('div');
-        col.className = 'chart-col';
-        
-        let html = '';
-        if (day.total > 0) {
-            const pAgain = (day.stats.again / day.total) * 100;
-            const pHard = (day.stats.hard / day.total) * 100;
-            const pGood = (day.stats.good / day.total) * 100;
-            const pEasy = (day.stats.easy / day.total) * 100;
-            
-            const heightPct = Math.max(15, (day.total / maxWords) * 100);
-            
-            html = `<div class="chart-total">${day.total}<br><span style="font-size:8px;font-weight:normal;">słów</span></div>`;
-            html += `<div class="bar-wrapper" style="height: ${heightPct}%;">`;
-            if(pEasy > 0) html += `<div class="bar-segment bar-easy" style="height: ${pEasy}%"></div>`;
-            if(pGood > 0) html += `<div class="bar-segment bar-good" style="height: ${pGood}%"></div>`;
-            if(pHard > 0) html += `<div class="bar-segment bar-hard" style="height: ${pHard}%"></div>`;
-            if(pAgain > 0) html += `<div class="bar-segment bar-again" style="height: ${pAgain}%"></div>`;
-            html += `</div>`;
-        } else {
-            html += `<div class="chart-total" style="color:transparent;">0</div>`;
-            html += `<div class="bar-wrapper" style="height: 0%;"></div>`;
-        }
-        
-        html += `<div class="chart-label">${day.short}</div>`;
-        col.innerHTML = html;
-        container.appendChild(col);
-    });
-}
-
-let currentCalDate = new Date(getLocalToday());
-
-function changeMonth(offset) {
-    currentCalDate.setMonth(currentCalDate.getMonth() + offset);
-    renderCalendar();
-}
-
-function renderCalendar() {
-    const grid = document.getElementById('calendar-grid');
-    grid.innerHTML = "";
-    
-    const year = currentCalDate.getFullYear();
-    const month = currentCalDate.getMonth();
-    
-    const monthNames = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
-    document.getElementById('calendar-month-label').textContent = `${monthNames[month]} ${year}`;
-    
-    const daysOfWeek = ["pon", "wt", "śr", "czw", "pt", "sob", "nd"];
-    daysOfWeek.forEach(d => {
-        const el = document.createElement('div');
-        el.className = "cal-day-header";
-        el.textContent = d;
-        grid.appendChild(el);
-    });
-    
-    const firstDay = new Date(year, month, 1);
-    const lastDay = new Date(year, month + 1, 0);
-    
-    let startDayIndex = firstDay.getDay() - 1; 
-    if (startDayIndex === -1) startDayIndex = 6;
-    
-    for (let i = 0; i < startDayIndex; i++) {
-        const el = document.createElement('div');
-        el.className = "cal-day empty";
-        grid.appendChild(el);
-    }
-    
-    for (let i = 1; i <= lastDay.getDate(); i++) {
-        const el = document.createElement('div');
-        el.className = "cal-day";
-        el.textContent = i;
-        
-        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
-        if (appState.history && appState.history[dateStr] && appState.history[dateStr].completedAll) {
-            el.classList.add('completed');
-        }
-        grid.appendChild(el);
-    }
-}
-
-// --- RESZTA LOGIKI KART ---
-function openQuickEdit() {
-    if (!currentCard) return;
-    document.getElementById('qe-front').value = currentCard.front;
-    document.getElementById('qe-back').value = currentCard.back;
-    document.getElementById('modal-quick-edit').classList.remove('hidden');
-}
-
-function saveQuickEdit() {
-    if (!currentCard) return;
-    const f = document.getElementById('qe-front').value.trim();
-    const b = document.getElementById('qe-back').value.trim();
-    if(!f || !b) return alert("Wypełnij oba pola!");
-    
-    currentCard.front = f;
-    currentCard.back = b;
-    
-    const idx = appState.flashcards.findIndex(x => x.id == currentCard.id);
-    if(idx !== -1) appState.flashcards[idx] = currentCard;
-
-    saveState();
-    renderDeckTable(); 
-    
-    document.getElementById('study-front').textContent = currentCard.front;
-    document.getElementById('study-back').textContent = currentCard.back; 
-    
-    closeModal('modal-quick-edit');
-}
-
-function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
-
-function exportCSV() {
-    if (appState.flashcards.length === 0) return alert("Brak fiszek!");
-    let content = "Awers;Rewers;Interwal\n";
-    appState.flashcards.forEach(f => { content += `${f.front.replace(/;/g, ",")};${f.back.replace(/;/g, ",")};${f.interval}\n`; });
-    const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a'); a.href = url; a.download = "korean_export.csv"; a.click();
-}
-
-function stripHTML(html) {
-    if(typeof html !== 'string') return String(html || '');
-    let tmp = document.createElement("DIV"); tmp.innerHTML = html; return tmp.textContent || tmp.innerText || "";
-}
-
-function parseCSV(content) {
-    let count = 0;
-    const lines = content.replace(/\r/g, '').split('\n');
-    if (lines.length === 0) return 0;
-    
-    const headerCheck = lines[0].toLowerCase();
-    const hasHeader = headerCheck.includes('strona') || headerCheck.includes('awers') || headerCheck.includes('poziom');
-    
-    lines.forEach((line, index) => {
-        if (hasHeader && index === 0) return;
-        if (!line.trim()) return; 
-        
-        let parts = line.split(';');
-        if (parts.length < 2) parts = line.split('\t');
-        
-        if (parts.length >= 2) {
-            const front = stripHTML(parts[0].replace(/^"|"$/g, '').trim());
-            const back = stripHTML(parts[1].replace(/^"|"$/g, '').trim());
-            if (!front || !back) return;
-
-            let interval = 0;
-            let nextReview = new Date().toISOString();
-            let ef = 2.5;
-            let rep = 0;
-
-            if (parts.length >= 4) {
-                const level = parts[2].replace(/^"|"$/g, '').trim();
-                const nextRevStr = parts[3].replace(/^"|"$/g, '').trim();
-                if (level === 'Przyswojona') { rep = 2; interval = 14; } 
-                else if (level === 'W trakcie nauki' || level === 'W trakcie') { rep = 1; interval = 3; }
-
-                if (nextRevStr && nextRevStr !== 'Brak — nowa karta' && nextRevStr.length >= 10) {
-                    const dateMatch = nextRevStr.match(/\d{4}-\d{2}-\d{2}/);
-                    if (dateMatch) {
-                        nextReview = new Date(dateMatch[0]).toISOString();
-                        const diffTime = new Date(dateMatch[0]).getTime() - new Date().getTime();
-                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                        if (diffDays > 0) interval = diffDays;
-                    }
-                }
-            } else if (parts.length === 3) {
-                const parsedInt = parseInt(parts[2].replace(/^"|"$/g, '').trim());
-                if (!isNaN(parsedInt)) {
-                    interval = parsedInt;
-                    rep = interval > 0 ? 1 : 0;
-                    if (interval > 0) {
-                        let next = new Date(); next.setDate(next.getDate() + interval); nextReview = next.toISOString();
-                    }
-                }
-            }
-            if (createFlashcardData(front, back, rep, interval, ef, nextReview)) count++;
-        }
-    });
-    return count;
-}
-
-function importCSV(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        try {
-            const content = e.target.result;
-            let addedCards = parseCSV(content);
-            if (addedCards > 0) {
-                saveState(); renderDeckTable(); refreshStudySession();
-                alert(`Sukces! Zaimportowano ${addedCards} fiszek.`);
-            } else { alert("Nie odnaleziono fiszek. Sprawdź format CSV."); }
-        } catch(err) { alert("Błąd odczytu pliku: " + err.message); }
-        event.target.value = '';
-    };
-    reader.readAsText(file, "UTF-8");
-}
-
-window.addEventListener('DOMContentLoaded', loadState);
+    cats.forEach(
