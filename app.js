@@ -94,7 +94,6 @@ function decodeBase64Unicode(str) {
 }
 
 async function syncToGitHub() {
-    // Automatycznie pobierz i zapisz dane z inputów przed synchronizacją
     appState.ghToken = document.getElementById('gh-token').value.trim();
     appState.ghUser = document.getElementById('gh-user').value.trim();
     appState.ghRepo = document.getElementById('gh-repo').value.trim();
@@ -117,13 +116,17 @@ async function syncToGitHub() {
             sha = getData.sha;
         }
 
-        // --- KLUCZOWA ZMIANA: Kopiujemy stan i usuwamy sekrety przed wysłaniem ---
-        const safeState = { ...appState };
-        delete safeState.ghToken; // Usuwamy token z pliku wysyłanego na GitHuba
-        delete safeState.apiKey;  // Usuwamy klucz Gemini z pliku wysyłanego na GitHuba
+        // TWORZYMY CZYSTY OBIEKT - Gwarancja braku kluczy API i tokenów!
+        const safeState = {
+            dailyLimit: appState.dailyLimit,
+            words: appState.words || [],
+            flashcards: appState.flashcards || [],
+            library: appState.library || [],
+            sessionStats: appState.sessionStats || { again: [], hard: [], good: [], easy: [] }
+        };
 
         const body = {
-            message: `Automatyczny zapis postępów z aplikacji (${getLocalToday()})`,
+            message: `Zapis postępów z aplikacji (${getLocalToday()})`,
             content: encodeBase64Unicode(JSON.stringify(safeState, null, 2))
         };
         if (sha) body.sha = sha;
