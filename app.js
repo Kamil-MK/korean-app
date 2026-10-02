@@ -1,4 +1,4 @@
-const DEFAULT_API_KEY = "AQ.Ab8RN6JqzbNtewAjJQwtNjRqzqlXBQrRP15UiThSjuROd5TUFg";
+const DEFAULT_API_KEY = "";
 const STORAGE_KEY = "KoreanApp_Ecosystem_State_V4";
 
 function getLocalToday() {
