@@ -1,4 +1,4 @@
-const CACHE_NAME = 'korean-app-v6';
+const CACHE_NAME = 'korean-app-v10';
 const ASSETS = [
     'index.html',
     'style.css',
