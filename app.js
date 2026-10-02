@@ -16,7 +16,7 @@ let appState = {
     words: [],
     flashcards: [],
     library: [],
-    sessionStats: { date: "", again: [], hard: [], good: [], easy: [] }
+    sessionStats: { date: "", again: [], hard: [], good: [], easy: [], introduced: [] }
 };
 
 let currentStoryId = null;
@@ -30,9 +30,13 @@ function loadState() {
     if (!appState.apiKey) appState.apiKey = DEFAULT_API_KEY;
     if (!appState.library) appState.library = [];
     
+    // Weryfikacja daty i inicjalizacja rejestru wprowadzonych dziś fiszek
     const today = getLocalToday();
     if (!appState.sessionStats || appState.sessionStats.date !== today) {
-        appState.sessionStats = { date: today, again: [], hard: [], good: [], easy: [] };
+        appState.sessionStats = { date: today, again: [], hard: [], good: [], easy: [], introduced: [] };
+        saveState();
+    } else if (!appState.sessionStats.introduced) {
+        appState.sessionStats.introduced = [];
         saveState();
     }
 
@@ -126,7 +130,7 @@ async function syncToGitHub() {
             words: appState.words || [],
             flashcards: appState.flashcards || [],
             library: appState.library || [],
-            sessionStats: appState.sessionStats || { again: [], hard: [], good: [], easy: [] }
+            sessionStats: appState.sessionStats || { date: getLocalToday(), again: [], hard: [], good: [], easy: [], introduced: [] }
         };
 
         const body = {
@@ -550,6 +554,7 @@ function deleteCard(id) {
     }
 }
 
+// --- ZMODYFIKOWANA LOGIKA SESJI NAUKI (CAPPING NOWYCH KART) ---
 let studyQueue = [];
 let currentCard = null;
 
@@ -559,19 +564,38 @@ function updateStudyCounter() {
 
 function refreshStudySession() {
     const now = new Date().toISOString();
-    let newAdded = 0;
     
-    studyQueue = appState.flashcards.filter(c => {
-        if (!c.nextReview || c.nextReview <= now) {
-            if (c.rep === 0) {
-                if (newAdded >= appState.dailyLimit) return false;
-                newAdded++;
-            }
-            return true;
-        }
-        return false;
-    });
+    if (!appState.sessionStats.introduced) {
+        appState.sessionStats.introduced = [];
+    }
 
+    // 1. Zbieramy powtórki: karta ma rep > 0 i upłynął czas
+    let reviews = appState.flashcards.filter(c => 
+        c.rep > 0 && c.nextReview && c.nextReview <= now
+    );
+
+    // 2. Zbieramy nowe karty (rep === 0), które ewentualnie możemy dołączyć
+    let potentialNew = appState.flashcards.filter(c => 
+        c.rep === 0 && (!c.nextReview || c.nextReview <= now)
+    );
+
+    // Te nowe karty były już dodane do kolejki podczas wcześniejszego losowania dzisiaj
+    let alreadyIntroducedToday = potentialNew.filter(c => appState.sessionStats.introduced.includes(c.id));
+    
+    // Z tych całkiem nowych bierzemy tylko tyle, aby dopełnić dzienny limit
+    let unintroduced = potentialNew.filter(c => !appState.sessionStats.introduced.includes(c.id));
+    let slotsLeft = Math.max(0, appState.dailyLimit - appState.sessionStats.introduced.length);
+    let toIntroduce = unintroduced.slice(0, slotsLeft);
+
+    if (toIntroduce.length > 0) {
+        toIntroduce.forEach(c => appState.sessionStats.introduced.push(c.id));
+        saveState();
+    }
+
+    // Zlepiamy to w jedną ostateczną listę
+    studyQueue = [...reviews, ...alreadyIntroducedToday, ...toIntroduce];
+
+    // Sortujemy: najpierw powtórki (rep > 0), na końcu zupełnie nowe (rep === 0)
     studyQueue.sort((a, b) => (a.rep > 0 && b.rep === 0 ? -1 : (a.rep === 0 && b.rep > 0 ? 1 : 0)));
 
     updateSessionProgressUI();
@@ -615,7 +639,7 @@ function previewSM2(card, quality) {
 function processAnswer(quality) {
     const today = getLocalToday();
     if (!appState.sessionStats || appState.sessionStats.date !== today) {
-        appState.sessionStats = { date: today, again: [], hard: [], good: [], easy: [] };
+        appState.sessionStats = { date: today, again: [], hard: [], good: [], easy: [], introduced: [] };
     }
 
     let cat = quality < 3 ? 'again' : (quality === 3 ? 'hard' : (quality === 4 ? 'good' : 'easy'));
@@ -865,7 +889,7 @@ async function silentSyncToGitHub() {
             words: appState.words || [],
             flashcards: appState.flashcards || [],
             library: appState.library || [],
-            sessionStats: appState.sessionStats || { again: [], hard: [], good: [], easy: [] }
+            sessionStats: appState.sessionStats || { date: getLocalToday(), again: [], hard: [], good: [], easy: [], introduced: [] }
         };
 
         const body = {
@@ -874,7 +898,6 @@ async function silentSyncToGitHub() {
         };
         if (sha) body.sha = sha;
 
-        // Flaga 'keepalive: true' pozwala przeglądarce wysłać dane nawet gdy aplikacja się zamyka
         await fetch(url, {
             method: 'PUT',
             headers: { "Authorization": `token ${appState.ghToken}`, "Content-Type": "application/json" },
@@ -892,14 +915,12 @@ async function silentSyncToGitHub() {
     }
 }
 
-// Uruchamianie cichej synchronizacji co 5 minut, gdy aplikacja jest widoczna
 setInterval(() => {
     if (document.visibilityState === 'visible') {
         silentSyncToGitHub();
     }
 }, 5 * 60 * 1000);
 
-// Uruchamianie cichej synchronizacji z użyciem keepalive w momencie minimalizacji/zamykania aplikacji
 document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') {
         silentSyncToGitHub();
