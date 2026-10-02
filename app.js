@@ -190,13 +190,19 @@ function sumUpWords() {
 
 async function fetchTranslation(word, id) {
     try {
-        const url = `[https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=pl&dt=t&q=$](https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=pl&dt=t&q=$){encodeURIComponent(word)}`;
-        const res = await fetch(url);
+        // Omijamy blokadę CORS przeglądarki używając darmowego proxy AllOrigins
+        const targetUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=pl&dt=t&q=${encodeURIComponent(word)}`;
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
         
-        if (!res.ok) throw new Error("Błąd serwera Google");
-        const data = await res.json();
+        const res = await fetch(proxyUrl);
+        if (!res.ok) throw new Error("Błąd proxy AllOrigins");
+        
+        const proxyData = await res.json();
+        // Dekodujemy zawartość zwróconą przez proxy
+        const data = JSON.parse(proxyData.contents);
+        
+        // Wyciągamy tłumaczenie z odpowiedzi Google
         let tr = data[0][0][0];
-        
         if (!tr || tr === word) tr = "Brak tłumaczenia";
         
         const w = appState.words.find(item => item.id === id);
@@ -215,6 +221,7 @@ async function fetchTranslation(word, id) {
         }
     }
 }
+
 
 // Zmodyfikowana funkcja generująca tabelę słówek (dodany przycisk Usuń)
 function renderWordsTable() {
