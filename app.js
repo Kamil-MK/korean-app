@@ -1,4 +1,4 @@
-const DEFAULT_API_KEY = "";
+const DEFAULT_API_KEY = "AQ.Ab8RN6JqzbNtewAjJQwtNjRqzqlXBQrRP15UiThSjuROd5TUFg";
 const STORAGE_KEY = "KoreanApp_Ecosystem_State_V3";
 
 function getLocalToday() {
@@ -190,14 +190,11 @@ function sumUpWords() {
 
 async function fetchTranslation(word, id) {
     try {
-        // Używamy stabilnego, darmowego endpointu Google Translate
-        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=pl&dt=t&q=${encodeURIComponent(word)}`;
+        const url = `[https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=pl&dt=t&q=$](https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=pl&dt=t&q=$){encodeURIComponent(word)}`;
         const res = await fetch(url);
         
         if (!res.ok) throw new Error("Błąd serwera Google");
         const data = await res.json();
-        
-        // Wyciągamy przetłumaczony tekst ze struktury JSON od Google
         let tr = data[0][0][0];
         
         if (!tr || tr === word) tr = "Brak tłumaczenia";
@@ -219,6 +216,7 @@ async function fetchTranslation(word, id) {
     }
 }
 
+// Zmodyfikowana funkcja generująca tabelę słówek (dodany przycisk Usuń)
 function renderWordsTable() {
     const tbody = document.getElementById('words-tbody');
     tbody.innerHTML = "";
@@ -229,10 +227,24 @@ function renderWordsTable() {
             <td><strong>${w.ko}</strong></td>
             <td>${w.autoPl}</td>
             <td><input type="text" value="${w.custom}" placeholder="Własne..." onchange="updateCustomTranslation('${w.id}', this.value)"></td>
-            <td><button class="btn btn-primary btn-sm w-100" ${isAdded ? 'disabled' : ''} onclick="addWordToSRS('${w.id}')">${isAdded ? 'Dodane' : 'Fiszka'}</button></td>
+            <td>
+                <div style="display: flex; gap: 5px;">
+                    <button class="btn btn-primary btn-sm" style="flex: 1;" ${isAdded ? 'disabled' : ''} onclick="addWordToSRS('${w.id}')">${isAdded ? 'Dodane' : 'Fiszka'}</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteWord('${w.id}')">Usuń</button>
+                </div>
+            </td>
         `;
         tbody.appendChild(tr);
     });
+}
+
+// Nowa funkcja usuwania słówek
+function deleteWord(id) {
+    if (confirm("Usunąć to słówko z listy?")) {
+        appState.words = appState.words.filter(w => w.id !== id);
+        saveState();
+        renderWordsTable();
+    }
 }
 
 function updateCustomTranslation(id, val) {
