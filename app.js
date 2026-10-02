@@ -11,6 +11,7 @@ let appState = {
     ghToken: "",
     ghUser: "",
     ghRepo: "",
+    autoSync: false,
     dailyLimit: 5,
     words: [],
     flashcards: [],
@@ -62,6 +63,7 @@ function updateSettingsUI() {
     document.getElementById('gh-token').value = appState.ghToken || "";
     document.getElementById('gh-user').value = appState.ghUser || "";
     document.getElementById('gh-repo').value = appState.ghRepo || "";
+    document.getElementById('auto-sync').checked = appState.autoSync || false;
     document.getElementById('daily-limit').value = appState.dailyLimit;
 }
 
@@ -70,6 +72,7 @@ function saveSettings() {
     appState.ghToken = document.getElementById('gh-token').value.trim();
     appState.ghUser = document.getElementById('gh-user').value.trim();
     appState.ghRepo = document.getElementById('gh-repo').value.trim();
+    appState.autoSync = document.getElementById('auto-sync').checked;
     const lim = parseInt(document.getElementById('daily-limit').value);
     if (lim > 0) appState.dailyLimit = lim;
     
@@ -97,6 +100,7 @@ async function syncToGitHub() {
     appState.ghToken = document.getElementById('gh-token').value.trim();
     appState.ghUser = document.getElementById('gh-user').value.trim();
     appState.ghRepo = document.getElementById('gh-repo').value.trim();
+    appState.autoSync = document.getElementById('auto-sync').checked;
     saveState();
 
     if (!appState.ghToken || !appState.ghUser || !appState.ghRepo) {
@@ -116,9 +120,9 @@ async function syncToGitHub() {
             sha = getData.sha;
         }
 
-        // TWORZYMY CZYSTY OBIEKT - Gwarancja braku kluczy API i tokenów!
         const safeState = {
             dailyLimit: appState.dailyLimit,
+            autoSync: appState.autoSync || false,
             words: appState.words || [],
             flashcards: appState.flashcards || [],
             library: appState.library || [],
@@ -176,7 +180,6 @@ async function syncFromGitHub() {
         const imported = JSON.parse(jsonStr);
         
         if (imported && Array.isArray(imported.flashcards)) {
-            // Zachowujemy obecne hasła w aplikacji podczas pobierania paczki z danymi
             const currentApiKey = appState.apiKey;
             const currentGhToken = appState.ghToken;
             const currentGhUser = appState.ghUser;
@@ -842,5 +845,65 @@ function importCSV(event) {
     };
     reader.readAsText(file, "UTF-8");
 }
+
+// --- AUTO SYNC W TLE ---
+async function silentSyncToGitHub() {
+    if (!appState.autoSync || !appState.ghToken || !appState.ghUser || !appState.ghRepo) return;
+    
+    const url = `[https://api.github.com/repos/$](https://api.github.com/repos/$){appState.ghUser}/${appState.ghRepo}/contents/database.json`;
+    try {
+        let sha = "";
+        const getRes = await fetch(url, { headers: { "Authorization": `token ${appState.ghToken}` } });
+        if (getRes.ok) {
+            const getData = await getRes.json();
+            sha = getData.sha;
+        }
+
+        const safeState = {
+            dailyLimit: appState.dailyLimit,
+            autoSync: appState.autoSync,
+            words: appState.words || [],
+            flashcards: appState.flashcards || [],
+            library: appState.library || [],
+            sessionStats: appState.sessionStats || { again: [], hard: [], good: [], easy: [] }
+        };
+
+        const body = {
+            message: `Auto-sync w tle (${getLocalToday()} ${new Date().toLocaleTimeString('pl-PL')})`,
+            content: encodeBase64Unicode(JSON.stringify(safeState, null, 2))
+        };
+        if (sha) body.sha = sha;
+
+        // Flaga 'keepalive: true' pozwala przeglądarce wysłać dane nawet gdy aplikacja się zamyka
+        await fetch(url, {
+            method: 'PUT',
+            headers: { "Authorization": `token ${appState.ghToken}`, "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+            keepalive: true 
+        });
+
+        const msg = document.getElementById('sync-msg');
+        if (msg) {
+            msg.textContent = "⏱️ Ostatnia automatyczna kopia zapasowa: " + new Date().toLocaleTimeString('pl-PL');
+            msg.style.color = "var(--text-light)";
+        }
+    } catch (e) {
+        console.error("Auto-sync error:", e);
+    }
+}
+
+// Uruchamianie cichej synchronizacji co 5 minut, gdy aplikacja jest widoczna
+setInterval(() => {
+    if (document.visibilityState === 'visible') {
+        silentSyncToGitHub();
+    }
+}, 5 * 60 * 1000);
+
+// Uruchamianie cichej synchronizacji z użyciem keepalive w momencie minimalizacji/zamykania aplikacji
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+        silentSyncToGitHub();
+    }
+});
 
 window.addEventListener('DOMContentLoaded', loadState);
