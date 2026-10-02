@@ -17,7 +17,7 @@ let appState = {
     flashcards: [],
     library: [],
     sessionStats: { date: "", again: [], hard: [], good: [], easy: [] },
-    history: {} // <-- Baza wiedzy o poprzednich dniach (dla wykresów i kalendarza)
+    history: {}
 };
 
 let currentStoryId = null;
@@ -126,7 +126,7 @@ async function syncToGitHub() {
             words: appState.words || [],
             flashcards: appState.flashcards || [],
             library: appState.library || [],
-            history: appState.history || {},
+            history: appState.history || {}, // Twoje statystyki i streak bezpiecznie lecą do chmury!
             sessionStats: appState.sessionStats || { again: [], hard: [], good: [], easy: [] }
         };
 
@@ -600,15 +600,23 @@ function updateStudyCounter() {
     document.getElementById('study-stats').textContent = `Do powtórki: ${studyQueue.length}`;
 }
 
+// Główna funkcja wyliczania kolejki z nałożonym limitem nowych słówek
 function refreshStudySession() {
     const now = new Date().toISOString();
-    let newAdded = 0;
+    const today = getLocalToday();
+    
+    if (!appState.history) appState.history = {};
+    if (!appState.history[today]) appState.history[today] = { again: 0, hard: 0, good: 0, easy: 0, completedAll: false, newCardsDone: 0 };
+
+    let newCardsDone = appState.history[today].newCardsDone || 0;
+    let newCardsInQueue = 0;
     
     studyQueue = appState.flashcards.filter(c => {
         if (!c.nextReview || c.nextReview <= now) {
             if (c.rep === 0) {
-                if (newAdded >= appState.dailyLimit) return false;
-                newAdded++;
+                // Limitujemy łącznie przerobione dzisiaj ORAZ te wrzucone do obecnej kolejki
+                if (newCardsDone + newCardsInQueue >= appState.dailyLimit) return false;
+                newCardsInQueue++;
             }
             return true;
         }
@@ -617,28 +625,22 @@ function refreshStudySession() {
 
     studyQueue.sort((a, b) => (a.rep > 0 && b.rep === 0 ? -1 : (a.rep === 0 && b.rep > 0 ? 1 : 0)));
 
-    // ZALICZENIE DNIA (Streak Logic)
-    const today = getLocalToday();
-    if (!appState.history) appState.history = {};
-    if (!appState.history[today]) appState.history[today] = { again: 0, hard: 0, good: 0, easy: 0, completedAll: false };
-    
-    if (studyQueue.length === 0) {
-        appState.history[today].completedAll = true;
-    } else {
-        appState.history[today].completedAll = false;
-    }
-    saveState();
-
     updateSessionProgressUI();
     updateStudyCounter();
 
-    if (studyQueue.length > 0) {
+    if (studyQueue.length === 0) {
+        // ZALICZENIE DNIA (Streak Logic)
+        appState.history[today].completedAll = true;
+        saveState();
+        document.getElementById('study-empty').classList.remove('hidden');
+        document.getElementById('study-active').classList.add('hidden');
+        updateActivityStats();
+    } else {
+        appState.history[today].completedAll = false;
+        saveState();
         document.getElementById('study-empty').classList.add('hidden');
         document.getElementById('study-active').classList.remove('hidden');
         nextStudyCard();
-    } else {
-        document.getElementById('study-empty').classList.remove('hidden');
-        document.getElementById('study-active').classList.add('hidden');
     }
 }
 
@@ -673,19 +675,35 @@ function processAnswer(quality) {
         appState.sessionStats = { date: today, again: [], hard: [], good: [], easy: [] };
     }
     if (!appState.history) appState.history = {};
-    if (!appState.history[today]) appState.history[today] = { again: 0, hard: 0, good: 0, easy: 0, completedAll: false };
+    if (!appState.history[today]) appState.history[today] = { again: 0, hard: 0, good: 0, easy: 0, completedAll: false, newCardsDone: 0 };
 
     let cat = quality < 3 ? 'again' : (quality === 3 ? 'hard' : (quality === 4 ? 'good' : 'easy'));
     appState.sessionStats[cat].push({ ...currentCard });
-    appState.history[today][cat]++; // Dodajemy do globalnej historii
+    appState.history[today][cat]++; 
+
+    // Twarde liczenie, że to słówko zostało jako nowe odkryte dziś
+    if (currentCard.rep === 0) {
+        appState.history[today].newCardsDone = (appState.history[today].newCardsDone || 0) + 1;
+    }
 
     applySM2(currentCard, quality);
     studyQueue.shift(); 
     saveState(); 
     renderDeckTable(); 
     
-    // Przeliczy czy kolejka jest pusta i ew. zaliczy streak
-    refreshStudySession(); 
+    updateStudyCounter();
+    updateSessionProgressUI();
+
+    // Wyłapujemy opróżnienie kolejki bez wywoływania refreshStudySession()
+    if (studyQueue.length === 0) {
+        appState.history[today].completedAll = true;
+        saveState();
+        document.getElementById('study-empty').classList.remove('hidden');
+        document.getElementById('study-active').classList.add('hidden');
+        updateActivityStats();
+    } else {
+        nextStudyCard();
+    }
 }
 
 function applySM2(card, quality) {
@@ -772,7 +790,6 @@ function updateActivityStats() {
     if (!appState.history) return;
     const today = getLocalToday();
     
-    // Obliczanie streaków
     const dates = Object.keys(appState.history).sort();
     const completedDates = dates.filter(d => appState.history[d].completedAll);
     
@@ -913,7 +930,7 @@ function renderCalendar() {
     }
 }
 
-// Reszta kodu: szybka edycja, import/export csv...
+// --- RESZTA LOGIKI KART ---
 function openQuickEdit() {
     if (!currentCard) return;
     document.getElementById('qe-front').value = currentCard.front;
