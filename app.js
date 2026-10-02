@@ -1,5 +1,5 @@
 const DEFAULT_API_KEY = "";
-const STORAGE_KEY = "KoreanApp_Ecosystem_State_V4";
+const STORAGE_KEY = "KoreanApp_Ecosystem_State_V5";
 
 function getLocalToday() {
     const d = new Date();
@@ -16,7 +16,8 @@ let appState = {
     words: [],
     flashcards: [],
     library: [],
-    sessionStats: { date: "", again: [], hard: [], good: [], easy: [], introduced: [] }
+    sessionStats: { date: "", again: [], hard: [], good: [], easy: [] },
+    history: {} // <-- Baza wiedzy o poprzednich dniach (dla wykresów i kalendarza)
 };
 
 let currentStoryId = null;
@@ -29,14 +30,11 @@ function loadState() {
     }
     if (!appState.apiKey) appState.apiKey = DEFAULT_API_KEY;
     if (!appState.library) appState.library = [];
+    if (!appState.history) appState.history = {};
     
-    // Weryfikacja daty i inicjalizacja rejestru wprowadzonych dziś fiszek
     const today = getLocalToday();
     if (!appState.sessionStats || appState.sessionStats.date !== today) {
-        appState.sessionStats = { date: today, again: [], hard: [], good: [], easy: [], introduced: [] };
-        saveState();
-    } else if (!appState.sessionStats.introduced) {
-        appState.sessionStats.introduced = [];
+        appState.sessionStats = { date: today, again: [], hard: [], good: [], easy: [] };
         saveState();
     }
 
@@ -57,8 +55,10 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         btn.classList.add('active');
         document.getElementById(targetId).classList.add('active');
+        
         if (targetId === 'tab-fiszki') refreshStudySession();
         if (targetId === 'tab-slowka') renderWordsTable();
+        if (targetId === 'tab-aktywnosc') updateActivityStats();
     });
 });
 
@@ -93,12 +93,8 @@ function deleteApiKey() {
 }
 
 // --- GITHUB CLOUD SYNC ---
-function encodeBase64Unicode(str) {
-    return btoa(unescape(encodeURIComponent(str)));
-}
-function decodeBase64Unicode(str) {
-    return decodeURIComponent(escape(atob(str)));
-}
+function encodeBase64Unicode(str) { return btoa(unescape(encodeURIComponent(str))); }
+function decodeBase64Unicode(str) { return decodeURIComponent(escape(atob(str))); }
 
 async function syncToGitHub() {
     appState.ghToken = document.getElementById('gh-token').value.trim();
@@ -130,7 +126,8 @@ async function syncToGitHub() {
             words: appState.words || [],
             flashcards: appState.flashcards || [],
             library: appState.library || [],
-            sessionStats: appState.sessionStats || { date: getLocalToday(), again: [], hard: [], good: [], easy: [], introduced: [] }
+            history: appState.history || {},
+            sessionStats: appState.sessionStats || { again: [], hard: [], good: [], easy: [] }
         };
 
         const body = {
@@ -196,6 +193,8 @@ async function syncFromGitHub() {
             appState.ghUser = currentGhUser;
             appState.ghRepo = currentGhRepo;
 
+            if(!appState.history) appState.history = {};
+
             saveState();
             msg.textContent = "✅ Postępy pobrane i wczytane!";
             msg.style.color = "var(--success)";
@@ -210,6 +209,43 @@ async function syncFromGitHub() {
         loader.style.display = 'none';
     }
 }
+
+// --- AUTO SYNC W TLE ---
+async function silentSyncToGitHub() {
+    if (!appState.autoSync || !appState.ghToken || !appState.ghUser || !appState.ghRepo) return;
+    const url = `https://api.github.com/repos/${appState.ghUser}/${appState.ghRepo}/contents/database.json`;
+    try {
+        let sha = "";
+        const getRes = await fetch(url, { headers: { "Authorization": `token ${appState.ghToken}` } });
+        if (getRes.ok) { const getData = await getRes.json(); sha = getData.sha; }
+
+        const safeState = {
+            dailyLimit: appState.dailyLimit, autoSync: appState.autoSync,
+            words: appState.words || [], flashcards: appState.flashcards || [],
+            library: appState.library || [], history: appState.history || {},
+            sessionStats: appState.sessionStats || { again: [], hard: [], good: [], easy: [] }
+        };
+
+        const body = {
+            message: `Auto-sync w tle (${getLocalToday()} ${new Date().toLocaleTimeString('pl-PL')})`,
+            content: encodeBase64Unicode(JSON.stringify(safeState, null, 2))
+        };
+        if (sha) body.sha = sha;
+
+        await fetch(url, {
+            method: 'PUT',
+            headers: { "Authorization": `token ${appState.ghToken}`, "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+            keepalive: true 
+        });
+
+        const msg = document.getElementById('sync-msg');
+        if (msg) { msg.textContent = "⏱️ Ostatnia automatyczna kopia zapasowa: " + new Date().toLocaleTimeString('pl-PL'); msg.style.color = "var(--text-light)"; }
+    } catch (e) { console.error("Auto-sync error:", e); }
+}
+
+setInterval(() => { if (document.visibilityState === 'visible') silentSyncToGitHub(); }, 5 * 60 * 1000);
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') silentSyncToGitHub(); });
 
 // --- LOKALNY BACKUP ---
 function exportData() {
@@ -419,10 +455,7 @@ function sumUpWords() {
     });
     saveState();
     document.getElementById('sumup-result').textContent = `Dodano ${count} słów do słownika!`;
-    
-    selected.forEach(s => {
-        s.classList.remove('selected');
-    });
+    selected.forEach(s => s.classList.remove('selected'));
 }
 
 async function fetchTranslation(word, id) {
@@ -487,7 +520,13 @@ function updateCustomTranslation(id, val) {
 function addWordToSRS(id) {
     const w = appState.words.find(item => item.id === id);
     if (!w) return;
-    createFlashcardData(w.ko, w.custom.trim() !== "" ? w.custom : w.autoPl, 0, 0, 2.5);
+    const isAdded = createFlashcardData(w.ko, w.custom.trim() !== "" ? w.custom : w.autoPl, 0, 0, 2.5);
+    
+    if (isAdded) {
+        saveState();
+        renderDeckTable();
+        refreshStudySession();
+    }
     renderWordsTable();
     if(!document.getElementById('reader-view').classList.contains('hidden')) {
         setupReaderContent(currentStoryText);
@@ -554,7 +593,6 @@ function deleteCard(id) {
     }
 }
 
-// --- ZMODYFIKOWANA LOGIKA SESJI NAUKI (CAPPING NOWYCH KART) ---
 let studyQueue = [];
 let currentCard = null;
 
@@ -564,39 +602,32 @@ function updateStudyCounter() {
 
 function refreshStudySession() {
     const now = new Date().toISOString();
+    let newAdded = 0;
     
-    if (!appState.sessionStats.introduced) {
-        appState.sessionStats.introduced = [];
-    }
+    studyQueue = appState.flashcards.filter(c => {
+        if (!c.nextReview || c.nextReview <= now) {
+            if (c.rep === 0) {
+                if (newAdded >= appState.dailyLimit) return false;
+                newAdded++;
+            }
+            return true;
+        }
+        return false;
+    });
 
-    // 1. Zbieramy powtórki: karta ma rep > 0 i upłynął czas
-    let reviews = appState.flashcards.filter(c => 
-        c.rep > 0 && c.nextReview && c.nextReview <= now
-    );
-
-    // 2. Zbieramy nowe karty (rep === 0), które ewentualnie możemy dołączyć
-    let potentialNew = appState.flashcards.filter(c => 
-        c.rep === 0 && (!c.nextReview || c.nextReview <= now)
-    );
-
-    // Te nowe karty były już dodane do kolejki podczas wcześniejszego losowania dzisiaj
-    let alreadyIntroducedToday = potentialNew.filter(c => appState.sessionStats.introduced.includes(c.id));
-    
-    // Z tych całkiem nowych bierzemy tylko tyle, aby dopełnić dzienny limit
-    let unintroduced = potentialNew.filter(c => !appState.sessionStats.introduced.includes(c.id));
-    let slotsLeft = Math.max(0, appState.dailyLimit - appState.sessionStats.introduced.length);
-    let toIntroduce = unintroduced.slice(0, slotsLeft);
-
-    if (toIntroduce.length > 0) {
-        toIntroduce.forEach(c => appState.sessionStats.introduced.push(c.id));
-        saveState();
-    }
-
-    // Zlepiamy to w jedną ostateczną listę
-    studyQueue = [...reviews, ...alreadyIntroducedToday, ...toIntroduce];
-
-    // Sortujemy: najpierw powtórki (rep > 0), na końcu zupełnie nowe (rep === 0)
     studyQueue.sort((a, b) => (a.rep > 0 && b.rep === 0 ? -1 : (a.rep === 0 && b.rep > 0 ? 1 : 0)));
+
+    // ZALICZENIE DNIA (Streak Logic)
+    const today = getLocalToday();
+    if (!appState.history) appState.history = {};
+    if (!appState.history[today]) appState.history[today] = { again: 0, hard: 0, good: 0, easy: 0, completedAll: false };
+    
+    if (studyQueue.length === 0) {
+        appState.history[today].completedAll = true;
+    } else {
+        appState.history[today].completedAll = false;
+    }
+    saveState();
 
     updateSessionProgressUI();
     updateStudyCounter();
@@ -639,20 +670,22 @@ function previewSM2(card, quality) {
 function processAnswer(quality) {
     const today = getLocalToday();
     if (!appState.sessionStats || appState.sessionStats.date !== today) {
-        appState.sessionStats = { date: today, again: [], hard: [], good: [], easy: [], introduced: [] };
+        appState.sessionStats = { date: today, again: [], hard: [], good: [], easy: [] };
     }
+    if (!appState.history) appState.history = {};
+    if (!appState.history[today]) appState.history[today] = { again: 0, hard: 0, good: 0, easy: 0, completedAll: false };
 
     let cat = quality < 3 ? 'again' : (quality === 3 ? 'hard' : (quality === 4 ? 'good' : 'easy'));
     appState.sessionStats[cat].push({ ...currentCard });
+    appState.history[today][cat]++; // Dodajemy do globalnej historii
 
     applySM2(currentCard, quality);
     studyQueue.shift(); 
     saveState(); 
     renderDeckTable(); 
     
-    updateStudyCounter();
-    updateSessionProgressUI();
-    nextStudyCard();
+    // Przeliczy czy kolejka jest pusta i ew. zaliczy streak
+    refreshStudySession(); 
 }
 
 function applySM2(card, quality) {
@@ -734,6 +767,153 @@ function openStatsModal() {
     document.getElementById('modal-stats').classList.remove('hidden');
 }
 
+// --- NOWA LOGIKA: ZAKŁADKA AKTYWNOŚĆ ---
+function updateActivityStats() {
+    if (!appState.history) return;
+    const today = getLocalToday();
+    
+    // Obliczanie streaków
+    const dates = Object.keys(appState.history).sort();
+    const completedDates = dates.filter(d => appState.history[d].completedAll);
+    
+    let currentStreak = 0;
+    let maxStreak = 0;
+    let totalDays = completedDates.length;
+    
+    let tempStreak = 0;
+    let prevDate = null;
+    
+    for (let i = 0; i < completedDates.length; i++) {
+        const d = completedDates[i];
+        if (!prevDate) {
+            tempStreak = 1;
+        } else {
+            const diffTime = Math.abs(new Date(d) - new Date(prevDate));
+            const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+            if (diffDays === 1) {
+                tempStreak++;
+            } else {
+                tempStreak = 1;
+            }
+        }
+        if (tempStreak > maxStreak) maxStreak = tempStreak;
+        prevDate = d;
+        
+        if (i === completedDates.length - 1) {
+            const diffToday = Math.round(Math.abs(new Date(today) - new Date(d)) / (1000 * 60 * 60 * 24));
+            if (diffToday === 0 || diffToday === 1) {
+                currentStreak = tempStreak;
+            }
+        }
+    }
+    
+    document.getElementById('streak-current').textContent = currentStreak;
+    document.getElementById('streak-max').textContent = maxStreak;
+    document.getElementById('streak-total').textContent = totalDays;
+    
+    render7DayChart();
+    renderCalendar();
+}
+
+function render7DayChart() {
+    const container = document.getElementById('chart-7days');
+    container.innerHTML = "";
+    const todayObj = new Date(getLocalToday());
+    
+    let daysData = [];
+    let maxWords = 0;
+    for (let i = 6; i >= 0; i--) {
+        let d = new Date(todayObj);
+        d.setDate(d.getDate() - i);
+        let ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        let stats = appState.history[ds] || { again: 0, hard: 0, good: 0, easy: 0 };
+        let total = stats.again + stats.hard + stats.good + stats.easy;
+        if (total > maxWords) maxWords = total;
+        daysData.push({ date: ds, short: d.toLocaleDateString('pl-PL', {weekday: 'short'}), stats, total });
+    }
+    
+    daysData.forEach(day => {
+        const col = document.createElement('div');
+        col.className = 'chart-col';
+        
+        let html = '';
+        if (day.total > 0) {
+            const pAgain = (day.stats.again / day.total) * 100;
+            const pHard = (day.stats.hard / day.total) * 100;
+            const pGood = (day.stats.good / day.total) * 100;
+            const pEasy = (day.stats.easy / day.total) * 100;
+            
+            const heightPct = Math.max(15, (day.total / maxWords) * 100);
+            
+            html = `<div class="chart-total">${day.total}<br><span style="font-size:8px;font-weight:normal;">słów</span></div>`;
+            html += `<div class="bar-wrapper" style="height: ${heightPct}%;">`;
+            if(pEasy > 0) html += `<div class="bar-segment bar-easy" style="height: ${pEasy}%"></div>`;
+            if(pGood > 0) html += `<div class="bar-segment bar-good" style="height: ${pGood}%"></div>`;
+            if(pHard > 0) html += `<div class="bar-segment bar-hard" style="height: ${pHard}%"></div>`;
+            if(pAgain > 0) html += `<div class="bar-segment bar-again" style="height: ${pAgain}%"></div>`;
+            html += `</div>`;
+        } else {
+            html += `<div class="chart-total" style="color:transparent;">0</div>`;
+            html += `<div class="bar-wrapper" style="height: 0%;"></div>`;
+        }
+        
+        html += `<div class="chart-label">${day.short}</div>`;
+        col.innerHTML = html;
+        container.appendChild(col);
+    });
+}
+
+let currentCalDate = new Date(getLocalToday());
+
+function changeMonth(offset) {
+    currentCalDate.setMonth(currentCalDate.getMonth() + offset);
+    renderCalendar();
+}
+
+function renderCalendar() {
+    const grid = document.getElementById('calendar-grid');
+    grid.innerHTML = "";
+    
+    const year = currentCalDate.getFullYear();
+    const month = currentCalDate.getMonth();
+    
+    const monthNames = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
+    document.getElementById('calendar-month-label').textContent = `${monthNames[month]} ${year}`;
+    
+    const daysOfWeek = ["pon", "wt", "śr", "czw", "pt", "sob", "nd"];
+    daysOfWeek.forEach(d => {
+        const el = document.createElement('div');
+        el.className = "cal-day-header";
+        el.textContent = d;
+        grid.appendChild(el);
+    });
+    
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    
+    let startDayIndex = firstDay.getDay() - 1; 
+    if (startDayIndex === -1) startDayIndex = 6;
+    
+    for (let i = 0; i < startDayIndex; i++) {
+        const el = document.createElement('div');
+        el.className = "cal-day empty";
+        grid.appendChild(el);
+    }
+    
+    for (let i = 1; i <= lastDay.getDate(); i++) {
+        const el = document.createElement('div');
+        el.className = "cal-day";
+        el.textContent = i;
+        
+        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+        if (appState.history && appState.history[dateStr] && appState.history[dateStr].completedAll) {
+            el.classList.add('completed');
+        }
+        grid.appendChild(el);
+    }
+}
+
+// Reszta kodu: szybka edycja, import/export csv...
 function openQuickEdit() {
     if (!currentCard) return;
     document.getElementById('qe-front').value = currentCard.front;
@@ -762,16 +942,12 @@ function saveQuickEdit() {
     closeModal('modal-quick-edit');
 }
 
-function closeModal(id) {
-    document.getElementById(id).classList.add('hidden');
-}
+function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
 function exportCSV() {
     if (appState.flashcards.length === 0) return alert("Brak fiszek!");
     let content = "Awers;Rewers;Interwal\n";
-    appState.flashcards.forEach(f => {
-        content += `${f.front.replace(/;/g, ",")};${f.back.replace(/;/g, ",")};${f.interval}\n`;
-    });
+    appState.flashcards.forEach(f => { content += `${f.front.replace(/;/g, ",")};${f.back.replace(/;/g, ",")};${f.interval}\n`; });
     const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a'); a.href = url; a.download = "korean_export.csv"; a.click();
@@ -779,9 +955,7 @@ function exportCSV() {
 
 function stripHTML(html) {
     if(typeof html !== 'string') return String(html || '');
-    let tmp = document.createElement("DIV");
-    tmp.innerHTML = html;
-    return tmp.textContent || tmp.innerText || "";
+    let tmp = document.createElement("DIV"); tmp.innerHTML = html; return tmp.textContent || tmp.innerText || "";
 }
 
 function parseCSV(content) {
@@ -812,7 +986,6 @@ function parseCSV(content) {
             if (parts.length >= 4) {
                 const level = parts[2].replace(/^"|"$/g, '').trim();
                 const nextRevStr = parts[3].replace(/^"|"$/g, '').trim();
-                
                 if (level === 'Przyswojona') { rep = 2; interval = 14; } 
                 else if (level === 'W trakcie nauki' || level === 'W trakcie') { rep = 1; interval = 3; }
 
@@ -831,16 +1004,11 @@ function parseCSV(content) {
                     interval = parsedInt;
                     rep = interval > 0 ? 1 : 0;
                     if (interval > 0) {
-                        let next = new Date();
-                        next.setDate(next.getDate() + interval);
-                        nextReview = next.toISOString();
+                        let next = new Date(); next.setDate(next.getDate() + interval); nextReview = next.toISOString();
                     }
                 }
             }
-
-            if (createFlashcardData(front, back, rep, interval, ef, nextReview)) {
-                count++;
-            }
+            if (createFlashcardData(front, back, rep, interval, ef, nextReview)) count++;
         }
     });
     return count;
@@ -849,82 +1017,19 @@ function parseCSV(content) {
 function importCSV(event) {
     const file = event.target.files[0];
     if (!file) return;
-
     const reader = new FileReader();
     reader.onload = function(e) {
         try {
             const content = e.target.result;
             let addedCards = parseCSV(content);
-
             if (addedCards > 0) {
                 saveState(); renderDeckTable(); refreshStudySession();
                 alert(`Sukces! Zaimportowano ${addedCards} fiszek.`);
-            } else {
-                alert("Nie odnaleziono fiszek. Sprawdź format CSV.");
-            }
-        } catch(err) {
-            alert("Błąd odczytu pliku: " + err.message);
-        }
+            } else { alert("Nie odnaleziono fiszek. Sprawdź format CSV."); }
+        } catch(err) { alert("Błąd odczytu pliku: " + err.message); }
         event.target.value = '';
     };
     reader.readAsText(file, "UTF-8");
 }
-
-// --- AUTO SYNC W TLE ---
-async function silentSyncToGitHub() {
-    if (!appState.autoSync || !appState.ghToken || !appState.ghUser || !appState.ghRepo) return;
-    
-    const url = `[https://api.github.com/repos/$](https://api.github.com/repos/$){appState.ghUser}/${appState.ghRepo}/contents/database.json`;
-    try {
-        let sha = "";
-        const getRes = await fetch(url, { headers: { "Authorization": `token ${appState.ghToken}` } });
-        if (getRes.ok) {
-            const getData = await getRes.json();
-            sha = getData.sha;
-        }
-
-        const safeState = {
-            dailyLimit: appState.dailyLimit,
-            autoSync: appState.autoSync,
-            words: appState.words || [],
-            flashcards: appState.flashcards || [],
-            library: appState.library || [],
-            sessionStats: appState.sessionStats || { date: getLocalToday(), again: [], hard: [], good: [], easy: [], introduced: [] }
-        };
-
-        const body = {
-            message: `Auto-sync w tle (${getLocalToday()} ${new Date().toLocaleTimeString('pl-PL')})`,
-            content: encodeBase64Unicode(JSON.stringify(safeState, null, 2))
-        };
-        if (sha) body.sha = sha;
-
-        await fetch(url, {
-            method: 'PUT',
-            headers: { "Authorization": `token ${appState.ghToken}`, "Content-Type": "application/json" },
-            body: JSON.stringify(body),
-            keepalive: true 
-        });
-
-        const msg = document.getElementById('sync-msg');
-        if (msg) {
-            msg.textContent = "⏱️ Ostatnia automatyczna kopia zapasowa: " + new Date().toLocaleTimeString('pl-PL');
-            msg.style.color = "var(--text-light)";
-        }
-    } catch (e) {
-        console.error("Auto-sync error:", e);
-    }
-}
-
-setInterval(() => {
-    if (document.visibilityState === 'visible') {
-        silentSyncToGitHub();
-    }
-}, 5 * 60 * 1000);
-
-document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') {
-        silentSyncToGitHub();
-    }
-});
 
 window.addEventListener('DOMContentLoaded', loadState);
