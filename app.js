@@ -33,15 +33,38 @@ function loadState() {
     if (!appState.history) appState.history = {};
     
     const today = getLocalToday();
+    
+    // Inicjalizacja nowej sesji na nowy dzień
     if (!appState.sessionStats || appState.sessionStats.date !== today) {
         appState.sessionStats = { date: today, again: [], hard: [], good: [], easy: [] };
         saveState();
+    } else {
+        // SKRYPT RATUNKOWY: Przeniesienie starych fiszek do nowej aktywności
+        if (!appState.history[today]) {
+            appState.history[today] = { again: 0, hard: 0, good: 0, easy: 0, completedAll: false, newCardsDone: 0 };
+        }
+        
+        const hist = appState.history[today];
+        const sess = appState.sessionStats;
+        
+        const totalHist = hist.again + hist.hard + hist.good + hist.easy;
+        const totalSess = (sess.again?.length || 0) + (sess.hard?.length || 0) + (sess.good?.length || 0) + (sess.easy?.length || 0);
+        
+        // Jeśli wykres jest pusty, ale pasek z fiszkami ma dzisiejsze wyniki - skopiuj je!
+        if (totalHist === 0 && totalSess > 0) {
+            hist.again = sess.again?.length || 0;
+            hist.hard = sess.hard?.length || 0;
+            hist.good = sess.good?.length || 0;
+            hist.easy = sess.easy?.length || 0;
+            saveState();
+        }
     }
 
     updateSettingsUI();
     renderWordsTable();
     renderDeckTable();
-    refreshStudySession();
+    // Odświeżenie sesji na końcu automatycznie wykryje brak fiszek i oznaczy dzień jako ZALICZONY (completedAll = true)
+    refreshStudySession(); 
 }
 
 function saveState() {
