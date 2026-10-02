@@ -11,12 +11,20 @@
 <body>
 
     <main class="app-container">
+        <!-- ZAKŁADKA: CZYTELNIA -->
         <section id="tab-czytelnia" class="tab-content active">
-            <header class="section-header">
+            <header class="section-header flex-between">
                 <h2>Czytelnia AI</h2>
+                <button class="btn btn-outline btn-sm" onclick="toggleLibrary()">📚 Biblioteka</button>
             </header>
             
-            <div class="card" id="reader-setup">
+            <div id="library-view" class="card hidden">
+                <h3>Zapisane historie</h3>
+                <div id="library-list" class="mt-3"></div>
+                <button class="btn btn-primary w-100 mt-3" onclick="toggleLibrary()">Wróć do czytelni</button>
+            </div>
+
+            <div id="reader-setup" class="card">
                 <textarea id="custom-text" rows="5" placeholder="Wklej własny tekst po koreańsku..."></textarea>
                 <div class="btn-group">
                     <button class="btn btn-primary" onclick="startReadingCustom()">START - Czytaj tekst</button>
@@ -26,26 +34,28 @@
                 <p id="ai-error" class="error-msg"></p>
             </div>
 
-            <div class="card hidden" id="reader-view">
-                <div class="flex-between">
-                    <h3>Interaktywny tekst</h3>
-                    <button class="btn btn-outline btn-sm" onclick="closeReader()">Zamknij</button>
+            <div id="reader-view" class="card hidden">
+                <div class="flex-between mb-3">
+                    <input type="text" id="story-title" placeholder="Tytuł historii (opcjonalnie)" style="margin-bottom:0; width: 65%;">
+                    <button class="btn btn-success btn-sm" onclick="saveStoryToLibrary()">💾 Zapisz</button>
                 </div>
-                <p class="hint">Klikaj słowa, aby je zaznaczyć. Po zakończeniu kliknij "Sum-up".</p>
+                <p class="hint">Klikaj nieznane słowa (żółte). Znane fiszki są zaznaczone na zielono.</p>
                 <div id="reader-content" class="reader-text"></div>
                 <div id="reader-actions" class="mt-4">
-                    <button class="btn btn-primary w-100" onclick="sumUpWords()">Sum-up (Wyodrębnij do słownika)</button>
+                    <button class="btn btn-primary w-100 mb-2" onclick="sumUpWords()">Sum-up (Wyodrębnij do słownika)</button>
+                    <button class="btn btn-outline w-100" onclick="closeReader()">Zakończ czytanie</button>
                 </div>
                 <div id="sumup-result" class="success-msg"></div>
             </div>
         </section>
 
+        <!-- ZAKŁADKA: SŁÓWKA -->
         <section id="tab-slowka" class="tab-content">
             <header class="section-header">
                 <h2>Moje Słówka</h2>
             </header>
             <div class="card">
-                <p class="hint">Wychwycone słowa z tłumaczeniami API MyMemory. Dodaj je do fiszek.</p>
+                <p class="hint">Wychwycone słowa z tłumaczeniami API. Dodaj je do fiszek.</p>
                 <div class="table-responsive">
                     <table class="data-table">
                         <thead>
@@ -62,6 +72,7 @@
             </div>
         </section>
 
+        <!-- ZAKŁADKA: FISZKI -->
         <section id="tab-fiszki" class="tab-content">
             <header class="section-header">
                 <div class="flex-between mb-2">
@@ -141,17 +152,33 @@
             </div>
         </section>
 
+        <!-- ZAKŁADKA: USTAWIENIA -->
         <section id="tab-ustawienia" class="tab-content">
             <header class="section-header">
                 <h2>Ustawienia</h2>
             </header>
             
             <div class="card">
+                <h3>Synchronizacja z GitHub (Cloud Sync)</h3>
+                <p class="hint" style="font-size: 13px;">Podaj wygenerowany Personal Access Token z uprawnieniami do repozytorium (repo), aby nadpisywać bazę na serwerze.</p>
+                <input type="password" id="gh-token" placeholder="GitHub PAT Token (ghp_...)">
+                <input type="text" id="gh-user" placeholder="Nazwa użytkownika GitHub">
+                <input type="text" id="gh-repo" placeholder="Nazwa repozytorium (np. korean-app)">
+                
+                <div class="flex-wrap gap-2 mt-2">
+                    <button class="btn btn-success w-100" onclick="syncToGitHub()">☁️ Wyślij stan na GitHuba</button>
+                    <button class="btn btn-outline w-100" onclick="syncFromGitHub()">⬇️ Pobierz stan z GitHuba</button>
+                </div>
+                <div id="sync-loader" class="loader mt-3"></div>
+                <p id="sync-msg" class="text-center mt-2" style="font-weight: 600;"></p>
+            </div>
+
+            <div class="card">
                 <h3>Klucz Gemini API</h3>
                 <input type="password" id="api-key" placeholder="Wprowadź klucz API">
                 <div class="flex-wrap gap-2">
-                    <button class="btn btn-primary" onclick="saveApiKey()">Zapisz klucz</button>
-                    <button class="btn btn-outline" onclick="deleteApiKey()">Domyślny klucz</button>
+                    <button class="btn btn-primary" onclick="saveSettings()">Zapisz ustawienia</button>
+                    <button class="btn btn-outline" onclick="deleteApiKey()">Domyślny klucz AI</button>
                 </div>
             </div>
 
@@ -159,20 +186,21 @@
                 <h3>Parametry Nauki</h3>
                 <label for="daily-limit">Dzienny limit nowych fiszek:</label>
                 <input type="number" id="daily-limit" min="1" max="100" value="5">
-                <button class="btn btn-primary" onclick="saveDailyLimit()">Zapisz limit</button>
+                <button class="btn btn-primary" onclick="saveSettings()">Zapisz limit</button>
             </div>
 
             <div class="card">
-                <h3>Kopia zapasowa i Synchronizacja</h3>
+                <h3>Lokalna Kopia zapasowa</h3>
                 <div class="flex-wrap gap-2">
-                    <button class="btn btn-primary" onclick="exportData()">Eksportuj postępy (JSON)</button>
+                    <button class="btn btn-primary" onclick="exportData()">Eksport do pliku (JSON)</button>
                     <input type="file" id="import-file" style="position: absolute; left: -9999px; opacity: 0;" accept=".json,application/json,text/plain,*/*" onchange="importData(event)">
-                    <button class="btn btn-outline" onclick="document.getElementById('import-file').click()">Importuj postępy (JSON)</button>
+                    <button class="btn btn-outline" onclick="document.getElementById('import-file').click()">Import z pliku (JSON)</button>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Modals -->
     <div id="modal-quick-edit" class="modal hidden">
         <div class="modal-content">
             <h3>Szybka edycja fiszki</h3>
