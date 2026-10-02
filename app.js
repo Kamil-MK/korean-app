@@ -190,15 +190,32 @@ function sumUpWords() {
 
 async function fetchTranslation(word, id) {
     try {
-        const res = await fetch(`[https://api.mymemory.translated.net/get?q=$](https://api.mymemory.translated.net/get?q=$){encodeURIComponent(word)}&langpair=ko|pl`);
+        // Używamy stabilnego, darmowego endpointu Google Translate
+        const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=pl&dt=t&q=${encodeURIComponent(word)}`;
+        const res = await fetch(url);
+        
+        if (!res.ok) throw new Error("Błąd serwera Google");
         const data = await res.json();
-        let tr = data.responseData.translatedText;
-        if (tr === word || !tr) tr = "Brak tłumaczenia";
+        
+        // Wyciągamy przetłumaczony tekst ze struktury JSON od Google
+        let tr = data[0][0][0];
+        
+        if (!tr || tr === word) tr = "Brak tłumaczenia";
+        
         const w = appState.words.find(item => item.id === id);
-        if (w) { w.autoPl = tr; saveState(); renderWordsTable(); }
+        if (w) { 
+            w.autoPl = tr; 
+            saveState(); 
+            renderWordsTable(); 
+        }
     } catch (e) {
+        console.error("Błąd tłumaczenia:", e);
         const w = appState.words.find(item => item.id === id);
-        if (w) { w.autoPl = "Błąd sieci"; saveState(); renderWordsTable(); }
+        if (w) { 
+            w.autoPl = "Błąd pobierania"; 
+            saveState(); 
+            renderWordsTable(); 
+        }
     }
 }
 
