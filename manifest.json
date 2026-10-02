@@ -7,9 +7,16 @@
     "theme_color": "#4F46E5",
     "icons": [
         {
-            "src": "data:image/svg+xml,<svg xmlns=%22[http://www.w3.org/2000/svg%22](http://www.w3.org/2000/svg%22) viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%234F46E5%22/><text x=%2250%22 y=%2257%22 font-size=%2250%22 font-weight=%22bold%22 fill=%22white%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22>K</text></svg>",
-            "sizes": "192x192 512x512",
-            "type": "image/svg+xml"
+            "src": "icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
         }
     ]
 }
