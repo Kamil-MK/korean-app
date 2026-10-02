@@ -82,7 +82,7 @@ function deleteApiKey() {
     appState.apiKey = DEFAULT_API_KEY;
     updateSettingsUI();
     saveState();
-    alert("Przywrócono domyślny klucz API AI.");
+    alert("Klucz API AI został usunięty z pamięci.");
 }
 
 // --- GITHUB CLOUD SYNC ---
@@ -100,7 +100,7 @@ async function syncToGitHub() {
     saveState();
 
     if (!appState.ghToken || !appState.ghUser || !appState.ghRepo) {
-        return alert("Wypełnij najpierw wszystkie 3 pola: Token, Użytkownik i Repozytorium!");
+        return alert("Wypełnij najpierw wszystkie 3 pola synchronizacji (Token, Użytkownik, Repozytorium)!");
     }
     const msg = document.getElementById('sync-msg');
     const loader = document.getElementById('sync-loader');
@@ -153,8 +153,13 @@ async function syncToGitHub() {
 }
 
 async function syncFromGitHub() {
+    appState.ghToken = document.getElementById('gh-token').value.trim();
+    appState.ghUser = document.getElementById('gh-user').value.trim();
+    appState.ghRepo = document.getElementById('gh-repo').value.trim();
+    saveState();
+
     if (!appState.ghToken || !appState.ghUser || !appState.ghRepo) {
-        return alert("Wypełnij najpierw dane GitHub w ustawieniach!");
+        return alert("Wypełnij najpierw wszystkie 3 pola synchronizacji (Token, Użytkownik, Repozytorium)!");
     }
     const msg = document.getElementById('sync-msg');
     const loader = document.getElementById('sync-loader');
@@ -171,7 +176,19 @@ async function syncFromGitHub() {
         const imported = JSON.parse(jsonStr);
         
         if (imported && Array.isArray(imported.flashcards)) {
+            // Zachowujemy obecne hasła w aplikacji podczas pobierania paczki z danymi
+            const currentApiKey = appState.apiKey;
+            const currentGhToken = appState.ghToken;
+            const currentGhUser = appState.ghUser;
+            const currentGhRepo = appState.ghRepo;
+
             appState = imported;
+
+            appState.apiKey = currentApiKey;
+            appState.ghToken = currentGhToken;
+            appState.ghUser = currentGhUser;
+            appState.ghRepo = currentGhRepo;
+
             saveState();
             msg.textContent = "✅ Postępy pobrane i wczytane!";
             msg.style.color = "var(--success)";
@@ -315,6 +332,11 @@ async function fetchWithRetry(url, options, retries = 3, delay = 2000) {
 }
 
 async function generateAIStory() {
+    if (!appState.apiKey || appState.apiKey.trim() === "") {
+        alert("Aby wygenerować historię, przejdź do zakładki Ustawienia i podaj swój klucz Gemini API.");
+        return;
+    }
+
     const loader = document.getElementById('ai-loader');
     const errorP = document.getElementById('ai-error');
     loader.style.display = 'block'; errorP.style.display = 'none';
@@ -391,10 +413,8 @@ function sumUpWords() {
     saveState();
     document.getElementById('sumup-result').textContent = `Dodano ${count} słów do słownika!`;
     
-    // Zmiana zaznaczonych na zielone (bo będą dodane)
     selected.forEach(s => {
         s.classList.remove('selected');
-        // s.classList.add('known-word'); // Można dodać to, gdy użytkownik zrobi fiszkę, na razie tylko odznaczamy
     });
 }
 
@@ -462,7 +482,6 @@ function addWordToSRS(id) {
     if (!w) return;
     createFlashcardData(w.ko, w.custom.trim() !== "" ? w.custom : w.autoPl, 0, 0, 2.5);
     renderWordsTable();
-    // Odśwież czytelnię jeśli jest otwarta, żeby zaktualizować kolory słów
     if(!document.getElementById('reader-view').classList.contains('hidden')) {
         setupReaderContent(currentStoryText);
     }
