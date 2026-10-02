@@ -126,7 +126,7 @@ async function syncToGitHub() {
             words: appState.words || [],
             flashcards: appState.flashcards || [],
             library: appState.library || [],
-            history: appState.history || {}, // Twoje statystyki i streak bezpiecznie lecą do chmury!
+            history: appState.history || {}, 
             sessionStats: appState.sessionStats || { again: [], hard: [], good: [], easy: [] }
         };
 
@@ -319,7 +319,7 @@ function saveStoryToLibrary() {
     if (!currentStoryText) return;
 
     if (currentStoryId) {
-        const s = appState.library.find(x => x.id === currentStoryId);
+        const s = appState.library.find(x => x.id == currentStoryId);
         if(s) s.title = title;
     } else {
         currentStoryId = Date.now().toString();
@@ -330,7 +330,7 @@ function saveStoryToLibrary() {
 }
 
 function loadStoryFromLibrary(id) {
-    const story = appState.library.find(x => x.id === id);
+    const story = appState.library.find(x => x.id == id);
     if (!story) return;
     document.getElementById('library-view').classList.add('hidden');
     currentStoryId = story.id;
@@ -342,7 +342,7 @@ function loadStoryFromLibrary(id) {
 function deleteStory(event, id) {
     event.stopPropagation();
     if(confirm("Usunąć tę historię z biblioteki?")) {
-        appState.library = appState.library.filter(x => x.id !== id);
+        appState.library = appState.library.filter(x => x.id != id);
         saveState();
         renderLibrary();
     }
@@ -471,14 +471,14 @@ async function fetchTranslation(word, id) {
         
         if (!tr || tr === word) tr = "Brak tłumaczenia";
         
-        const w = appState.words.find(item => item.id === id);
+        const w = appState.words.find(item => item.id == id);
         if (w) { 
             w.autoPl = tr; 
             saveState(); 
             renderWordsTable(); 
         }
     } catch (e) {
-        const w = appState.words.find(item => item.id === id);
+        const w = appState.words.find(item => item.id == id);
         if (w) { w.autoPl = "Błąd pobierania"; saveState(); renderWordsTable(); }
     }
 }
@@ -506,19 +506,19 @@ function renderWordsTable() {
 
 function deleteWord(id) {
     if (confirm("Usunąć to słówko z listy?")) {
-        appState.words = appState.words.filter(w => w.id !== id);
+        appState.words = appState.words.filter(w => w.id != id);
         saveState();
         renderWordsTable();
     }
 }
 
 function updateCustomTranslation(id, val) {
-    const w = appState.words.find(item => item.id === id);
+    const w = appState.words.find(item => item.id == id);
     if (w) { w.custom = val; saveState(); }
 }
 
 function addWordToSRS(id) {
-    const w = appState.words.find(item => item.id === id);
+    const w = appState.words.find(item => item.id == id);
     if (!w) return;
     const isAdded = createFlashcardData(w.ko, w.custom.trim() !== "" ? w.custom : w.autoPl, 0, 0, 2.5);
     
@@ -582,13 +582,13 @@ function renderDeckTable() {
 }
 
 function updateCardField(id, field, val) {
-    const c = appState.flashcards.find(item => item.id === id);
+    const c = appState.flashcards.find(item => item.id == id);
     if (c) { c[field] = val; saveState(); }
 }
 
 function deleteCard(id) {
     if (confirm("Usunąć fiszkę?")) {
-        appState.flashcards = appState.flashcards.filter(item => item.id !== id);
+        appState.flashcards = appState.flashcards.filter(item => item.id != id);
         saveState(); renderDeckTable(); refreshStudySession(); renderWordsTable();
     }
 }
@@ -600,7 +600,6 @@ function updateStudyCounter() {
     document.getElementById('study-stats').textContent = `Do powtórki: ${studyQueue.length}`;
 }
 
-// Główna funkcja wyliczania kolejki z nałożonym limitem nowych słówek
 function refreshStudySession() {
     const now = new Date().toISOString();
     const today = getLocalToday();
@@ -614,7 +613,6 @@ function refreshStudySession() {
     studyQueue = appState.flashcards.filter(c => {
         if (!c.nextReview || c.nextReview <= now) {
             if (c.rep === 0) {
-                // Limitujemy łącznie przerobione dzisiaj ORAZ te wrzucone do obecnej kolejki
                 if (newCardsDone + newCardsInQueue >= appState.dailyLimit) return false;
                 newCardsInQueue++;
             }
@@ -629,7 +627,6 @@ function refreshStudySession() {
     updateStudyCounter();
 
     if (studyQueue.length === 0) {
-        // ZALICZENIE DNIA (Streak Logic)
         appState.history[today].completedAll = true;
         saveState();
         document.getElementById('study-empty').classList.remove('hidden');
@@ -681,7 +678,6 @@ function processAnswer(quality) {
     appState.sessionStats[cat].push({ ...currentCard });
     appState.history[today][cat]++; 
 
-    // Twarde liczenie, że to słówko zostało jako nowe odkryte dziś
     if (currentCard.rep === 0) {
         appState.history[today].newCardsDone = (appState.history[today].newCardsDone || 0) + 1;
     }
@@ -694,7 +690,6 @@ function processAnswer(quality) {
     updateStudyCounter();
     updateSessionProgressUI();
 
-    // Wyłapujemy opróżnienie kolejki bez wywoływania refreshStudySession()
     if (studyQueue.length === 0) {
         appState.history[today].completedAll = true;
         saveState();
@@ -947,7 +942,7 @@ function saveQuickEdit() {
     currentCard.front = f;
     currentCard.back = b;
     
-    const idx = appState.flashcards.findIndex(x => x.id === currentCard.id);
+    const idx = appState.flashcards.findIndex(x => x.id == currentCard.id);
     if(idx !== -1) appState.flashcards[idx] = currentCard;
 
     saveState();
