@@ -94,8 +94,14 @@ function decodeBase64Unicode(str) {
 }
 
 async function syncToGitHub() {
+    // Automatycznie pobierz i zapisz dane z inputów przed synchronizacją
+    appState.ghToken = document.getElementById('gh-token').value.trim();
+    appState.ghUser = document.getElementById('gh-user').value.trim();
+    appState.ghRepo = document.getElementById('gh-repo').value.trim();
+    saveState();
+
     if (!appState.ghToken || !appState.ghUser || !appState.ghRepo) {
-        return alert("Wypełnij najpierw dane GitHub w ustawieniach!");
+        return alert("Wypełnij najpierw wszystkie 3 pola: Token, Użytkownik i Repozytorium!");
     }
     const msg = document.getElementById('sync-msg');
     const loader = document.getElementById('sync-loader');
@@ -105,17 +111,20 @@ async function syncToGitHub() {
     let sha = "";
 
     try {
-        // 1. Pobierz aktualne SHA pliku (jeśli istnieje)
         const getRes = await fetch(url, { headers: { "Authorization": `token ${appState.ghToken}` } });
         if (getRes.ok) {
             const getData = await getRes.json();
             sha = getData.sha;
         }
 
-        // 2. Wyślij zaktualizowany plik
+        // --- KLUCZOWA ZMIANA: Kopiujemy stan i usuwamy sekrety przed wysłaniem ---
+        const safeState = { ...appState };
+        delete safeState.ghToken; // Usuwamy token z pliku wysyłanego na GitHuba
+        delete safeState.apiKey;  // Usuwamy klucz Gemini z pliku wysyłanego na GitHuba
+
         const body = {
             message: `Automatyczny zapis postępów z aplikacji (${getLocalToday()})`,
-            content: encodeBase64Unicode(JSON.stringify(appState, null, 2))
+            content: encodeBase64Unicode(JSON.stringify(safeState, null, 2))
         };
         if (sha) body.sha = sha;
 
