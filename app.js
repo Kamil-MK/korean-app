@@ -38,7 +38,6 @@ function loadState() {
         appState.sessionStats = { date: today, again: [], hard: [], good: [], easy: [] };
         saveState();
     } else {
-        // SKRYPT RATUNKOWY: Przeniesienie starych fiszek do nowej aktywności
         if (!appState.history[today]) {
             appState.history[today] = { again: 0, hard: 0, good: 0, easy: 0, completedAll: false, newCardsDone: 0 };
         }
@@ -440,7 +439,6 @@ function setupReaderContent(text) {
             container.appendChild(document.createTextNode(token));
         } else {
             const cleanWord = token.replace(/[.,!?()\[\]"'“”]/g, '').trim();
-            // Czytelnia musi sprawdzić, czy słówko znajduje się na rewersie
             const isFiszka = appState.flashcards.some(f => f.back === cleanWord || f.front === cleanWord);
             
             const span = document.createElement('span');
@@ -508,7 +506,6 @@ function renderWordsTable() {
     const tbody = document.getElementById('words-tbody');
     tbody.innerHTML = "";
     appState.words.forEach(w => {
-        // Sprawdzamy rewers (oraz awers dla wstecznej kompatybilności ze starymi fiszkami)
         const isAdded = appState.flashcards.some(f => f.back === w.ko || f.front === w.ko);
         const tr = document.createElement('tr');
         tr.innerHTML = `
@@ -543,7 +540,6 @@ function addWordToSRS(id) {
     const w = appState.words.find(item => item.id == id);
     if (!w) return;
     
-    // Tłumaczenie na Awers, słówko (w.ko) na Rewers
     const frontTranslation = w.custom.trim() !== "" ? w.custom : w.autoPl;
     const isAdded = createFlashcardData(frontTranslation, w.ko, 0, 0, 2.5);
     
@@ -625,19 +621,34 @@ function updateStudyCounter() {
     document.getElementById('study-stats').textContent = `Do powtórki: ${studyQueue.length}`;
 }
 
+// Zaktualizowana funkcja do zarządzania kolejką z poprawionym czasem
 function refreshStudySession() {
-    const now = new Date().toISOString();
-    const today = getLocalToday();
+    const todayStr = getLocalToday();
     
     if (!appState.history) appState.history = {};
-    if (!appState.history[today]) appState.history[today] = { again: 0, hard: 0, good: 0, easy: 0, completedAll: false, newCardsDone: 0 };
+    if (!appState.history[todayStr]) appState.history[todayStr] = { again: 0, hard: 0, good: 0, easy: 0, completedAll: false, newCardsDone: 0 };
 
-    let newCardsDone = appState.history[today].newCardsDone || 0;
+    let newCardsDone = appState.history[todayStr].newCardsDone || 0;
     let newCardsInQueue = 0;
     
+    const todayObj = new Date();
+    todayObj.setHours(0, 0, 0, 0); // Północ bieżącego dnia
+    
     studyQueue = appState.flashcards.filter(c => {
-        if (!c.nextReview || c.nextReview <= now) {
-            if (c.rep === 0) {
+        let isDue = false;
+        if (!c.nextReview) {
+            isDue = true;
+        } else {
+            const reviewDate = new Date(c.nextReview);
+            reviewDate.setHours(0, 0, 0, 0); 
+            if (reviewDate.getTime() <= todayObj.getTime()) {
+                isDue = true;
+            }
+        }
+
+        if (isDue) {
+            // Tylko NAPRAWDĘ nowe fiszki (interval === 0) obciążają limit dzienny
+            if (c.interval === 0) {
                 if (newCardsDone + newCardsInQueue >= appState.dailyLimit) return false;
                 newCardsInQueue++;
             }
@@ -646,19 +657,19 @@ function refreshStudySession() {
         return false;
     });
 
-    studyQueue.sort((a, b) => (a.rep > 0 && b.rep === 0 ? -1 : (a.rep === 0 && b.rep > 0 ? 1 : 0)));
+    studyQueue.sort((a, b) => (a.interval > 0 && b.interval === 0 ? -1 : (a.interval === 0 && b.interval > 0 ? 1 : 0)));
 
     updateSessionProgressUI();
     updateStudyCounter();
 
     if (studyQueue.length === 0) {
-        appState.history[today].completedAll = true;
+        appState.history[todayStr].completedAll = true;
         saveState();
         document.getElementById('study-empty').classList.remove('hidden');
         document.getElementById('study-active').classList.add('hidden');
         updateActivityStats();
     } else {
-        appState.history[today].completedAll = false;
+        appState.history[todayStr].completedAll = false;
         saveState();
         document.getElementById('study-empty').classList.add('hidden');
         document.getElementById('study-active').classList.remove('hidden');
@@ -703,7 +714,7 @@ function processAnswer(quality) {
     appState.sessionStats[cat].push({ ...currentCard });
     appState.history[today][cat]++; 
 
-    if (currentCard.rep === 0) {
+    if (currentCard.interval === 0) {
         appState.history[today].newCardsDone = (appState.history[today].newCardsDone || 0) + 1;
     }
 
@@ -749,7 +760,11 @@ function applySM2(card, quality) {
         card.rep++;
     }
     card.ef = Math.max(1.3, card.ef + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)));
-    let next = new Date(); next.setDate(next.getDate() + card.interval); card.nextReview = next.toISOString();
+    
+    let next = new Date(); 
+    next.setDate(next.getDate() + card.interval); 
+    next.setHours(0, 0, 0, 0); // Zerujemy godziny przy zapisie
+    card.nextReview = next.toISOString();
 }
 
 function updateSessionProgressUI() {
