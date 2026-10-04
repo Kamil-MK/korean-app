@@ -560,3 +560,730 @@ function addWordToSRS(id) {
 function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = null) {
     if(!front || !back || appState.flashcards.some(f => f.front === front && f.back === back)) return false;
     appState.flashcards.push({
+        id: Date.now() + Math.random(),
+        front: front.trim(),
+        back: back.trim(),
+        rep: rep > 0 ? rep : (interval > 0 ? 1 : 0),
+        interval: interval > 0 ? interval : 0,
+        ef: ef >= 1.3 ? ef : 2.5,
+        nextReview: nextReviewStr || (interval > 0 ? new Date(Date.now() + interval * 86400000).toISOString() : new Date().toISOString())
+    });
+    return true;
+}
+
+function addManualFlashcard() {
+    const front = document.getElementById('manual-front').value.trim();
+    const back = document.getElementById('manual-back').value.trim();
+    if (!front || !back) return alert("Uzupełnij pola.");
+    if (createFlashcardData(front, back, 0, 0, 2.5)) {
+        saveState(); renderDeckTable(); refreshStudySession();
+        document.getElementById('manual-front').value = ""; document.getElementById('manual-back').value = "";
+    } else { alert("Taka fiszka już istnieje!"); }
+}
+
+function toggleDeckList() {
+    const container = document.getElementById('deck-list-container');
+    container.classList.toggle('hidden');
+}
+
+function renderDeckTable() {
+    const tbody = document.getElementById('deck-tbody');
+    tbody.innerHTML = "";
+    const countSpan = document.getElementById('total-cards-count');
+    if(countSpan) countSpan.textContent = appState.flashcards.length;
+
+    appState.flashcards.forEach(f => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><input type="text" value="${f.front}" onchange="updateCardField('${f.id}', 'front', this.value)"></td>
+            <td><input type="text" value="${f.back}" onchange="updateCardField('${f.id}', 'back', this.value)"></td>
+            <td>${f.interval}d</td>
+            <td><button class="btn btn-danger btn-sm" onclick="deleteCard('${f.id}')">Usuń</button></td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function updateCardField(id, field, val) {
+    const c = appState.flashcards.find(item => item.id == id);
+    if (c) { c[field] = val; saveState(); }
+}
+
+function deleteCard(id) {
+    if (confirm("Usunąć fiszkę?")) {
+        appState.flashcards = appState.flashcards.filter(item => item.id != id);
+        saveState(); renderDeckTable(); refreshStudySession(); renderWordsTable();
+    }
+}
+
+let studyQueue = [];
+let currentCard = null;
+
+function updateStudyCounter() {
+    document.getElementById('study-stats').textContent = `Do powtórki: ${studyQueue.length}`;
+}
+
+function refreshStudySession() {
+    const todayStr = getLocalToday();
+    
+    if (!appState.history) appState.history = {};
+    if (!appState.history[todayStr]) {
+        appState.history[todayStr] = { again: 0, hard: 0, good: 0, easy: 0, completedAll: false, newCardsDone: 0, practicedMistakes: [] };
+    } else if (!appState.history[todayStr].practicedMistakes) {
+        appState.history[todayStr].practicedMistakes = [];
+    }
+
+    let newCardsDone = appState.history[todayStr].newCardsDone || 0;
+    let newCardsInQueue = 0;
+    
+    const todayObj = new Date();
+    todayObj.setHours(0, 0, 0, 0); 
+    
+    studyQueue = appState.flashcards.filter(c => {
+        let isDue = false;
+        if (!c.nextReview) {
+            isDue = true;
+        } else {
+            const reviewDate = new Date(c.nextReview);
+            reviewDate.setHours(0, 0, 0, 0); 
+            if (reviewDate.getTime() <= todayObj.getTime()) {
+                isDue = true;
+            }
+        }
+
+        if (isDue) {
+            if (c.interval === 0) {
+                if (newCardsDone + newCardsInQueue >= appState.dailyLimit) return false;
+                newCardsInQueue++;
+            }
+            return true;
+        }
+        return false;
+    });
+
+    studyQueue.sort((a, b) => (a.interval > 0 && b.interval === 0 ? -1 : (a.interval === 0 && b.interval > 0 ? 1 : 0)));
+
+    updateSessionProgressUI();
+    updateStudyCounter();
+
+    if (studyQueue.length === 0) {
+        appState.history[todayStr].completedAll = true;
+        saveState();
+        document.getElementById('study-empty').classList.remove('hidden');
+        document.getElementById('study-active').classList.add('hidden');
+        updateActivityStats();
+        
+        // POKAZANIE PRZYCISKU ROZSYPANKI
+        const practiceBtn = document.getElementById('btn-practice-mistakes');
+        if (appState.sessionStats && appState.sessionStats.date === todayStr && appState.sessionStats.again && appState.sessionStats.again.length > 0) {
+            const practiced = appState.history[todayStr].practicedMistakes || [];
+            
+            // Odfiltrowujemy słówka, które były już przećwiczone w grze Match
+            const uniqueMistakes = Array.from(new Map(appState.sessionStats.again.map(item => [item.id, item])).values())
+                                        .filter(item => !practiced.includes(item.id));
+
+            if (uniqueMistakes.length > 0) {
+                practiceBtn.textContent = `Przećwicz dzisiejsze błędy (${uniqueMistakes.length})`;
+                practiceBtn.classList.remove('hidden');
+            } else {
+                practiceBtn.classList.add('hidden');
+            }
+        } else {
+            if(practiceBtn) practiceBtn.classList.add('hidden');
+        }
+
+    } else {
+        appState.history[todayStr].completedAll = false;
+        saveState();
+        document.getElementById('study-empty').classList.add('hidden');
+        document.getElementById('study-active').classList.remove('hidden');
+        
+        const practiceBtn = document.getElementById('btn-practice-mistakes');
+        if(practiceBtn) practiceBtn.classList.add('hidden');
+
+        nextStudyCard();
+    }
+}
+
+function nextStudyCard() {
+    if (studyQueue.length === 0) { refreshStudySession(); return; }
+    currentCard = studyQueue[0];
+    document.getElementById('study-front').textContent = currentCard.front;
+    document.getElementById('study-back').textContent = currentCard.back;
+    document.getElementById('study-front').classList.remove('hidden');
+    document.getElementById('study-back').classList.add('hidden');
+    document.getElementById('btn-show-answer').classList.remove('hidden');
+    document.getElementById('srs-actions').classList.add('hidden');
+    
+    document.getElementById('time-hard').textContent = previewSM2(currentCard, 3);
+    document.getElementById('time-good').textContent = previewSM2(currentCard, 4);
+    document.getElementById('time-easy').textContent = previewSM2(currentCard, 5);
+}
+
+function showAnswer() {
+    document.getElementById('study-back').classList.remove('hidden');
+    document.getElementById('btn-show-answer').classList.add('hidden');
+    document.getElementById('srs-actions').classList.remove('hidden');
+}
+
+function previewSM2(card, quality) {
+    let temp = { ...card }; applySM2(temp, quality); return `${temp.interval}d`;
+}
+
+function processAnswer(quality) {
+    const today = getLocalToday();
+    if (!appState.sessionStats || appState.sessionStats.date !== today) {
+        appState.sessionStats = { date: today, again: [], hard: [], good: [], easy: [] };
+    }
+    
+    if (!appState.history) appState.history = {};
+    if (!appState.history[today]) {
+        appState.history[today] = { again: 0, hard: 0, good: 0, easy: 0, completedAll: false, newCardsDone: 0, practicedMistakes: [] };
+    } else if (!appState.history[today].practicedMistakes) {
+        appState.history[today].practicedMistakes = [];
+    }
+
+    let cat = quality < 3 ? 'again' : (quality === 3 ? 'hard' : (quality === 4 ? 'good' : 'easy'));
+    appState.sessionStats[cat].push({ ...currentCard });
+    appState.history[today][cat]++; 
+
+    if (currentCard.interval === 0) {
+        appState.history[today].newCardsDone = (appState.history[today].newCardsDone || 0) + 1;
+    }
+
+    applySM2(currentCard, quality);
+    studyQueue.shift(); 
+    saveState(); 
+    renderDeckTable(); 
+    
+    updateStudyCounter();
+    updateSessionProgressUI();
+
+    if (studyQueue.length === 0) {
+        appState.history[today].completedAll = true;
+        saveState();
+        document.getElementById('study-empty').classList.remove('hidden');
+        document.getElementById('study-active').classList.add('hidden');
+        updateActivityStats();
+        refreshStudySession(); 
+    } else {
+        nextStudyCard();
+    }
+}
+
+function applySM2(card, quality) {
+    if (quality < 3) { 
+        card.rep = 0; 
+        card.interval = 1; 
+    } else {
+        if (card.rep === 0) {
+            if (quality === 3) card.interval = 1;
+            else if (quality === 4) card.interval = 3;
+            else if (quality === 5) card.interval = 5;
+        }
+        else if (card.rep === 1) {
+            if (quality === 3) card.interval = 2;
+            else if (quality === 4) card.interval = 6;
+            else if (quality === 5) card.interval = 8;
+        }
+        else {
+            card.interval = Math.round(card.interval * card.ef);
+            if (quality === 3) card.interval = Math.max(1, Math.round(card.interval * 0.8));
+            else if (quality === 5) card.interval = Math.round(card.interval * 1.2);
+        }
+        card.rep++;
+    }
+    card.ef = Math.max(1.3, card.ef + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)));
+    
+    let next = new Date(); 
+    next.setDate(next.getDate() + card.interval); 
+    next.setHours(0, 0, 0, 0); 
+    card.nextReview = next.toISOString();
+}
+
+function updateSessionProgressUI() {
+    if (!appState.sessionStats) return;
+    const total = appState.sessionStats.again.length + appState.sessionStats.hard.length + appState.sessionStats.good.length + appState.sessionStats.easy.length;
+    
+    if (total === 0) {
+        document.getElementById('prog-again').style.width = '0%';
+        document.getElementById('prog-hard').style.width = '0%';
+        document.getElementById('prog-good').style.width = '0%';
+        document.getElementById('prog-easy').style.width = '0%';
+        document.getElementById('prog-percent').textContent = '0';
+        return;
+    }
+    const pAgain = (appState.sessionStats.again.length / total) * 100;
+    const pHard = (appState.sessionStats.hard.length / total) * 100;
+    const pGood = (appState.sessionStats.good.length / total) * 100;
+    const pEasy = (appState.sessionStats.easy.length / total) * 100;
+
+    document.getElementById('prog-again').style.width = pAgain + '%';
+    document.getElementById('prog-hard').style.width = pHard + '%';
+    document.getElementById('prog-good').style.width = pGood + '%';
+    document.getElementById('prog-easy').style.width = pEasy + '%';
+
+    const successRate = ((appState.sessionStats.good.length + appState.sessionStats.easy.length) / total * 100).toFixed(0);
+    document.getElementById('prog-percent').textContent = successRate;
+}
+
+function openStatsModal() {
+    if (!appState.sessionStats) return;
+    const container = document.getElementById('stats-details-container');
+    container.innerHTML = '';
+    
+    const cats = [
+        { id: 'again', name: 'Złe (Nie znam)', color: 'var(--danger)', data: appState.sessionStats.again },
+        { id: 'hard', name: 'Średnie (Słabo)', color: 'var(--warning)', data: appState.sessionStats.hard },
+        { id: 'good', name: 'Dobre', color: '#3B82F6', data: appState.sessionStats.good },
+        { id: 'easy', name: 'Bardzo Dobre', color: 'var(--success)', data: appState.sessionStats.easy }
+    ];
+
+    let html = '';
+    cats.forEach(c => {
+        if(c.data.length > 0) {
+            html += `<h4 style="color: ${c.color}; margin-top: 10px;">${c.name} (${c.data.length})</h4>`;
+            html += `<ul class="stats-list">`;
+            c.data.forEach(card => { html += `<li><b>${card.front}</b> - ${card.back}</li>`; });
+            html += `</ul>`;
+        }
+    });
+
+    if(html === '') html = '<p class="text-center hint">Brak danych w dzisiejszej sesji.</p>';
+    container.innerHTML = html;
+    document.getElementById('modal-stats').classList.remove('hidden');
+}
+
+// --- LOGIKA AKTYWNOŚCI ---
+function updateActivityStats() {
+    if (!appState.history) return;
+    const today = getLocalToday();
+    
+    const dates = Object.keys(appState.history).sort();
+    const completedDates = dates.filter(d => appState.history[d].completedAll);
+    
+    let currentStreak = 0;
+    let maxStreak = 0;
+    let totalDays = completedDates.length;
+    
+    let tempStreak = 0;
+    let prevDate = null;
+    
+    for (let i = 0; i < completedDates.length; i++) {
+        const d = completedDates[i];
+        if (!prevDate) {
+            tempStreak = 1;
+        } else {
+            const diffTime = Math.abs(new Date(d) - new Date(prevDate));
+            const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+            if (diffDays === 1) {
+                tempStreak++;
+            } else {
+                tempStreak = 1;
+            }
+        }
+        if (tempStreak > maxStreak) maxStreak = tempStreak;
+        prevDate = d;
+        
+        if (i === completedDates.length - 1) {
+            const diffToday = Math.round(Math.abs(new Date(today) - new Date(d)) / (1000 * 60 * 60 * 24));
+            if (diffToday === 0 || diffToday === 1) {
+                currentStreak = tempStreak;
+            }
+        }
+    }
+    
+    document.getElementById('streak-current').textContent = currentStreak;
+    document.getElementById('streak-max').textContent = maxStreak;
+    document.getElementById('streak-total').textContent = totalDays;
+    
+    render7DayChart();
+    renderCalendar();
+}
+
+function render7DayChart() {
+    const container = document.getElementById('chart-7days');
+    container.innerHTML = "";
+    const todayObj = new Date(getLocalToday());
+    
+    let daysData = [];
+    let maxWords = 0;
+    for (let i = 6; i >= 0; i--) {
+        let d = new Date(todayObj);
+        d.setDate(d.getDate() - i);
+        let ds = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        let stats = appState.history[ds] || { again: 0, hard: 0, good: 0, easy: 0 };
+        let total = stats.again + stats.hard + stats.good + stats.easy;
+        if (total > maxWords) maxWords = total;
+        daysData.push({ date: ds, short: d.toLocaleDateString('pl-PL', {weekday: 'short'}), stats, total });
+    }
+    
+    daysData.forEach(day => {
+        const col = document.createElement('div');
+        col.className = 'chart-col';
+        
+        let html = '';
+        if (day.total > 0) {
+            const pAgain = (day.stats.again / day.total) * 100;
+            const pHard = (day.stats.hard / day.total) * 100;
+            const pGood = (day.stats.good / day.total) * 100;
+            const pEasy = (day.stats.easy / day.total) * 100;
+            
+            const heightPct = Math.max(15, (day.total / maxWords) * 100);
+            
+            html = `<div class="chart-total">${day.total}<br><span style="font-size:8px;font-weight:normal;">słów</span></div>`;
+            html += `<div class="bar-wrapper" style="height: ${heightPct}%;">`;
+            if(pEasy > 0) html += `<div class="bar-segment bar-easy" style="height: ${pEasy}%"></div>`;
+            if(pGood > 0) html += `<div class="bar-segment bar-good" style="height: ${pGood}%"></div>`;
+            if(pHard > 0) html += `<div class="bar-segment bar-hard" style="height: ${pHard}%"></div>`;
+            if(pAgain > 0) html += `<div class="bar-segment bar-again" style="height: ${pAgain}%"></div>`;
+            html += `</div>`;
+        } else {
+            html += `<div class="chart-total" style="color:transparent;">0</div>`;
+            html += `<div class="bar-wrapper" style="height: 0%;"></div>`;
+        }
+        
+        html += `<div class="chart-label">${day.short}</div>`;
+        col.innerHTML = html;
+        container.appendChild(col);
+    });
+}
+
+let currentCalDate = new Date(getLocalToday());
+
+function changeMonth(offset) {
+    currentCalDate.setMonth(currentCalDate.getMonth() + offset);
+    renderCalendar();
+}
+
+function renderCalendar() {
+    const grid = document.getElementById('calendar-grid');
+    grid.innerHTML = "";
+    
+    const year = currentCalDate.getFullYear();
+    const month = currentCalDate.getMonth();
+    
+    const monthNames = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
+    document.getElementById('calendar-month-label').textContent = `${monthNames[month]} ${year}`;
+    
+    const daysOfWeek = ["pon", "wt", "śr", "czw", "pt", "sob", "nd"];
+    daysOfWeek.forEach(d => {
+        const el = document.createElement('div');
+        el.className = "cal-day-header";
+        el.textContent = d;
+        grid.appendChild(el);
+    });
+    
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    
+    let startDayIndex = firstDay.getDay() - 1; 
+    if (startDayIndex === -1) startDayIndex = 6;
+    
+    for (let i = 0; i < startDayIndex; i++) {
+        const el = document.createElement('div');
+        el.className = "cal-day empty";
+        grid.appendChild(el);
+    }
+    
+    for (let i = 1; i <= lastDay.getDate(); i++) {
+        const el = document.createElement('div');
+        el.className = "cal-day";
+        el.textContent = i;
+        
+        const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+        if (appState.history && appState.history[dateStr] && appState.history[dateStr].completedAll) {
+            el.classList.add('completed');
+        }
+        grid.appendChild(el);
+    }
+}
+
+// --- RESZTA LOGIKI KART ---
+function openQuickEdit() {
+    if (!currentCard) return;
+    document.getElementById('qe-front').value = currentCard.front;
+    document.getElementById('qe-back').value = currentCard.back;
+    document.getElementById('modal-quick-edit').classList.remove('hidden');
+}
+
+function saveQuickEdit() {
+    if (!currentCard) return;
+    const f = document.getElementById('qe-front').value.trim();
+    const b = document.getElementById('qe-back').value.trim();
+    if(!f || !b) return alert("Wypełnij oba pola!");
+    
+    currentCard.front = f;
+    currentCard.back = b;
+    
+    const idx = appState.flashcards.findIndex(x => x.id == currentCard.id);
+    if(idx !== -1) appState.flashcards[idx] = currentCard;
+
+    saveState();
+    renderDeckTable(); 
+    
+    document.getElementById('study-front').textContent = currentCard.front;
+    document.getElementById('study-back').textContent = currentCard.back; 
+    
+    closeModal('modal-quick-edit');
+}
+
+function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+function exportCSV() {
+    if (appState.flashcards.length === 0) return alert("Brak fiszek!");
+    let content = "Awers;Rewers;Interwal\n";
+    appState.flashcards.forEach(f => { content += `${f.front.replace(/;/g, ",")};${f.back.replace(/;/g, ",")};${f.interval}\n`; });
+    const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = "korean_export.csv"; a.click();
+}
+
+function stripHTML(html) {
+    if(typeof html !== 'string') return String(html || '');
+    let tmp = document.createElement("DIV"); tmp.innerHTML = html; return tmp.textContent || tmp.innerText || "";
+}
+
+function parseCSV(content) {
+    let count = 0;
+    const lines = content.replace(/\r/g, '').split('\n');
+    if (lines.length === 0) return 0;
+    
+    const headerCheck = lines[0].toLowerCase();
+    const hasHeader = headerCheck.includes('strona') || headerCheck.includes('awers') || headerCheck.includes('poziom');
+    
+    lines.forEach((line, index) => {
+        if (hasHeader && index === 0) return;
+        if (!line.trim()) return; 
+        
+        let parts = line.split(';');
+        if (parts.length < 2) parts = line.split('\t');
+        
+        if (parts.length >= 2) {
+            const front = stripHTML(parts[0].replace(/^"|"$/g, '').trim());
+            const back = stripHTML(parts[1].replace(/^"|"$/g, '').trim());
+            if (!front || !back) return;
+
+            let interval = 0;
+            let nextReview = new Date().toISOString();
+            let ef = 2.5;
+            let rep = 0;
+
+            if (parts.length >= 4) {
+                const level = parts[2].replace(/^"|"$/g, '').trim();
+                const nextRevStr = parts[3].replace(/^"|"$/g, '').trim();
+                if (level === 'Przyswojona') { rep = 2; interval = 14; } 
+                else if (level === 'W trakcie nauki' || level === 'W trakcie') { rep = 1; interval = 3; }
+
+                if (nextRevStr && nextRevStr !== 'Brak — nowa karta' && nextRevStr.length >= 10) {
+                    const dateMatch = nextRevStr.match(/\d{4}-\d{2}-\d{2}/);
+                    if (dateMatch) {
+                        nextReview = new Date(dateMatch[0]).toISOString();
+                        const diffTime = new Date(dateMatch[0]).getTime() - new Date().getTime();
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                        if (diffDays > 0) interval = diffDays;
+                    }
+                }
+            } else if (parts.length === 3) {
+                const parsedInt = parseInt(parts[2].replace(/^"|"$/g, '').trim());
+                if (!isNaN(parsedInt)) {
+                    interval = parsedInt;
+                    rep = interval > 0 ? 1 : 0;
+                    if (interval > 0) {
+                        let next = new Date(); next.setDate(next.getDate() + interval); nextReview = next.toISOString();
+                    }
+                }
+            }
+            if (createFlashcardData(front, back, rep, interval, ef, nextReview)) count++;
+        }
+    });
+    return count;
+}
+
+function importCSV(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const content = e.target.result;
+            let addedCards = parseCSV(content);
+            if (addedCards > 0) {
+                saveState(); renderDeckTable(); refreshStudySession();
+                alert(`Sukces! Zaimportowano ${addedCards} fiszek.`);
+            } else { alert("Nie odnaleziono fiszek. Sprawdź format CSV."); }
+        } catch(err) { alert("Błąd odczytu pliku: " + err.message); }
+        event.target.value = '';
+    };
+    reader.readAsText(file, "UTF-8");
+}
+
+
+// ==========================================
+// TAP-TO-MATCH GAME LOGIC (Rozsypanki)
+// ==========================================
+
+let matchingChunks = [];
+let currentMatchRound = 0;
+let matchSelKo = null;
+let matchSelPl = null;
+let matchedInRound = 0;
+
+function shuffleArray(array) {
+    let curId = array.length;
+    while (0 !== curId) {
+        let randId = Math.floor(Math.random() * curId);
+        curId -= 1;
+        let tmp = array[curId];
+        array[curId] = array[randId];
+        array[randId] = tmp;
+    }
+    return array;
+}
+
+function startMatchingGame() {
+    const todayStr = getLocalToday();
+    if (!appState.sessionStats || appState.sessionStats.date !== todayStr || !appState.sessionStats.again) return;
+    
+    const hist = appState.history[todayStr] || {};
+    const practiced = hist.practicedMistakes || [];
+
+    // Pobieramy błędy, usuwamy duplikaty po ID i odfiltrowujemy już przećwiczone
+    const uniqueMistakes = Array.from(new Map(appState.sessionStats.again.map(item => [item.id, item])).values())
+                                .filter(item => !practiced.includes(item.id));
+
+    if (uniqueMistakes.length === 0) {
+        alert("Nie ma już błędów do przećwiczenia na dzisiaj!");
+        return;
+    }
+
+    matchingChunks = [];
+    for (let i = 0; i < uniqueMistakes.length; i += 10) {
+        matchingChunks.push(uniqueMistakes.slice(i, i + 10));
+    }
+
+    currentMatchRound = 0;
+    document.getElementById('matching-game-view').classList.remove('hidden');
+    renderMatchingRound();
+}
+
+function renderMatchingRound() {
+    matchSelKo = null;
+    matchSelPl = null;
+    matchedInRound = 0;
+
+    const chunk = matchingChunks[currentMatchRound];
+    document.getElementById('matching-progress').textContent = `Runda ${currentMatchRound + 1} z ${matchingChunks.length}`;
+
+    const koCol = document.getElementById('match-col-ko');
+    const plCol = document.getElementById('match-col-pl');
+    koCol.innerHTML = '';
+    plCol.innerHTML = '';
+
+    let koArr = shuffleArray([...chunk]);
+    let plArr = shuffleArray([...chunk]);
+
+    koArr.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'match-card';
+        div.textContent = item.back; 
+        div.onclick = () => handleMatchClick('ko', item.id, item.back, div);
+        koCol.appendChild(div);
+    });
+
+    plArr.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'match-card';
+        div.textContent = item.front; 
+        div.onclick = () => handleMatchClick('pl', item.id, item.front, div);
+        plCol.appendChild(div);
+    });
+}
+
+function handleMatchClick(type, id, text, el) {
+    if (el.classList.contains('matched')) return;
+
+    if (type === 'ko') {
+        if (matchSelKo) matchSelKo.el.classList.remove('selected');
+        matchSelKo = { id, el };
+        el.classList.add('selected');
+        speakKorean(text);
+    } else {
+        if (matchSelPl) matchSelPl.el.classList.remove('selected');
+        matchSelPl = { id, el };
+        el.classList.add('selected');
+    }
+
+    if (matchSelKo && matchSelPl) {
+        const koRef = matchSelKo;
+        const plRef = matchSelPl;
+        
+        if (koRef.id === plRef.id) {
+            // SUKCES
+            if ('vibrate' in navigator) navigator.vibrate(50);
+            koRef.el.classList.remove('selected');
+            plRef.el.classList.remove('selected');
+            koRef.el.classList.add('matched');
+            plRef.el.classList.add('matched');
+            matchedInRound++;
+            
+            matchSelKo = null;
+            matchSelPl = null;
+
+            if (matchedInRound === matchingChunks[currentMatchRound].length) {
+                
+                // Zapisujemy tę rundę jako trwale "przećwiczoną"
+                const todayStr = getLocalToday();
+                if (!appState.history[todayStr].practicedMistakes) appState.history[todayStr].practicedMistakes = [];
+                
+                const chunkIds = matchingChunks[currentMatchRound].map(item => item.id);
+                appState.history[todayStr].practicedMistakes.push(...chunkIds);
+                saveState();
+
+                setTimeout(() => {
+                    currentMatchRound++;
+                    if (currentMatchRound < matchingChunks.length) {
+                        renderMatchingRound();
+                    } else {
+                        alert("Świetna robota! Przećwiczyłeś wszystkie dzisiejsze błędy.");
+                        closeMatchingGame();
+                    }
+                }, 600);
+            }
+        } else {
+            // BŁĄD
+            if ('vibrate' in navigator) navigator.vibrate(200);
+            koRef.el.classList.remove('selected');
+            plRef.el.classList.remove('selected');
+            
+            koRef.el.classList.add('error');
+            plRef.el.classList.add('error');
+            
+            matchSelKo = null;
+            matchSelPl = null;
+
+            setTimeout(() => {
+                koRef.el.classList.remove('error');
+                plRef.el.classList.remove('error');
+            }, 400);
+        }
+    }
+}
+
+function speakKorean(text) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); 
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'ko-KR';
+        window.speechSynthesis.speak(u);
+    }
+}
+
+function closeMatchingGame() {
+    document.getElementById('matching-game-view').classList.add('hidden');
+    matchSelKo = null;
+    matchSelPl = null;
+    refreshStudySession(); // Wywołujemy po wyjściu, aby odświeżyć licznik pozostałych słów na przycisku
+}
+
+window.addEventListener('DOMContentLoaded', loadState);
