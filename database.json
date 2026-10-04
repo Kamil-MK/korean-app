@@ -486,9 +486,9 @@
       "front": "Brakować",
       "back": "부족하다",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.791Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445791.879,
@@ -522,9 +522,9 @@
       "front": "Różnic się",
       "back": "다양하다",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.791Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445792.148,
@@ -602,10 +602,10 @@
       "id": 1790781445793.8699,
       "front": "Katedra przedmiotu X",
       "back": "X학과",
-      "rep": 3,
-      "interval": 2,
+      "rep": 4,
+      "interval": 5,
       "ef": 2.36,
-      "nextReview": "2026-10-04T16:32:13.135Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445793.1165,
@@ -638,10 +638,10 @@
       "id": 1790781445793.4814,
       "front": "Employment",
       "back": "취업",
-      "rep": 2,
-      "interval": 4,
+      "rep": 3,
+      "interval": 10,
       "ef": 2.5,
-      "nextReview": "2026-10-04T00:00:00.000Z"
+      "nextReview": "2026-10-13T22:00:00.000Z"
     },
     {
       "id": 1790781445793.3206,
@@ -659,34 +659,34 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445793.7998,
       "front": "Formularz",
       "back": "신청서",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.793Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445793.097,
       "front": "Wypełnić (w kontekscie dokumentu, podania, etc.)",
       "back": "작성하다",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.793Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445793.753,
       "front": "Złożyć podanie",
       "back": "신청서를 내다",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.793Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445793.0203,
@@ -710,10 +710,10 @@
       "id": 1790781445793.2224,
       "front": "Dojazd do i z pracy",
       "back": "출퇴근",
-      "rep": 2,
-      "interval": 4,
-      "ef": 2.5,
-      "nextReview": "2026-10-04T00:00:00.000Z"
+      "rep": 3,
+      "interval": 8,
+      "ef": 2.36,
+      "nextReview": "2026-10-11T22:00:00.000Z"
     },
     {
       "id": 1790781445793.4473,
@@ -740,7 +740,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445793.3206,
@@ -848,7 +848,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445793.6675,
@@ -917,10 +917,10 @@
       "id": 1790781445793.3953,
       "front": "Repair",
       "back": "수리하다",
-      "rep": 1,
+      "rep": 0,
       "interval": 1,
-      "ef": 1.5600000000000003,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "ef": 1.3,
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445793.1626,
@@ -938,7 +938,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445793.8328,
@@ -974,7 +974,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445794.048,
@@ -1007,10 +1007,10 @@
       "id": 1790781445794.3867,
       "front": "Set, zestaw (licznik ubrań)",
       "back": "벌",
-      "rep": 1,
-      "interval": 1,
+      "rep": 2,
+      "interval": 6,
       "ef": 1.5600000000000003,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-09T22:00:00.000Z"
     },
     {
       "id": 1790781445794.3713,
@@ -1025,10 +1025,10 @@
       "id": 1790781445794.236,
       "front": "Prognoza pogody",
       "back": "일기 예보",
-      "rep": 2,
-      "interval": 4,
+      "rep": 3,
+      "interval": 10,
       "ef": 2.5,
-      "nextReview": "2026-10-04T00:00:00.000Z"
+      "nextReview": "2026-10-13T22:00:00.000Z"
     },
     {
       "id": 1790781445794.6624,
@@ -1091,7 +1091,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445794.3484,
@@ -1145,7 +1145,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445794.8425,
@@ -1160,10 +1160,10 @@
       "id": 1790781445794.2979,
       "front": "Large",
       "back": "대형",
-      "rep": 3,
-      "interval": 2,
-      "ef": 2.36,
-      "nextReview": "2026-10-04T17:50:52.054Z"
+      "rep": 4,
+      "interval": 4,
+      "ef": 2.2199999999999998,
+      "nextReview": "2026-10-07T22:00:00.000Z"
     },
     {
       "id": 1790781445794.9575,
@@ -1205,10 +1205,10 @@
       "id": 1790781445794.6543,
       "front": "Mind, feelings",
       "back": "심경",
-      "rep": 2,
-      "interval": 2,
+      "rep": 3,
+      "interval": 5,
       "ef": 2.36,
-      "nextReview": "2026-10-04T17:51:13.063Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445794.5754,
@@ -1253,7 +1253,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445794.9143,
@@ -1343,7 +1343,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445794.8896,
@@ -1415,7 +1415,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445794.2112,
@@ -1568,7 +1568,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445795.5896,
@@ -1592,10 +1592,10 @@
       "id": 1790781445795.4854,
       "front": "Relieve the burden",
       "back": "부담을 덜다",
-      "rep": 0,
-      "interval": 1,
+      "rep": 1,
+      "interval": 3,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-06T22:00:00.000Z"
     },
     {
       "id": 1790781445795.957,
@@ -1622,7 +1622,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445795.0378,
@@ -1649,7 +1649,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445795.7898,
@@ -1700,10 +1700,10 @@
       "id": 1790781445795.4963,
       "front": "Udogodnienia",
       "back": "편의 시설",
-      "rep": 2,
-      "interval": 2,
-      "ef": 2.36,
-      "nextReview": "2026-10-04T17:52:48.831Z"
+      "rep": 3,
+      "interval": 4,
+      "ef": 2.2199999999999998,
+      "nextReview": "2026-10-07T22:00:00.000Z"
     },
     {
       "id": 1790781445795.4883,
@@ -1811,7 +1811,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445795.4875,
@@ -2009,7 +2009,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445795.683,
@@ -2054,7 +2054,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445796.9084,
@@ -2207,7 +2207,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445796.6504,
@@ -2216,7 +2216,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445796.5276,
@@ -2243,7 +2243,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445796.303,
@@ -2375,10 +2375,10 @@
       "id": 1790781445796.851,
       "front": "pocket money",
       "back": "용돈",
-      "rep": 2,
-      "interval": 2,
+      "rep": 3,
+      "interval": 5,
       "ef": 2.36,
-      "nextReview": "2026-10-04T17:54:15.476Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445796.2563,
@@ -2402,10 +2402,10 @@
       "id": 1790781445796.9402,
       "front": "to choose",
       "back": "고르다",
-      "rep": 2,
-      "interval": 4,
-      "ef": 2.5,
-      "nextReview": "2026-10-04T00:00:00.000Z"
+      "rep": 3,
+      "interval": 12,
+      "ef": 2.6,
+      "nextReview": "2026-10-15T22:00:00.000Z"
     },
     {
       "id": 1790781445796.1436,
@@ -2474,10 +2474,10 @@
       "id": 1790781445796.4326,
       "front": "start",
       "back": "개강",
-      "rep": 2,
-      "interval": 4,
-      "ef": 2.5,
-      "nextReview": "2026-10-04T00:00:00.000Z"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445796.786,
@@ -2528,10 +2528,10 @@
       "id": 1790781445796.3464,
       "front": "nocleg",
       "back": "숙소",
-      "rep": 2,
-      "interval": 2,
+      "rep": 3,
+      "interval": 5,
       "ef": 2.36,
-      "nextReview": "2026-10-04T17:54:31.614Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445796.6055,
@@ -2918,16 +2918,16 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445798.4182,
       "front": "konkurencje",
       "back": "경기 종목",
-      "rep": 0,
-      "interval": 1,
+      "rep": 1,
+      "interval": 3,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-06T22:00:00.000Z"
     },
     {
       "id": 1790781445798.4993,
@@ -3059,10 +3059,10 @@
       "id": 1790781445798.3591,
       "front": "assumption",
       "back": "가정",
-      "rep": 1,
+      "rep": 0,
       "interval": 1,
-      "ef": 1.5600000000000003,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "ef": 1.3,
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445798.9387,
@@ -3131,10 +3131,10 @@
       "id": 1790781445799.6602,
       "front": "sytuacja",
       "back": "상황",
-      "rep": 2,
-      "interval": 4,
+      "rep": 3,
+      "interval": 10,
       "ef": 2.5,
-      "nextReview": "2026-10-04T00:00:00.000Z"
+      "nextReview": "2026-10-13T22:00:00.000Z"
     },
     {
       "id": 1790781445799.721,
@@ -3149,10 +3149,10 @@
       "id": 1790781445799.3972,
       "front": "reakcja",
       "back": "반응",
-      "rep": 2,
-      "interval": 2,
+      "rep": 3,
+      "interval": 5,
       "ef": 2.36,
-      "nextReview": "2026-10-04T17:56:27.859Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445799.8186,
@@ -3251,7 +3251,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445799.1052,
@@ -3356,10 +3356,10 @@
       "id": 1790781445799.6172,
       "front": "experience / doswiadczac",
       "back": "경험하다",
-      "rep": 0,
-      "interval": 1,
+      "rep": 1,
+      "interval": 3,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-06T22:00:00.000Z"
     },
     {
       "id": 1790781445799.3633,
@@ -3404,7 +3404,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445799.851,
@@ -3428,10 +3428,10 @@
       "id": 1790781445799.2366,
       "front": "job/work",
       "back": "직장",
-      "rep": 0,
-      "interval": 1,
+      "rep": 1,
+      "interval": 3,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-06T22:00:00.000Z"
     },
     {
       "id": 1790781445799.163,
@@ -3476,16 +3476,16 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445800.3953,
       "front": "biznesmen",
       "back": "사업가",
-      "rep": 2,
-      "interval": 4,
+      "rep": 3,
+      "interval": 10,
       "ef": 2.5,
-      "nextReview": "2026-10-04T00:00:00.000Z"
+      "nextReview": "2026-10-13T22:00:00.000Z"
     },
     {
       "id": 1790781445800.6904,
@@ -3521,7 +3521,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445800.0432,
@@ -3557,16 +3557,16 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445800.839,
       "front": "to earn",
       "back": "벌다",
-      "rep": 2,
-      "interval": 4,
+      "rep": 3,
+      "interval": 10,
       "ef": 2.5,
-      "nextReview": "2026-10-04T00:00:00.000Z"
+      "nextReview": "2026-10-13T22:00:00.000Z"
     },
     {
       "id": 1790781445800.5193,
@@ -3635,10 +3635,10 @@
       "id": 1790781445800.8818,
       "front": "okazja",
       "back": "기회",
-      "rep": 2,
-      "interval": 2,
+      "rep": 3,
+      "interval": 5,
       "ef": 2.36,
-      "nextReview": "2026-10-04T17:59:35.813Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445800.712,
@@ -3647,7 +3647,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-03T22:00:00.000Z"
+      "nextReview": "2026-10-04T22:00:00.000Z"
     },
     {
       "id": 1790781445800.902,
@@ -3711,12 +3711,12 @@
       "newCardsDone": 5
     },
     "2026-10-04": {
-      "again": 20,
-      "hard": 3,
-      "good": 6,
-      "easy": 0,
-      "completedAll": false,
-      "newCardsDone": 0
+      "again": 54,
+      "hard": 6,
+      "good": 22,
+      "easy": 1,
+      "completedAll": true,
+      "newCardsDone": 5
     }
   },
   "sessionStats": {
@@ -3901,6 +3901,312 @@
         "interval": 1,
         "ef": 1.3,
         "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445793.2493,
+        "front": "Attend",
+        "back": "참석하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445793.5571,
+        "front": "To leave",
+        "back": "남기다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445793.1536,
+        "front": "Zakup impulsywny",
+        "back": "충동구매",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445793.3953,
+        "front": "Repair",
+        "back": "수리하다",
+        "rep": 1,
+        "interval": 1,
+        "ef": 1.5600000000000003,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445793.1943,
+        "front": "Respect",
+        "back": "존경",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.9092,
+        "front": "Stan / state",
+        "back": "상태",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.913,
+        "front": "Occure",
+        "back": "발생하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.549,
+        "front": "Wyraźnie, for sure",
+        "back": "확실하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.713,
+        "front": "Reflect on oneself",
+        "back": "반성하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.1472,
+        "front": "Beginner",
+        "back": "초보자",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.773,
+        "front": "To praise",
+        "back": "칭찬하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.3447,
+        "front": "Posiadacz",
+        "back": "소지자",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.6304,
+        "front": "Go to study abroad",
+        "back": "유학을 가다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.3225,
+        "front": "Absurd",
+        "back": "황당하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.7908,
+        "front": "Main street",
+        "back": "번화가",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.2979,
+        "front": "PAy the rent",
+        "back": "방세를 내다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445796.0483,
+        "front": "Condition",
+        "back": "조건",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445796.6965,
+        "front": "Change notice",
+        "back": "변경 안내",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445796.6504,
+        "front": "Progress",
+        "back": "진행",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445796.9954,
+        "front": "Rozwijać",
+        "back": "발전하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445796.4326,
+        "front": "start",
+        "back": "개강",
+        "rep": 2,
+        "interval": 4,
+        "ef": 2.5,
+        "nextReview": "2026-10-04T00:00:00.000Z"
+      },
+      {
+        "id": 1790781445798.2935,
+        "front": "participate",
+        "back": "참가하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445798.3591,
+        "front": "assumption",
+        "back": "가정",
+        "rep": 1,
+        "interval": 1,
+        "ef": 1.5600000000000003,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445799.8354,
+        "front": "informacja",
+        "back": "정보",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445799.863,
+        "front": "proces / kurs",
+        "back": "과정",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445800.1199,
+        "front": "polityk / pracownik panstwowy",
+        "back": "공무원",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445800.332,
+        "front": "negatywny",
+        "back": "부정적",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445800.2869,
+        "front": "be in rush",
+        "back": "급하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445800.712,
+        "front": "dowolnie / free",
+        "back": "자유롭다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445791.6511,
+        "front": "Brakować",
+        "back": "부족하다",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.791Z"
+      },
+      {
+        "id": 1790781445791.7766,
+        "front": "Różnic się",
+        "back": "다양하다",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.791Z"
+      },
+      {
+        "id": 1790781445793.7998,
+        "front": "Formularz",
+        "back": "신청서",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.793Z"
+      },
+      {
+        "id": 1790781445793.097,
+        "front": "Wypełnić (w kontekscie dokumentu, podania, etc.)",
+        "back": "작성하다",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.793Z"
+      },
+      {
+        "id": 1790781445793.753,
+        "front": "Złożyć podanie",
+        "back": "신청서를 내다",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.793Z"
       }
     ],
     "hard": [
@@ -3930,6 +4236,33 @@
         "interval": 1,
         "ef": 1.7000000000000002,
         "nextReview": "2026-10-04T05:27:37.484Z"
+      },
+      {
+        "id": 1790781445793.2224,
+        "front": "Dojazd do i z pracy",
+        "back": "출퇴근",
+        "rep": 2,
+        "interval": 4,
+        "ef": 2.5,
+        "nextReview": "2026-10-04T00:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.2979,
+        "front": "Large",
+        "back": "대형",
+        "rep": 3,
+        "interval": 2,
+        "ef": 2.36,
+        "nextReview": "2026-10-04T17:50:52.054Z"
+      },
+      {
+        "id": 1790781445795.4963,
+        "front": "Udogodnienia",
+        "back": "편의 시설",
+        "rep": 2,
+        "interval": 2,
+        "ef": 2.36,
+        "nextReview": "2026-10-04T17:52:48.831Z"
       }
     ],
     "good": [
@@ -3986,8 +4319,162 @@
         "interval": 1,
         "ef": 1.5600000000000003,
         "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445793.8699,
+        "front": "Katedra przedmiotu X",
+        "back": "X학과",
+        "rep": 3,
+        "interval": 2,
+        "ef": 2.36,
+        "nextReview": "2026-10-04T16:32:13.135Z"
+      },
+      {
+        "id": 1790781445793.4814,
+        "front": "Employment",
+        "back": "취업",
+        "rep": 2,
+        "interval": 4,
+        "ef": 2.5,
+        "nextReview": "2026-10-04T00:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.3867,
+        "front": "Set, zestaw (licznik ubrań)",
+        "back": "벌",
+        "rep": 1,
+        "interval": 1,
+        "ef": 1.5600000000000003,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.236,
+        "front": "Prognoza pogody",
+        "back": "일기 예보",
+        "rep": 2,
+        "interval": 4,
+        "ef": 2.5,
+        "nextReview": "2026-10-04T00:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.6543,
+        "front": "Mind, feelings",
+        "back": "심경",
+        "rep": 2,
+        "interval": 2,
+        "ef": 2.36,
+        "nextReview": "2026-10-04T17:51:13.063Z"
+      },
+      {
+        "id": 1790781445795.4854,
+        "front": "Relieve the burden",
+        "back": "부담을 덜다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445796.851,
+        "front": "pocket money",
+        "back": "용돈",
+        "rep": 2,
+        "interval": 2,
+        "ef": 2.36,
+        "nextReview": "2026-10-04T17:54:15.476Z"
+      },
+      {
+        "id": 1790781445796.3464,
+        "front": "nocleg",
+        "back": "숙소",
+        "rep": 2,
+        "interval": 2,
+        "ef": 2.36,
+        "nextReview": "2026-10-04T17:54:31.614Z"
+      },
+      {
+        "id": 1790781445798.4182,
+        "front": "konkurencje",
+        "back": "경기 종목",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445799.6602,
+        "front": "sytuacja",
+        "back": "상황",
+        "rep": 2,
+        "interval": 4,
+        "ef": 2.5,
+        "nextReview": "2026-10-04T00:00:00.000Z"
+      },
+      {
+        "id": 1790781445799.3972,
+        "front": "reakcja",
+        "back": "반응",
+        "rep": 2,
+        "interval": 2,
+        "ef": 2.36,
+        "nextReview": "2026-10-04T17:56:27.859Z"
+      },
+      {
+        "id": 1790781445799.6172,
+        "front": "experience / doswiadczac",
+        "back": "경험하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445799.2366,
+        "front": "job/work",
+        "back": "직장",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-03T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445800.3953,
+        "front": "biznesmen",
+        "back": "사업가",
+        "rep": 2,
+        "interval": 4,
+        "ef": 2.5,
+        "nextReview": "2026-10-04T00:00:00.000Z"
+      },
+      {
+        "id": 1790781445800.839,
+        "front": "to earn",
+        "back": "벌다",
+        "rep": 2,
+        "interval": 4,
+        "ef": 2.5,
+        "nextReview": "2026-10-04T00:00:00.000Z"
+      },
+      {
+        "id": 1790781445800.8818,
+        "front": "okazja",
+        "back": "기회",
+        "rep": 2,
+        "interval": 2,
+        "ef": 2.36,
+        "nextReview": "2026-10-04T17:59:35.813Z"
       }
     ],
-    "easy": []
+    "easy": [
+      {
+        "id": 1790781445796.9402,
+        "front": "to choose",
+        "back": "고르다",
+        "rep": 2,
+        "interval": 4,
+        "ef": 2.5,
+        "nextReview": "2026-10-04T00:00:00.000Z"
+      }
+    ]
   }
 }
