@@ -621,7 +621,6 @@ function updateStudyCounter() {
     document.getElementById('study-stats').textContent = `Do powtórki: ${studyQueue.length}`;
 }
 
-// Zaktualizowana funkcja do zarządzania kolejką z poprawionym czasem
 function refreshStudySession() {
     const todayStr = getLocalToday();
     
@@ -632,7 +631,7 @@ function refreshStudySession() {
     let newCardsInQueue = 0;
     
     const todayObj = new Date();
-    todayObj.setHours(0, 0, 0, 0); // Północ bieżącego dnia
+    todayObj.setHours(0, 0, 0, 0); 
     
     studyQueue = appState.flashcards.filter(c => {
         let isDue = false;
@@ -647,7 +646,6 @@ function refreshStudySession() {
         }
 
         if (isDue) {
-            // Tylko NAPRAWDĘ nowe fiszki (interval === 0) obciążają limit dzienny
             if (c.interval === 0) {
                 if (newCardsDone + newCardsInQueue >= appState.dailyLimit) return false;
                 newCardsInQueue++;
@@ -668,11 +666,31 @@ function refreshStudySession() {
         document.getElementById('study-empty').classList.remove('hidden');
         document.getElementById('study-active').classList.add('hidden');
         updateActivityStats();
+        
+        // POKAZANIE PRZYCISKU ROZSYPANKI (Tap-to-Match)
+        const practiceBtn = document.getElementById('btn-practice-mistakes');
+        if (appState.sessionStats && appState.sessionStats.date === todayStr && appState.sessionStats.again && appState.sessionStats.again.length > 0) {
+            // Unikalne słówka po ID fiszki
+            const uniqueMistakes = Array.from(new Map(appState.sessionStats.again.map(item => [item.id, item])).values());
+            if (uniqueMistakes.length > 0) {
+                practiceBtn.textContent = `Przećwicz dzisiejsze błędy (${uniqueMistakes.length})`;
+                practiceBtn.classList.remove('hidden');
+            } else {
+                practiceBtn.classList.add('hidden');
+            }
+        } else {
+            practiceBtn.classList.add('hidden');
+        }
+
     } else {
         appState.history[todayStr].completedAll = false;
         saveState();
         document.getElementById('study-empty').classList.add('hidden');
         document.getElementById('study-active').classList.remove('hidden');
+        
+        const practiceBtn = document.getElementById('btn-practice-mistakes');
+        if(practiceBtn) practiceBtn.classList.add('hidden');
+
         nextStudyCard();
     }
 }
@@ -732,6 +750,7 @@ function processAnswer(quality) {
         document.getElementById('study-empty').classList.remove('hidden');
         document.getElementById('study-active').classList.add('hidden');
         updateActivityStats();
+        refreshStudySession(); // Wywołane, żeby zaktualizować przycisk Rozsypanki
     } else {
         nextStudyCard();
     }
@@ -763,7 +782,7 @@ function applySM2(card, quality) {
     
     let next = new Date(); 
     next.setDate(next.getDate() + card.interval); 
-    next.setHours(0, 0, 0, 0); // Zerujemy godziny przy zapisie
+    next.setHours(0, 0, 0, 0); 
     card.nextReview = next.toISOString();
 }
 
@@ -820,7 +839,7 @@ function openStatsModal() {
     document.getElementById('modal-stats').classList.remove('hidden');
 }
 
-// --- NOWA LOGIKA: ZAKŁADKA AKTYWNOŚĆ ---
+// --- LOGIKA AKTYWNOŚCI ---
 function updateActivityStats() {
     if (!appState.history) return;
     const today = getLocalToday();
@@ -1082,6 +1101,161 @@ function importCSV(event) {
         event.target.value = '';
     };
     reader.readAsText(file, "UTF-8");
+}
+
+
+// ==========================================
+// TAP-TO-MATCH GAME LOGIC (Rozsypanki)
+// ==========================================
+
+let matchingChunks = [];
+let currentMatchRound = 0;
+let matchSelKo = null;
+let matchSelPl = null;
+let matchedInRound = 0;
+
+function shuffleArray(array) {
+    let curId = array.length;
+    while (0 !== curId) {
+        let randId = Math.floor(Math.random() * curId);
+        curId -= 1;
+        let tmp = array[curId];
+        array[curId] = array[randId];
+        array[randId] = tmp;
+    }
+    return array;
+}
+
+function startMatchingGame() {
+    const todayStr = getLocalToday();
+    if (!appState.sessionStats || appState.sessionStats.date !== todayStr || !appState.sessionStats.again) return;
+    
+    // Pobieramy błędy i usuwamy duplikaty po ID
+    const uniqueMistakes = Array.from(new Map(appState.sessionStats.again.map(item => [item.id, item])).values());
+    if (uniqueMistakes.length === 0) return;
+
+    // Dzielimy na paczki (chunks) po maksymalnie 10 słówek
+    matchingChunks = [];
+    for (let i = 0; i < uniqueMistakes.length; i += 10) {
+        matchingChunks.push(uniqueMistakes.slice(i, i + 10));
+    }
+
+    currentMatchRound = 0;
+    document.getElementById('matching-game-view').classList.remove('hidden');
+    renderMatchingRound();
+}
+
+function renderMatchingRound() {
+    matchSelKo = null;
+    matchSelPl = null;
+    matchedInRound = 0;
+
+    const chunk = matchingChunks[currentMatchRound];
+    document.getElementById('matching-progress').textContent = `Runda ${currentMatchRound + 1} z ${matchingChunks.length}`;
+
+    const koCol = document.getElementById('match-col-ko');
+    const plCol = document.getElementById('match-col-pl');
+    koCol.innerHTML = '';
+    plCol.innerHTML = '';
+
+    // Niezależne tasowanie obydwu kolumn
+    let koArr = shuffleArray([...chunk]);
+    let plArr = shuffleArray([...chunk]);
+
+    koArr.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'match-card';
+        div.textContent = item.back; // Koreańskie jest na rewersie
+        div.onclick = () => handleMatchClick('ko', item.id, item.back, div);
+        koCol.appendChild(div);
+    });
+
+    plArr.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'match-card';
+        div.textContent = item.front; // Polskie jest na awersie
+        div.onclick = () => handleMatchClick('pl', item.id, item.front, div);
+        plCol.appendChild(div);
+    });
+}
+
+function handleMatchClick(type, id, text, el) {
+    if (el.classList.contains('matched')) return;
+
+    if (type === 'ko') {
+        if (matchSelKo) matchSelKo.el.classList.remove('selected');
+        matchSelKo = { id, el };
+        el.classList.add('selected');
+        speakKorean(text); // Web Speech API
+    } else {
+        if (matchSelPl) matchSelPl.el.classList.remove('selected');
+        matchSelPl = { id, el };
+        el.classList.add('selected');
+    }
+
+    // Jeśli wybrano po jednym z każdej kolumny, sprawdzamy
+    if (matchSelKo && matchSelPl) {
+        const koRef = matchSelKo;
+        const plRef = matchSelPl;
+        
+        if (koRef.id === plRef.id) {
+            // SUKCES
+            if ('vibrate' in navigator) navigator.vibrate(50);
+            koRef.el.classList.remove('selected');
+            plRef.el.classList.remove('selected');
+            koRef.el.classList.add('matched');
+            plRef.el.classList.add('matched');
+            matchedInRound++;
+            
+            matchSelKo = null;
+            matchSelPl = null;
+
+            // Sprawdzamy czy runda zakończona
+            if (matchedInRound === matchingChunks[currentMatchRound].length) {
+                setTimeout(() => {
+                    currentMatchRound++;
+                    if (currentMatchRound < matchingChunks.length) {
+                        renderMatchingRound();
+                    } else {
+                        alert("Świetna robota! Przećwiczyłeś wszystkie dzisiejsze błędy.");
+                        closeMatchingGame();
+                    }
+                }, 600);
+            }
+        } else {
+            // BŁĄD
+            if ('vibrate' in navigator) navigator.vibrate(200);
+            koRef.el.classList.remove('selected');
+            plRef.el.classList.remove('selected');
+            
+            koRef.el.classList.add('error');
+            plRef.el.classList.add('error');
+            
+            matchSelKo = null;
+            matchSelPl = null;
+
+            setTimeout(() => {
+                koRef.el.classList.remove('error');
+                plRef.el.classList.remove('error');
+            }, 400);
+        }
+    }
+}
+
+function speakKorean(text) {
+    if ('speechSynthesis' in window) {
+        // Zatrzymujemy poprzednie wypowiedzi by uniknąć zacinania
+        window.speechSynthesis.cancel(); 
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'ko-KR';
+        window.speechSynthesis.speak(u);
+    }
+}
+
+function closeMatchingGame() {
+    document.getElementById('matching-game-view').classList.add('hidden');
+    matchSelKo = null;
+    matchSelPl = null;
 }
 
 window.addEventListener('DOMContentLoaded', loadState);
