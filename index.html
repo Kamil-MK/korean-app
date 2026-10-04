@@ -152,7 +152,11 @@
                 <div id="study-empty" class="study-container text-center">
                     <h3>Brak fiszek do powtórki! 🎉</h3>
                     <p class="hint">Wszystkie zaległości zostały nadrobione. Dzisiejszy cel zaliczony!</p>
-                    <button class="btn btn-primary mt-2" onclick="refreshStudySession()">Odśwież sesję</button>
+                    
+                    <!-- NOWY PRZYCISK DO GRY MATCHING -->
+                    <button id="btn-practice-mistakes" class="btn btn-warning w-100 mt-3 hidden" onclick="startMatchingGame()" style="background-color: var(--warning); color: #FFF; font-weight:bold;">Przećwicz dzisiejsze błędy (0)</button>
+                    
+                    <button class="btn btn-outline mt-3 w-100" onclick="refreshStudySession()">Odśwież sesję</button>
                 </div>
             </div>
 
@@ -268,8 +272,24 @@
         </div>
     </div>
 
+    <!-- NOWY WIDOK: GRA MATCHING (ROZSYPANKI) -->
+    <section id="matching-game-view" class="hidden matching-overlay">
+        <div class="flex-between mb-3">
+            <h2 style="margin:0;">Rozsypanki</h2>
+            <button class="btn btn-outline btn-sm" onclick="closeMatchingGame()">Zakończ</button>
+        </div>
+        <div id="matching-progress" class="mb-3 text-center" style="font-weight:bold; color:var(--primary); font-size: 18px;">
+            Runda 1 z X
+        </div>
+        <p class="text-center hint mb-4">Połącz koreańskie słowo z jego polskim odpowiednikiem.</p>
+        
+        <div class="matching-board">
+            <div id="match-col-ko" class="matching-col"></div>
+            <div id="match-col-pl" class="matching-col"></div>
+        </div>
+    </section>
+
     <nav class="bottom-nav">
-        <!-- Dodano przycisk aktywności -->
         <button class="nav-btn" data-target="tab-aktywnosc"><span>📈</span> Aktywność</button>
         <button class="nav-btn active" data-target="tab-czytelnia"><span>📖</span> Czytelnia</button>
         <button class="nav-btn" data-target="tab-slowka"><span>📝</span> Słówka</button>
