@@ -76,6 +76,7 @@ input, textarea {
     background: #FFF; 
     outline: none; 
     transition: border-color 0.2s; 
+    resize: vertical;
 }
 
 input:focus, textarea:focus { 
@@ -165,7 +166,7 @@ input:focus, textarea:focus {
 .word-span.selected { color: var(--selected-word); font-weight: bold; text-decoration: underline; background: #FEF3C7; }
 .word-span.known-word { color: #10B981; font-weight: bold; background: #D1FAE5; }
 
-/* Tabele (Słówka i Zarządzanie Talią) */
+/* Tabele */
 .table-responsive { overflow-x: auto; }
 .data-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
 .data-table th, .data-table td { padding: 10px; border-bottom: 1px solid var(--border); text-align: left; }
@@ -187,6 +188,26 @@ input:focus, textarea:focus {
     margin-bottom: 16px; 
     text-align: center; 
     word-break: break-word; 
+}
+
+.study-back-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.example-sentence {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border);
+    font-size: 18px;
+    color: var(--text-light);
+    font-style: italic;
+    width: 100%;
+    text-align: center;
+    line-height: 1.5;
 }
 
 .srs-buttons { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -309,7 +330,6 @@ input:focus, textarea:focus {
     width: 100%; 
 }
 
-/* Wykres słupkowy */
 .chart-container { 
     display: flex; 
     justify-content: space-around; 
@@ -347,45 +367,11 @@ input:focus, textarea:focus {
 .chart-label { font-size: 11px; color: var(--text-light); font-weight: 500; }
 .chart-total { font-size: 11px; font-weight: bold; margin-bottom: 4px; color: var(--primary); text-align: center; line-height: 1; }
 
-/* Kalendarz */
-.calendar-grid { 
-    display: grid; 
-    grid-template-columns: repeat(7, 1fr); 
-    gap: 6px; 
-    text-align: center; 
-}
-
-.cal-day-header { 
-    font-size: 12px; 
-    color: var(--text-light); 
-    font-weight: 600; 
-    margin-bottom: 4px; 
-    text-transform: uppercase; 
-}
-
-.cal-day { 
-    padding: 4px 0; 
-    border-radius: 50%; 
-    font-size: 14px; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    aspect-ratio: 1; 
-    margin: auto; 
-    width: 100%; 
-    max-width: 38px; 
-    color: var(--text-dark); 
-}
-
-.cal-day.completed { 
-    border: 2px solid var(--warning); 
-    color: var(--text-dark); 
-    font-weight: bold; 
-    background: #FFFBEB; 
-}
-
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; }
+.cal-day-header { font-size: 12px; color: var(--text-light); font-weight: 600; margin-bottom: 4px; text-transform: uppercase; }
+.cal-day { padding: 4px 0; border-radius: 50%; font-size: 14px; display: flex; justify-content: center; align-items: center; aspect-ratio: 1; margin: auto; width: 100%; max-width: 38px; color: var(--text-dark); }
+.cal-day.completed { border: 2px solid var(--warning); color: var(--text-dark); font-weight: bold; background: #FFFBEB; }
 .cal-day.empty { background: transparent; }
-
 .pb-0 { padding-bottom: 0 !important; }
 
 /* --- GRA MATCHING (ROZSYPANKA) --- */
