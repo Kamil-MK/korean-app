@@ -22,6 +22,7 @@ let appState = {
 
 let currentStoryId = null;
 let currentStoryText = "";
+let editingCardId = null; // Zmienna globalna trzymająca ID edytowanej fiszki w Modalu
 
 function loadState() {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -543,7 +544,7 @@ function addWordToSRS(id) {
     if (!w) return;
     
     const frontTranslation = w.custom.trim() !== "" ? w.custom : w.autoPl;
-    const isAdded = createFlashcardData(frontTranslation, w.ko, 0, 0, 2.5);
+    const isAdded = createFlashcardData(frontTranslation, w.ko, 0, 0, 2.5, null, ""); // Puste exampleSentence dla szybkich słówek
     
     if (isAdded) {
         saveState();
@@ -557,12 +558,14 @@ function addWordToSRS(id) {
 }
 
 // --- ZARZĄDZANIE FISZKAMI I SRS ---
-function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = null) {
+// ZAKTUALIZOWANE: Obsługa exampleSentence z zachowaniem kompatybilności wstecznej
+function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = null, exampleSentence = "") {
     if(!front || !back || appState.flashcards.some(f => f.front === front && f.back === back)) return false;
     appState.flashcards.push({
         id: Date.now() + Math.random(),
         front: front.trim(),
         back: back.trim(),
+        exampleSentence: exampleSentence.trim(),
         rep: rep > 0 ? rep : (interval > 0 ? 1 : 0),
         interval: interval > 0 ? interval : 0,
         ef: ef >= 1.3 ? ef : 2.5,
@@ -571,13 +574,18 @@ function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = nul
     return true;
 }
 
+// ZAKTUALIZOWANE: Dodawanie ze zdaniem przykładowym
 function addManualFlashcard() {
     const front = document.getElementById('manual-front').value.trim();
     const back = document.getElementById('manual-back').value.trim();
-    if (!front || !back) return alert("Uzupełnij pola.");
-    if (createFlashcardData(front, back, 0, 0, 2.5)) {
+    const example = document.getElementById('manual-example').value.trim();
+    if (!front || !back) return alert("Uzupełnij przynajmniej pola Awers i Rewers.");
+    
+    if (createFlashcardData(front, back, 0, 0, 2.5, null, example)) {
         saveState(); renderDeckTable(); refreshStudySession();
-        document.getElementById('manual-front').value = ""; document.getElementById('manual-back').value = "";
+        document.getElementById('manual-front').value = ""; 
+        document.getElementById('manual-back').value = "";
+        document.getElementById('manual-example').value = "";
     } else { alert("Taka fiszka już istnieje!"); }
 }
 
@@ -586,6 +594,7 @@ function toggleDeckList() {
     container.classList.toggle('hidden');
 }
 
+// ZAKTUALIZOWANE: Przycisk Edytuj dodany do kolumny Akcji w Bazie Fiszek
 function renderDeckTable() {
     const tbody = document.getElementById('deck-tbody');
     tbody.innerHTML = "";
@@ -598,7 +607,12 @@ function renderDeckTable() {
             <td><input type="text" value="${f.front}" onchange="updateCardField('${f.id}', 'front', this.value)"></td>
             <td><input type="text" value="${f.back}" onchange="updateCardField('${f.id}', 'back', this.value)"></td>
             <td>${f.interval}d</td>
-            <td><button class="btn btn-danger btn-sm" onclick="deleteCard('${f.id}')">Usuń</button></td>
+            <td>
+                <div style="display: flex; gap: 5px;">
+                    <button class="btn btn-outline btn-sm" style="flex: 1; padding: 4px;" onclick="openQuickEdit('${f.id}')">✏️ Edytuj</button>
+                    <button class="btn btn-danger btn-sm" style="flex: 1; padding: 4px;" onclick="deleteCard('${f.id}')">Usuń</button>
+                </div>
+            </td>
         `;
         tbody.appendChild(tr);
     });
@@ -673,12 +687,10 @@ function refreshStudySession() {
         document.getElementById('study-active').classList.add('hidden');
         updateActivityStats();
         
-        // POKAZANIE PRZYCISKU ROZSYPANKI
         const practiceBtn = document.getElementById('btn-practice-mistakes');
         if (appState.sessionStats && appState.sessionStats.date === todayStr && appState.sessionStats.again && appState.sessionStats.again.length > 0) {
             const practiced = appState.history[todayStr].practicedMistakes || [];
             
-            // Odfiltrowujemy słówka, które były już przećwiczone w grze Match
             const uniqueMistakes = Array.from(new Map(appState.sessionStats.again.map(item => [item.id, item])).values())
                                         .filter(item => !practiced.includes(item.id));
 
@@ -705,11 +717,21 @@ function refreshStudySession() {
     }
 }
 
+// ZAKTUALIZOWANE: Pokazywanie opcjonalnego zdania (exampleSentence) na Rewersie
 function nextStudyCard() {
     if (studyQueue.length === 0) { refreshStudySession(); return; }
     currentCard = studyQueue[0];
+    
     document.getElementById('study-front').textContent = currentCard.front;
-    document.getElementById('study-back').textContent = currentCard.back;
+    
+    let backHtml = `<div class="study-back-content"><div>${currentCard.back}</div>`;
+    if (currentCard.exampleSentence) {
+        backHtml += `<div class="example-sentence">${currentCard.exampleSentence}</div>`;
+    }
+    backHtml += `</div>`;
+    
+    document.getElementById('study-back').innerHTML = backHtml;
+    
     document.getElementById('study-front').classList.remove('hidden');
     document.getElementById('study-back').classList.add('hidden');
     document.getElementById('btn-show-answer').classList.remove('hidden');
@@ -999,33 +1021,59 @@ function renderCalendar() {
     }
 }
 
-// --- RESZTA LOGIKI KART ---
-function openQuickEdit() {
-    if (!currentCard) return;
-    document.getElementById('qe-front').value = currentCard.front;
-    document.getElementById('qe-back').value = currentCard.back;
+// ZAKTUALIZOWANE: Pełnoprawny Edytor (Zarówno z poziomu Panelu Sesji jak i Listy Bazy)
+function openQuickEdit(id = null) {
+    let cardToEdit;
+    if (id) {
+        cardToEdit = appState.flashcards.find(c => c.id == id);
+    } else {
+        cardToEdit = currentCard; // Domyślnie używamy fiszki z aktywnej sesji
+    }
+
+    if (!cardToEdit) return;
+    
+    editingCardId = cardToEdit.id;
+    document.getElementById('qe-front').value = cardToEdit.front;
+    document.getElementById('qe-back').value = cardToEdit.back;
+    document.getElementById('qe-example').value = cardToEdit.exampleSentence || "";
     document.getElementById('modal-quick-edit').classList.remove('hidden');
 }
 
 function saveQuickEdit() {
-    if (!currentCard) return;
+    if (!editingCardId) return;
     const f = document.getElementById('qe-front').value.trim();
     const b = document.getElementById('qe-back').value.trim();
-    if(!f || !b) return alert("Wypełnij oba pola!");
+    const e = document.getElementById('qe-example').value.trim();
+    if(!f || !b) return alert("Wypełnij oba główne pola (Awers i Rewers)!");
     
-    currentCard.front = f;
-    currentCard.back = b;
-    
-    const idx = appState.flashcards.findIndex(x => x.id == currentCard.id);
-    if(idx !== -1) appState.flashcards[idx] = currentCard;
+    const idx = appState.flashcards.findIndex(x => x.id == editingCardId);
+    if(idx !== -1) {
+        appState.flashcards[idx].front = f;
+        appState.flashcards[idx].back = b;
+        appState.flashcards[idx].exampleSentence = e;
+    }
 
     saveState();
     renderDeckTable(); 
     
-    document.getElementById('study-front').textContent = currentCard.front;
-    document.getElementById('study-back').textContent = currentCard.back; 
+    // Zabezpieczenie wizualne jeśli zaktualizowano aktualnie "rozwiązywaną" fiszkę w trakcie sesji
+    if (currentCard && currentCard.id == editingCardId) {
+        currentCard.front = f;
+        currentCard.back = b;
+        currentCard.exampleSentence = e;
+        
+        document.getElementById('study-front').textContent = currentCard.front;
+        
+        let backHtml = `<div class="study-back-content"><div>${currentCard.back}</div>`;
+        if (currentCard.exampleSentence) {
+            backHtml += `<div class="example-sentence">${currentCard.exampleSentence}</div>`;
+        }
+        backHtml += `</div>`;
+        document.getElementById('study-back').innerHTML = backHtml;
+    }
     
     closeModal('modal-quick-edit');
+    editingCardId = null;
 }
 
 function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
@@ -1148,7 +1196,6 @@ function startMatchingGame() {
     const hist = appState.history[todayStr] || {};
     const practiced = hist.practicedMistakes || [];
 
-    // Pobieramy błędy, usuwamy duplikaty po ID i odfiltrowujemy już przećwiczone
     const uniqueMistakes = Array.from(new Map(appState.sessionStats.again.map(item => [item.id, item])).values())
                                 .filter(item => !practiced.includes(item.id));
 
@@ -1219,7 +1266,6 @@ function handleMatchClick(type, id, text, el) {
         const plRef = matchSelPl;
         
         if (koRef.id === plRef.id) {
-            // SUKCES
             if ('vibrate' in navigator) navigator.vibrate(50);
             koRef.el.classList.remove('selected');
             plRef.el.classList.remove('selected');
@@ -1231,8 +1277,6 @@ function handleMatchClick(type, id, text, el) {
             matchSelPl = null;
 
             if (matchedInRound === matchingChunks[currentMatchRound].length) {
-                
-                // Zapisujemy tę rundę jako trwale "przećwiczoną"
                 const todayStr = getLocalToday();
                 if (!appState.history[todayStr].practicedMistakes) appState.history[todayStr].practicedMistakes = [];
                 
@@ -1251,7 +1295,6 @@ function handleMatchClick(type, id, text, el) {
                 }, 600);
             }
         } else {
-            // BŁĄD
             if ('vibrate' in navigator) navigator.vibrate(200);
             koRef.el.classList.remove('selected');
             plRef.el.classList.remove('selected');
@@ -1283,7 +1326,7 @@ function closeMatchingGame() {
     document.getElementById('matching-game-view').classList.add('hidden');
     matchSelKo = null;
     matchSelPl = null;
-    refreshStudySession(); // Wywołujemy po wyjściu, aby odświeżyć licznik pozostałych słów na przycisku
+    refreshStudySession(); 
 }
 
 window.addEventListener('DOMContentLoaded', loadState);
