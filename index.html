@@ -152,10 +152,7 @@
                 <div id="study-empty" class="study-container text-center">
                     <h3>Brak fiszek do powtórki! 🎉</h3>
                     <p class="hint">Wszystkie zaległości zostały nadrobione. Dzisiejszy cel zaliczony!</p>
-                    
-                    <!-- NOWY PRZYCISK DO GRY MATCHING -->
                     <button id="btn-practice-mistakes" class="btn btn-warning w-100 mt-3 hidden" onclick="startMatchingGame()" style="background-color: var(--warning); color: #FFF; font-weight:bold;">Przećwicz dzisiejsze błędy (0)</button>
-                    
                     <button class="btn btn-outline mt-3 w-100" onclick="refreshStudySession()">Odśwież sesję</button>
                 </div>
             </div>
@@ -173,8 +170,9 @@
                 </div>
                 
                 <h4 class="mt-3">Dodaj fiszkę ręcznie</h4>
-                <input type="text" id="manual-front" placeholder="Awers (Koreański)">
-                <input type="text" id="manual-back" placeholder="Rewers (Tłumaczenie)">
+                <input type="text" id="manual-front" placeholder="Awers (Polski - Hasło)">
+                <input type="text" id="manual-back" placeholder="Rewers (Koreański - Tłumaczenie)">
+                <textarea id="manual-example" rows="2" placeholder="Zdanie przykładowe / Kontekst (opcjonalnie)"></textarea>
                 <button class="btn btn-primary w-100" onclick="addManualFlashcard()">Dodaj fiszkę</button>
 
                 <div id="deck-list-container" class="hidden mt-4">
@@ -186,7 +184,7 @@
                                     <th>Awers</th>
                                     <th>Rewers</th>
                                     <th>Interwał</th>
-                                    <th>Akcja</th>
+                                    <th style="min-width: 140px;">Akcja</th>
                                 </tr>
                             </thead>
                             <tbody id="deck-tbody"></tbody>
@@ -254,9 +252,10 @@
     <!-- Modals -->
     <div id="modal-quick-edit" class="modal hidden">
         <div class="modal-content">
-            <h3>Szybka edycja fiszki</h3>
-            <input type="text" id="qe-front" placeholder="Awers">
-            <input type="text" id="qe-back" placeholder="Rewers">
+            <h3>Edytuj fiszkę</h3>
+            <input type="text" id="qe-front" placeholder="Awers (Polski - Hasło)">
+            <input type="text" id="qe-back" placeholder="Rewers (Koreański - Tłumaczenie)">
+            <textarea id="qe-example" rows="3" placeholder="Zdanie przykładowe / Kontekst (opcjonalnie)"></textarea>
             <div class="flex-between mt-3 gap-2">
                 <button class="btn btn-outline w-100" onclick="closeModal('modal-quick-edit')">Anuluj</button>
                 <button class="btn btn-primary w-100" onclick="saveQuickEdit()">Zapisz</button>
@@ -272,7 +271,6 @@
         </div>
     </div>
 
-    <!-- NOWY WIDOK: GRA MATCHING (ROZSYPANKI) -->
     <section id="matching-game-view" class="hidden matching-overlay">
         <div class="flex-between mb-3">
             <h2 style="margin:0;">Rozsypanki</h2>
