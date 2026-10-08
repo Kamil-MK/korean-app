@@ -1262,7 +1262,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-07T22:00:00.000Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445794.9143,
@@ -1331,10 +1331,10 @@
       "id": 1790781445794.656,
       "front": "Pensja tygodniowa",
       "back": "주급",
-      "rep": 2,
-      "interval": 6,
+      "rep": 3,
+      "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-10-08T17:51:39.652Z"
+      "nextReview": "2026-10-22T22:00:00.000Z"
     },
     {
       "id": 1790781445794.3835,
@@ -1349,10 +1349,10 @@
       "id": 1790781445794.1472,
       "front": "Beginner",
       "back": "초보자",
-      "rep": 1,
-      "interval": 3,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-07T22:00:00.000Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445794.8896,
@@ -1403,10 +1403,10 @@
       "id": 1790781445794.6938,
       "front": "Partykuła do kogoś/wobec kogoś",
       "back": "N더러",
-      "rep": 2,
-      "interval": 6,
+      "rep": 3,
+      "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-10-08T17:51:52.568Z"
+      "nextReview": "2026-10-22T22:00:00.000Z"
     },
     {
       "id": 1790781445794.5317,
@@ -1421,10 +1421,10 @@
       "id": 1790781445794.773,
       "front": "To praise",
       "back": "칭찬하다",
-      "rep": 2,
-      "interval": 2,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-07T22:00:00.000Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445794.2112,
@@ -1493,10 +1493,10 @@
       "id": 1790781445795.3853,
       "front": "Powstrzymywaxć",
       "back": "참다",
-      "rep": 2,
-      "interval": 6,
+      "rep": 3,
+      "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-10-08T17:52:10.204Z"
+      "nextReview": "2026-10-22T22:00:00.000Z"
     },
     {
       "id": 1790781445795.0579,
@@ -1628,10 +1628,10 @@
       "id": 1790781445795.6304,
       "front": "Go to study abroad",
       "back": "유학을 가다",
-      "rep": 1,
-      "interval": 3,
+      "rep": 2,
+      "interval": 6,
       "ef": 1.3,
-      "nextReview": "2026-10-07T22:00:00.000Z"
+      "nextReview": "2026-10-13T22:00:00.000Z"
     },
     {
       "id": 1790781445795.0378,
@@ -1658,7 +1658,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-07T22:00:00.000Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445795.7898,
@@ -1709,10 +1709,10 @@
       "id": 1790781445795.4963,
       "front": "Udogodnienia",
       "back": "편의 시설",
-      "rep": 3,
-      "interval": 4,
-      "ef": 2.2199999999999998,
-      "nextReview": "2026-10-07T22:00:00.000Z"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.42,
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445795.4883,
@@ -1754,10 +1754,10 @@
       "id": 1790781445795.4648,
       "front": "Walking",
       "back": "걸어가다",
-      "rep": 2,
-      "interval": 6,
+      "rep": 3,
+      "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-10-08T17:53:04.767Z"
+      "nextReview": "2026-10-22T22:00:00.000Z"
     },
     {
       "id": 1790781445795.6125,
@@ -1781,10 +1781,10 @@
       "id": 1790781445795.8767,
       "front": "WĄski, narrow",
       "back": "좁다",
-      "rep": 2,
-      "interval": 6,
+      "rep": 3,
+      "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-10-08T17:53:10.705Z"
+      "nextReview": "2026-10-22T22:00:00.000Z"
     },
     {
       "id": 1790781445795.0808,
@@ -1820,7 +1820,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-07T22:00:00.000Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445795.4875,
@@ -2018,7 +2018,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-07T22:00:00.000Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445795.683,
@@ -3926,9 +3926,9 @@
       ]
     },
     "2026-10-08": {
-      "again": 27,
+      "again": 34,
       "hard": 5,
-      "good": 11,
+      "good": 17,
       "easy": 0,
       "completedAll": false,
       "newCardsDone": 0,
@@ -4186,6 +4186,69 @@
         "interval": 3,
         "ef": 1.3,
         "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.713,
+        "front": "Reflect on oneself",
+        "back": "반성하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.1472,
+        "front": "Beginner",
+        "back": "초보자",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.773,
+        "front": "To praise",
+        "back": "칭찬하다",
+        "rep": 2,
+        "interval": 2,
+        "ef": 1.3,
+        "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.3225,
+        "front": "Absurd",
+        "back": "황당하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.4963,
+        "front": "Udogodnienia",
+        "back": "편의 시설",
+        "rep": 3,
+        "interval": 4,
+        "ef": 2.2199999999999998,
+        "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.7908,
+        "front": "Main street",
+        "back": "번화가",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.2979,
+        "front": "PAy the rent",
+        "back": "방세를 내다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-07T22:00:00.000Z"
       }
     ],
     "hard": [
@@ -4337,6 +4400,60 @@
         "interval": 1,
         "ef": 1.7000000000000002,
         "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.656,
+        "front": "Pensja tygodniowa",
+        "back": "주급",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:51:39.652Z"
+      },
+      {
+        "id": 1790781445794.6938,
+        "front": "Partykuła do kogoś/wobec kogoś",
+        "back": "N더러",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:51:52.568Z"
+      },
+      {
+        "id": 1790781445795.3853,
+        "front": "Powstrzymywaxć",
+        "back": "참다",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:52:10.204Z"
+      },
+      {
+        "id": 1790781445795.6304,
+        "front": "Go to study abroad",
+        "back": "유학을 가다",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.4648,
+        "front": "Walking",
+        "back": "걸어가다",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:53:04.767Z"
+      },
+      {
+        "id": 1790781445795.8767,
+        "front": "WĄski, narrow",
+        "back": "좁다",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:53:10.705Z"
       }
     ],
     "easy": []
