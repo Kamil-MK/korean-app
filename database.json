@@ -2672,19 +2672,19 @@
       "id": 1790781445797.2607,
       "front": "blow off steam",
       "back": "화를 풀다",
-      "rep": 2,
-      "interval": 6,
+      "rep": 3,
+      "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-10-08T17:54:43.890Z"
+      "nextReview": "2026-10-22T22:00:00.000Z"
     },
     {
       "id": 1790781445797.739,
       "front": "decyzja",
       "back": "결정",
-      "rep": 2,
-      "interval": 6,
-      "ef": 2.5,
-      "nextReview": "2026-10-08T17:54:50.768Z"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445797.3813,
@@ -2789,10 +2789,10 @@
       "id": 1790781445797.3855,
       "front": "sala wykładowa",
       "back": "강의실",
-      "rep": 2,
-      "interval": 6,
+      "rep": 3,
+      "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-10-08T17:54:56.519Z"
+      "nextReview": "2026-10-22T22:00:00.000Z"
     },
     {
       "id": 1790781445797.1362,
@@ -2879,10 +2879,10 @@
       "id": 1790781445798.8906,
       "front": "liczba ludzi",
       "back": "인원",
-      "rep": 2,
-      "interval": 6,
-      "ef": 2.5,
-      "nextReview": "2026-10-08T17:55:03.101Z"
+      "rep": 3,
+      "interval": 12,
+      "ef": 2.36,
+      "nextReview": "2026-10-19T22:00:00.000Z"
     },
     {
       "id": 1790781445798.8972,
@@ -2897,19 +2897,19 @@
       "id": 1790781445798.5818,
       "front": "grupa/organizacja",
       "back": "단체",
-      "rep": 2,
-      "interval": 6,
+      "rep": 3,
+      "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-10-08T17:55:05.346Z"
+      "nextReview": "2026-10-22T22:00:00.000Z"
     },
     {
       "id": 1790781445798.138,
       "front": "lista/tabela",
       "back": "일람표",
-      "rep": 2,
-      "interval": 6,
+      "rep": 3,
+      "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-10-08T17:55:08.089Z"
+      "nextReview": "2026-10-22T22:00:00.000Z"
     },
     {
       "id": 1790781445798.5522,
@@ -2924,10 +2924,10 @@
       "id": 1790781445798.2935,
       "front": "participate",
       "back": "참가하다",
-      "rep": 1,
-      "interval": 3,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-07T22:00:00.000Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445798.4182,
@@ -3926,9 +3926,9 @@
       ]
     },
     "2026-10-08": {
-      "again": 37,
-      "hard": 6,
-      "good": 23,
+      "again": 39,
+      "hard": 7,
+      "good": 27,
       "easy": 0,
       "completedAll": false,
       "newCardsDone": 0,
@@ -4276,6 +4276,24 @@
         "interval": 1,
         "ef": 1.3,
         "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445797.739,
+        "front": "decyzja",
+        "back": "결정",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:54:50.768Z"
+      },
+      {
+        "id": 1790781445798.2935,
+        "front": "participate",
+        "back": "참가하다",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-07T22:00:00.000Z"
       }
     ],
     "hard": [
@@ -4332,6 +4350,15 @@
         "interval": 6,
         "ef": 2.5,
         "nextReview": "2026-10-08T17:54:25.406Z"
+      },
+      {
+        "id": 1790781445798.8906,
+        "front": "liczba ludzi",
+        "back": "인원",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:55:03.101Z"
       }
     ],
     "good": [
@@ -4544,6 +4571,42 @@
         "interval": 6,
         "ef": 2.5,
         "nextReview": "2026-10-08T17:54:35.442Z"
+      },
+      {
+        "id": 1790781445797.2607,
+        "front": "blow off steam",
+        "back": "화를 풀다",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:54:43.890Z"
+      },
+      {
+        "id": 1790781445797.3855,
+        "front": "sala wykładowa",
+        "back": "강의실",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:54:56.519Z"
+      },
+      {
+        "id": 1790781445798.5818,
+        "front": "grupa/organizacja",
+        "back": "단체",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:55:05.346Z"
+      },
+      {
+        "id": 1790781445798.138,
+        "front": "lista/tabela",
+        "back": "일람표",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:55:08.089Z"
       }
     ],
     "easy": []
