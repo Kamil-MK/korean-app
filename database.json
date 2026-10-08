@@ -3176,19 +3176,19 @@
       "id": 1790781445799.3008,
       "front": "zachwywac sie / wyrazac podziw / zaskoczenie",
       "back": "감탄하다",
-      "rep": 2,
-      "interval": 6,
-      "ef": 2.5,
-      "nextReview": "2026-10-08T17:56:38.891Z"
+      "rep": 3,
+      "interval": 18,
+      "ef": 2.6,
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445799.0776,
       "front": "incident / zdarzenie",
       "back": "사건",
-      "rep": 2,
-      "interval": 6,
+      "rep": 3,
+      "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-10-08T17:56:43.791Z"
+      "nextReview": "2026-10-22T22:00:00.000Z"
     },
     {
       "id": 1790781445799.449,
@@ -3221,19 +3221,19 @@
       "id": 1790781445799.1802,
       "front": "typ",
       "back": "종류",
-      "rep": 2,
-      "interval": 6,
-      "ef": 2.5,
-      "nextReview": "2026-10-08T17:56:46.987Z"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445799.3955,
       "front": "taniec formalnie",
       "back": "무용",
-      "rep": 2,
-      "interval": 6,
+      "rep": 3,
+      "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-10-08T17:56:49.734Z"
+      "nextReview": "2026-10-22T22:00:00.000Z"
     },
     {
       "id": 1790781445799.2114,
@@ -3260,7 +3260,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-07T22:00:00.000Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445799.1052,
@@ -3401,10 +3401,10 @@
       "id": 1790781445799.1099,
       "front": "badac (w kontekscie badan naukowych)",
       "back": "연구하다",
-      "rep": 2,
-      "interval": 6,
-      "ef": 2.5,
-      "nextReview": "2026-10-08T17:57:29.851Z"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445799.863,
@@ -3413,7 +3413,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-07T22:00:00.000Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445799.851,
@@ -3440,25 +3440,25 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-07T22:00:00.000Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445799.163,
       "front": "szukac pracy",
       "back": "직장을 구하다",
-      "rep": 1,
+      "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-07T22:00:00.000Z"
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445799.3042,
       "front": "aplikowac / wyslac aplikacje",
       "back": "지원서를 제출하다",
-      "rep": 2,
-      "interval": 6,
+      "rep": 3,
+      "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-10-08T17:58:28.152Z"
+      "nextReview": "2026-10-22T22:00:00.000Z"
     },
     {
       "id": 1790781445799.2327,
@@ -3482,10 +3482,10 @@
       "id": 1790781445800.1199,
       "front": "polityk / pracownik panstwowy",
       "back": "공무원",
-      "rep": 1,
-      "interval": 3,
+      "rep": 2,
+      "interval": 6,
       "ef": 1.3,
-      "nextReview": "2026-10-07T22:00:00.000Z"
+      "nextReview": "2026-10-13T22:00:00.000Z"
     },
     {
       "id": 1790781445800.3953,
@@ -3509,10 +3509,10 @@
       "id": 1790781445800.794,
       "front": "tlumacz ustny",
       "back": "통역사",
-      "rep": 2,
-      "interval": 6,
-      "ef": 2.5,
-      "nextReview": "2026-10-08T17:58:40.262Z"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445800.4922,
@@ -3926,10 +3926,10 @@
       ]
     },
     "2026-10-08": {
-      "again": 40,
+      "again": 47,
       "hard": 7,
-      "good": 31,
-      "easy": 0,
+      "good": 35,
+      "easy": 1,
       "completedAll": false,
       "newCardsDone": 0,
       "practicedMistakes": []
@@ -4303,6 +4303,69 @@
         "interval": 2,
         "ef": 1.3,
         "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445799.1802,
+        "front": "typ",
+        "back": "종류",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:56:46.987Z"
+      },
+      {
+        "id": 1790781445799.8354,
+        "front": "informacja",
+        "back": "정보",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445799.1099,
+        "front": "badac (w kontekscie badan naukowych)",
+        "back": "연구하다",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:57:29.851Z"
+      },
+      {
+        "id": 1790781445799.863,
+        "front": "proces / kurs",
+        "back": "과정",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445799.2366,
+        "front": "job/work",
+        "back": "직장",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445799.163,
+        "front": "szukac pracy",
+        "back": "직장을 구하다",
+        "rep": 1,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445800.794,
+        "front": "tlumacz ustny",
+        "back": "통역사",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:58:40.262Z"
       }
     ],
     "hard": [
@@ -4652,8 +4715,54 @@
         "interval": 5,
         "ef": 1.8000000000000003,
         "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445799.0776,
+        "front": "incident / zdarzenie",
+        "back": "사건",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:56:43.791Z"
+      },
+      {
+        "id": 1790781445799.3955,
+        "front": "taniec formalnie",
+        "back": "무용",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:56:49.734Z"
+      },
+      {
+        "id": 1790781445799.3042,
+        "front": "aplikowac / wyslac aplikacje",
+        "back": "지원서를 제출하다",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:58:28.152Z"
+      },
+      {
+        "id": 1790781445800.1199,
+        "front": "polityk / pracownik panstwowy",
+        "back": "공무원",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-07T22:00:00.000Z"
       }
     ],
-    "easy": []
+    "easy": [
+      {
+        "id": 1790781445799.3008,
+        "front": "zachwywac sie / wyrazac podziw / zaskoczenie",
+        "back": "감탄하다",
+        "rep": 2,
+        "interval": 6,
+        "ef": 2.5,
+        "nextReview": "2026-10-08T17:56:38.891Z"
+      }
+    ]
   }
 }
