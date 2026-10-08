@@ -75,12 +75,31 @@ input, textarea {
     font-size: 16px; 
     background: #FFF; 
     outline: none; 
-    transition: border-color 0.2s; 
+    transition: all 0.2s; 
     resize: vertical;
 }
 
 input:focus, textarea:focus { 
     border-color: var(--primary); 
+}
+
+/* HARD MODE CSS */
+.success-input {
+    border-color: var(--success) !important;
+    background-color: #D1FAE5 !important;
+    color: #065F46 !important;
+}
+
+.error {
+    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+    border-color: var(--danger) !important;
+    background-color: #FEE2E2 !important;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
 }
 
 .btn { 
@@ -306,64 +325,18 @@ input:focus, textarea:focus {
 }
 
 /* --- ZAKŁADKA AKTYWNOŚCI / STREAKS / WYKRESY --- */
-.stats-grid { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 12px; 
-    margin-bottom: 12px; 
-}
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.stat-box { background: #FFF; border-radius: 16px; padding: 16px; text-align: center; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+.stat-box.full-width { display: flex; justify-content: center; align-items: center; gap: 10px; width: 100%; }
 
-.stat-box { 
-    background: #FFF; 
-    border-radius: 16px; 
-    padding: 16px; 
-    text-align: center; 
-    border: 1px solid var(--border); 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02); 
-}
-
-.stat-box.full-width { 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    gap: 10px; 
-    width: 100%; 
-}
-
-.chart-container { 
-    display: flex; 
-    justify-content: space-around; 
-    align-items: flex-end; 
-    height: 180px; 
-    padding-bottom: 5px; 
-}
-
-.chart-col { 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: flex-end; 
-    align-items: center; 
-    width: 12%; 
-    height: 100%; 
-}
-
-.bar-wrapper { 
-    width: 12px; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: flex-end; 
-    border-radius: 6px; 
-    overflow: hidden; 
-    background: #F1F5F9; 
-    margin-bottom: 5px; 
-}
-
+.chart-container { display: flex; justify-content: space-around; align-items: flex-end; height: 180px; padding-bottom: 5px; }
+.chart-col { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; width: 12%; height: 100%; }
+.bar-wrapper { width: 12px; display: flex; flex-direction: column; justify-content: flex-end; border-radius: 6px; overflow: hidden; background: #F1F5F9; margin-bottom: 5px; }
 .bar-segment { width: 100%; transition: height 0.4s ease; }
 .bar-again { background: var(--danger); }
 .bar-hard { background: var(--warning); }
 .bar-good { background: #3B82F6; }
 .bar-easy { background: var(--success); }
-
 .chart-label { font-size: 11px; color: var(--text-light); font-weight: 500; }
 .chart-total { font-size: 11px; font-weight: bold; margin-bottom: 4px; color: var(--primary); text-align: center; line-height: 1; }
 
@@ -375,89 +348,16 @@ input:focus, textarea:focus {
 .pb-0 { padding-bottom: 0 !important; }
 
 /* --- GRA MATCHING (ROZSYPANKA) --- */
-.matching-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: var(--bg-color);
-    z-index: 3000;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-}
-
-.matching-board {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    flex-grow: 1;
-    align-content: start;
-    padding-bottom: 40px;
-}
-
-.matching-col {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.match-card {
-    background: var(--card-bg);
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    padding: 16px 10px;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    word-break: break-word;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 70px;
-}
-
-.match-card.selected {
-    border-color: var(--warning);
-    background: #FFFBEB;
-    transform: scale(0.97);
-}
-
-.match-card.matched {
-    border-color: var(--success);
-    background: #D1FAE5;
-    color: #065F46;
-    opacity: 0.5;
-    pointer-events: none;
-    transform: scale(0.95);
-}
-
-.match-card.error {
-    border-color: var(--danger);
-    background: #FEE2E2;
-    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    20%, 60% { transform: translateX(-6px); }
-    40%, 80% { transform: translateX(6px); }
-}
+.matching-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-color); z-index: 3000; padding: 20px; display: flex; flex-direction: column; overflow-y: auto; }
+.matching-board { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex-grow: 1; align-content: start; padding-bottom: 40px; }
+.matching-col { display: flex; flex-direction: column; gap: 10px; }
+.match-card { background: var(--card-bg); border: 2px solid var(--border); border-radius: 12px; padding: 16px 10px; text-align: center; font-size: 16px; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.02); word-break: break-word; display: flex; align-items: center; justify-content: center; min-height: 70px; }
+.match-card.selected { border-color: var(--warning); background: #FFFBEB; transform: scale(0.97); }
+.match-card.matched { border-color: var(--success); background: #D1FAE5; color: #065F46; opacity: 0.5; pointer-events: none; transform: scale(0.95); }
 
 @media (min-width: 768px) {
     body { padding-bottom: 0; padding-top: 70px; }
-    .bottom-nav { 
-        top: 0; 
-        bottom: auto; 
-        border-top: none; 
-        border-bottom: 1px solid var(--border); 
-        justify-content: center; 
-        gap: 40px; 
-    }
+    .bottom-nav { top: 0; bottom: auto; border-top: none; border-bottom: 1px solid var(--border); justify-content: center; gap: 40px; }
     .nav-btn { flex-direction: row; gap: 8px; font-size: 15px; }
     .matching-overlay { padding-top: 80px; }
 }
