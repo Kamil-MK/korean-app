@@ -1008,9 +1008,9 @@
       "front": "Scrap a car",
       "back": "폐차 (폐차를 시키다 - to order car scrapping)",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.794Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445794.3867,
@@ -1026,9 +1026,9 @@
       "front": "To release (w kontekscie filmu)",
       "back": "개봉하다",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.794Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445794.236,
@@ -1044,18 +1044,18 @@
       "front": "Service center",
       "back": "AS센터",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.794Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445794.8152,
       "front": "Shipping fee",
       "back": "택배비",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.794Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445794.4797,
@@ -1071,9 +1071,9 @@
       "front": "Klient",
       "back": "고객님",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.794Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-08T22:00:00.000Z"
     },
     {
       "id": 1790781445794.204,
@@ -3926,12 +3926,12 @@
       ]
     },
     "2026-10-08": {
-      "again": 48,
+      "again": 53,
       "hard": 7,
       "good": 39,
       "easy": 1,
-      "completedAll": false,
-      "newCardsDone": 0,
+      "completedAll": true,
+      "newCardsDone": 5,
       "practicedMistakes": []
     }
   },
@@ -4375,6 +4375,51 @@
         "interval": 1,
         "ef": 1.3,
         "nextReview": "2026-10-07T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.086,
+        "front": "Scrap a car",
+        "back": "폐차 (폐차를 시키다 - to order car scrapping)",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.794Z"
+      },
+      {
+        "id": 1790781445794.3713,
+        "front": "To release (w kontekscie filmu)",
+        "back": "개봉하다",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.794Z"
+      },
+      {
+        "id": 1790781445794.6624,
+        "front": "Service center",
+        "back": "AS센터",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.794Z"
+      },
+      {
+        "id": 1790781445794.8152,
+        "front": "Shipping fee",
+        "back": "택배비",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.794Z"
+      },
+      {
+        "id": 1790781445794.5217,
+        "front": "Klient",
+        "back": "고객님",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.794Z"
       }
     ],
     "hard": [
