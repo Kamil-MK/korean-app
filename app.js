@@ -13,6 +13,7 @@ let appState = {
     ghRepo: "",
     autoSync: false,
     dailyLimit: 5,
+    settings: { hardMode: false }, // Nowy włącznik trybu wpisywania
     words: [],
     flashcards: [],
     library: [],
@@ -22,16 +23,18 @@ let appState = {
 
 let currentStoryId = null;
 let currentStoryText = "";
-let editingCardId = null; // Zmienna globalna trzymająca ID edytowanej fiszki w Modalu
+let editingCardId = null;
 
 function loadState() {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
         try { appState = { ...appState, ...JSON.parse(saved) }; } catch (e) {}
     }
+    
     if (!appState.apiKey) appState.apiKey = DEFAULT_API_KEY;
     if (!appState.library) appState.library = [];
     if (!appState.history) appState.history = {};
+    if (!appState.settings) appState.settings = { hardMode: false };
     
     const today = getLocalToday();
     
@@ -84,6 +87,7 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
     });
 });
 
+// Aktualizacja włącznika Hard Mode w UI Ustawień
 function updateSettingsUI() {
     document.getElementById('api-key').value = appState.apiKey;
     document.getElementById('gh-token').value = appState.ghToken || "";
@@ -91,6 +95,9 @@ function updateSettingsUI() {
     document.getElementById('gh-repo').value = appState.ghRepo || "";
     document.getElementById('auto-sync').checked = appState.autoSync || false;
     document.getElementById('daily-limit').value = appState.dailyLimit;
+    
+    const hardModeToggle = document.getElementById('hard-mode-setting');
+    if (hardModeToggle) hardModeToggle.checked = appState.settings.hardMode || false;
 }
 
 function saveSettings() {
@@ -99,6 +106,11 @@ function saveSettings() {
     appState.ghUser = document.getElementById('gh-user').value.trim();
     appState.ghRepo = document.getElementById('gh-repo').value.trim();
     appState.autoSync = document.getElementById('auto-sync').checked;
+    
+    if (!appState.settings) appState.settings = {};
+    const hardModeToggle = document.getElementById('hard-mode-setting');
+    if (hardModeToggle) appState.settings.hardMode = hardModeToggle.checked;
+    
     const lim = parseInt(document.getElementById('daily-limit').value);
     if (lim > 0) appState.dailyLimit = lim;
     
@@ -145,6 +157,7 @@ async function syncToGitHub() {
         const safeState = {
             dailyLimit: appState.dailyLimit,
             autoSync: appState.autoSync || false,
+            settings: appState.settings || { hardMode: false },
             words: appState.words || [],
             flashcards: appState.flashcards || [],
             library: appState.library || [],
@@ -216,6 +229,7 @@ async function syncFromGitHub() {
             appState.ghRepo = currentGhRepo;
 
             if(!appState.history) appState.history = {};
+            if(!appState.settings) appState.settings = { hardMode: false };
 
             saveState();
             msg.textContent = "✅ Postępy pobrane i wczytane!";
@@ -243,6 +257,7 @@ async function silentSyncToGitHub() {
 
         const safeState = {
             dailyLimit: appState.dailyLimit, autoSync: appState.autoSync,
+            settings: appState.settings || { hardMode: false },
             words: appState.words || [], flashcards: appState.flashcards || [],
             library: appState.library || [], history: appState.history || {},
             sessionStats: appState.sessionStats || { again: [], hard: [], good: [], easy: [] }
@@ -269,7 +284,6 @@ async function silentSyncToGitHub() {
 setInterval(() => { if (document.visibilityState === 'visible') silentSyncToGitHub(); }, 5 * 60 * 1000);
 document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') silentSyncToGitHub(); });
 
-// --- LOKALNY BACKUP ---
 function exportData() {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appState, null, 2));
     const dl = document.createElement('a');
@@ -544,7 +558,7 @@ function addWordToSRS(id) {
     if (!w) return;
     
     const frontTranslation = w.custom.trim() !== "" ? w.custom : w.autoPl;
-    const isAdded = createFlashcardData(frontTranslation, w.ko, 0, 0, 2.5, null, ""); // Puste exampleSentence dla szybkich słówek
+    const isAdded = createFlashcardData(frontTranslation, w.ko, 0, 0, 2.5, null, "");
     
     if (isAdded) {
         saveState();
@@ -558,7 +572,6 @@ function addWordToSRS(id) {
 }
 
 // --- ZARZĄDZANIE FISZKAMI I SRS ---
-// ZAKTUALIZOWANE: Obsługa exampleSentence z zachowaniem kompatybilności wstecznej
 function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = null, exampleSentence = "") {
     if(!front || !back || appState.flashcards.some(f => f.front === front && f.back === back)) return false;
     appState.flashcards.push({
@@ -574,7 +587,6 @@ function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = nul
     return true;
 }
 
-// ZAKTUALIZOWANE: Dodawanie ze zdaniem przykładowym
 function addManualFlashcard() {
     const front = document.getElementById('manual-front').value.trim();
     const back = document.getElementById('manual-back').value.trim();
@@ -594,7 +606,6 @@ function toggleDeckList() {
     container.classList.toggle('hidden');
 }
 
-// ZAKTUALIZOWANE: Przycisk Edytuj dodany do kolumny Akcji w Bazie Fiszek
 function renderDeckTable() {
     const tbody = document.getElementById('deck-tbody');
     tbody.innerHTML = "";
@@ -690,7 +701,6 @@ function refreshStudySession() {
         const practiceBtn = document.getElementById('btn-practice-mistakes');
         if (appState.sessionStats && appState.sessionStats.date === todayStr && appState.sessionStats.again && appState.sessionStats.again.length > 0) {
             const practiced = appState.history[todayStr].practicedMistakes || [];
-            
             const uniqueMistakes = Array.from(new Map(appState.sessionStats.again.map(item => [item.id, item])).values())
                                         .filter(item => !practiced.includes(item.id));
 
@@ -717,7 +727,6 @@ function refreshStudySession() {
     }
 }
 
-// ZAKTUALIZOWANE: Pokazywanie opcjonalnego zdania (exampleSentence) na Rewersie
 function nextStudyCard() {
     if (studyQueue.length === 0) { refreshStudySession(); return; }
     currentCard = studyQueue[0];
@@ -734,12 +743,79 @@ function nextStudyCard() {
     
     document.getElementById('study-front').classList.remove('hidden');
     document.getElementById('study-back').classList.add('hidden');
-    document.getElementById('btn-show-answer').classList.remove('hidden');
     document.getElementById('srs-actions').classList.add('hidden');
     
+    // HARD MODE: Ukrycie przycisku i renderowanie inputu
+    const isHardMode = appState.settings && appState.settings.hardMode;
+    if (isHardMode) {
+        document.getElementById('btn-show-answer').classList.add('hidden');
+        document.getElementById('hard-mode-container').classList.remove('hidden');
+        
+        const hmInput = document.getElementById('hard-mode-input');
+        hmInput.value = '';
+        hmInput.classList.remove('error', 'success-input');
+        hmInput.disabled = false;
+        
+        setTimeout(() => hmInput.focus(), 150); // Wymuszenie klawiatury
+    } else {
+        document.getElementById('btn-show-answer').classList.remove('hidden');
+        document.getElementById('hard-mode-container').classList.add('hidden');
+    }
+
     document.getElementById('time-hard').textContent = previewSM2(currentCard, 3);
     document.getElementById('time-good').textContent = previewSM2(currentCard, 4);
     document.getElementById('time-easy').textContent = previewSM2(currentCard, 5);
+}
+
+// LOGIKA HARD MODE (Walidacja i Wibracje)
+document.getElementById('hard-mode-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        checkHardMode();
+    }
+});
+
+function checkHardMode() {
+    const inputEl = document.getElementById('hard-mode-input');
+    const answerRaw = inputEl.value;
+    const targetRaw = currentCard.back;
+    
+    // Zabezpieczenie przed samymi spacjami
+    if (!answerRaw.trim()) return;
+
+    // Normalizacja - wycinamy WSZYSTKIE spacje i białe znaki do porównania
+    const normalize = str => str.replace(/\s+/g, '').toLowerCase();
+    
+    if (normalize(answerRaw) === normalize(targetRaw)) {
+        // SUKCES
+        inputEl.classList.add('success-input');
+        inputEl.disabled = true;
+        
+        setTimeout(() => {
+            processAnswer(4); // Automatyczna ocena "Dobrze", wywoła to wibrację wewnątrz funkcji processAnswer
+        }, 400);
+    } else {
+        // BŁĄD LITERÓWKA
+        inputEl.classList.add('error');
+        setTimeout(() => {
+            inputEl.classList.remove('error');
+            inputEl.value = '';
+            inputEl.focus();
+        }, 400); // Trwa tyle co animacja shake z CSS
+    }
+}
+
+function giveUpHardMode() {
+    const inputEl = document.getElementById('hard-mode-input');
+    inputEl.value = currentCard.back;
+    inputEl.disabled = true;
+    inputEl.style.color = "var(--danger)";
+    
+    document.getElementById('study-back').classList.remove('hidden');
+    
+    setTimeout(() => {
+        inputEl.style.color = "";
+        processAnswer(0); // Automatycznie oceniamy na Again po obejrzeniu poprawnej odpowiedzi
+    }, 1500); // 1.5s na przeczytanie prawidłowej odpowiedzi
 }
 
 function showAnswer() {
@@ -753,6 +829,15 @@ function previewSM2(card, quality) {
 }
 
 function processAnswer(quality) {
+    // HAPTIC FEEDBACK - KRYTYCZNY WARUNEK (Wibracje TYLKO dla dobrych odpowiedzi 4 i 5)
+    if ('vibrate' in navigator) {
+        if (quality === 4) {
+            navigator.vibrate(50); // Krótka nagroda
+        } else if (quality === 5) {
+            navigator.vibrate([30, 50, 30]); // Podwójna nagroda
+        }
+    }
+
     const today = getLocalToday();
     if (!appState.sessionStats || appState.sessionStats.date !== today) {
         appState.sessionStats = { date: today, again: [], hard: [], good: [], easy: [] };
@@ -1021,13 +1106,12 @@ function renderCalendar() {
     }
 }
 
-// ZAKTUALIZOWANE: Pełnoprawny Edytor (Zarówno z poziomu Panelu Sesji jak i Listy Bazy)
 function openQuickEdit(id = null) {
     let cardToEdit;
     if (id) {
         cardToEdit = appState.flashcards.find(c => c.id == id);
     } else {
-        cardToEdit = currentCard; // Domyślnie używamy fiszki z aktywnej sesji
+        cardToEdit = currentCard; 
     }
 
     if (!cardToEdit) return;
@@ -1056,7 +1140,6 @@ function saveQuickEdit() {
     saveState();
     renderDeckTable(); 
     
-    // Zabezpieczenie wizualne jeśli zaktualizowano aktualnie "rozwiązywaną" fiszkę w trakcie sesji
     if (currentCard && currentCard.id == editingCardId) {
         currentCard.front = f;
         currentCard.back = b;
@@ -1259,74 +1342,3 @@ function handleMatchClick(type, id, text, el) {
         if (matchSelPl) matchSelPl.el.classList.remove('selected');
         matchSelPl = { id, el };
         el.classList.add('selected');
-    }
-
-    if (matchSelKo && matchSelPl) {
-        const koRef = matchSelKo;
-        const plRef = matchSelPl;
-        
-        if (koRef.id === plRef.id) {
-            if ('vibrate' in navigator) navigator.vibrate(50);
-            koRef.el.classList.remove('selected');
-            plRef.el.classList.remove('selected');
-            koRef.el.classList.add('matched');
-            plRef.el.classList.add('matched');
-            matchedInRound++;
-            
-            matchSelKo = null;
-            matchSelPl = null;
-
-            if (matchedInRound === matchingChunks[currentMatchRound].length) {
-                const todayStr = getLocalToday();
-                if (!appState.history[todayStr].practicedMistakes) appState.history[todayStr].practicedMistakes = [];
-                
-                const chunkIds = matchingChunks[currentMatchRound].map(item => item.id);
-                appState.history[todayStr].practicedMistakes.push(...chunkIds);
-                saveState();
-
-                setTimeout(() => {
-                    currentMatchRound++;
-                    if (currentMatchRound < matchingChunks.length) {
-                        renderMatchingRound();
-                    } else {
-                        alert("Świetna robota! Przećwiczyłeś wszystkie dzisiejsze błędy.");
-                        closeMatchingGame();
-                    }
-                }, 600);
-            }
-        } else {
-            if ('vibrate' in navigator) navigator.vibrate(200);
-            koRef.el.classList.remove('selected');
-            plRef.el.classList.remove('selected');
-            
-            koRef.el.classList.add('error');
-            plRef.el.classList.add('error');
-            
-            matchSelKo = null;
-            matchSelPl = null;
-
-            setTimeout(() => {
-                koRef.el.classList.remove('error');
-                plRef.el.classList.remove('error');
-            }, 400);
-        }
-    }
-}
-
-function speakKorean(text) {
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel(); 
-        const u = new SpeechSynthesisUtterance(text);
-        u.lang = 'ko-KR';
-        window.speechSynthesis.speak(u);
-    }
-}
-
-function closeMatchingGame() {
-    document.getElementById('matching-game-view').classList.add('hidden');
-    matchSelKo = null;
-    matchSelPl = null;
-    refreshStudySession(); 
-}
-
-window.addEventListener('DOMContentLoaded', loadState);
