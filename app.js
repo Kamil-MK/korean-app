@@ -13,7 +13,7 @@ let appState = {
     ghRepo: "",
     autoSync: false,
     dailyLimit: 5,
-    settings: { hardMode: false }, // Nowy włącznik trybu wpisywania
+    settings: { hardMode: false },
     words: [],
     flashcards: [],
     library: [],
@@ -87,7 +87,6 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
     });
 });
 
-// Aktualizacja włącznika Hard Mode w UI Ustawień
 function updateSettingsUI() {
     document.getElementById('api-key').value = appState.apiKey;
     document.getElementById('gh-token').value = appState.ghToken || "";
@@ -745,7 +744,6 @@ function nextStudyCard() {
     document.getElementById('study-back').classList.add('hidden');
     document.getElementById('srs-actions').classList.add('hidden');
     
-    // HARD MODE: Ukrycie przycisku i renderowanie inputu
     const isHardMode = appState.settings && appState.settings.hardMode;
     if (isHardMode) {
         document.getElementById('btn-show-answer').classList.add('hidden');
@@ -756,7 +754,7 @@ function nextStudyCard() {
         hmInput.classList.remove('error', 'success-input');
         hmInput.disabled = false;
         
-        setTimeout(() => hmInput.focus(), 150); // Wymuszenie klawiatury
+        setTimeout(() => hmInput.focus(), 150);
     } else {
         document.getElementById('btn-show-answer').classList.remove('hidden');
         document.getElementById('hard-mode-container').classList.add('hidden');
@@ -767,40 +765,29 @@ function nextStudyCard() {
     document.getElementById('time-easy').textContent = previewSM2(currentCard, 5);
 }
 
-// LOGIKA HARD MODE (Walidacja i Wibracje)
-document.getElementById('hard-mode-input').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        checkHardMode();
-    }
-});
-
 function checkHardMode() {
     const inputEl = document.getElementById('hard-mode-input');
     const answerRaw = inputEl.value;
     const targetRaw = currentCard.back;
     
-    // Zabezpieczenie przed samymi spacjami
     if (!answerRaw.trim()) return;
 
-    // Normalizacja - wycinamy WSZYSTKIE spacje i białe znaki do porównania
     const normalize = str => str.replace(/\s+/g, '').toLowerCase();
     
     if (normalize(answerRaw) === normalize(targetRaw)) {
-        // SUKCES
         inputEl.classList.add('success-input');
         inputEl.disabled = true;
         
         setTimeout(() => {
-            processAnswer(4); // Automatyczna ocena "Dobrze", wywoła to wibrację wewnątrz funkcji processAnswer
+            processAnswer(4);
         }, 400);
     } else {
-        // BŁĄD LITERÓWKA
         inputEl.classList.add('error');
         setTimeout(() => {
             inputEl.classList.remove('error');
             inputEl.value = '';
             inputEl.focus();
-        }, 400); // Trwa tyle co animacja shake z CSS
+        }, 400);
     }
 }
 
@@ -814,8 +801,8 @@ function giveUpHardMode() {
     
     setTimeout(() => {
         inputEl.style.color = "";
-        processAnswer(0); // Automatycznie oceniamy na Again po obejrzeniu poprawnej odpowiedzi
-    }, 1500); // 1.5s na przeczytanie prawidłowej odpowiedzi
+        processAnswer(0);
+    }, 1500);
 }
 
 function showAnswer() {
@@ -829,12 +816,11 @@ function previewSM2(card, quality) {
 }
 
 function processAnswer(quality) {
-    // HAPTIC FEEDBACK - KRYTYCZNY WARUNEK (Wibracje TYLKO dla dobrych odpowiedzi 4 i 5)
     if ('vibrate' in navigator) {
         if (quality === 4) {
-            navigator.vibrate(50); // Krótka nagroda
+            navigator.vibrate(50);
         } else if (quality === 5) {
-            navigator.vibrate([30, 50, 30]); // Podwójna nagroda
+            navigator.vibrate([30, 50, 30]);
         }
     }
 
@@ -1249,7 +1235,6 @@ function importCSV(event) {
     reader.readAsText(file, "UTF-8");
 }
 
-
 // ==========================================
 // TAP-TO-MATCH GAME LOGIC (Rozsypanki)
 // ==========================================
@@ -1342,3 +1327,82 @@ function handleMatchClick(type, id, text, el) {
         if (matchSelPl) matchSelPl.el.classList.remove('selected');
         matchSelPl = { id, el };
         el.classList.add('selected');
+    }
+
+    if (matchSelKo && matchSelPl) {
+        const koRef = matchSelKo;
+        const plRef = matchSelPl;
+        
+        if (koRef.id === plRef.id) {
+            if ('vibrate' in navigator) navigator.vibrate(50);
+            koRef.el.classList.remove('selected');
+            plRef.el.classList.remove('selected');
+            koRef.el.classList.add('matched');
+            plRef.el.classList.add('matched');
+            matchedInRound++;
+            
+            matchSelKo = null;
+            matchSelPl = null;
+
+            if (matchedInRound === matchingChunks[currentMatchRound].length) {
+                const todayStr = getLocalToday();
+                if (!appState.history[todayStr].practicedMistakes) appState.history[todayStr].practicedMistakes = [];
+                
+                const chunkIds = matchingChunks[currentMatchRound].map(item => item.id);
+                appState.history[todayStr].practicedMistakes.push(...chunkIds);
+                saveState();
+
+                setTimeout(() => {
+                    currentMatchRound++;
+                    if (currentMatchRound < matchingChunks.length) {
+                        renderMatchingRound();
+                    } else {
+                        alert("Świetna robota! Przećwiczyłeś wszystkie dzisiejsze błędy.");
+                        closeMatchingGame();
+                    }
+                }, 600);
+            }
+        } else {
+            if ('vibrate' in navigator) navigator.vibrate(200);
+            koRef.el.classList.remove('selected');
+            plRef.el.classList.remove('selected');
+            
+            koRef.el.classList.add('error');
+            plRef.el.classList.add('error');
+            
+            matchSelKo = null;
+            matchSelPl = null;
+
+            setTimeout(() => {
+                koRef.el.classList.remove('error');
+                plRef.el.classList.remove('error');
+            }, 400);
+        }
+    }
+}
+
+function speakKorean(text) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); 
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'ko-KR';
+        window.speechSynthesis.speak(u);
+    }
+}
+
+function closeMatchingGame() {
+    document.getElementById('matching-game-view').classList.add('hidden');
+    matchSelKo = null;
+    matchSelPl = null;
+    refreshStudySession(); 
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    loadState();
+    const hmInput = document.getElementById('hard-mode-input');
+    if (hmInput) {
+        hmInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkHardMode();
+        });
+    }
+});
