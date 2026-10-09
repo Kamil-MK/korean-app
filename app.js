@@ -726,6 +726,7 @@ function refreshStudySession() {
     }
 }
 
+// ZAKTUALIZOWANA LOGIKA HARD MODE (Brak auto-przejścia po błędzie / sukcesie)
 function nextStudyCard() {
     if (studyQueue.length === 0) { refreshStudySession(); return; }
     currentCard = studyQueue[0];
@@ -749,10 +750,20 @@ function nextStudyCard() {
         document.getElementById('btn-show-answer').classList.add('hidden');
         document.getElementById('hard-mode-container').classList.remove('hidden');
         
+        // Reset kontrolek Hard Mode przy nowej karcie
         const hmInput = document.getElementById('hard-mode-input');
         hmInput.value = '';
+        hmInput.style.color = "";
         hmInput.classList.remove('error', 'success-input');
         hmInput.disabled = false;
+        
+        const btnCheck = document.getElementById('btn-check-hard-mode');
+        btnCheck.textContent = "Sprawdź";
+        btnCheck.className = "btn btn-primary w-100";
+        btnCheck.onclick = checkHardMode;
+        
+        const btnGiveUp = document.getElementById('btn-give-up-hard-mode');
+        btnGiveUp.classList.remove('hidden');
         
         setTimeout(() => hmInput.focus(), 150);
     } else {
@@ -780,9 +791,13 @@ function checkHardMode() {
         
         document.getElementById('study-back').classList.remove('hidden');
         
-        setTimeout(() => {
-            processAnswer(4);
-        }, 1500); 
+        // Zamień guzik "Sprawdź" na "Dalej", aby dać czas na przeczytanie Rewersu
+        const btnCheck = document.getElementById('btn-check-hard-mode');
+        btnCheck.textContent = "Dalej ➔";
+        btnCheck.className = "btn btn-success w-100";
+        btnCheck.onclick = () => processAnswer(4);
+        
+        document.getElementById('btn-give-up-hard-mode').classList.add('hidden');
     } else {
         inputEl.classList.add('error');
         setTimeout(() => {
@@ -801,10 +816,16 @@ function giveUpHardMode() {
     
     document.getElementById('study-back').classList.remove('hidden');
     
-    setTimeout(() => {
+    // Zamień guzik na "Dalej (Ucz się)", dając czas na przeczytanie Rewersu
+    const btnCheck = document.getElementById('btn-check-hard-mode');
+    btnCheck.textContent = "Dalej (Ucz się) ➔";
+    btnCheck.className = "btn btn-danger w-100";
+    btnCheck.onclick = () => {
         inputEl.style.color = "";
         processAnswer(0);
-    }, 1500);
+    };
+    
+    document.getElementById('btn-give-up-hard-mode').classList.add('hidden');
 }
 
 function showAnswer() {
