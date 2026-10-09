@@ -778,9 +778,11 @@ function checkHardMode() {
         inputEl.classList.add('success-input');
         inputEl.disabled = true;
         
+        document.getElementById('study-back').classList.remove('hidden');
+        
         setTimeout(() => {
             processAnswer(4);
-        }, 400);
+        }, 1500); 
     } else {
         inputEl.classList.add('error');
         setTimeout(() => {
@@ -1234,6 +1236,7 @@ function importCSV(event) {
     };
     reader.readAsText(file, "UTF-8");
 }
+
 
 // ==========================================
 // TAP-TO-MATCH GAME LOGIC (Rozsypanki)
