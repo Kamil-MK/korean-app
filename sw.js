@@ -1,4 +1,4 @@
-const CACHE_NAME = 'korean-app-v13';
+const CACHE_NAME = 'korean-app-v14';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
