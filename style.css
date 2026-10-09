@@ -83,7 +83,7 @@ input:focus, textarea:focus {
     border-color: var(--primary); 
 }
 
-/* HARD MODE CSS */
+/* HARD MODE STYLES */
 .success-input {
     border-color: var(--success) !important;
     background-color: #D1FAE5 !important;
