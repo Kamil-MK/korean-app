@@ -409,6 +409,7 @@ async function fetchWithRetry(url, options, retries = 3, delay = 2000) {
     }
 }
 
+// ZAKTUALIZOWANE: Sampling w Vanilla JS i zoptymalizowany prompt
 async function generateAIStory() {
     if (!appState.apiKey || appState.apiKey.trim() === "") {
         alert("Aby wygenerować historię, przejdź do zakładki Ustawienia i podaj swój klucz Gemini API.");
@@ -419,9 +420,33 @@ async function generateAIStory() {
     const errorP = document.getElementById('ai-error');
     loader.style.display = 'block'; errorP.style.display = 'none';
 
-    const known = appState.flashcards.filter(f => f.interval > 10).map(f => f.front);
-    const learning = appState.flashcards.filter(f => f.interval <= 10).map(f => f.front);
-    const prompt = `Jesteś osobistym nauczycielem koreańskiego i twórcą Graded Readers. Napisz krótką (100-180 słów) historię po koreańsku. ZNANE słowa: [${known.join(', ')}], W TRAKCIE NAUKI: [${learning.join(', ')}]. Używaj 70% słów ZNANYCH, 20% W TRAKCIE NAUKI, max 10% CAŁKOWICIE NOWYCH. Historia ma być naturalna i współczesna. Zwróć WYŁĄCZNIE sam tekst koreański, bez tłumaczeń i markdown.`;
+    function shuffleArray(array) {
+        let curId = array.length;
+        while (0 !== curId) {
+            let randId = Math.floor(Math.random() * curId);
+            curId -= 1;
+            let tmp = array[curId];
+            array[curId] = array[randId];
+            array[randId] = tmp;
+        }
+        return array;
+    }
+
+    const knownPool = appState.flashcards.filter(f => f.interval > 10).map(f => f.back);
+    const learningPool = appState.flashcards.filter(f => f.interval <= 10).map(f => f.back);
+
+    const sampledKnown = shuffleArray([...knownPool]).slice(0, 20);
+    const sampledLearning = shuffleArray([...learningPool]).slice(0, 8);
+
+    const knownStr = sampledKnown.join(', ');
+    const learningStr = sampledLearning.join(', ');
+
+    const prompt = `Napisz po koreańsku wciągające opowiadanie (ok. 150-200 słów). Tematyka powinna oscylować wokół pracy w e-commerce i zarządzania sprzedażą online, wprowadzania nowych technologii, jazdy autem elektrycznym lub wyzwań i rytuałów codzienności (np. parzenie kawy metodą pour-over), a styl musi odpowiadać standardom tekstów z egzaminu TOPIK II.
+Wymagania:
+Użyj tych znanych słów jako bazy: [${knownStr}].
+Wpleć te słowa, których uczeń aktualnie się uczy: [${learningStr}].
+Wprowadź dokładnie 2 ZUPEŁNIE NOWE, zaawansowane słowa (poziom TOPIK II), których nie ma na powyższych listach. Pogrub je używając znaczników HTML <b>.
+Zwróć sam tekst opowiadania w formacie HTML (paragrafy w <p>), bez żadnych dodatkowych wstępów ani komentarzy.`;
 
     try {
         const response = await fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${appState.apiKey}`, {
@@ -431,7 +456,9 @@ async function generateAIStory() {
         });
         const data = await response.json();
         if (!response.ok) throw new Error(data.error ? data.error.message : "Błąd API Gemini.");
-        let aiText = data.candidates[0].content.parts[0].text.replace(/```/g, '').trim();
+        
+        let aiText = data.candidates[0].content.parts[0].text.replace(/```html/g, '').replace(/```/g, '').trim();
+        
         document.getElementById('custom-text').value = aiText;
         
         currentStoryId = null;
@@ -440,9 +467,12 @@ async function generateAIStory() {
         setupReaderContent(aiText);
     } catch (err) {
         errorP.textContent = "Błąd: " + err.message; errorP.style.display = 'block';
-    } finally { loader.style.display = 'none'; }
+    } finally { 
+        loader.style.display = 'none'; 
+    }
 }
 
+// ZAKTUALIZOWANE: Bezpieczny parser DOM dla znaczników <b> i <p>
 function setupReaderContent(text) {
     document.getElementById('reader-setup').classList.add('hidden');
     document.getElementById('reader-view').classList.remove('hidden');
@@ -450,23 +480,58 @@ function setupReaderContent(text) {
     const container = document.getElementById('reader-content');
     container.innerHTML = "";
     
-    text.split(/([\s]+)/).forEach(token => {
-        if (/\s+/.test(token)) {
-            container.appendChild(document.createTextNode(token));
-        } else {
-            const cleanWord = token.replace(/[.,!?()\[\]"'“”]/g, '').trim();
-            const isFiszka = appState.flashcards.some(f => f.back === cleanWord || f.front === cleanWord);
-            
-            const span = document.createElement('span');
-            span.className = 'word-span';
-            if(isFiszka) span.classList.add('known-word');
-            span.textContent = token;
-            
-            span.onclick = () => {
-                if(!isFiszka) span.classList.toggle('selected');
-            };
-            container.appendChild(span);
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = text;
+
+    function processNode(node, currentContainer, isBold) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            const words = node.nodeValue.split(/([\s]+)/);
+            words.forEach(token => {
+                if (/\s+/.test(token)) {
+                    currentContainer.appendChild(document.createTextNode(token));
+                } else if (token.length > 0) {
+                    const cleanWord = token.replace(/[.,!?()\[\]"'“”]/g, '').trim();
+                    const isFiszka = appState.flashcards.some(f => f.back === cleanWord || f.front === cleanWord);
+                    
+                    const span = document.createElement('span');
+                    span.className = 'word-span';
+                    
+                    if (isFiszka) span.classList.add('known-word');
+                    
+                    if (isBold) {
+                        span.style.fontWeight = 'bold';
+                        if (!isFiszka) span.style.color = 'var(--primary)'; 
+                    }
+                    
+                    span.textContent = token;
+                    
+                    span.onclick = () => {
+                        if (!isFiszka) span.classList.toggle('selected');
+                    };
+                    currentContainer.appendChild(span);
+                }
+            });
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+            let newContainer = currentContainer;
+            let nextIsBold = isBold || node.tagName === 'B' || node.tagName === 'STRONG';
+
+            if (node.tagName === 'P') {
+                const p = document.createElement('p');
+                p.style.marginBottom = '12px';
+                currentContainer.appendChild(p);
+                newContainer = p;
+            } else if (node.tagName === 'BR') {
+                currentContainer.appendChild(document.createElement('br'));
+            }
+
+            node.childNodes.forEach(child => {
+                processNode(child, newContainer, nextIsBold);
+            });
         }
+    }
+
+    tempDiv.childNodes.forEach(child => {
+        processNode(child, container, false);
     });
 }
 
@@ -495,8 +560,8 @@ function sumUpWords() {
 
 async function fetchTranslation(word, id) {
     try {
-        const targetUrl = `[https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=pl&dt=t&q=$](https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=pl&dt=t&q=$){encodeURIComponent(word)}`;
-        const proxyUrl = `[https://api.allorigins.win/get?url=$](https://api.allorigins.win/get?url=$){encodeURIComponent(targetUrl)}`;
+        const targetUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=pl&dt=t&q=${encodeURIComponent(word)}`;
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
         
         const res = await fetch(proxyUrl);
         if (!res.ok) throw new Error("Błąd proxy");
@@ -726,7 +791,6 @@ function refreshStudySession() {
     }
 }
 
-// ZAKTUALIZOWANA LOGIKA HARD MODE (Brak auto-przejścia po błędzie / sukcesie)
 function nextStudyCard() {
     if (studyQueue.length === 0) { refreshStudySession(); return; }
     currentCard = studyQueue[0];
@@ -750,7 +814,6 @@ function nextStudyCard() {
         document.getElementById('btn-show-answer').classList.add('hidden');
         document.getElementById('hard-mode-container').classList.remove('hidden');
         
-        // Reset kontrolek Hard Mode przy nowej karcie
         const hmInput = document.getElementById('hard-mode-input');
         hmInput.value = '';
         hmInput.style.color = "";
@@ -791,7 +854,6 @@ function checkHardMode() {
         
         document.getElementById('study-back').classList.remove('hidden');
         
-        // Zamień guzik "Sprawdź" na "Dalej", aby dać czas na przeczytanie Rewersu
         const btnCheck = document.getElementById('btn-check-hard-mode');
         btnCheck.textContent = "Dalej ➔";
         btnCheck.className = "btn btn-success w-100";
@@ -816,7 +878,6 @@ function giveUpHardMode() {
     
     document.getElementById('study-back').classList.remove('hidden');
     
-    // Zamień guzik na "Dalej (Ucz się)", dając czas na przeczytanie Rewersu
     const btnCheck = document.getElementById('btn-check-hard-mode');
     btnCheck.textContent = "Dalej (Ucz się) ➔";
     btnCheck.className = "btn btn-danger w-100";
@@ -1269,7 +1330,8 @@ let matchSelKo = null;
 let matchSelPl = null;
 let matchedInRound = 0;
 
-function shuffleArray(array) {
+// Reużywalna globalnie funkcja shuffleArray dla gry
+function shuffleMatchArray(array) {
     let curId = array.length;
     while (0 !== curId) {
         let randId = Math.floor(Math.random() * curId);
@@ -1319,8 +1381,8 @@ function renderMatchingRound() {
     koCol.innerHTML = '';
     plCol.innerHTML = '';
 
-    let koArr = shuffleArray([...chunk]);
-    let plArr = shuffleArray([...chunk]);
+    let koArr = shuffleMatchArray([...chunk]);
+    let plArr = shuffleMatchArray([...chunk]);
 
     koArr.forEach(item => {
         const div = document.createElement('div');
