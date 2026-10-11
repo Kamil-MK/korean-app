@@ -1,0 +1,80 @@
+[
+  {
+    "category": "1장 추측과 예상을 나타낼 때 (Przypuszczenia)",
+    "items": [
+      { "id": "i1_1", "title": "-아/어 보이다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i1_2", "title": "-(으)ㄴ/는 모양이다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i1_3", "title": "-(으)ㄹ 텐데", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i1_4", "title": "-(으)ㄹ 테니까", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i1_5", "title": "-(으)ㄹ걸요", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i1_6", "title": "-(으)ㄴ/는/(으)ㄹ 줄 몰랐다(알았다)", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i1_7", "title": "-(으)ㄹ지도 모르다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "category": "2장 대조를 나타낼 때 (Kontrast)",
+    "items": [
+      { "id": "i2_1", "title": "-기는 하지만, -기는 -지만", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i2_2", "title": "-(으)ㄴ/는 반면에", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i2_3", "title": "-(으)ㄴ/는데도", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "category": "4장 이유를 나타낼 때 (Powody i Przyczyny)",
+    "items": [
+      { "id": "i4_1", "title": "-거든요", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i4_2", "title": "-잖아요", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i4_3", "title": "-느라고", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i4_4", "title": "-는 바람에", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i4_5", "title": "-(으)ㄴ/는 탓에", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i4_6", "title": "-고 해서", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i4_7", "title": "-(으)ㄹ까 봐", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "category": "5장 다른 사람의 말이나 글을 인용할 때 (Cytowanie)",
+    "items": [
+      { "id": "i5_1", "title": "-다고요?", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i5_2", "title": "-다고 하던데", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i5_3", "title": "-다면서요?", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i5_4", "title": "-다니요?", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "category": "11장 조건을 나타낼 때 (Warunki)",
+    "items": [
+      { "id": "i11_1", "title": "-아/어야", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i11_2", "title": "-거든", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "category": "15장 선택을 나타낼 때 (Wybór)",
+    "items": [
+      { "id": "i15_1", "title": "아무+(이)나 / 아무+도", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i15_2", "title": "(이)나", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i15_3", "title": "(이)라도", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i15_4", "title": "-든지 -든지", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i15_5", "title": "-(으)ㄴ/는 대신에", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "category": "17장 발견과 결과를 나타낼 때 (Odkrycia i Wyniki)",
+    "items": [
+      { "id": "i17_1", "title": "-고 보니", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i17_2", "title": "-다 보니", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i17_3", "title": "-다 보면", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i17_4", "title": "-더니", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i17_5", "title": "-았/었더니", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i17_6", "title": "-다가는", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i17_7", "title": "-(으)ㄴ/는 셈이다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "category": "24장 가정 상황을 나타낼 때 (Sytuacje Hipotetyczne)",
+    "items": [
+      { "id": "i24_1", "title": "-(느)ㄴ다면", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i24_2", "title": "-았/었더라면", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "i24_3", "title": "-(으)ㄹ 뻔하다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  }
+]
