@@ -1,10 +1,11 @@
-const CACHE_NAME = 'korean-app-v14';
+const CACHE_NAME = 'korean-app-v13';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './style.css',
   './app.js',
-  './manifest.json'
+  './manifest.json',
+  './grammar.json'
 ];
 
 self.addEventListener('install', (event) => {
