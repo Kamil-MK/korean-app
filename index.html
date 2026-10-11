@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Korean SRS & AI Reader</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json?v=2">
+    <link rel="manifest" href="manifest.json?v=4">
     <meta name="theme-color" content="#4F46E5">
 </head>
 <body>
@@ -79,7 +79,7 @@
                     <input type="text" id="story-title" placeholder="Tytuł historii (opcjonalnie)" style="margin-bottom:0; width: 65%;">
                     <button class="btn btn-success btn-sm" onclick="saveStoryToLibrary()">💾 Zapisz</button>
                 </div>
-                <p class="hint">Klikaj nieznane słowa (żółte). Znane fiszki są zaznaczone na zielono.</p>
+                <p class="hint">Klikaj nieznane słowa (żółte). Znane fiszki są zaznaczone na zielono. Wybrane struktury gramatyczne będą <b>pogrubione</b>.</p>
                 <div id="reader-content" class="reader-text"></div>
                 <div id="reader-actions" class="mt-4">
                     <button class="btn btn-primary w-100 mb-2" onclick="sumUpWords()">Sum-up (Wyodrębnij do słownika)</button>
@@ -87,6 +87,24 @@
                 </div>
                 <div id="sumup-result" class="success-msg"></div>
             </div>
+        </section>
+
+        <!-- ZAKŁADKA: GRAMATYKA -->
+        <section id="tab-gramatyka" class="tab-content">
+            <header class="section-header">
+                <h2>Gramatyka (KGIU)</h2>
+            </header>
+            
+            <div class="card mb-3">
+                <h4>Filtruj status:</h4>
+                <div class="grammar-filters flex-wrap gap-2">
+                    <label class="filter-label"><input type="checkbox" id="filter-g0" checked onchange="renderGrammarTab()"> <span class="status-dot status-0"></span> Nie umiem</label>
+                    <label class="filter-label"><input type="checkbox" id="filter-g1" checked onchange="renderGrammarTab()"> <span class="status-dot status-1"></span> Średnio</label>
+                    <label class="filter-label"><input type="checkbox" id="filter-g2" checked onchange="renderGrammarTab()"> <span class="status-dot status-2"></span> Dobrze</label>
+                </div>
+            </div>
+
+            <div id="grammar-list-container"></div>
         </section>
 
         <!-- ZAKŁADKA: SŁÓWKA -->
@@ -142,7 +160,6 @@
                     
                     <button class="btn btn-primary w-100" id="btn-show-answer" onclick="showAnswer()">Pokaż odpowiedź</button>
                     
-                    <!-- KONTENER HARD MODE -->
                     <div id="hard-mode-container" class="hidden mt-3">
                         <input type="text" id="hard-mode-input" placeholder="Wpisz po koreańsku..." autocomplete="off">
                         <div class="flex-between gap-2 mt-2">
@@ -292,6 +309,34 @@
         </div>
     </div>
 
+    <!-- Modal: GRAMATYKA SZCZEGÓŁY -->
+    <div id="modal-grammar" class="modal hidden">
+        <div class="modal-content" style="max-height: 90vh; display: flex; flex-direction: column;">
+            <div class="flex-between mb-2">
+                <h3 id="grammar-modal-title" style="margin:0; font-size: 22px; color: var(--primary);">Tytuł</h3>
+                <button class="btn btn-outline btn-sm" onclick="closeModal('modal-grammar')">✕</button>
+            </div>
+            
+            <div class="grammar-status-buttons grid-3 gap-2 mb-3 mt-2">
+                <button id="g-stat-0" class="btn btn-outline btn-sm status-btn-0" onclick="setGrammarStatus(0)">Nie umiem</button>
+                <button id="g-stat-1" class="btn btn-outline btn-sm status-btn-1" onclick="setGrammarStatus(1)">Średnio</button>
+                <button id="g-stat-2" class="btn btn-outline btn-sm status-btn-2" onclick="setGrammarStatus(2)">Dobrze</button>
+            </div>
+
+            <div class="flex-between gap-2 mb-3">
+                <button class="btn btn-ai w-100 btn-sm" onclick="explainGrammarWithGemini()">✨ Wyjaśnij z Gemini</button>
+                <button id="g-force-btn" class="btn btn-outline w-100 btn-sm" onclick="toggleForceGrammar()">🎯 Wymuś w historii</button>
+            </div>
+            
+            <div id="grammar-ai-loader" class="loader mb-2"></div>
+
+            <div id="grammar-modal-body" style="overflow-y: auto; padding-right: 5px; flex-grow: 1;">
+                <!-- Tutaj wpadną dane z JSONa od Gemini -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Gra: ROZSYPANKI -->
     <section id="matching-game-view" class="hidden matching-overlay">
         <div class="flex-between mb-3">
             <h2 style="margin:0;">Rozsypanki</h2>
@@ -308,12 +353,13 @@
         </div>
     </section>
 
+    <!-- Zaktualizowany Bottom Nav o zakładkę Gramatyka (ikona książki zmieniona z Czytelni, Czytelnia ma ikonę robota/książki) -->
     <nav class="bottom-nav">
         <button class="nav-btn" data-target="tab-aktywnosc"><span>📈</span> Aktywność</button>
-        <button class="nav-btn active" data-target="tab-czytelnia"><span>📖</span> Czytelnia</button>
+        <button class="nav-btn active" data-target="tab-czytelnia"><span>🤖</span> Czytelnia</button>
+        <button class="nav-btn" data-target="tab-gramatyka"><span>📐</span> Gramatyka</button>
         <button class="nav-btn" data-target="tab-slowka"><span>📝</span> Słówka</button>
         <button class="nav-btn" data-target="tab-fiszki"><span>⚡</span> Fiszki</button>
-        <button class="nav-btn" data-target="tab-ustawienia"><span>⚙️</span> Ustawienia</button>
     </nav>
 
     <script src="app.js"></script>
