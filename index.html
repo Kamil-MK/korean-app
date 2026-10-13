@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Korean SRS & AI Reader</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json?v=4">
+    <link rel="manifest" href="manifest.json?v=5">
     <meta name="theme-color" content="#4F46E5">
 </head>
 <body>
 
     <main class="app-container">
         
-        <!-- ZAKŁADKA: AKTYWNOŚĆ -->
+        <!-- ZAKŁADKA 1: AKTYWNOŚĆ -->
         <section id="tab-aktywnosc" class="tab-content">
             <header class="section-header">
                 <h2>Aktywność</h2>
@@ -51,52 +51,94 @@
             </div>
         </section>
 
-        <!-- ZAKŁADKA: CZYTELNIA -->
+        <!-- ZAKŁADKA 2: CZYTELNIA I SŁÓWKA -->
         <section id="tab-czytelnia" class="tab-content active">
-            <header class="section-header flex-between">
-                <h2>Czytelnia AI</h2>
-                <button class="btn btn-outline btn-sm" onclick="toggleLibrary()">📚 Biblioteka</button>
+            <header class="section-header">
+                <h2>Czytelnia i Słownik</h2>
+                <div class="sub-tabs mt-2">
+                    <button id="sub-tab-reader" class="sub-tab-btn active" onclick="switchCzytelniaTab('reader')">Teksty i Historie</button>
+                    <button id="sub-tab-words" class="sub-tab-btn" onclick="switchCzytelniaTab('words')">Wyłapane Słówka</button>
+                </div>
             </header>
             
-            <div id="library-view" class="card hidden">
-                <h3>Zapisane historie</h3>
-                <div id="library-list" class="mt-3"></div>
-                <button class="btn btn-primary w-100 mt-3" onclick="toggleLibrary()">Wróć do czytelni</button>
-            </div>
-
-            <div id="reader-setup" class="card">
-                <textarea id="custom-text" rows="5" placeholder="Wklej własny tekst po koreańsku..."></textarea>
-                <div class="btn-group">
-                    <button class="btn btn-primary" onclick="startReadingCustom()">START - Czytaj tekst</button>
-                    <button class="btn btn-ai" onclick="generateAIStory()">Generuj historię AI (Gemini)</button>
-                </div>
-                <div id="ai-loader" class="loader"></div>
-                <p id="ai-error" class="error-msg"></p>
-            </div>
-
-            <div id="reader-view" class="card hidden">
+            <!-- PODZAKŁADKA: TEKSTY -->
+            <div id="czytelnia-reader-container">
                 <div class="flex-between mb-3">
-                    <input type="text" id="story-title" placeholder="Tytuł historii (opcjonalnie)" style="margin-bottom:0; width: 65%;">
-                    <button class="btn btn-success btn-sm" onclick="saveStoryToLibrary()">💾 Zapisz</button>
+                    <h3 style="margin:0;">Generator AI</h3>
+                    <button class="btn btn-outline btn-sm" onclick="toggleLibrary()">📚 Biblioteka</button>
                 </div>
-                <p class="hint">Klikaj nieznane słowa (żółte). Znane fiszki są zaznaczone na zielono. Wybrane struktury gramatyczne będą <b>pogrubione</b>.</p>
-                <div id="reader-content" class="reader-text"></div>
-                <div id="reader-actions" class="mt-4">
-                    <button class="btn btn-primary w-100 mb-2" onclick="sumUpWords()">Sum-up (Wyodrębnij do słownika)</button>
-                    <button class="btn btn-outline w-100" onclick="closeReader()">Zakończ czytanie</button>
+
+                <div id="library-view" class="card hidden">
+                    <h3>Zapisane historie</h3>
+                    <div id="library-list" class="mt-3"></div>
+                    <button class="btn btn-primary w-100 mt-3" onclick="toggleLibrary()">Wróć do czytelni</button>
                 </div>
-                <div id="sumup-result" class="success-msg"></div>
+
+                <div id="reader-setup" class="card">
+                    <textarea id="custom-text" rows="5" placeholder="Wklej własny tekst po koreańsku..."></textarea>
+                    <div class="btn-group">
+                        <button class="btn btn-primary" onclick="startReadingCustom()">START - Czytaj tekst</button>
+                        <button class="btn btn-ai" onclick="generateAIStory()">Generuj historię AI (Gemini)</button>
+                    </div>
+                    <div id="ai-loader" class="loader"></div>
+                    <p id="ai-error" class="error-msg"></p>
+                </div>
+
+                <div id="reader-view" class="card hidden">
+                    <div class="flex-between mb-3">
+                        <input type="text" id="story-title" placeholder="Tytuł historii" style="margin-bottom:0; width: 65%;">
+                        <button class="btn btn-success btn-sm" onclick="saveStoryToLibrary()">💾 Zapisz</button>
+                    </div>
+                    <p class="hint">Klikaj nieznane słowa (żółte). Znane fiszki są zielone. Wybrane struktury będą <b>pogrubione</b>.</p>
+                    <div id="reader-content" class="reader-text"></div>
+                    <div id="reader-actions" class="mt-4">
+                        <button class="btn btn-primary w-100 mb-2" onclick="sumUpWords()">Wyodrębnij zaznaczone do słownika</button>
+                        <button class="btn btn-outline w-100" onclick="closeReader()">Zakończ czytanie</button>
+                    </div>
+                    <div id="sumup-result" class="success-msg"></div>
+                </div>
+            </div>
+
+            <!-- PODZAKŁADKA: SŁÓWKA -->
+            <div id="czytelnia-words-container" class="hidden">
+                <div class="card">
+                    <p class="hint">Lista słówek wyłapanych podczas czytania. Przejrzyj tłumaczenia i dodaj wybrane do głównej talii fiszek.</p>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Słowo</th>
+                                    <th>Tłumaczenie API</th>
+                                    <th>Własne</th>
+                                    <th>Akcja</th>
+                                </tr>
+                            </thead>
+                            <tbody id="words-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- ZAKŁADKA: GRAMATYKA -->
+        <!-- ZAKŁADKA 3: GRAMATYKA -->
         <section id="tab-gramatyka" class="tab-content">
             <header class="section-header">
                 <h2>Gramatyka (KGIU)</h2>
             </header>
             
+            <!-- WIDGET POSTĘPU -->
+            <div class="grammar-widget card mb-4">
+                <h3 style="margin-bottom: 5px;">Trening Gramatyki</h3>
+                <p>Opanowane karty: <span id="grammar-mastered-count" style="font-weight: bold; color: #FFF;">0 / 0</span></p>
+                <div class="progress-bar-bg mb-3">
+                    <div id="grammar-progress-bar" style="background: var(--success); width: 0%; height: 100%;"></div>
+                </div>
+                <button class="btn btn-primary w-100" onclick="startSession('grammar')">Ucz się: <span id="grammar-due-count">0</span> kart</button>
+            </div>
+
+            <!-- LISTA STRUKTUR -->
             <div class="card mb-3">
-                <h4>Filtruj status:</h4>
+                <h4 style="color: var(--text-dark);">Baza struktur (Filtruj status):</h4>
                 <div class="grammar-filters flex-wrap gap-2">
                     <label class="filter-label"><input type="checkbox" id="filter-g0" checked onchange="renderGrammarTab()"> <span class="status-dot status-0"></span> Nie umiem</label>
                     <label class="filter-label"><input type="checkbox" id="filter-g1" checked onchange="renderGrammarTab()"> <span class="status-dot status-1"></span> Średnio</label>
@@ -107,34 +149,11 @@
             <div id="grammar-list-container"></div>
         </section>
 
-        <!-- ZAKŁADKA: SŁÓWKA -->
-        <section id="tab-slowka" class="tab-content">
-            <header class="section-header">
-                <h2>Moje Słówka</h2>
-            </header>
-            <div class="card">
-                <p class="hint">Wychwycone słowa z tłumaczeniami API. Dodaj je do fiszek.</p>
-                <div class="table-responsive">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Słowo</th>
-                                <th>Tłumaczenie API</th>
-                                <th>Własne</th>
-                                <th>Akcja</th>
-                            </tr>
-                        </thead>
-                        <tbody id="words-tbody"></tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <!-- ZAKŁADKA: FISZKI -->
+        <!-- ZAKŁADKA 4: FISZKI (SESJA SRS + ZARZĄDZANIE) -->
         <section id="tab-fiszki" class="tab-content">
             <header class="section-header">
                 <div class="flex-between mb-2">
-                    <h2>Sesja SRS</h2>
+                    <h2 id="srs-session-title">Sesja SRS (Słówka)</h2>
                     <span id="study-stats" class="badge">Do powtórki: 0</span>
                 </div>
                 <div id="session-progress" class="session-progress" onclick="openStatsModal()">
@@ -178,50 +197,53 @@
 
                 <div id="study-empty" class="study-container text-center">
                     <h3>Brak fiszek do powtórki! 🎉</h3>
-                    <p class="hint">Wszystkie zaległości zostały nadrobione. Dzisiejszy cel zaliczony!</p>
+                    <p class="hint">Wszystkie zaplanowane na dziś karty w tej talii zostały nadrobione.</p>
                     <button id="btn-practice-mistakes" class="btn btn-warning w-100 mt-3 hidden" onclick="startMatchingGame()" style="background-color: var(--warning); color: #FFF; font-weight:bold;">Przećwicz dzisiejsze błędy (0)</button>
                     <button class="btn btn-outline mt-3 w-100" onclick="refreshStudySession()">Odśwież sesję</button>
                 </div>
             </div>
 
-            <div class="card">
-                <div class="flex-between mb-3">
-                    <h3>Zarządzanie Talią</h3>
-                    <button class="btn btn-outline btn-sm" onclick="toggleDeckList()">🗂️ Baza fiszek</button>
-                </div>
-                
-                <div class="flex-wrap gap-2 mb-3">
-                    <button class="btn btn-outline" onclick="exportCSV()">Eksport .csv</button>
-                    <input type="file" id="import-csv-file" style="position: absolute; left: -9999px; opacity: 0;" accept=".csv,.txt,*/*" onchange="importCSV(event)">
-                    <button class="btn btn-outline" style="border-color: #8B5CF6; color: #8B5CF6;" onclick="document.getElementById('import-csv-file').click()">Wgraj tabelę Fiszek (.csv)</button>
-                </div>
-                
-                <h4 class="mt-3">Dodaj fiszkę ręcznie</h4>
-                <input type="text" id="manual-front" placeholder="Awers (Polski - Hasło)">
-                <input type="text" id="manual-back" placeholder="Rewers (Koreański - Tłumaczenie)">
-                <textarea id="manual-example" rows="2" placeholder="Zdanie przykładowe / Kontekst (opcjonalnie)"></textarea>
-                <button class="btn btn-primary w-100" onclick="addManualFlashcard()">Dodaj fiszkę</button>
+            <!-- Zarządzanie Talią (Widoczne tylko dla Słówek) -->
+            <div id="deck-management-section">
+                <div class="card">
+                    <div class="flex-between mb-3">
+                        <h3>Zarządzanie Talią (Słówka)</h3>
+                        <button class="btn btn-outline btn-sm" onclick="toggleDeckList()">🗂️ Baza fiszek</button>
+                    </div>
+                    
+                    <div class="flex-wrap gap-2 mb-3">
+                        <button class="btn btn-outline" onclick="exportCSV()">Eksport .csv</button>
+                        <input type="file" id="import-csv-file" style="position: absolute; left: -9999px; opacity: 0;" accept=".csv,.txt,*/*" onchange="importCSV(event)">
+                        <button class="btn btn-outline" style="border-color: #8B5CF6; color: #8B5CF6;" onclick="document.getElementById('import-csv-file').click()">Wgraj tabelę Fiszek (.csv)</button>
+                    </div>
+                    
+                    <h4 class="mt-3">Dodaj fiszkę ręcznie</h4>
+                    <input type="text" id="manual-front" placeholder="Awers (Polski - Hasło)">
+                    <input type="text" id="manual-back" placeholder="Rewers (Koreański - Tłumaczenie)">
+                    <textarea id="manual-example" rows="2" placeholder="Zdanie przykładowe / Kontekst (opcjonalnie)"></textarea>
+                    <button class="btn btn-primary w-100" onclick="addManualFlashcard()">Dodaj fiszkę</button>
 
-                <div id="deck-list-container" class="hidden mt-4">
-                    <h4 class="mt-4">Wszystkie fiszki w bazie (<span id="total-cards-count">0</span>)</h4>
-                    <div class="table-responsive">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Awers</th>
-                                    <th>Rewers</th>
-                                    <th>Interwał</th>
-                                    <th style="min-width: 140px;">Akcja</th>
-                                </tr>
-                            </thead>
-                            <tbody id="deck-tbody"></tbody>
-                        </table>
+                    <div id="deck-list-container" class="hidden mt-4">
+                        <h4 class="mt-4">Wszystkie słówka w bazie (<span id="total-cards-count">0</span>)</h4>
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Awers</th>
+                                        <th>Rewers</th>
+                                        <th>Interwał</th>
+                                        <th style="min-width: 140px;">Akcja</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="deck-tbody"></tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ZAKŁADKA: USTAWIENIA -->
+        <!-- ZAKŁADKA 5: USTAWIENIA -->
         <section id="tab-ustawienia" class="tab-content">
             <header class="section-header">
                 <h2>Ustawienia</h2>
@@ -239,8 +261,8 @@
             </div>
             
             <div class="card">
-                <h3>Synchronizacja z GitHub (Cloud Sync)</h3>
-                <p class="hint" style="font-size: 13px;">Podaj wygenerowany Personal Access Token, aby nadpisywać bazę na serwerze.</p>
+                <h3>Synchronizacja (Cloud Sync)</h3>
+                <p class="hint" style="font-size: 13px;">Podaj wygenerowany PAT, aby nadpisywać bazę na GitHubie.</p>
                 <input type="password" id="gh-token" placeholder="GitHub PAT Token (ghp_...)">
                 <input type="text" id="gh-user" placeholder="Nazwa użytkownika GitHub">
                 <input type="text" id="gh-repo" placeholder="Nazwa repozytorium (np. korean-app)">
@@ -248,7 +270,7 @@
                 <div class="mt-3 mb-3">
                     <label style="display: flex; align-items: center; gap: 8px; font-size: 14px; cursor: pointer; color: var(--text-dark);">
                         <input type="checkbox" id="auto-sync" style="width: 20px; height: 20px; margin: 0; accent-color: var(--primary);">
-                        <b>Automatyczna synchronizacja w tle</b> <br>(przy minimalizowaniu aplikacji i co 5 minut)
+                        <b>Automatyczna synchronizacja w tle</b>
                     </label>
                 </div>
 
@@ -270,13 +292,6 @@
             </div>
 
             <div class="card">
-                <h3>Parametry Nauki</h3>
-                <label for="daily-limit">Dzienny limit nowych fiszek:</label>
-                <input type="number" id="daily-limit" min="1" max="100" value="5">
-                <button class="btn btn-primary" onclick="saveSettings()">Zapisz limit</button>
-            </div>
-
-            <div class="card">
                 <h3>Lokalna Kopia zapasowa</h3>
                 <div class="flex-wrap gap-2">
                     <button class="btn btn-primary" onclick="exportData()">Eksport do pliku (JSON)</button>
@@ -287,7 +302,7 @@
         </section>
     </main>
 
-    <!-- Modals -->
+    <!-- Modale Edycji i Statystyk -->
     <div id="modal-quick-edit" class="modal hidden">
         <div class="modal-content">
             <h3>Edytuj fiszkę</h3>
@@ -329,10 +344,7 @@
             </div>
             
             <div id="grammar-ai-loader" class="loader mb-2"></div>
-
-            <div id="grammar-modal-body" style="overflow-y: auto; padding-right: 5px; flex-grow: 1;">
-                <!-- Tutaj wpadną dane z JSONa od Gemini -->
-            </div>
+            <div id="grammar-modal-body" style="overflow-y: auto; padding-right: 5px; flex-grow: 1;"></div>
         </div>
     </div>
 
@@ -353,13 +365,13 @@
         </div>
     </section>
 
-    <!-- Zaktualizowany Bottom Nav o zakładkę Gramatyka (ikona książki zmieniona z Czytelni, Czytelnia ma ikonę robota/książki) -->
+    <!-- DOLNE MENU NAWIGACJI -->
     <nav class="bottom-nav">
         <button class="nav-btn" data-target="tab-aktywnosc"><span>📈</span> Aktywność</button>
-        <button class="nav-btn active" data-target="tab-czytelnia"><span>🤖</span> Czytelnia</button>
+        <button class="nav-btn active" data-target="tab-czytelnia"><span>📖</span> Czytelnia</button>
         <button class="nav-btn" data-target="tab-gramatyka"><span>📐</span> Gramatyka</button>
-        <button class="nav-btn" data-target="tab-slowka"><span>📝</span> Słówka</button>
-        <button class="nav-btn" data-target="tab-fiszki"><span>⚡</span> Fiszki</button>
+        <button class="nav-btn" data-target="tab-fiszki" onclick="startSession('vocab')"><span>⚡</span> Fiszki</button>
+        <button class="nav-btn" data-target="tab-ustawienia"><span>⚙️</span> Ustaw.</button>
     </nav>
 
     <script src="app.js"></script>
