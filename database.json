@@ -3708,6 +3708,7 @@
       "nextReview": "2026-10-02T20:11:27.089Z"
     }
   ],
+  "grammarFlashcards": [],
   "library": [
     {
       "id": "1790954629165",
@@ -3718,6 +3719,390 @@
       "id": "1791661062505",
       "title": "Wygenerowana historia 2026-10-10",
       "text": "<p>\n새벽에 일찍 잠에서 깨 커피를 정성껏 내렸다. 입에 꼭 맞는 따뜻한 커피는 하루를 여는 소소한 즐거움이었다. 일기 예보를 확인한 후 전기차에 올랐다. 대학원에 진학하는 대신 전자상거래 창업을 선택했던 나는 기초 체력을 기르고자 매일 줄넘기를 하며 사업 계획을 완성했다. 창고 확장을 위해 부동산 중개소로 향하는 출근길의 복잡한 교통 상황 속에서도, 운전의 편리함은 우수한 차량 기술 덕분에 온전히 누릴 수 있었다.\n</p>\n\n<p>\n최근 온라인 매체를 통해 무료 배송 프로모션을 진행하자 주문량이 목표치를 초과해 급격히 증가했다. 부족한 자본과 단순한 이론만으로 시작했지만, 굳은 의지로 지원금 신청서를 제출했던 것이 결정적인 기회가 되었다. 이를 발판 삼아 해외 <b>판로</b>를 개척했고, 운영의 <b>효율성</b> 또한 크게 개선했다. 이러한 노력은 마침내 가시적인 성과로 나타났다.\n</p>\n\n<p>\n사무실에 도착하자 직원이 “새벽 주문 현황을 꼼꼼히 살펴봤어요”라며 밝게 웃었다. 우리는 힘찬 격려를 주고받았다. 대학 시절 종강 직후 밤낮없이 일하느라 몸살이 나기도 했고, 큰 발 때문에 '왕발'이라 불리며 발로 뛰던 열정은 이제 어엿한 기업으로 자라났다. 위기를 극복하며 얻은 성취는 나에게 진정한 삶의 의미를 일깨워 준다.\n</p>"
+    }
+  ],
+  "grammarTree": [
+    {
+      "category": "1장 추측과 예상을 나타낼 때 (Przypuszczenia)",
+      "items": [
+        {
+          "id": "i1_1",
+          "title": "-아/어 보이다",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i1_2",
+          "title": "-(으)ㄴ/는 모양이다",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i1_3",
+          "title": "-(으)ㄹ 텐데",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i1_4",
+          "title": "-(으)ㄹ 테니까",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i1_5",
+          "title": "-(으)ㄹ걸요",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i1_6",
+          "title": "-(으)ㄴ/는/(으)ㄹ 줄 몰랐다(알았다)",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i1_7",
+          "title": "-(으)ㄹ지도 모르다",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        }
+      ]
+    },
+    {
+      "category": "2장 대조를 나타낼 때 (Kontrast)",
+      "items": [
+        {
+          "id": "i2_1",
+          "title": "-기는 하지만, -기는 -지만",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i2_2",
+          "title": "-(으)ㄴ/는 반면에",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i2_3",
+          "title": "-(으)ㄴ/는데도",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        }
+      ]
+    },
+    {
+      "category": "4장 이유를 나타낼 때 (Powody i Przyczyny)",
+      "items": [
+        {
+          "id": "i4_1",
+          "title": "-거든요",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i4_2",
+          "title": "-잖아요",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i4_3",
+          "title": "-느라고",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i4_4",
+          "title": "-는 바람에",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i4_5",
+          "title": "-(으)ㄴ/는 탓에",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i4_6",
+          "title": "-고 해서",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i4_7",
+          "title": "-(으)ㄹ까 봐",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        }
+      ]
+    },
+    {
+      "category": "5장 다른 사람의 말이나 글을 인용할 때 (Cytowanie)",
+      "items": [
+        {
+          "id": "i5_1",
+          "title": "-다고요?",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i5_2",
+          "title": "-다고 하던데",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i5_3",
+          "title": "-다면서요?",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i5_4",
+          "title": "-다니요?",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        }
+      ]
+    },
+    {
+      "category": "11장 조건을 나타낼 때 (Warunki)",
+      "items": [
+        {
+          "id": "i11_1",
+          "title": "-아/어야",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i11_2",
+          "title": "-거든",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        }
+      ]
+    },
+    {
+      "category": "15장 선택을 나타낼 때 (Wybór)",
+      "items": [
+        {
+          "id": "i15_1",
+          "title": "아무+(이)나 / 아무+도",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i15_2",
+          "title": "(이)나",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i15_3",
+          "title": "(이)라도",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i15_4",
+          "title": "-든지 -든지",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i15_5",
+          "title": "-(으)ㄴ/는 대신에",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        }
+      ]
+    },
+    {
+      "category": "17장 발견과 결과를 나타낼 때 (Odkrycia i Wyniki)",
+      "items": [
+        {
+          "id": "i17_1",
+          "title": "-고 보니",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i17_2",
+          "title": "-다 보니",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i17_3",
+          "title": "-다 보면",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i17_4",
+          "title": "-더니",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i17_5",
+          "title": "-았/었더니",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i17_6",
+          "title": "-다가는",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i17_7",
+          "title": "-(으)ㄴ/는 셈이다",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        }
+      ]
+    },
+    {
+      "category": "24장 가정 상황을 나타낼 때 (Sytuacje Hipotetyczne)",
+      "items": [
+        {
+          "id": "i24_1",
+          "title": "-(느)ㄴ다면",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i24_2",
+          "title": "-았/었더라면",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        },
+        {
+          "id": "i24_3",
+          "title": "-(으)ㄹ 뻔하다",
+          "status": 0,
+          "meaning": "",
+          "rule": "",
+          "examples": [],
+          "forceInStory": false
+        }
+      ]
     }
   ],
   "history": {
@@ -3991,621 +4376,22 @@
         1790781445793.7998,
         1790781445793.097
       ]
+    },
+    "2026-10-13": {
+      "again": 0,
+      "hard": 0,
+      "good": 0,
+      "easy": 0,
+      "completedAll": false,
+      "newCardsDone": 0,
+      "practicedMistakes": []
     }
   },
   "sessionStats": {
-    "date": "2026-10-10",
-    "again": [
-      {
-        "id": 1790781445791.819,
-        "front": "Aptitude / Predyspozycje",
-        "back": "적성",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z",
-        "exampleSentence": "​자신의 적성에 맞는 직업을 구해야 해요."
-      },
-      {
-        "id": 1790781445791.9622,
-        "front": "Grade / results",
-        "back": "성적",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z",
-        "exampleSentence": "이번 시험에서 좋은 성적을 받았어요."
-      },
-      {
-        "id": 1790781445791.7559,
-        "front": "Wykorzystać",
-        "back": "살리다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z",
-        "exampleSentence": "저는 한국어를 살려서 일하고 싶어요"
-      },
-      {
-        "id": 1790781445791.1184,
-        "front": "Proces dorastania",
-        "back": "성장 과정",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z",
-        "exampleSentence": "자기소개서에 성장 과정을 잘 써야 해요"
-      },
-      {
-        "id": 1790781445791.8833,
-        "front": "Szczegóły o doświadczeniu zawodowym",
-        "back": "경력 사항",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z",
-        "exampleSentence": "자기소개서에 학교 생활 및 경력 사항을 잘 써야 합니다"
-      },
-      {
-        "id": 1790781445791.298,
-        "front": "Poczucie odpowiedzialności",
-        "back": "책임감",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z",
-        "exampleSentence": "한국에서 장남은 책임감이 무겁습니다"
-      },
-      {
-        "id": 1790781445791.6511,
-        "front": "Brakować",
-        "back": "부족하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z",
-        "exampleSentence": "시간이 부족해서 공부를 못 했어요"
-      },
-      {
-        "id": 1790781445793.3418,
-        "front": "Wykazać się",
-        "back": "발휘하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.7998,
-        "front": "Formularz",
-        "back": "신청서",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.097,
-        "front": "Wypełnić (w kontekscie dokumentu, podania, etc.)",
-        "back": "작성하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.753,
-        "front": "Złożyć podanie",
-        "back": "신청서를 내다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.5571,
-        "front": "To leave",
-        "back": "남기다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.3206,
-        "front": "Być pokornym",
-        "back": "겸손하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.5874,
-        "front": "Wylać",
-        "back": "쏟기다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z",
-        "exampleSentence": "아이는 거실에서 물을 쏟겼어요"
-      },
-      {
-        "id": 1790781445793.1536,
-        "front": "Zakup impulsywny",
-        "back": "충동구매",
-        "rep": 1,
-        "interval": 3,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.7942,
-        "front": "Paragon",
-        "back": "영수증",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.0012,
-        "front": "Wymiana",
-        "back": "교환",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.3953,
-        "front": "Repair",
-        "back": "수리하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.1943,
-        "front": "Respect",
-        "back": "존경",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.3787,
-        "front": "Perfume",
-        "back": "향수",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.086,
-        "front": "Scrap a car",
-        "back": "폐차 (폐차를 시키다 - to order car scrapping)",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.3713,
-        "front": "To release (w kontekscie filmu)",
-        "back": "개봉하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.8152,
-        "front": "Shipping fee",
-        "back": "택배비",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.6804,
-        "front": "Ekran",
-        "back": "환면",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.913,
-        "front": "Occure",
-        "back": "발생하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.3245,
-        "front": "Demand",
-        "back": "요구하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.9575,
-        "front": "Return request",
-        "back": "반품 신청",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.7292,
-        "front": "Personal",
-        "back": "개인",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.3225,
-        "front": "Absurd",
-        "back": "황당하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.7908,
-        "front": "Main street",
-        "back": "번화가",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.2979,
-        "front": "PAy the rent",
-        "back": "방세를 내다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445796.0483,
-        "front": "Condition",
-        "back": "조건",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445796.6965,
-        "front": "Change notice",
-        "back": "변경 안내",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445796.9954,
-        "front": "Rozwijać",
-        "back": "발전하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445798.2935,
-        "front": "participate",
-        "back": "참가하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z",
-        "exampleSentence": "내일 회의에 참가할 수 있어요?"
-      },
-      {
-        "id": 1790781445798.3591,
-        "front": "assumption",
-        "back": "가정",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445799.8354,
-        "front": "informacja",
-        "back": "정보",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445800.332,
-        "front": "negatywny",
-        "back": "부정적",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.5754,
-        "front": "Temptation",
-        "back": "운혹",
-        "rep": 0,
-        "interval": 0,
-        "ef": 2.5,
-        "nextReview": "2026-09-30T15:17:25.794Z"
-      },
-      {
-        "id": 1790781445794.9143,
-        "front": "Zakochać sie od 1 wejrzenia",
-        "back": "한눈에 반하다",
-        "rep": 0,
-        "interval": 0,
-        "ef": 2.5,
-        "nextReview": "2026-09-30T15:17:25.794Z"
-      },
-      {
-        "id": 1790781445794.1106,
-        "front": "Quantity",
-        "back": "수량",
-        "rep": 0,
-        "interval": 0,
-        "ef": 2.5,
-        "nextReview": "2026-09-30T15:17:25.794Z"
-      }
-    ],
+    "date": "2026-10-13",
+    "again": [],
     "hard": [],
-    "good": [
-      {
-        "id": 1790781445791.5671,
-        "front": "Specjalny wykład",
-        "back": "특강",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445791.7012,
-        "front": "Najstarszy syn",
-        "back": "장남",
-        "rep": 2,
-        "interval": 6,
-        "ef": 1.5600000000000003,
-        "nextReview": "2026-10-09T22:00:00.000Z",
-        "exampleSentence": "한국에서 장남은 책임감이 무겁습니다"
-      },
-      {
-        "id": 1790781445792.3806,
-        "front": "Państwa firma",
-        "back": "귀사",
-        "rep": 2,
-        "interval": 6,
-        "ef": 1.5600000000000003,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445792.8696,
-        "front": "Pasja",
-        "back": "열정",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z",
-        "exampleSentence": "처음의 열정을 잃지 마세요"
-      },
-      {
-        "id": 1790781445793.1423,
-        "front": "To dry",
-        "back": "말리다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.7258,
-        "front": "Thanks to N",
-        "back": "N은 덕분에",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z",
-        "exampleSentence": "선생님 덕분에 한국어 실력이 많이 늘었어요"
-      },
-      {
-        "id": 1790781445793.4822,
-        "front": "Oblać egzamin",
-        "back": "시험에 떨어지다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.3286,
-        "front": "Kolor",
-        "back": "색상",
-        "rep": 1,
-        "interval": 3,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.7493,
-        "front": "Size",
-        "back": "지수",
-        "rep": 1,
-        "interval": 3,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.4126,
-        "front": "Refund",
-        "back": "환불",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.9092,
-        "front": "Stan / state",
-        "back": "상태",
-        "rep": 1,
-        "interval": 3,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.3867,
-        "front": "Set, zestaw (licznik ubrań)",
-        "back": "벌",
-        "rep": 2,
-        "interval": 6,
-        "ef": 1.5600000000000003,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.5217,
-        "front": "Klient",
-        "back": "고객님",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.204,
-        "front": "Kupować",
-        "back": "구입하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.713,
-        "front": "Reflect on oneself",
-        "back": "반성하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.773,
-        "front": "To praise",
-        "back": "칭찬하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.3447,
-        "front": "Posiadacz",
-        "back": "소지자",
-        "rep": 1,
-        "interval": 3,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.4875,
-        "front": "Odległość",
-        "back": "거리",
-        "rep": 1,
-        "interval": 3,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445798.5532,
-        "front": "institution",
-        "back": "기관",
-        "rep": 1,
-        "interval": 3,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445798.7488,
-        "front": "overlap",
-        "back": "겹치다",
-        "rep": 1,
-        "interval": 3,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445799.5942,
-        "front": "upasc / fall",
-        "back": "빠지다",
-        "rep": 2,
-        "interval": 10,
-        "ef": 2.5,
-        "nextReview": "2026-10-10T00:00:00.000Z"
-      },
-      {
-        "id": 1790781445799.163,
-        "front": "szukac pracy",
-        "back": "직장을 구하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-09T22:00:00.000Z"
-      },
-      {
-        "id": 1790781445800.6904,
-        "front": "inzynier",
-        "back": "기술자",
-        "rep": 2,
-        "interval": 10,
-        "ef": 2.5,
-        "nextReview": "2026-10-10T00:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.5137,
-        "front": "Event, wydarzenie",
-        "back": "행사",
-        "rep": 0,
-        "interval": 0,
-        "ef": 2.5,
-        "nextReview": "2026-09-30T15:17:25.794Z"
-      },
-      {
-        "id": 1790781445794.4807,
-        "front": "Experience",
-        "back": "경험",
-        "rep": 0,
-        "interval": 0,
-        "ef": 2.5,
-        "nextReview": "2026-09-30T15:17:25.794Z"
-      }
-    ],
+    "good": [],
     "easy": []
   }
 }
