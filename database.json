@@ -3721,7 +3721,28 @@
       "nextReview": "2026-10-02T20:11:27.089Z"
     }
   ],
-  "grammarFlashcards": [],
+  "grammarFlashcards": [
+    {
+      "id": 1792146925903.123,
+      "front": "Na zewnątrz pewnie będzie padać deszcz, więc weź parasolkę.",
+      "back": "-(으)ㄹ 텐데",
+      "exampleSentence": "밖에 비가 ___ 우산을 챙기세요.",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "nextReview": "2026-10-16T10:35:25.904Z"
+    },
+    {
+      "id": 1792146938811.1487,
+      "front": "Nie jadłeś obiadu, więc pewnie jesteś głodny, zjesz coś ze mną?",
+      "back": "-(으)ㄹ 텐데",
+      "exampleSentence": "점심을 안 먹어서 배가 ___ 같이 밥 먹을래요?",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "nextReview": "2026-10-16T10:35:38.811Z"
+    }
+  ],
   "library": [
     {
       "id": "1790954629165",
@@ -3759,16 +3780,32 @@
         {
           "id": "i1_3",
           "title": "-(으)ㄹ 텐데",
-          "status": 0,
-          "meaning": "",
-          "rule": "",
-          "examples": [],
+          "status": 1,
+          "meaning": "Wyraża silne przypuszczenie, oczekiwanie lub intencję mówcy, stanowiące tło sytuacyjne (powód, kontrast lub przesłankę do sugestii) dla drugiej części zdania. Najczęściej tłumaczone jako: 'pewnie / na pewno [jest tak], więc/ale...'.",
+          "rule": "Do rdzenia czasownika/przymiotnika: po samogłosce lub spółgłosce 'ㄹ' dodaje się '-ㄹ 텐데' (dla 'ㄹ' forma to po prostu '텐데'), po spółgłosce dodaje się '-을 텐데'. W czasie przeszłym stosuje się '-았/었을 텐데', a z rzeczownikami '-(이)ㄹ 텐데'.",
+          "examples": [
+            {
+              "ko": "오늘 많이 피곤할 텐데 일찍 쉬세요.",
+              "pl": "Pewnie jesteś dzisiaj bardzo zmęczony, więc odpocznij wcześnie.",
+              "cloze": "오늘 많이 ___ 일찍 쉬세요."
+            },
+            {
+              "ko": "밖에 비가 올 텐데 우산을 챙기세요.",
+              "pl": "Na zewnątrz pewnie będzie padać deszcz, więc weź parasolkę.",
+              "cloze": "밖에 비가 ___ 우산을 챙기세요."
+            },
+            {
+              "ko": "점심을 안 먹어서 배가 고플 텐데 같이 밥 먹을래요?",
+              "pl": "Nie jadłeś obiadu, więc pewnie jesteś głodny, zjesz coś ze mną?",
+              "cloze": "점심을 안 먹어서 배가 ___ 같이 밥 먹을래요?"
+            }
+          ],
           "forceInStory": false
         },
         {
           "id": "i1_4",
           "title": "-(으)ㄹ 테니까",
-          "status": 0,
+          "status": 1,
           "meaning": "",
           "rule": "",
           "examples": [],
@@ -3841,7 +3878,7 @@
         {
           "id": "i4_1",
           "title": "-거든요",
-          "status": 0,
+          "status": 1,
           "meaning": "",
           "rule": "",
           "examples": [],
@@ -3859,7 +3896,7 @@
         {
           "id": "i4_3",
           "title": "-느라고",
-          "status": 0,
+          "status": 1,
           "meaning": "",
           "rule": "",
           "examples": [],
@@ -3959,7 +3996,7 @@
         {
           "id": "i11_2",
           "title": "-거든",
-          "status": 0,
+          "status": 1,
           "meaning": "",
           "rule": "",
           "examples": [],
@@ -4009,7 +4046,7 @@
         {
           "id": "i15_5",
           "title": "-(으)ㄴ/는 대신에",
-          "status": 0,
+          "status": 1,
           "meaning": "",
           "rule": "",
           "examples": [],
@@ -4032,7 +4069,7 @@
         {
           "id": "i17_2",
           "title": "-다 보니",
-          "status": 0,
+          "status": 1,
           "meaning": "",
           "rule": "",
           "examples": [],
@@ -4050,7 +4087,7 @@
         {
           "id": "i17_4",
           "title": "-더니",
-          "status": 0,
+          "status": 1,
           "meaning": "",
           "rule": "",
           "examples": [],
@@ -4068,7 +4105,7 @@
         {
           "id": "i17_6",
           "title": "-다가는",
-          "status": 0,
+          "status": 1,
           "meaning": "",
           "rule": "",
           "examples": [],
