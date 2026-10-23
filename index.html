@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Korean SRS & AI Reader</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json?v=5">
+    <link rel="manifest" href="manifest.json?v=6">
     <meta name="theme-color" content="#4F46E5">
 </head>
 <body>
@@ -126,7 +126,6 @@
                 <h2>Gramatyka (KGIU)</h2>
             </header>
             
-            <!-- WIDGET POSTĘPU -->
             <div class="grammar-widget card mb-4">
                 <h3 style="margin-bottom: 5px;">Trening Gramatyki</h3>
                 <p>Opanowane karty: <span id="grammar-mastered-count" style="font-weight: bold; color: #FFF;">0 / 0</span></p>
@@ -136,7 +135,6 @@
                 <button class="btn btn-primary w-100" onclick="startSession('grammar')">Ucz się: <span id="grammar-due-count">0</span> kart</button>
             </div>
 
-            <!-- LISTA STRUKTUR -->
             <div class="card mb-3">
                 <h4 style="color: var(--text-dark);">Baza struktur (Filtruj status):</h4>
                 <div class="grammar-filters flex-wrap gap-2">
@@ -149,7 +147,7 @@
             <div id="grammar-list-container"></div>
         </section>
 
-        <!-- ZAKŁADKA 4: FISZKI (SESJA SRS + ZARZĄDZANIE) -->
+        <!-- ZAKŁADKA 4: FISZKI -->
         <section id="tab-fiszki" class="tab-content">
             <header class="section-header">
                 <div class="flex-between mb-2">
@@ -174,19 +172,35 @@
                         <button class="btn btn-outline btn-sm" onclick="openQuickEdit()">✏️ Edytuj kartę</button>
                     </div>
                     
-                    <div class="study-card" id="study-front"></div>
-                    <div class="study-card hidden" id="study-back"></div>
-                    
-                    <button class="btn btn-primary w-100" id="btn-show-answer" onclick="showAnswer()">Pokaż odpowiedź</button>
-                    
-                    <div id="hard-mode-container" class="hidden mt-3">
-                        <input type="text" id="hard-mode-input" placeholder="Wpisz po koreańsku..." autocomplete="off">
-                        <div class="flex-between gap-2 mt-2">
-                            <button id="btn-check-hard-mode" class="btn btn-primary w-100" onclick="checkHardMode()">Sprawdź</button>
-                            <button id="btn-give-up-hard-mode" class="btn btn-danger w-100" onclick="giveUpHardMode()">Poddaję się / Nie wiem</button>
+                    <!-- KONTENER 1: Słówka (Klasyczne Fiszki & Hard Mode) -->
+                    <div id="study-vocab-container" class="w-100">
+                        <div class="study-card" id="study-front"></div>
+                        <div class="study-card hidden" id="study-back"></div>
+                        
+                        <button class="btn btn-primary w-100" id="btn-show-answer" onclick="showAnswer()">Pokaż odpowiedź</button>
+                        
+                        <div id="hard-mode-container" class="hidden mt-3">
+                            <input type="text" id="hard-mode-input" placeholder="Wpisz po koreańsku..." autocomplete="off">
+                            <div class="flex-between gap-2 mt-2">
+                                <button id="btn-check-hard-mode" class="btn btn-primary w-100" onclick="checkHardMode()">Sprawdź</button>
+                                <button id="btn-give-up-hard-mode" class="btn btn-danger w-100" onclick="giveUpHardMode()">Poddaję się / Nie wiem</button>
+                            </div>
                         </div>
                     </div>
 
+                    <!-- KONTENER 2: Gramatyka (Cloze Deletion Mode) -->
+                    <div id="study-cloze-container" class="hidden w-100">
+                        <div class="study-card cloze-card">
+                            <div id="cloze-hint" class="cloze-hint"></div>
+                            <div id="cloze-content" class="cloze-sentence mt-4"></div>
+                        </div>
+                        <div class="flex-between gap-2 mt-3">
+                            <button id="btn-check-cloze" class="btn btn-primary w-100" onclick="checkCloze()">Sprawdź</button>
+                            <button id="btn-give-up-cloze" class="btn btn-danger w-100" onclick="giveUpCloze()">Nie wiem</button>
+                        </div>
+                    </div>
+
+                    <!-- Przyciski oceny widoczne tylko po odsłonięciu (dla słówek) -->
                     <div class="srs-buttons hidden mt-3" id="srs-actions">
                         <button class="btn-srs again" onclick="processAnswer(0)">Nie znam<small>&lt;1m</small></button>
                         <button class="btn-srs hard" onclick="processAnswer(3)">Słabo<small id="time-hard"></small></button>
@@ -203,7 +217,7 @@
                 </div>
             </div>
 
-            <!-- Zarządzanie Talią (Widoczne tylko dla Słówek) -->
+            <!-- Zarządzanie Talią (Słówka) -->
             <div id="deck-management-section">
                 <div class="card">
                     <div class="flex-between mb-3">
@@ -254,7 +268,7 @@
                 <div class="mt-2 mb-2">
                     <label style="display: flex; align-items: center; gap: 8px; font-size: 15px; cursor: pointer; color: var(--text-dark);">
                         <input type="checkbox" id="hard-mode-setting" style="width: 22px; height: 22px; margin: 0; accent-color: var(--primary);">
-                        <div><b>Włącz Hard Mode</b> <br><span style="font-size: 12px; color: var(--text-light);">Wymuś samodzielne wpisywanie odpowiedzi</span></div>
+                        <div><b>Włącz Hard Mode (Tylko Słówka)</b> <br><span style="font-size: 12px; color: var(--text-light);">Wymuś samodzielne wpisywanie odpowiedzi w Fiszakch</span></div>
                     </label>
                 </div>
                 <button class="btn btn-primary w-100 mt-2" onclick="saveSettings()">Zapisz tryb</button>
@@ -292,6 +306,13 @@
             </div>
 
             <div class="card">
+                <h3>Parametry Nauki</h3>
+                <label for="daily-limit">Dzienny limit nowych fiszek:</label>
+                <input type="number" id="daily-limit" min="1" max="100" value="5">
+                <button class="btn btn-primary" onclick="saveSettings()">Zapisz limit</button>
+            </div>
+
+            <div class="card">
                 <h3>Lokalna Kopia zapasowa</h3>
                 <div class="flex-wrap gap-2">
                     <button class="btn btn-primary" onclick="exportData()">Eksport do pliku (JSON)</button>
@@ -309,6 +330,11 @@
             <input type="text" id="qe-front" placeholder="Awers (Polski - Hasło)">
             <input type="text" id="qe-back" placeholder="Rewers (Koreański - Tłumaczenie)">
             <textarea id="qe-example" rows="3" placeholder="Zdanie przykładowe / Kontekst (opcjonalnie)"></textarea>
+            
+            <!-- Pola dla fiszek gramatycznych (Cloze) -->
+            <input type="text" id="qe-cloze-sentence" placeholder="Zdanie z luką (użyj ___ jako pustego miejsca)" class="hidden mt-2">
+            <input type="text" id="qe-cloze-answer" placeholder="Odpowiedź do luki" class="hidden">
+            
             <div class="flex-between mt-3 gap-2">
                 <button class="btn btn-outline w-100" onclick="closeModal('modal-quick-edit')">Anuluj</button>
                 <button class="btn btn-primary w-100" onclick="saveQuickEdit()">Zapisz</button>
