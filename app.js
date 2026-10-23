@@ -32,6 +32,9 @@ let currentDeckType = 'vocab'; // 'vocab' | 'grammar'
 let activeGrammarCatIndex = null;
 let activeGrammarItemIndex = null;
 
+// Zmienna lokalna śledząca próby w Hard Mode dla bieżącej fiszki
+let currentAttempts = 0;
+
 function loadState() {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
@@ -244,7 +247,17 @@ async function syncFromGitHub() {
         const imported = JSON.parse(jsonStr);
         
         if (imported && Array.isArray(imported.flashcards)) {
+            const currentApiKey = appState.apiKey;
+            const currentGhToken = appState.ghToken;
+            const currentGhUser = appState.ghUser;
+            const currentGhRepo = appState.ghRepo;
+
             appState = imported;
+            appState.apiKey = currentApiKey;
+            appState.ghToken = currentGhToken;
+            appState.ghUser = currentGhUser;
+            appState.ghRepo = currentGhRepo;
+
             if(!appState.history) appState.history = {};
             if(!appState.settings) appState.settings = { hardMode: false };
             if(!appState.grammarTree) appState.grammarTree = [];
@@ -464,6 +477,14 @@ function setupReaderContent(text) {
 function closeReader() {
     document.getElementById('reader-view').classList.add('hidden');
     document.getElementById('reader-setup').classList.remove('hidden');
+}
+
+function startReadingCustom() {
+    const text = document.getElementById('custom-text').value.trim();
+    if (!text) return alert("Wklej tekst!");
+    currentStoryId = null; currentStoryText = text;
+    document.getElementById('story-title').value = "";
+    setupReaderContent(text);
 }
 
 function sumUpWords() {
@@ -695,7 +716,6 @@ function toggleForceGrammar() {
     renderGrammarTab();
 }
 
-// ZAKTUALIZOWANY PROMPT: Zwraca cloze_sentence i cloze_answer
 async function explainGrammarWithGemini() {
     if (!appState.apiKey || appState.apiKey.trim() === "") return alert("Podaj klucz Gemini API w Ustawieniach!");
     if (activeGrammarCatIndex === null || activeGrammarItemIndex === null) return;
@@ -742,7 +762,6 @@ function addGrammarFlashcard(exIndex) {
     
     if (!appState.grammarFlashcards) appState.grammarFlashcards = [];
     
-    // Front = pl, Back = ko, używamy nowych pól clozeSentence i clozeAnswer
     if (createFlashcardData(ex.pl, ex.ko, 0, 0, 2.5, null, "", appState.grammarFlashcards, ex.cloze_sentence, ex.cloze_answer)) {
         saveState();
         updateGrammarWidget();
@@ -758,8 +777,8 @@ function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = nul
         front: front.trim(),
         back: back.trim(),
         exampleSentence: exampleSentence.trim(),
-        clozeSentence: clozeSentence.trim(),
-        clozeAnswer: clozeAnswer.trim(),
+        clozeSentence: (clozeSentence || "").trim(),
+        clozeAnswer: (clozeAnswer || "").trim(),
         rep: rep > 0 ? rep : (interval > 0 ? 1 : 0),
         interval: interval > 0 ? interval : 0,
         ef: ef >= 1.3 ? ef : 2.5,
@@ -902,10 +921,12 @@ function refreshStudySession() {
     }
 }
 
-// ZAKTUALIZOWANE: Obsługa widoku CLOZE w trakcie sesji gramatyki
 function nextStudyCard() {
     if (studyQueue.length === 0) { refreshStudySession(); return; }
     currentCard = studyQueue[0];
+    
+    // Reset licznika prób dla nowej fiszki
+    currentAttempts = 0;
     
     document.getElementById('srs-actions').classList.add('hidden');
     
@@ -916,13 +937,13 @@ function nextStudyCard() {
         
         document.getElementById('cloze-hint').textContent = currentCard.front;
         
-        // Dynamiczne wstrzyknięcie pola input zamiast ___
         const sentenceHtml = currentCard.clozeSentence.replace(/_+/g, '<input type="text" id="cloze-input" class="cloze-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">');
         document.getElementById('cloze-content').innerHTML = sentenceHtml;
         
         const btnCheck = document.getElementById('btn-check-cloze');
         btnCheck.textContent = "Sprawdź";
         btnCheck.className = "btn btn-primary w-100";
+        btnCheck.onclick = checkCloze;
         document.getElementById('btn-give-up-cloze').classList.remove('hidden');
         
         const clozeInput = document.getElementById('cloze-input');
@@ -933,7 +954,7 @@ function nextStudyCard() {
             setTimeout(() => clozeInput.focus(), 150);
         }
     } else {
-        // --- TRYB STANDARDOWY (SŁÓWKA) ---
+        // --- TRYB STANDARDOWY & HARD MODE (SŁÓWKA) ---
         document.getElementById('study-cloze-container').classList.add('hidden');
         document.getElementById('study-vocab-container').classList.remove('hidden');
         
@@ -951,14 +972,32 @@ function nextStudyCard() {
         if (isHardMode) {
             document.getElementById('btn-show-answer').classList.add('hidden');
             document.getElementById('hard-mode-container').classList.remove('hidden');
-            const hmInput = document.getElementById('hard-mode-input');
-            hmInput.value = ''; hmInput.style.color = ""; hmInput.classList.remove('error', 'success-input'); hmInput.disabled = false;
             
-            const btnCheck = document.getElementById('btn-check-hard-mode');
-            btnCheck.textContent = "Sprawdź"; btnCheck.className = "btn btn-primary w-100"; btnCheck.onclick = checkHardMode;
-            document.getElementById('btn-give-up-hard-mode').classList.remove('hidden');
+            const attemptCounterEl = document.getElementById('attemptCounter');
+            if (attemptCounterEl) attemptCounterEl.textContent = "Próba: 1 / 4";
             
-            setTimeout(() => hmInput.focus(), 150);
+            const hmInput = document.getElementById('hardModeInput');
+            if (hmInput) {
+                hmInput.value = '';
+                hmInput.style.color = "";
+                hmInput.classList.remove('error', 'success-input');
+                hmInput.disabled = false;
+            }
+            
+            const btnCheck = document.getElementById('btnCheckHardMode');
+            if (btnCheck) {
+                btnCheck.textContent = "Sprawdź";
+                btnCheck.className = "btn btn-primary w-100";
+                btnCheck.classList.remove('hidden');
+            }
+            
+            const btnGiveUp = document.getElementById('btnGiveUp');
+            if (btnGiveUp) btnGiveUp.classList.remove('hidden');
+            
+            const btnNext = document.getElementById('btnNextCard');
+            if (btnNext) btnNext.classList.add('hidden');
+            
+            setTimeout(() => { if (hmInput) hmInput.focus(); }, 150);
         } else {
             document.getElementById('btn-show-answer').classList.remove('hidden');
             document.getElementById('hard-mode-container').classList.add('hidden');
@@ -970,7 +1009,7 @@ function nextStudyCard() {
     document.getElementById('time-easy').textContent = previewSM2(currentCard, 5);
 }
 
-// ZAKTUALIZOWANE: Walidacja Cloze z animacjami i wibracjami
+// Walidacja Cloze (Gramatyka)
 window.checkCloze = function() {
     const inputEl = document.getElementById('cloze-input');
     if (!inputEl) return;
@@ -985,21 +1024,21 @@ window.checkCloze = function() {
         inputEl.classList.add('success-input');
         inputEl.disabled = true;
         
-        if ('vibrate' in navigator) navigator.vibrate(50); // Satysfakcjonująca nagroda
+        if ('vibrate' in navigator) navigator.vibrate(50);
         
         const btnCheck = document.getElementById('btn-check-cloze');
         btnCheck.textContent = "Dalej ➔";
         btnCheck.className = "btn btn-success w-100";
-        btnCheck.onclick = () => processAnswer(4);
+        btnCheck.onclick = () => processAnswer(4, true, true);
         
         document.getElementById('btn-give-up-cloze').classList.add('hidden');
         
-        setTimeout(() => { processAnswer(4); }, 1000); // Auto-przejście
+        setTimeout(() => { processAnswer(4, true, true); }, 1000);
     } else {
         inputEl.classList.add('error');
         setTimeout(() => {
             inputEl.classList.remove('error');
-            inputEl.focus(); // Użytkownik może poprawić literówkę
+            inputEl.focus();
         }, 400);
     }
 }
@@ -1016,45 +1055,103 @@ window.giveUpCloze = function() {
     const btnCheck = document.getElementById('btn-check-cloze');
     btnCheck.textContent = "Dalej (Ucz się) ➔";
     btnCheck.className = "btn btn-danger w-100";
-    btnCheck.onclick = () => processAnswer(0);
+    btnCheck.onclick = () => processAnswer(0, true, true);
     
     document.getElementById('btn-give-up-cloze').classList.add('hidden');
     
-    setTimeout(() => { processAnswer(0); }, 2000); 
+    setTimeout(() => { processAnswer(0, true, true); }, 2000); 
 }
 
+// ==========================================
+// NOWA LOGIKA HARD MODE (Maszyna Stanów i Próby)
+// ==========================================
 function checkHardMode() {
-    const inputEl = document.getElementById('hard-mode-input');
-    const answerRaw = inputEl.value; const targetRaw = currentCard.back;
-    if (!answerRaw.trim()) return;
-    const normalize = str => str.replace(/\s+/g, '').toLowerCase();
+    const inputEl = document.getElementById('hardModeInput');
+    if (!inputEl || inputEl.disabled) return;
     
-    if (normalize(answerRaw) === normalize(targetRaw)) {
-        inputEl.classList.add('success-input'); inputEl.disabled = true;
+    const userVal = inputEl.value.trim();
+    // Ignoruj puste kliknięcia (nie nabijaj licznika prób)
+    if (!userVal) return;
+
+    currentAttempts++;
+    const targetVal = currentCard.back.trim();
+
+    if (userVal === targetVal) {
+        // SCENARIUSZ A: Odpowiedź POPRAWNA
+        inputEl.classList.remove('error');
+        inputEl.classList.add('success-input');
+        inputEl.disabled = true;
         document.getElementById('study-back').classList.remove('hidden');
-        
-        if ('vibrate' in navigator) navigator.vibrate(50);
-        
-        const btnCheck = document.getElementById('btn-check-hard-mode');
-        btnCheck.textContent = "Dalej ➔"; btnCheck.className = "btn btn-success w-100"; btnCheck.onclick = () => processAnswer(4);
-        document.getElementById('btn-give-up-hard-mode').classList.add('hidden');
-        
-        setTimeout(() => { processAnswer(4); }, 1000);
+
+        let rating = 5;
+        if (currentAttempts <= 2) {
+            rating = 5; // Bardzo dobrze (Easy)
+            if ('vibrate' in navigator) navigator.vibrate([30, 50, 30]);
+        } else if (currentAttempts === 3) {
+            rating = 4; // Dobrze (Good)
+            if ('vibrate' in navigator) navigator.vibrate(50);
+        } else {
+            rating = 3; // Słabo (Hard) - BRAK WIBRACJI
+        }
+
+        // Zapisz wynik w SM-2 w tle (bez natychmiastowego przeładowania widoku i bez duplikowania wibracji)
+        processAnswer(rating, false, true);
+
+        // Po krótkim opóźnieniu (500 ms) załaduj kolejną fiszkę
+        setTimeout(() => {
+            advanceStudyView();
+        }, 500);
     } else {
-        inputEl.classList.add('error'); setTimeout(() => { inputEl.classList.remove('error'); inputEl.value = ''; inputEl.focus(); }, 400);
+        // SCENARIUSZ B: Odpowiedź BŁĘDNA (Brak wibracji)
+        if (currentAttempts < 4) {
+            // Próby 1, 2, 3
+            inputEl.classList.remove('error');
+            void inputEl.offsetWidth; // Reflow dla ponownego uruchomienia animacji shake
+            inputEl.classList.add('error');
+
+            const attemptCounterEl = document.getElementById('attemptCounter');
+            if (attemptCounterEl) {
+                attemptCounterEl.textContent = `Próba: ${currentAttempts + 1} / 4`;
+            }
+
+            setTimeout(() => {
+                inputEl.classList.remove('error');
+                inputEl.focus();
+                inputEl.select();
+            }, 400);
+        } else {
+            // Spalona 4. próba
+            handleHardModeFailure();
+        }
     }
 }
 
 function giveUpHardMode() {
-    const inputEl = document.getElementById('hard-mode-input');
-    inputEl.value = currentCard.back; inputEl.disabled = true; inputEl.style.color = "var(--danger)";
+    const inputEl = document.getElementById('hardModeInput');
+    if (!inputEl || inputEl.disabled) return;
+    handleHardModeFailure();
+}
+
+function handleHardModeFailure() {
+    const inputEl = document.getElementById('hardModeInput');
+    if (inputEl) {
+        inputEl.disabled = true;
+        inputEl.classList.remove('error');
+    }
+
+    // Automatycznie zapisz w SM-2 ocenę Nie znam (Again = 0), ale NIE ładuj jeszcze kolejnej fiszki
+    processAnswer(0, false, true);
+
+    // Wyświetl poprawną odpowiedź oraz zdanie przykładowe (znajdujące się w #study-back)
     document.getElementById('study-back').classList.remove('hidden');
-    const btnCheck = document.getElementById('btn-check-hard-mode');
-    btnCheck.textContent = "Dalej (Ucz się) ➔"; btnCheck.className = "btn btn-danger w-100";
-    btnCheck.onclick = () => { inputEl.style.color = ""; processAnswer(0); };
-    document.getElementById('btn-give-up-hard-mode').classList.add('hidden');
+
+    // Ukryj przyciski "Sprawdź" oraz "Poddaję się", odkryj przycisk "Dalej" (#btnNextCard)
+    document.getElementById('btnCheckHardMode').classList.add('hidden');
+    document.getElementById('btnGiveUp').classList.add('hidden');
     
-    setTimeout(() => { inputEl.style.color = ""; processAnswer(0); }, 2000);
+    const btnNext = document.getElementById('btnNextCard');
+    btnNext.classList.remove('hidden');
+    setTimeout(() => btnNext.focus(), 100);
 }
 
 function showAnswer() {
@@ -1065,9 +1162,11 @@ function showAnswer() {
 
 function previewSM2(card, quality) { let temp = { ...card }; applySM2(temp, quality); return `${temp.interval}d`; }
 
-function processAnswer(quality) {
-    if ('vibrate' in navigator) {
-        if (quality === 5) { navigator.vibrate([30, 50, 30]); } // Dobrze (4) wibruje wcześniej w walidacji Cloze/HardMode, więc zostawiamy nagrodę tylko za klik "Easy"
+// Rozdzielona aktualizacja danych w SM-2 od przeładowania widoku karty
+function processAnswer(quality, advanceView = true, suppressVibrate = false) {
+    if (!suppressVibrate && 'vibrate' in navigator) {
+        if (quality === 4) { navigator.vibrate(50); }
+        else if (quality === 5) { navigator.vibrate([30, 50, 30]); }
     }
 
     const today = getLocalToday();
@@ -1078,7 +1177,6 @@ function processAnswer(quality) {
 
     let cat = quality < 3 ? 'again' : (quality === 3 ? 'hard' : (quality === 4 ? 'good' : 'easy'));
     
-    // Zapis statystyk dotyczy tylko słownictwa (zachowujemy czystość wykresów)
     if(currentDeckType === 'vocab') {
         appState.sessionStats[cat].push({ ...currentCard });
         appState.history[today][cat]++; 
@@ -1090,18 +1188,31 @@ function processAnswer(quality) {
     }
 
     applySM2(currentCard, quality);
-    studyQueue.shift(); saveState(); 
+    studyQueue.shift(); 
+    saveState(); 
+    
     if(currentDeckType === 'vocab') renderDeckTable(); 
     updateGrammarWidget();
-    updateStudyCounter(); updateSessionProgressUI();
+    updateStudyCounter(); 
+    updateSessionProgressUI();
 
+    if (advanceView) {
+        advanceStudyView();
+    }
+}
+
+function advanceStudyView() {
+    const today = getLocalToday();
     if (studyQueue.length === 0) {
         if(currentDeckType === 'vocab') appState.history[today].completedAll = true;
         saveState();
         document.getElementById('study-empty').classList.remove('hidden');
         document.getElementById('study-active').classList.add('hidden');
-        updateActivityStats(); refreshStudySession(); 
-    } else { nextStudyCard(); }
+        updateActivityStats(); 
+        refreshStudySession(); 
+    } else {
+        nextStudyCard();
+    }
 }
 
 function applySM2(card, quality) {
@@ -1211,7 +1322,15 @@ function saveQuickEdit() {
         } else {
             currentCard.exampleSentence = document.getElementById('qe-example').value.trim();
         }
-        nextStudyCard(); // Refresh view safely
+        if (studyQueue[0] && studyQueue[0].id == editingCardId) {
+            nextStudyCard();
+        } else {
+            document.getElementById('study-front').textContent = currentCard.front;
+            let backHtml = `<div class="study-back-content"><div>${currentCard.back}</div>`;
+            if (currentCard.exampleSentence) { backHtml += `<div class="example-sentence">${currentCard.exampleSentence}</div>`; }
+            backHtml += `</div>`;
+            document.getElementById('study-back').innerHTML = backHtml;
+        }
     }
     closeModal('modal-quick-edit'); editingCardId = null;
 }
@@ -1385,4 +1504,15 @@ function closeMatchingGame() {
 
 window.addEventListener('DOMContentLoaded', () => {
     loadState();
+    
+    // Obsługa zatwierdzania klawiszem Enter w Hard Mode
+    const hmInput = document.getElementById('hardModeInput');
+    if (hmInput) {
+        hmInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                checkHardMode();
+            }
+        });
+    }
 });
