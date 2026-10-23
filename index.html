@@ -180,11 +180,13 @@
                         <button class="btn btn-primary w-100" id="btn-show-answer" onclick="showAnswer()">Pokaż odpowiedź</button>
                         
                         <div id="hard-mode-container" class="hidden mt-3">
-                            <input type="text" id="hard-mode-input" placeholder="Wpisz po koreańsku..." autocomplete="off">
+                            <div id="attemptCounter" class="attempt-counter">Próba: 1 / 4</div>
+                            <input type="text" id="hardModeInput" placeholder="Wpisz po koreańsku..." autocomplete="off">
                             <div class="flex-between gap-2 mt-2">
-                                <button id="btn-check-hard-mode" class="btn btn-primary w-100" onclick="checkHardMode()">Sprawdź</button>
-                                <button id="btn-give-up-hard-mode" class="btn btn-danger w-100" onclick="giveUpHardMode()">Poddaję się / Nie wiem</button>
+                                <button id="btnCheckHardMode" class="btn btn-primary w-100" onclick="checkHardMode()">Sprawdź</button>
+                                <button id="btnGiveUp" class="btn btn-danger w-100" onclick="giveUpHardMode()">Poddaję się</button>
                             </div>
+                            <button id="btnNextCard" class="btn btn-primary w-100 mt-2 hidden" onclick="advanceStudyView()">Dalej ➔</button>
                         </div>
                     </div>
 
@@ -200,9 +202,9 @@
                         </div>
                     </div>
 
-                    <!-- Przyciski oceny widoczne tylko po odsłonięciu (dla słówek) -->
+                    <!-- Przyciski oceny widoczne tylko po odsłonięciu (dla słówek w trybie normalnym) -->
                     <div class="srs-buttons hidden mt-3" id="srs-actions">
-                        <button class="btn-srs again" onclick="processAnswer(0)">Nie znam<small>&lt;1m</small></button>
+                        <button class="btn-srs again" onclick="processAnswer(0)">Nie znam<small>mniej niż 1m</small></button>
                         <button class="btn-srs hard" onclick="processAnswer(3)">Słabo<small id="time-hard"></small></button>
                         <button class="btn-srs good" onclick="processAnswer(4)">Dobrze<small id="time-good"></small></button>
                         <button class="btn-srs easy" onclick="processAnswer(5)">Bardzo dobrze<small id="time-easy"></small></button>
@@ -268,7 +270,7 @@
                 <div class="mt-2 mb-2">
                     <label style="display: flex; align-items: center; gap: 8px; font-size: 15px; cursor: pointer; color: var(--text-dark);">
                         <input type="checkbox" id="hard-mode-setting" style="width: 22px; height: 22px; margin: 0; accent-color: var(--primary);">
-                        <div><b>Włącz Hard Mode (Tylko Słówka)</b> <br><span style="font-size: 12px; color: var(--text-light);">Wymuś samodzielne wpisywanie odpowiedzi w Fiszakch</span></div>
+                        <div><b>Włącz Hard Mode (Tylko Słówka)</b> <br><span style="font-size: 12px; color: var(--text-light);">Wymuś samodzielne wpisywanie odpowiedzi w Fiszkach</span></div>
                     </label>
                 </div>
                 <button class="btn btn-primary w-100 mt-2" onclick="saveSettings()">Zapisz tryb</button>
