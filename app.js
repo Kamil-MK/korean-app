@@ -15,8 +15,8 @@ let appState = {
     dailyLimit: 5,
     settings: { hardMode: false },
     words: [],
-    flashcards: [], // TALIA SŁÓWEK
-    grammarFlashcards: [], // TALIA GRAMATYKI
+    flashcards: [], 
+    grammarFlashcards: [], 
     library: [],
     grammarTree: [], 
     sessionStats: { date: "", again: [], hard: [], good: [], easy: [] },
@@ -27,7 +27,6 @@ let currentStoryId = null;
 let currentStoryText = "";
 let editingCardId = null;
 
-// Kontekst Sesji
 let currentDeckType = 'vocab'; // 'vocab' | 'grammar'
 
 let activeGrammarCatIndex = null;
@@ -88,7 +87,6 @@ function loadState() {
     updateGrammarWidget();
     if(appState.grammarTree && appState.grammarTree.length > 0) renderGrammarTab();
     
-    // Domyślna sesja na start to słówka
     refreshStudySession();
 }
 
@@ -106,7 +104,6 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
         document.getElementById(targetId).classList.add('active');
         
         if (targetId === 'tab-fiszki') {
-            // Jeśli użytkownik użył dolnego paska, domyślnie odpalamy słówka
             if(currentDeckType !== 'vocab') startSession('vocab');
             else refreshStudySession();
         }
@@ -532,7 +529,6 @@ function addWordToSRS(id) {
     const w = appState.words.find(item => item.id == id);
     if (!w) return;
     const frontTranslation = w.custom.trim() !== "" ? w.custom : w.autoPl;
-    // Słówka zawsze dodajemy do appState.flashcards
     if (createFlashcardData(frontTranslation, w.ko, 0, 0, 2.5, null, "", appState.flashcards)) {
         saveState(); renderDeckTable(); refreshStudySession();
     }
@@ -540,7 +536,6 @@ function addWordToSRS(id) {
     if(!document.getElementById('reader-view').classList.contains('hidden')) setupReaderContent(currentStoryText);
 }
 
-// Biblioteka Reader
 function toggleLibrary() {
     const libView = document.getElementById('library-view'); const setupView = document.getElementById('reader-setup'); const readerView = document.getElementById('reader-view');
     if (libView.classList.contains('hidden')) { readerView.classList.add('hidden'); setupView.classList.add('hidden'); libView.classList.remove('hidden'); renderLibrary(); } 
@@ -587,7 +582,7 @@ window.updateGrammarWidget = function() {
     const mastered = appState.grammarFlashcards.filter(c => c.interval > 10).length;
     const due = appState.grammarFlashcards.filter(c => isDue(c)).length;
     
-    document.getElementById('grammar-mastered-count').textContent = `${mastered} /${total}`;
+    document.getElementById('grammar-mastered-count').textContent = `${mastered} / ${total}`;
     document.getElementById('grammar-due-count').textContent = due;
     const pct = total === 0 ? 0 : (mastered / total) * 100;
     document.getElementById('grammar-progress-bar').style.width = `${pct}%`;
@@ -630,7 +625,7 @@ function renderGrammarTab() {
             const div = document.createElement('div');
             div.className = 'grammar-item';
             div.onclick = () => openGrammarModal(catIndex, itemIndex);
-            div.innerHTML = `<span class="grammar-title">${item.title}${item.forceInStory ? '🎯' : ''}</span><span class="status-dot status-${item.status}"></span>`;
+            div.innerHTML = `<span class="grammar-title">${item.title} ${item.forceInStory ? '🎯' : ''}</span><span class="status-dot status-${item.status}"></span>`;
             content.appendChild(div);
         });
 
@@ -700,6 +695,7 @@ function toggleForceGrammar() {
     renderGrammarTab();
 }
 
+// ZAKTUALIZOWANY PROMPT: Zwraca cloze_sentence i cloze_answer
 async function explainGrammarWithGemini() {
     if (!appState.apiKey || appState.apiKey.trim() === "") return alert("Podaj klucz Gemini API w Ustawieniach!");
     if (activeGrammarCatIndex === null || activeGrammarItemIndex === null) return;
@@ -713,7 +709,12 @@ async function explainGrammarWithGemini() {
   "meaning": "znaczenie po polsku",
   "rule": "krótka reguła tworzenia i łączenia",
   "examples": [
-    { "ko": "pełne zdanie koreańskie z użyciem struktury", "pl": "tłumaczenie polskie", "cloze": "zdanie koreańskie z zamazaną strukturą zastąpioną przez ___" }
+    { 
+      "ko": "pełne zdanie koreańskie z użyciem struktury", 
+      "pl": "polskie tłumaczenie", 
+      "cloze_sentence": "zdanie koreańskie z luką zapisaną jako ___ zamiast struktury docelowej", 
+      "cloze_answer": "dokładny fragment tekstu usunięty w luce" 
+    }
   ]
 }
 Daj minimum 3 różne przykłady. Nie dodawaj formatowania markdown (np. \`\`\`json). Sam JSON.`;
@@ -739,11 +740,10 @@ function addGrammarFlashcard(exIndex) {
     const item = appState.grammarTree[activeGrammarCatIndex].items[activeGrammarItemIndex];
     const ex = item.examples[exIndex];
     
-    // Zapis do dedykowanej talii appState.grammarFlashcards
     if (!appState.grammarFlashcards) appState.grammarFlashcards = [];
     
-    // Front: Pl, Back: Gramatyka, ExampleSentence: Zdanie z ___
-    if (createFlashcardData(ex.pl, item.title, 0, 0, 2.5, null, ex.cloze || ex.ko, appState.grammarFlashcards)) {
+    // Front = pl, Back = ko, używamy nowych pól clozeSentence i clozeAnswer
+    if (createFlashcardData(ex.pl, ex.ko, 0, 0, 2.5, null, "", appState.grammarFlashcards, ex.cloze_sentence, ex.cloze_answer)) {
         saveState();
         updateGrammarWidget();
         alert("Utworzono fiszkę gramatyczną (Cloze)!");
@@ -751,14 +751,15 @@ function addGrammarFlashcard(exIndex) {
 }
 
 // --- UNIWERSALNE ZARZĄDZANIE FISZKAMI I SRS ---
-// Obsługuje wstrzykiwanie do odpowiedniej talii przez argument targetDeck
-function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = null, exampleSentence = "", targetDeck = appState.flashcards) {
+function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = null, exampleSentence = "", targetDeck = appState.flashcards, clozeSentence = "", clozeAnswer = "") {
     if(!front || !back || targetDeck.some(f => f.front === front && f.back === back)) return false;
     targetDeck.push({
         id: Date.now() + Math.random(),
         front: front.trim(),
         back: back.trim(),
         exampleSentence: exampleSentence.trim(),
+        clozeSentence: clozeSentence.trim(),
+        clozeAnswer: clozeAnswer.trim(),
         rep: rep > 0 ? rep : (interval > 0 ? 1 : 0),
         interval: interval > 0 ? interval : 0,
         ef: ef >= 1.3 ? ef : 2.5,
@@ -796,11 +797,9 @@ window.startSession = function(type) {
         if(mgmt) mgmt.classList.remove('hidden');
     }
     
-    // Wizualne przejście do panelu SRS
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     
-    // Jeśli odpalamy Słówka, podświetlamy przycisk Fiszki, jeśli Gramatykę, podświetlamy Gramatykę
     if(type === 'grammar') document.querySelector('.nav-btn[data-target="tab-gramatyka"]').classList.add('active');
     else document.querySelector('.nav-btn[data-target="tab-fiszki"]').classList.add('active');
     
@@ -811,7 +810,6 @@ window.startSession = function(type) {
 function toggleDeckList() { document.getElementById('deck-list-container').classList.toggle('hidden'); }
 
 function renderDeckTable() {
-    // Tabela zawsze renderuje tylko słówka z racji tego, że w Gramatyce jest ukryta
     const tbody = document.getElementById('deck-tbody');
     tbody.innerHTML = "";
     const countSpan = document.getElementById('total-cards-count');
@@ -850,7 +848,6 @@ function refreshStudySession() {
     if (!appState.history[todayStr]) appState.history[todayStr] = hist;
     if (!hist.practicedMistakes) hist.practicedMistakes = [];
 
-    // Niezależne liczniki nowych kart na dzień dla słownictwa i gramatyki
     const limitKey = currentDeckType === 'grammar' ? 'newGrammarDone' : 'newCardsDone';
     let newCardsDone = hist[limitKey] || 0;
     let newCardsInQueue = 0;
@@ -880,7 +877,7 @@ function refreshStudySession() {
     updateStudyCounter();
 
     if (studyQueue.length === 0) {
-        if(currentDeckType === 'vocab') appState.history[todayStr].completedAll = true; // Zaliczenie dnia w Aktywności dotyczy tylko słówek
+        if(currentDeckType === 'vocab') appState.history[todayStr].completedAll = true; 
         saveState();
         document.getElementById('study-empty').classList.remove('hidden');
         document.getElementById('study-active').classList.add('hidden');
@@ -905,40 +902,125 @@ function refreshStudySession() {
     }
 }
 
+// ZAKTUALIZOWANE: Obsługa widoku CLOZE w trakcie sesji gramatyki
 function nextStudyCard() {
     if (studyQueue.length === 0) { refreshStudySession(); return; }
     currentCard = studyQueue[0];
     
-    document.getElementById('study-front').textContent = currentCard.front;
-    let backHtml = `<div class="study-back-content"><div>${currentCard.back}</div>`;
-    if (currentCard.exampleSentence) { backHtml += `<div class="example-sentence">${currentCard.exampleSentence}</div>`; }
-    backHtml += `</div>`;
-    document.getElementById('study-back').innerHTML = backHtml;
-    
-    document.getElementById('study-front').classList.remove('hidden');
-    document.getElementById('study-back').classList.add('hidden');
     document.getElementById('srs-actions').classList.add('hidden');
     
-    const isHardMode = appState.settings && appState.settings.hardMode;
-    if (isHardMode) {
-        document.getElementById('btn-show-answer').classList.add('hidden');
-        document.getElementById('hard-mode-container').classList.remove('hidden');
-        const hmInput = document.getElementById('hard-mode-input');
-        hmInput.value = ''; hmInput.style.color = ""; hmInput.classList.remove('error', 'success-input'); hmInput.disabled = false;
+    if (currentDeckType === 'grammar' && currentCard.clozeSentence) {
+        // --- TRYB CLOZE (GRAMATYKA) ---
+        document.getElementById('study-vocab-container').classList.add('hidden');
+        document.getElementById('study-cloze-container').classList.remove('hidden');
         
-        const btnCheck = document.getElementById('btn-check-hard-mode');
-        btnCheck.textContent = "Sprawdź"; btnCheck.className = "btn btn-primary w-100"; btnCheck.onclick = checkHardMode;
-        document.getElementById('btn-give-up-hard-mode').classList.remove('hidden');
+        document.getElementById('cloze-hint').textContent = currentCard.front;
         
-        setTimeout(() => hmInput.focus(), 150);
+        // Dynamiczne wstrzyknięcie pola input zamiast ___
+        const sentenceHtml = currentCard.clozeSentence.replace(/_+/g, '<input type="text" id="cloze-input" class="cloze-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">');
+        document.getElementById('cloze-content').innerHTML = sentenceHtml;
+        
+        const btnCheck = document.getElementById('btn-check-cloze');
+        btnCheck.textContent = "Sprawdź";
+        btnCheck.className = "btn btn-primary w-100";
+        document.getElementById('btn-give-up-cloze').classList.remove('hidden');
+        
+        const clozeInput = document.getElementById('cloze-input');
+        if (clozeInput) {
+            clozeInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') checkCloze();
+            });
+            setTimeout(() => clozeInput.focus(), 150);
+        }
     } else {
-        document.getElementById('btn-show-answer').classList.remove('hidden');
-        document.getElementById('hard-mode-container').classList.add('hidden');
+        // --- TRYB STANDARDOWY (SŁÓWKA) ---
+        document.getElementById('study-cloze-container').classList.add('hidden');
+        document.getElementById('study-vocab-container').classList.remove('hidden');
+        
+        document.getElementById('study-front').textContent = currentCard.front;
+        
+        let backHtml = `<div class="study-back-content"><div>${currentCard.back}</div>`;
+        if (currentCard.exampleSentence) { backHtml += `<div class="example-sentence">${currentCard.exampleSentence}</div>`; }
+        backHtml += `</div>`;
+        document.getElementById('study-back').innerHTML = backHtml;
+        
+        document.getElementById('study-front').classList.remove('hidden');
+        document.getElementById('study-back').classList.add('hidden');
+        
+        const isHardMode = appState.settings && appState.settings.hardMode;
+        if (isHardMode) {
+            document.getElementById('btn-show-answer').classList.add('hidden');
+            document.getElementById('hard-mode-container').classList.remove('hidden');
+            const hmInput = document.getElementById('hard-mode-input');
+            hmInput.value = ''; hmInput.style.color = ""; hmInput.classList.remove('error', 'success-input'); hmInput.disabled = false;
+            
+            const btnCheck = document.getElementById('btn-check-hard-mode');
+            btnCheck.textContent = "Sprawdź"; btnCheck.className = "btn btn-primary w-100"; btnCheck.onclick = checkHardMode;
+            document.getElementById('btn-give-up-hard-mode').classList.remove('hidden');
+            
+            setTimeout(() => hmInput.focus(), 150);
+        } else {
+            document.getElementById('btn-show-answer').classList.remove('hidden');
+            document.getElementById('hard-mode-container').classList.add('hidden');
+        }
     }
 
     document.getElementById('time-hard').textContent = previewSM2(currentCard, 3);
     document.getElementById('time-good').textContent = previewSM2(currentCard, 4);
     document.getElementById('time-easy').textContent = previewSM2(currentCard, 5);
+}
+
+// ZAKTUALIZOWANE: Walidacja Cloze z animacjami i wibracjami
+window.checkCloze = function() {
+    const inputEl = document.getElementById('cloze-input');
+    if (!inputEl) return;
+    const answerRaw = inputEl.value;
+    const targetRaw = currentCard.clozeAnswer;
+    
+    if (!answerRaw.trim()) return;
+
+    const normalize = str => str.replace(/\s+/g, '').toLowerCase();
+    
+    if (normalize(answerRaw) === normalize(targetRaw)) {
+        inputEl.classList.add('success-input');
+        inputEl.disabled = true;
+        
+        if ('vibrate' in navigator) navigator.vibrate(50); // Satysfakcjonująca nagroda
+        
+        const btnCheck = document.getElementById('btn-check-cloze');
+        btnCheck.textContent = "Dalej ➔";
+        btnCheck.className = "btn btn-success w-100";
+        btnCheck.onclick = () => processAnswer(4);
+        
+        document.getElementById('btn-give-up-cloze').classList.add('hidden');
+        
+        setTimeout(() => { processAnswer(4); }, 1000); // Auto-przejście
+    } else {
+        inputEl.classList.add('error');
+        setTimeout(() => {
+            inputEl.classList.remove('error');
+            inputEl.focus(); // Użytkownik może poprawić literówkę
+        }, 400);
+    }
+}
+
+window.giveUpCloze = function() {
+    const inputEl = document.getElementById('cloze-input');
+    if (!inputEl) return;
+    
+    inputEl.value = currentCard.clozeAnswer;
+    inputEl.disabled = true;
+    inputEl.style.color = "var(--danger)";
+    inputEl.style.borderBottomColor = "var(--danger)";
+    
+    const btnCheck = document.getElementById('btn-check-cloze');
+    btnCheck.textContent = "Dalej (Ucz się) ➔";
+    btnCheck.className = "btn btn-danger w-100";
+    btnCheck.onclick = () => processAnswer(0);
+    
+    document.getElementById('btn-give-up-cloze').classList.add('hidden');
+    
+    setTimeout(() => { processAnswer(0); }, 2000); 
 }
 
 function checkHardMode() {
@@ -950,9 +1032,14 @@ function checkHardMode() {
     if (normalize(answerRaw) === normalize(targetRaw)) {
         inputEl.classList.add('success-input'); inputEl.disabled = true;
         document.getElementById('study-back').classList.remove('hidden');
+        
+        if ('vibrate' in navigator) navigator.vibrate(50);
+        
         const btnCheck = document.getElementById('btn-check-hard-mode');
         btnCheck.textContent = "Dalej ➔"; btnCheck.className = "btn btn-success w-100"; btnCheck.onclick = () => processAnswer(4);
         document.getElementById('btn-give-up-hard-mode').classList.add('hidden');
+        
+        setTimeout(() => { processAnswer(4); }, 1000);
     } else {
         inputEl.classList.add('error'); setTimeout(() => { inputEl.classList.remove('error'); inputEl.value = ''; inputEl.focus(); }, 400);
     }
@@ -966,6 +1053,8 @@ function giveUpHardMode() {
     btnCheck.textContent = "Dalej (Ucz się) ➔"; btnCheck.className = "btn btn-danger w-100";
     btnCheck.onclick = () => { inputEl.style.color = ""; processAnswer(0); };
     document.getElementById('btn-give-up-hard-mode').classList.add('hidden');
+    
+    setTimeout(() => { inputEl.style.color = ""; processAnswer(0); }, 2000);
 }
 
 function showAnswer() {
@@ -978,7 +1067,7 @@ function previewSM2(card, quality) { let temp = { ...card }; applySM2(temp, qual
 
 function processAnswer(quality) {
     if ('vibrate' in navigator) {
-        if (quality === 4) { navigator.vibrate(50); } else if (quality === 5) { navigator.vibrate([30, 50, 30]); }
+        if (quality === 5) { navigator.vibrate([30, 50, 30]); } // Dobrze (4) wibruje wcześniej w walidacji Cloze/HardMode, więc zostawiamy nagrodę tylko za klik "Easy"
     }
 
     const today = getLocalToday();
@@ -988,8 +1077,12 @@ function processAnswer(quality) {
     else if (!appState.history[today].practicedMistakes) { appState.history[today].practicedMistakes = []; }
 
     let cat = quality < 3 ? 'again' : (quality === 3 ? 'hard' : (quality === 4 ? 'good' : 'easy'));
-    appState.sessionStats[cat].push({ ...currentCard });
-    appState.history[today][cat]++; 
+    
+    // Zapis statystyk dotyczy tylko słownictwa (zachowujemy czystość wykresów)
+    if(currentDeckType === 'vocab') {
+        appState.sessionStats[cat].push({ ...currentCard });
+        appState.history[today][cat]++; 
+    }
 
     if (currentCard.interval === 0) {
         const limitKey = currentDeckType === 'grammar' ? 'newGrammarDone' : 'newCardsDone';
@@ -1063,7 +1156,6 @@ function openStatsModal() {
     container.innerHTML = html; document.getElementById('modal-stats').classList.remove('hidden');
 }
 
-// Zmodyfikowany Quick Edit dostosowujący się do aktywnej talii
 function openQuickEdit(id = null) {
     const deck = getActiveDeck();
     let cardToEdit;
@@ -1073,7 +1165,20 @@ function openQuickEdit(id = null) {
     editingCardId = cardToEdit.id;
     document.getElementById('qe-front').value = cardToEdit.front;
     document.getElementById('qe-back').value = cardToEdit.back;
-    document.getElementById('qe-example').value = cardToEdit.exampleSentence || "";
+    
+    if (currentDeckType === 'grammar') {
+        document.getElementById('qe-cloze-sentence').value = cardToEdit.clozeSentence || "";
+        document.getElementById('qe-cloze-answer').value = cardToEdit.clozeAnswer || "";
+        document.getElementById('qe-cloze-sentence').classList.remove('hidden');
+        document.getElementById('qe-cloze-answer').classList.remove('hidden');
+        document.getElementById('qe-example').classList.add('hidden');
+    } else {
+        document.getElementById('qe-example').value = cardToEdit.exampleSentence || "";
+        document.getElementById('qe-cloze-sentence').classList.add('hidden');
+        document.getElementById('qe-cloze-answer').classList.add('hidden');
+        document.getElementById('qe-example').classList.remove('hidden');
+    }
+
     document.getElementById('modal-quick-edit').classList.remove('hidden');
 }
 
@@ -1081,23 +1186,32 @@ function saveQuickEdit() {
     if (!editingCardId) return;
     const f = document.getElementById('qe-front').value.trim();
     const b = document.getElementById('qe-back').value.trim();
-    const e = document.getElementById('qe-example').value.trim();
     if(!f || !b) return alert("Wypełnij oba główne pola (Awers i Rewers)!");
     
     const deck = getActiveDeck();
     const idx = deck.findIndex(x => x.id == editingCardId);
     if(idx !== -1) {
-        deck[idx].front = f; deck[idx].back = b; deck[idx].exampleSentence = e;
+        deck[idx].front = f; 
+        deck[idx].back = b; 
+        if (currentDeckType === 'grammar') {
+            deck[idx].clozeSentence = document.getElementById('qe-cloze-sentence').value.trim();
+            deck[idx].clozeAnswer = document.getElementById('qe-cloze-answer').value.trim();
+        } else {
+            deck[idx].exampleSentence = document.getElementById('qe-example').value.trim();
+        }
     }
     saveState(); 
     if(currentDeckType === 'vocab') renderDeckTable(); 
     
     if (currentCard && currentCard.id == editingCardId) {
-        currentCard.front = f; currentCard.back = b; currentCard.exampleSentence = e;
-        document.getElementById('study-front').textContent = currentCard.front;
-        let backHtml = `<div class="study-back-content"><div>${currentCard.back}</div>`;
-        if (currentCard.exampleSentence) { backHtml += `<div class="example-sentence">${currentCard.exampleSentence}</div>`; }
-        backHtml += `</div>`; document.getElementById('study-back').innerHTML = backHtml;
+        currentCard.front = f; currentCard.back = b; 
+        if (currentDeckType === 'grammar') {
+            currentCard.clozeSentence = document.getElementById('qe-cloze-sentence').value.trim();
+            currentCard.clozeAnswer = document.getElementById('qe-cloze-answer').value.trim();
+        } else {
+            currentCard.exampleSentence = document.getElementById('qe-example').value.trim();
+        }
+        nextStudyCard(); // Refresh view safely
     }
     closeModal('modal-quick-edit'); editingCardId = null;
 }
@@ -1271,6 +1385,4 @@ function closeMatchingGame() {
 
 window.addEventListener('DOMContentLoaded', () => {
     loadState();
-    const hmInput = document.getElementById('hard-mode-input');
-    if (hmInput) { hmInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') checkHardMode(); }); }
 });
