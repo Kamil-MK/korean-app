@@ -3731,8 +3731,8 @@
       "exampleSentence": "밖에 비가 ___ 우산을 챙기세요.",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-21T22:00:00.000Z"
+      "ef": 1.3,
+      "nextReview": "2026-10-24T22:00:00.000Z"
     },
     {
       "id": 1792146938811.1487,
@@ -3741,8 +3741,8 @@
       "exampleSentence": "점심을 안 먹어서 배가 ___ 같이 밥 먹을래요?",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-21T22:00:00.000Z"
+      "ef": 1.3,
+      "nextReview": "2026-10-24T22:00:00.000Z"
     },
     {
       "id": 1792606037348.9333,
@@ -3751,8 +3751,44 @@
       "exampleSentence": "오늘 많이 ___ 일찍 쉬세요.",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-21T22:00:00.000Z"
+      "ef": 1.3,
+      "nextReview": "2026-10-24T22:00:00.000Z"
+    },
+    {
+      "id": 1792868874933.095,
+      "front": "Przez to, że uczyłem się do egzaminu, nie mogłem wczory spać.",
+      "back": "어제 시험공부를 하느라고 잠을 못 잤어요.",
+      "exampleSentence": "",
+      "clozeSentence": "어제 시험공부를 ___ 잠을 못 잤어요.",
+      "clozeAnswer": "하느라고",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "nextReview": "2026-10-24T19:07:54.933Z"
+    },
+    {
+      "id": 1792872812031.8994,
+      "front": "Z powodu oglądania filmu nie zdołałem odrobić całej pracy domowej.",
+      "back": "영화를 보느라고 숙제를 다 못 했어요.",
+      "exampleSentence": "",
+      "clozeSentence": "영화를 ___ 숙제를 다 못 했어요.",
+      "clozeAnswer": "보느라고",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "nextReview": "2026-10-24T20:13:32.031Z"
+    },
+    {
+      "id": 1792872823576.0645,
+      "front": "Spóźniłem się na spotkanie, ponieważ czekałem na kolegę.",
+      "back": "친구를 기다리느라고 약속 시간에 늦었어요.",
+      "exampleSentence": "",
+      "clozeSentence": "친구를 ___ 약속 시간에 늦었어요.",
+      "clozeAnswer": "기다리느라고",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "nextReview": "2026-10-24T20:13:43.576Z"
     }
   ],
   "library": [
@@ -3909,9 +3945,28 @@
           "id": "i4_3",
           "title": "-느라고",
           "status": 1,
-          "meaning": "",
-          "rule": "",
-          "examples": [],
+          "meaning": "Wskazuje, że czynność z pierwszej części zdania była przyczyną lub powodem negatywnego skutku bądź niezrealizowania czegoś w drugiej części zdania (często tłumaczone jako: „z powodu robienia czegoś”, „przez to, że...”).",
+          "rule": "Końcówkę -느라고 dodaje się bezpośrednio do tematu czasownika, niezależnie od obecności patchim (np. 하다 -> 하느라고, 먹다 -> 먹느라고). Podmiot w obu częściach zdania musi być ten sam, a konstrukcja łączy się wyłącznie z czasownikami oznaczającymi działanie.",
+          "examples": [
+            {
+              "ko": "어제 시험공부를 하느라고 잠을 못 잤어요.",
+              "pl": "Przez to, że uczyłem się do egzaminu, nie mogłem wczory spać.",
+              "cloze_sentence": "어제 시험공부를 ___ 잠을 못 잤어요.",
+              "cloze_answer": "하느라고"
+            },
+            {
+              "ko": "영화를 보느라고 숙제를 다 못 했어요.",
+              "pl": "Z powodu oglądania filmu nie zdołałem odrobić całej pracy domowej.",
+              "cloze_sentence": "영화를 ___ 숙제를 다 못 했어요.",
+              "cloze_answer": "보느라고"
+            },
+            {
+              "ko": "친구를 기다리느라고 약속 시간에 늦었어요.",
+              "pl": "Spóźniłem się na spotkanie, ponieważ czekałem na kolegę.",
+              "cloze_sentence": "친구를 ___ 약속 시간에 늦었어요.",
+              "cloze_answer": "기다리느라고"
+            }
+          ],
           "forceInStory": false
         },
         {
@@ -4578,7 +4633,37 @@
       "easy": 47,
       "completedAll": true,
       "newCardsDone": 5,
-      "practicedMistakes": []
+      "practicedMistakes": [
+        1790781445791.6094,
+        1790781445791.819,
+        1790781445792.1013,
+        1790781445793.3206,
+        1790781445793.7969,
+        1790781445794.3835,
+        1790781445794.8896,
+        1790781445794.5317,
+        1790781445794.773,
+        1790781445795.9348,
+        1790781445795.0693,
+        1790781445795.5261,
+        1790781445795.0378,
+        1790781445795.988,
+        1790781445795.7898,
+        1790781445795.2913,
+        1790781445795.6125,
+        1790781445795.1,
+        1790781445795.101,
+        1790781445795.2703,
+        1790781445795.2979,
+        1790781445796.6965,
+        1790781445798.4753,
+        1790781445799.8354,
+        1790781445795.7446,
+        1790781445795.5793,
+        1790781445795.9023,
+        1790781445795.9187,
+        1790781445795.4182
+      ]
     }
   },
   "sessionStats": {
