@@ -1,5 +1,6 @@
 const DEFAULT_API_KEY = "";
 const STORAGE_KEY = "KoreanApp_Ecosystem_V6";
+const GEMINI_MODEL = "gemini-3.8-flash";
 
 function getLocalToday() {
     const d = new Date();
@@ -34,8 +35,9 @@ let activeGrammarItemIndex = null;
 
 // Zmienna lokalna śledząca próby w Hard Mode dla bieżącej fiszki
 let currentAttempts = 0;
-// Flaga zapobiegająca wielokrotnemu klikaniu generowania gramatyki
+// Flagi blokujące podwójne kliknięcia przy zapytaniach do AI
 let isGeneratingGrammar = false;
+let isGeneratingStory = false;
 
 function loadState() {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -303,6 +305,65 @@ function importData(event) {
     reader.readAsText(file);
 }
 
+// Eksport i import CSV dla słówek
+window.exportCSV = function() {
+    if (!appState.flashcards || appState.flashcards.length === 0) return alert("Brak fiszek do eksportu.");
+    const escapeCsv = (str) => `"${String(str || '').replace(/"/g, '""')}"`;
+    const rows = [["Front_PL", "Back_KO", "Example", "Interval", "Rep", "EF", "NextReview"]];
+    appState.flashcards.forEach(f => {
+        rows.push([
+            escapeCsv(f.front),
+            escapeCsv(f.back),
+            escapeCsv(f.exampleSentence || ""),
+            f.interval || 0,
+            f.rep || 0,
+            f.ef || 2.5,
+            escapeCsv(f.nextReview || "")
+        ]);
+    });
+    const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + encodeURIComponent(rows.map(r => r.join(",")).join("\n"));
+    const dl = document.createElement('a');
+    dl.setAttribute("href", csvContent);
+    dl.setAttribute("download", `korean_vocab_${getLocalToday()}.csv`);
+    dl.click();
+};
+
+window.importCSV = function(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            const lines = e.target.result.split(/\r?\n/).filter(l => l.trim() !== "");
+            let added = 0;
+            lines.forEach((line, idx) => {
+                if (idx === 0 && line.toLowerCase().includes("front")) return;
+                const cols = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
+                if (!cols || cols.length < 2) return;
+                const clean = s => s ? s.trim().replace(/^"|"$/g, '').replace(/""/g, '"') : "";
+                const front = clean(cols[0]);
+                const back = clean(cols[1]);
+                const example = cols[2] ? clean(cols[2]) : "";
+                const interval = cols[3] ? parseInt(clean(cols[3])) || 0 : 0;
+                const rep = cols[4] ? parseInt(clean(cols[4])) || 0 : 0;
+                const ef = cols[5] ? parseFloat(clean(cols[5])) || 2.5 : 2.5;
+                const nextRev = cols[6] ? clean(cols[6]) : null;
+                if (createFlashcardData(front, back, rep, interval, ef, nextRev, example, appState.flashcards)) {
+                    added++;
+                }
+            });
+            saveState();
+            renderDeckTable();
+            refreshStudySession();
+            alert(`Zaimportowano nowych fiszek: ${added}`);
+        } catch (err) {
+            alert("Błąd podczas importu pliku CSV.");
+        }
+        event.target.value = '';
+    };
+    reader.readAsText(file);
+};
+
 function updateSettingsUI() {
     document.getElementById('api-key').value = appState.apiKey;
     document.getElementById('gh-token').value = appState.ghToken || "";
@@ -337,64 +398,75 @@ function deleteApiKey() {
 }
 
 // ==========================================
-// UNIWERSALNY KLIENT GEMINI API (Fallback + Timeout)
+// ZOPTYMALIZOWANY KLIENT GEMINI 3.8 FLASH
 // ==========================================
 async function callGeminiAPI(prompt, expectJson = false) {
-    const models = ['gemini-2.5-flash', 'gemini-2.0-flash'];
-    let lastError = null;
-
-    for (const model of models) {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${appState.apiKey.trim()}`;
+    
+    async function sendRequest(useThinkingZero) {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 25000); // 25s timeout
+        const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s bezpieczny timeout
+
+        const generationConfig = {
+            temperature: expectJson ? 0.4 : 0.7,
+            maxOutputTokens: expectJson ? 1200 : 2048
+        };
+
+        if (expectJson) {
+            generationConfig.responseMimeType = "application/json";
+        }
+
+        // Wyłączenie ukrytych tokenów myślowych ("thinking") oszczędza limit tokenów i skraca czas odpowiedzi z 30s do ~2s
+        if (useThinkingZero) {
+            generationConfig.thinkingConfig = { thinkingBudget: 0 };
+        }
 
         try {
-            const payload = {
-                contents: [{ parts: [{ text: prompt }] }],
-                generationConfig: {
-                    temperature: 0.7
-                }
-            };
-
-            if (expectJson) {
-                payload.generationConfig.responseMimeType = "application/json";
-            }
-
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${appState.apiKey.trim()}`;
             const response = await fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: prompt }] }],
+                    generationConfig
+                }),
                 signal: controller.signal
             });
-
             clearTimeout(timeoutId);
             const data = await response.json();
-
-            if (response.ok && data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-                return data.candidates[0].content.parts[0].text;
-            }
-
-            const errMsg = data.error ? data.error.message : `Kod błędu HTTP: ${response.status}`;
-            lastError = new Error(errMsg);
-
-            // Jeśli model nie istnieje (404), jest przeciążony (503) lub wyczerpano limit na tym konkretnym modelu (429), spróbuj kolejnego modelu z listy
-            if ([404, 429, 503].includes(response.status)) {
-                console.warn(`Model ${model} zwrócił status ${response.status}. Przełączam na model zapasowy...`);
-                continue;
-            } else {
-                throw lastError;
-            }
+            return { response, data };
         } catch (err) {
             clearTimeout(timeoutId);
             if (err.name === 'AbortError') {
-                lastError = new Error("Przekroczono czas oczekiwania na odpowiedź serwera Gemini (25s). Sprawdź połączenie i spróbuj ponownie.");
-            } else {
-                lastError = err;
+                throw new Error("Serwer Gemini nie odpowiedział w ciągu 30 sekund. Spróbuj ponownie za chwilę.");
             }
+            throw err;
         }
     }
 
-    throw lastError || new Error("Nie udało się połączyć z Gemini API.");
+    // Pierwsza próba: szybka (bez marnowania tokenów na thinking)
+    let { response, data } = await sendRequest(true);
+
+    // Jeśli endpoint modelu 3.8 odrzuci parametr thinkingConfig (status 400), ponów raz bez niego
+    if (response.status === 400 && data?.error?.message?.toLowerCase().includes('thinking')) {
+        ({ response, data } = await sendRequest(false));
+    }
+
+    if (!response.ok) {
+        if (response.status === 429) {
+            throw new Error("Przekroczono darmowy limit zapytań/tokenów na minutę (429). Odczekaj ok. 60 sekund i kliknij ponownie.");
+        }
+        throw new Error(data.error ? data.error.message : `Błąd HTTP ${response.status}`);
+    }
+
+    // Wyciągnięcie właściwego tekstu (pomija ewentualne części thought: true)
+    const parts = data.candidates?.[0]?.content?.parts || [];
+    const textPart = parts.find(p => typeof p.text === 'string' && !p.thought) || parts[0];
+
+    if (!textPart || !textPart.text) {
+        throw new Error("Model zwrócił pustą odpowiedź.");
+    }
+
+    return textPart.text;
 }
 
 // --- CZYTELNIA I PODZAKŁADKI ---
@@ -414,10 +486,14 @@ window.switchCzytelniaTab = function(tab) {
 }
 
 async function generateAIStory() {
+    if (isGeneratingStory) return;
     if (!appState.apiKey || appState.apiKey.trim() === "") return alert("Podaj swój klucz Gemini API w Ustawieniach.");
+    
     const loader = document.getElementById('ai-loader');
     const errorP = document.getElementById('ai-error');
-    loader.style.display = 'block'; errorP.style.display = 'none';
+    isGeneratingStory = true;
+    loader.style.display = 'block'; 
+    errorP.style.display = 'none';
 
     function shuffleArray(array) {
         let curId = array.length;
@@ -467,8 +543,12 @@ Wprowadź 2 ZUPEŁNIE NOWE słowa (poziom TOPIK II), których nie ma na listach 
         }
         setupReaderContent(aiText);
     } catch (err) {
-        errorP.textContent = "Błąd: " + err.message; errorP.style.display = 'block';
-    } finally { loader.style.display = 'none'; }
+        errorP.textContent = "Błąd: " + err.message; 
+        errorP.style.display = 'block';
+    } finally { 
+        isGeneratingStory = false;
+        loader.style.display = 'none'; 
+    }
 }
 
 function setupReaderContent(text) {
@@ -757,7 +837,7 @@ function toggleForceGrammar() {
 }
 
 async function explainGrammarWithGemini() {
-    if (isGeneratingGrammar) return; // Blokada przed wielokrotnym klikaniem i spaleniem limitu tokenów
+    if (isGeneratingGrammar) return;
     if (!appState.apiKey || appState.apiKey.trim() === "") return alert("Podaj klucz Gemini API w Ustawieniach!");
     if (activeGrammarCatIndex === null || activeGrammarItemIndex === null) return;
     
@@ -772,26 +852,25 @@ async function explainGrammarWithGemini() {
         explainBtn.textContent = "⏳ Generowanie...";
     }
 
-    const prompt = `Wytłumacz krótko i konkretnie po polsku gramatykę koreańską "${item.title}".
-Zwróć poprawny obiekt JSON o następującej strukturze:
+    const prompt = `Wytłumacz krótko po polsku gramatykę koreańską "${item.title}".
+Zwróć wyłącznie czysty obiekt JSON w formacie:
 {
-  "meaning": "krótkie znaczenie/odpowiednik po polsku",
-  "rule": "zwięzła reguła łączenia z czasownikami/przymiotnikami oraz najważniejsze ograniczenia (np. podmiot, czas)",
+  "meaning": "znaczenie po polsku",
+  "rule": "krótka reguła tworzenia i łączenia (max 2-3 zdania)",
   "examples": [
     {
-      "ko": "pełne naturalne zdanie koreańskie używające tej gramatyki",
-      "pl": "naturalne tłumaczenie zdania na język polski",
-      "cloze_sentence": "to samo zdanie koreańskie, ale z luką ___ dokładnie w miejscu odmienianego słowa z tą gramatyką",
-      "cloze_answer": "dokładnie to słowo/forma, które zostało zastąpione przez ___"
+      "ko": "pełne zdanie koreańskie z użyciem struktury",
+      "pl": "polskie tłumaczenie",
+      "cloze_sentence": "zdanie koreańskie z luką ___ dokładnie zamiast odmienionego słowa ze strukturą",
+      "cloze_answer": "dokładny fragment tekstu usunięty w luce"
     }
   ]
 }
-Podaj dokładnie 3 praktyczne przykłady.`;
+Podaj dokładnie 3 przykłady.`;
 
     try {
         const rawResponse = await callGeminiAPI(prompt, true);
         
-        // Wyodrębnienie czystego obiektu JSON niezależnie od ewentualnych znaczników
         const jsonMatch = rawResponse.match(/\{[\s\S]*\}/);
         const cleanJsonStr = jsonMatch ? jsonMatch[0] : rawResponse.replace(/```json/gi, '').replace(/```/g, '').trim();
         const parsed = JSON.parse(cleanJsonStr);
