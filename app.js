@@ -34,6 +34,8 @@ let activeGrammarItemIndex = null;
 
 // Zmienna lokalna śledząca próby w Hard Mode dla bieżącej fiszki
 let currentAttempts = 0;
+// Flaga zapobiegająca wielokrotnemu klikaniu generowania gramatyki
+let isGeneratingGrammar = false;
 
 function loadState() {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -334,6 +336,67 @@ function deleteApiKey() {
     updateSettingsUI(); saveState(); alert("Klucz API usunięty z pamięci.");
 }
 
+// ==========================================
+// UNIWERSALNY KLIENT GEMINI API (Fallback + Timeout)
+// ==========================================
+async function callGeminiAPI(prompt, expectJson = false) {
+    const models = ['gemini-2.5-flash', 'gemini-2.0-flash'];
+    let lastError = null;
+
+    for (const model of models) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 25000); // 25s timeout
+
+        try {
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                generationConfig: {
+                    temperature: 0.7
+                }
+            };
+
+            if (expectJson) {
+                payload.generationConfig.responseMimeType = "application/json";
+            }
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${appState.apiKey.trim()}`;
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+            const data = await response.json();
+
+            if (response.ok && data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+                return data.candidates[0].content.parts[0].text;
+            }
+
+            const errMsg = data.error ? data.error.message : `Kod błędu HTTP: ${response.status}`;
+            lastError = new Error(errMsg);
+
+            // Jeśli model nie istnieje (404), jest przeciążony (503) lub wyczerpano limit na tym konkretnym modelu (429), spróbuj kolejnego modelu z listy
+            if ([404, 429, 503].includes(response.status)) {
+                console.warn(`Model ${model} zwrócił status ${response.status}. Przełączam na model zapasowy...`);
+                continue;
+            } else {
+                throw lastError;
+            }
+        } catch (err) {
+            clearTimeout(timeoutId);
+            if (err.name === 'AbortError') {
+                lastError = new Error("Przekroczono czas oczekiwania na odpowiedź serwera Gemini (25s). Sprawdź połączenie i spróbuj ponownie.");
+            } else {
+                lastError = err;
+            }
+        }
+    }
+
+    throw lastError || new Error("Nie udało się połączyć z Gemini API.");
+}
+
 // --- CZYTELNIA I PODZAKŁADKI ---
 window.switchCzytelniaTab = function(tab) {
     if (tab === 'reader') {
@@ -347,23 +410,6 @@ window.switchCzytelniaTab = function(tab) {
         document.getElementById('sub-tab-reader').classList.remove('active');
         document.getElementById('sub-tab-words').classList.add('active');
         renderWordsTable();
-    }
-}
-
-async function fetchWithRetry(url, options, retries = 3, delay = 2000) {
-    for (let i = 0; i < retries; i++) {
-        try {
-            const response = await fetch(url, options);
-            if (response.ok) return response;
-            if ([503, 429].includes(response.status) && i < retries - 1) {
-                await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
-                continue;
-            }
-            return response;
-        } catch (err) {
-            if (i === retries - 1) throw err;
-            await new Promise(res => setTimeout(res, delay));
-        }
     }
 }
 
@@ -409,14 +455,8 @@ Wprowadź 2 ZUPEŁNIE NOWE słowa (poziom TOPIK II), których nie ma na listach 
     prompt += `\nZwróć sam tekst opowiadania w formacie HTML (paragrafy w <p>), bez żadnych komentarzy.`;
 
     try {
-        const response = await fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${appState.apiKey}`, {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-        });
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.error ? data.error.message : "Błąd API Gemini.");
-        
-        let aiText = data.candidates[0].content.parts[0].text.replace(/```html/g, '').replace(/```/g, '').trim();
+        const rawText = await callGeminiAPI(prompt, false);
+        let aiText = rawText.replace(/```html/gi, '').replace(/```/g, '').trim();
         document.getElementById('custom-text').value = aiText;
         currentStoryId = null; currentStoryText = aiText;
         document.getElementById('story-title').value = "Historia " + getLocalToday();
@@ -717,42 +757,61 @@ function toggleForceGrammar() {
 }
 
 async function explainGrammarWithGemini() {
+    if (isGeneratingGrammar) return; // Blokada przed wielokrotnym klikaniem i spaleniem limitu tokenów
     if (!appState.apiKey || appState.apiKey.trim() === "") return alert("Podaj klucz Gemini API w Ustawieniach!");
     if (activeGrammarCatIndex === null || activeGrammarItemIndex === null) return;
     
     const item = appState.grammarTree[activeGrammarCatIndex].items[activeGrammarItemIndex];
     const loader = document.getElementById('grammar-ai-loader');
+    const explainBtn = document.querySelector('#modal-grammar .btn-ai');
+    
+    isGeneratingGrammar = true;
     loader.style.display = 'block';
+    if (explainBtn) {
+        explainBtn.disabled = true;
+        explainBtn.textContent = "⏳ Generowanie...";
+    }
 
-    const prompt = `Wytłumacz krótko po polsku gramatykę koreańską [ ${item.title} ]. Zwróć wyłącznie czysty obiekt JSON w formacie:
+    const prompt = `Wytłumacz krótko i konkretnie po polsku gramatykę koreańską "${item.title}".
+Zwróć poprawny obiekt JSON o następującej strukturze:
 {
-  "meaning": "znaczenie po polsku",
-  "rule": "krótka reguła tworzenia i łączenia",
+  "meaning": "krótkie znaczenie/odpowiednik po polsku",
+  "rule": "zwięzła reguła łączenia z czasownikami/przymiotnikami oraz najważniejsze ograniczenia (np. podmiot, czas)",
   "examples": [
-    { 
-      "ko": "pełne zdanie koreańskie z użyciem struktury", 
-      "pl": "polskie tłumaczenie", 
-      "cloze_sentence": "zdanie koreańskie z luką zapisaną jako ___ zamiast struktury docelowej", 
-      "cloze_answer": "dokładny fragment tekstu usunięty w luce" 
+    {
+      "ko": "pełne naturalne zdanie koreańskie używające tej gramatyki",
+      "pl": "naturalne tłumaczenie zdania na język polski",
+      "cloze_sentence": "to samo zdanie koreańskie, ale z luką ___ dokładnie w miejscu odmienianego słowa z tą gramatyką",
+      "cloze_answer": "dokładnie to słowo/forma, które zostało zastąpione przez ___"
     }
   ]
 }
-Daj minimum 3 różne przykłady. Nie dodawaj formatowania markdown (np. \`\`\`json). Sam JSON.`;
+Podaj dokładnie 3 praktyczne przykłady.`;
 
     try {
-        const response = await fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${appState.apiKey}`, {
-            method: 'POST', headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-        });
-        const data = await response.json();
-        if (!response.ok) throw new Error(data.error ? data.error.message : "Błąd API Gemini.");
+        const rawResponse = await callGeminiAPI(prompt, true);
         
-        let jsonStr = data.candidates[0].content.parts[0].text.replace(/```json/g, '').replace(/```/g, '').trim();
-        const parsed = JSON.parse(jsonStr);
+        // Wyodrębnienie czystego obiektu JSON niezależnie od ewentualnych znaczników
+        const jsonMatch = rawResponse.match(/\{[\s\S]*\}/);
+        const cleanJsonStr = jsonMatch ? jsonMatch[0] : rawResponse.replace(/```json/gi, '').replace(/```/g, '').trim();
+        const parsed = JSON.parse(cleanJsonStr);
         
-        item.meaning = parsed.meaning || ""; item.rule = parsed.rule || ""; item.examples = parsed.examples || [];
-        saveState(); renderGrammarModalBody(item);
-    } catch (err) { alert("Błąd Gemini: " + err.message); } finally { loader.style.display = 'none'; }
+        item.meaning = parsed.meaning || "";
+        item.rule = parsed.rule || "";
+        item.examples = Array.isArray(parsed.examples) ? parsed.examples : [];
+        
+        saveState();
+        renderGrammarModalBody(item);
+    } catch (err) {
+        alert("Błąd Gemini: " + err.message);
+    } finally {
+        isGeneratingGrammar = false;
+        loader.style.display = 'none';
+        if (explainBtn) {
+            explainBtn.disabled = false;
+            explainBtn.textContent = "✨ Wyjaśnij z Gemini";
+        }
+    }
 }
 
 function addGrammarFlashcard(exIndex) {
@@ -1063,7 +1122,7 @@ window.giveUpCloze = function() {
 }
 
 // ==========================================
-// NOWA LOGIKA HARD MODE (Maszyna Stanów i Próby)
+// LOGIKA HARD MODE (Maszyna Stanów i Próby)
 // ==========================================
 function checkHardMode() {
     const inputEl = document.getElementById('hardModeInput');
