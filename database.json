@@ -22,6 +22,132 @@
       "ko": "살펴봤어요",
       "autoPl": "Błąd pobierania",
       "custom": "To examine / rozejrzeć się"
+    },
+    {
+      "id": 1792924233652.0383,
+      "ko": "번번이",
+      "autoPl": "Błąd pobierania",
+      "custom": "Za każdym razem"
+    },
+    {
+      "id": 1792924233657.3557,
+      "ko": "실패한",
+      "autoPl": "Błąd pobierania",
+      "custom": "Ponieść porażkę"
+    },
+    {
+      "id": 1792924233657.1655,
+      "ko": "과제",
+      "autoPl": "zadanie",
+      "custom": "Zadanie (np. Na uczelni)"
+    },
+    {
+      "id": 1792924233657.1152,
+      "ko": "꼬박",
+      "autoPl": "Błąd pobierania",
+      "custom": "Od początku do konća"
+    },
+    {
+      "id": 1792924233657.2234,
+      "ko": "일쑤였다",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.1892,
+      "ko": "동네",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.6685,
+      "ko": "주최한",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.3032,
+      "ko": "물류",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.0574,
+      "ko": "창업",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.6604,
+      "ko": "합류하라고",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.3804,
+      "ko": "제안",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.8594,
+      "ko": "개선해",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.9377,
+      "ko": "최신",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.8206,
+      "ko": "현장에",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.167,
+      "ko": "업무였다",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.5715,
+      "ko": "불안을",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.2415,
+      "ko": "마침내",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.663,
+      "ko": "기적이",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.4148,
+      "ko": "양복",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792924233658.9321,
+      "ko": "눈부신",
+      "autoPl": "Błąd pobierania",
+      "custom": ""
+    },
+    {
+      "id": 1792930131168.7024,
+      "ko": "속에서",
+      "autoPl": "W",
+      "custom": ""
     }
   ],
   "flashcards": [
@@ -364,10 +490,10 @@
       "id": 1790781445791.1184,
       "front": "Proces dorastania",
       "back": "성장 과정",
-      "rep": 1,
-      "interval": 3,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z",
+      "nextReview": "2026-10-25T23:00:00.000Z",
       "exampleSentence": "자기소개서에 성장 과정을 잘 써야 해요"
     },
     {
@@ -383,10 +509,10 @@
       "id": 1790781445791.1482,
       "front": "Relacje z rowiesnikami",
       "back": "교우 관계",
-      "rep": 2,
-      "interval": 6,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445791.8833,
@@ -458,10 +584,10 @@
       "id": 1790781445791.9436,
       "front": "Korporacjs",
       "back": "기업",
-      "rep": 1,
-      "interval": 3,
-      "ef": 1.56,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.6600000000000001,
+      "nextReview": "2026-11-01T23:00:00.000Z"
     },
     {
       "id": 1790781445791.7493,
@@ -559,10 +685,10 @@
       "id": 1790781445792.5918,
       "front": "Studiować jako główny kierunek",
       "back": "전공하다",
-      "rep": 2,
-      "interval": 25,
-      "ef": 2.5,
-      "nextReview": "2026-10-25T00:00:00.000Z"
+      "rep": 3,
+      "interval": 76,
+      "ef": 2.6,
+      "nextReview": "2027-01-08T23:00:00.000Z"
     },
     {
       "id": 1790781445792.1013,
@@ -571,7 +697,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445792.8267,
@@ -605,10 +731,10 @@
       "id": 1790781445793.3418,
       "front": "Wykazać się",
       "back": "발휘하다",
-      "rep": 1,
-      "interval": 3,
-      "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-01T23:00:00.000Z"
     },
     {
       "id": 1790781445793.2202,
@@ -772,26 +898,26 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z",
+      "nextReview": "2026-10-25T23:00:00.000Z",
       "exampleSentence": "선생님은 겸손한 사람을 좋아하세요"
     },
     {
       "id": 1790781445793.7969,
       "front": "Wyjeżdżać",
       "back": "떠나다",
-      "rep": 0,
-      "interval": 1,
+      "rep": 1,
+      "interval": 3,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-27T23:00:00.000Z"
     },
     {
       "id": 1790781445793.395,
       "front": "Studiować język za granicą",
       "back": "어학연수 하다",
-      "rep": 1,
-      "interval": 3,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445793.4934,
@@ -825,10 +951,10 @@
       "id": 1790781445793.0913,
       "front": "Confidence",
       "back": "자신감",
-      "rep": 3,
-      "interval": 10,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "rep": 4,
+      "interval": 20,
+      "ef": 1.8000000000000003,
+      "nextReview": "2026-11-13T23:00:00.000Z"
     },
     {
       "id": 1790781445793.7258,
@@ -1088,10 +1214,10 @@
       "id": 1790781445794.5217,
       "front": "Klient",
       "back": "고객님",
-      "rep": 1,
-      "interval": 3,
-      "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-01T23:00:00.000Z"
     },
     {
       "id": 1790781445794.204,
@@ -1116,10 +1242,10 @@
       "id": 1790781445794.913,
       "front": "Occure",
       "back": "발생하다",
-      "rep": 1,
-      "interval": 3,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z",
+      "nextReview": "2026-10-25T23:00:00.000Z",
       "exampleSentence": "갑차기 큰 문에가 발생했어요"
     },
     {
@@ -1234,10 +1360,10 @@
       "id": 1790781445794.6543,
       "front": "Mind, feelings",
       "back": "심경",
-      "rep": 1,
-      "interval": 3,
-      "ef": 1.56,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.6600000000000001,
+      "nextReview": "2026-11-01T23:00:00.000Z"
     },
     {
       "id": 1790781445794.5754,
@@ -1280,10 +1406,11 @@
       "id": 1790781445794.713,
       "front": "Reflect on oneself",
       "back": "반성하다",
-      "rep": 1,
-      "interval": 3,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z",
+      "exampleSentence": "그는 자신의 잘못을 깊이 반성하고 있다"
     },
     {
       "id": 1790781445794.9143,
@@ -1364,7 +1491,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445794.1472,
@@ -1379,10 +1506,10 @@
       "id": 1790781445794.8896,
       "front": "Experienced candidate",
       "back": "경력자 우대",
-      "rep": 0,
-      "interval": 1,
+      "rep": 1,
+      "interval": 3,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-27T23:00:00.000Z"
     },
     {
       "id": 1790781445794.4958,
@@ -1433,19 +1560,19 @@
       "id": 1790781445794.5317,
       "front": "Repeatedly",
       "back": "자꾸",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-10-29T23:00:00.000Z"
     },
     {
       "id": 1790781445794.773,
       "front": "To praise",
       "back": "칭찬하다",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-10-29T23:00:00.000Z"
     },
     {
       "id": 1790781445794.2112,
@@ -1460,10 +1587,10 @@
       "id": 1790781445794.4924,
       "front": "To gain experience",
       "back": "경험을 쌓다",
-      "rep": 1,
-      "interval": 3,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445794.065,
@@ -1481,7 +1608,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.3345,
@@ -1499,16 +1626,16 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.7585,
       "front": "Unconditionally",
       "back": "무조건",
-      "rep": 1,
-      "interval": 3,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.3853,
@@ -1589,7 +1716,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.3447,
@@ -1661,7 +1788,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.988,
@@ -1670,7 +1797,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.3225,
@@ -1688,7 +1815,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.6807,
@@ -1703,10 +1830,10 @@
       "id": 1790781445795.213,
       "front": "Wielkość",
       "back": "크기",
-      "rep": 1,
-      "interval": 3,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.8000000000000003,
+      "nextReview": "2026-11-01T23:00:00.000Z"
     },
     {
       "id": 1790781445795.6624,
@@ -1739,10 +1866,10 @@
       "id": 1790781445795.4883,
       "front": "Facility",
       "back": "시설",
-      "rep": 1,
-      "interval": 3,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.3,
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.2222,
@@ -1769,7 +1896,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.4648,
@@ -1784,10 +1911,10 @@
       "id": 1790781445795.6125,
       "front": "Square meeter",
       "back": "제곱미터",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-10-29T23:00:00.000Z"
     },
     {
       "id": 1790781445795.2527,
@@ -1823,7 +1950,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.101,
@@ -1832,7 +1959,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.7908,
@@ -1887,7 +2014,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.7446,
@@ -1895,8 +2022,8 @@
       "back": "계약금",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "ef": 1.3,
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.5793,
@@ -1904,8 +2031,8 @@
       "back": "부동산",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "ef": 1.3,
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.9023,
@@ -1913,8 +2040,8 @@
       "back": "부동산 중개소",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "ef": 1.3,
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.9187,
@@ -1922,8 +2049,8 @@
       "back": "주변에",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "ef": 1.3,
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.4182,
@@ -1931,53 +2058,53 @@
       "back": "빈방",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "ef": 1.3,
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.8618,
       "front": "Czasami X, czasami Y",
       "back": "X기도 하고 Y기도 하다",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.795Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.2268,
       "front": "Historical site",
       "back": "유적지",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.795Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.4092,
       "front": "~on the other hand",
       "back": "는 반면에",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.795Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.875,
       "front": "Price",
       "back": "물가",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.795Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.0977,
       "front": "Child",
       "back": "아동",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.795Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445795.0837,
@@ -2037,10 +2164,10 @@
       "id": 1790781445795.2979,
       "front": "PAy the rent",
       "back": "방세를 내다",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-10-29T23:00:00.000Z"
     },
     {
       "id": 1790781445795.683,
@@ -2238,7 +2365,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445796.6504,
@@ -2668,10 +2795,10 @@
       "id": 1790781445797.2373,
       "front": "stracić",
       "back": "잃다",
-      "rep": 2,
-      "interval": 25,
-      "ef": 2.5,
-      "nextReview": "2026-10-25T00:00:00.000Z"
+      "rep": 3,
+      "interval": 76,
+      "ef": 2.6,
+      "nextReview": "2027-01-08T23:00:00.000Z"
     },
     {
       "id": 1790781445797.4827,
@@ -3057,10 +3184,10 @@
       "id": 1790781445798.4753,
       "front": "alone senior",
       "back": "독거노인",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-10-29T23:00:00.000Z"
     },
     {
       "id": 1790781445798.9592,
@@ -3194,10 +3321,10 @@
       "id": 1790781445799.8186,
       "front": "oczekiwac / czekac",
       "back": "기대하다",
-      "rep": 3,
-      "interval": 11,
-      "ef": 1.8000000000000003,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "rep": 4,
+      "interval": 24,
+      "ef": 1.9000000000000004,
+      "nextReview": "2026-11-17T23:00:00.000Z"
     },
     {
       "id": 1790781445799.3008,
@@ -3287,7 +3414,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445799.1052,
@@ -3438,10 +3565,10 @@
       "id": 1790781445799.863,
       "front": "proces / kurs",
       "back": "과정",
-      "rep": 1,
-      "interval": 3,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-25T23:00:00.000Z"
     },
     {
       "id": 1790781445799.851,
@@ -3697,21 +3824,23 @@
     },
     {
       "id": 1790970755893.256,
-      "front": "보증금도",
-      "back": "Bezpieczeństwo",
+      "front": "Bezpieczeństwo",
+      "back": "보증금도",
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-10-02T19:52:35.893Z"
+      "nextReview": "2026-10-02T19:52:35.893Z",
+      "exampleSentence": ""
     },
     {
       "id": 1790971276350.665,
-      "front": "애완동물을",
-      "back": "Zwierzę domowe",
+      "front": "Zwierzę domowe",
+      "back": "애완동물을",
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-10-02T20:01:16.350Z"
+      "nextReview": "2026-10-02T20:01:16.350Z",
+      "exampleSentence": ""
     },
     {
       "id": 1790971887089.701,
@@ -3721,6 +3850,66 @@
       "interval": 0,
       "ef": 2.5,
       "nextReview": "2026-10-02T20:11:27.089Z"
+    },
+    {
+      "id": 1792925187861.1267,
+      "front": "Za każdym razem",
+      "back": "번번이",
+      "exampleSentence": "",
+      "clozeSentence": "",
+      "clozeAnswer": "",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "nextReview": "2026-10-25T10:46:27.861Z"
+    },
+    {
+      "id": 1792925200590.9148,
+      "front": "Ponieść porażkę",
+      "back": "실패한",
+      "exampleSentence": "",
+      "clozeSentence": "",
+      "clozeAnswer": "",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "nextReview": "2026-10-25T10:46:40.590Z"
+    },
+    {
+      "id": 1792925514913.8203,
+      "front": "Zadanie (np. Na uczelni)",
+      "back": "과제",
+      "exampleSentence": "온라인 쇼핑몰 프로젝트 신청서와 과제 제출을 준비한다",
+      "clozeSentence": "",
+      "clozeAnswer": "",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "nextReview": "2026-10-25T10:51:54.913Z"
+    },
+    {
+      "id": 1792925525160.6768,
+      "front": "Od początku do konća",
+      "back": "꼬박",
+      "exampleSentence": "밤을 꼬박 새웠다",
+      "clozeSentence": "",
+      "clozeAnswer": "",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "nextReview": "2026-10-25T10:52:05.160Z"
+    },
+    {
+      "id": 1792930297499.7104,
+      "front": "Opuszczać, pomijać (np. Posiłek, turę)",
+      "back": "거르다",
+      "exampleSentence": "피곤해서 입이 짧다 보니 아침 식사도 걸렀어요",
+      "clozeSentence": "",
+      "clozeAnswer": "",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "nextReview": "2026-10-25T12:11:37.499Z"
     }
   ],
   "grammarFlashcards": [
@@ -3804,7 +3993,7 @@
     },
     {
       "id": "1792875567029",
-      "title": "Historia 2026-10-24",
+      "title": "민우 씨는 직장을 찾고 있어요",
       "text": "<p>컴퓨터공학을 <b>전공</b>한 민우는 졸업 후 <b>하숙집</b>에서 지내며 e-커머스 <b>대형</b> 플랫폼에 <b>지원서</b>를 넣는 <b>취업 준비생</b>이었다. 그는 <b>높은 학력</b>과 좋은 <b>학점</b>을 가졌지만, 어려운 <b>경제 상황</b> 속에서 <b>진로</b>를 <b>선택하다</b>가 번번이 실패한 <b>경험</b>이 있었다. 오늘도 온라인 쇼핑몰 프로젝트 <b>신청서</b>와 <b>과제 제출</b>을 준비하<b>느라고</b> 밤을 꼬박 새웠다. 피곤해서 <b>입이 짧다</b> 보니 아침 식사도 거르기 일쑤였다.</p>\n\n<p>오후에 그는 기분 전환을 위해 동네 <b>단체</b>에서 주최한 플로깅 <b>모꼬지</b>에 나갔다. 길가의 쓰레기를 <b>줍다</b> 보니 <b>다양하다</b>고 느낄 만큼 여러 <b>연령</b>의 사람들이 모여 있었다. 그는 이 모임에서 IT 물류 시스템을 <b>맡다</b>가 <b>창업</b>(<b>창업</b>)한 선배를 만났다. 민우의 열정을 본 선배는 직접 이름을 <b>불러 주다</b>가 자신의 팀에 합류하라고 <b>제안</b>(<b>제안</b>)했다. 데이터 <b>낭비</b>라는 <b>단점</b>을 개선해 <b>저렴하다</b>는 평가를 받는 최신 알고리즘을 현장에 <b>전달하다</b>는 업무였다.</p>\n\n<p>불안을 <b>참다</b> 보면 좋은 날이 올 <b>텐데</b>, 오늘 마침내 기적이 일어난 것이다. 새 양복 한 <b>벌</b>을 사 입을 생각에, 민우에게 오늘은 인생을 바꾼 가장 눈부신 <b>사건</b>이 되었다.</p>"
     }
   ],
@@ -4671,13 +4860,51 @@
       ]
     },
     "2026-10-25": {
-      "again": 3,
+      "again": 37,
       "hard": 0,
-      "good": 0,
-      "easy": 2,
-      "completedAll": false,
-      "newCardsDone": 0,
-      "practicedMistakes": []
+      "good": 2,
+      "easy": 16,
+      "completedAll": true,
+      "newCardsDone": 5,
+      "practicedMistakes": [
+        1790781445791.8076,
+        1790781445791.972,
+        1790781445791.1711,
+        1790781445791.1184,
+        1790781445791.1482,
+        1790781445792.1013,
+        1790781445793.3206,
+        1790781445793.395,
+        1790781445794.913,
+        1790781445794.713,
+        1790781445794.3835,
+        1790781445794.4924,
+        1790781445795.9348,
+        1790781445795.0693,
+        1790781445795.7585,
+        1790781445795.5261,
+        1790781445795.0378,
+        1790781445795.988,
+        1790781445795.7898,
+        1790781445795.4883,
+        1790781445795.2913,
+        1790781445795.1,
+        1790781445795.101,
+        1790781445795.2703,
+        1790781445795.7446,
+        1790781445795.5793,
+        1790781445795.9023,
+        1790781445795.9187,
+        1790781445795.4182,
+        1790781445796.6965,
+        1790781445799.8354,
+        1790781445799.863,
+        1790781445795.8618,
+        1790781445795.2268,
+        1790781445795.4092,
+        1790781445795.875,
+        1790781445795.0977
+      ]
     }
   },
   "sessionStats": {
@@ -4709,10 +4936,338 @@
         "interval": 3,
         "ef": 1.3,
         "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445791.1184,
+        "front": "Proces dorastania",
+        "back": "성장 과정",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z",
+        "exampleSentence": "자기소개서에 성장 과정을 잘 써야 해요"
+      },
+      {
+        "id": 1790781445791.1482,
+        "front": "Relacje z rowiesnikami",
+        "back": "교우 관계",
+        "rep": 2,
+        "interval": 6,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445792.1013,
+        "front": "WIedza",
+        "back": "지식",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445793.3206,
+        "front": "Być pokornym",
+        "back": "겸손하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z",
+        "exampleSentence": "선생님은 겸손한 사람을 좋아하세요"
+      },
+      {
+        "id": 1790781445793.395,
+        "front": "Studiować język za granicą",
+        "back": "어학연수 하다",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.913,
+        "front": "Occure",
+        "back": "발생하다",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z",
+        "exampleSentence": "갑차기 큰 문에가 발생했어요"
+      },
+      {
+        "id": 1790781445794.713,
+        "front": "Reflect on oneself",
+        "back": "반성하다",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.3835,
+        "front": "Roczna pensja",
+        "back": "연봉",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.4924,
+        "front": "To gain experience",
+        "back": "경험을 쌓다",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.9348,
+        "front": "At all",
+        "back": "도대체",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.0693,
+        "front": "To solve",
+        "back": "풀다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.7585,
+        "front": "Unconditionally",
+        "back": "무조건",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.5261,
+        "front": "Reklama / ogłoszenie",
+        "back": "광고",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.0378,
+        "front": "Obrzydliwy",
+        "back": "징그럽다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.988,
+        "front": "Unique",
+        "back": "독특하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.7898,
+        "front": "Unfamiliar",
+        "back": "낯설다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.4883,
+        "front": "Facility",
+        "back": "시설",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.7000000000000002,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.2913,
+        "front": "Bardzo mały pokój na wynajem",
+        "back": "고시원",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.1,
+        "front": "Residential area",
+        "back": "주댁가",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.101,
+        "front": "Shopping district",
+        "back": "상점가",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.2703,
+        "front": "Depozyt za mieszkanie",
+        "back": "보증금",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.7446,
+        "front": "Opłata rezerwacyjna",
+        "back": "계약금",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.5793,
+        "front": "REal estate",
+        "back": "부동산",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.9023,
+        "front": "Pośrednik nieruchomości",
+        "back": "부동산 중개소",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.9187,
+        "front": "W otoczeniu, around",
+        "back": "주변에",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.4182,
+        "front": "Vacancy /wakat",
+        "back": "빈방",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445796.6965,
+        "front": "Change notice",
+        "back": "변경 안내",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445799.8354,
+        "front": "informacja",
+        "back": "정보",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445799.863,
+        "front": "proces / kurs",
+        "back": "과정",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.8618,
+        "front": "Czasami X, czasami Y",
+        "back": "X기도 하고 Y기도 하다",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.795Z"
+      },
+      {
+        "id": 1790781445795.2268,
+        "front": "Historical site",
+        "back": "유적지",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.795Z"
+      },
+      {
+        "id": 1790781445795.4092,
+        "front": "~on the other hand",
+        "back": "는 반면에",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.795Z"
+      },
+      {
+        "id": 1790781445795.875,
+        "front": "Price",
+        "back": "물가",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.795Z"
+      },
+      {
+        "id": 1790781445795.0977,
+        "front": "Child",
+        "back": "아동",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.795Z"
       }
     ],
     "hard": [],
-    "good": [],
+    "good": [
+      {
+        "id": 1790781445793.7969,
+        "front": "Wyjeżdżać",
+        "back": "떠나다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.8896,
+        "front": "Experienced candidate",
+        "back": "경력자 우대",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      }
+    ],
     "easy": [
       {
         "id": 1790781445791.6094,
@@ -4733,6 +5288,132 @@
         "ef": 1.3,
         "nextReview": "2026-10-24T22:00:00.000Z",
         "exampleSentence": "​자신의 적성에 맞는 직업을 구해야 해요."
+      },
+      {
+        "id": 1790781445791.9436,
+        "front": "Korporacjs",
+        "back": "기업",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.56,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445792.5918,
+        "front": "Studiować jako główny kierunek",
+        "back": "전공하다",
+        "rep": 2,
+        "interval": 25,
+        "ef": 2.5,
+        "nextReview": "2026-10-25T00:00:00.000Z"
+      },
+      {
+        "id": 1790781445793.3418,
+        "front": "Wykazać się",
+        "back": "발휘하다",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445793.0913,
+        "front": "Confidence",
+        "back": "자신감",
+        "rep": 3,
+        "interval": 10,
+        "ef": 1.7000000000000002,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.5217,
+        "front": "Klient",
+        "back": "고객님",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.6543,
+        "front": "Mind, feelings",
+        "back": "심경",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.56,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.5317,
+        "front": "Repeatedly",
+        "back": "자꾸",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445794.773,
+        "front": "To praise",
+        "back": "칭찬하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.213,
+        "front": "Wielkość",
+        "back": "크기",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.7000000000000002,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.6125,
+        "front": "Square meeter",
+        "back": "제곱미터",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445795.2979,
+        "front": "PAy the rent",
+        "back": "방세를 내다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445797.2373,
+        "front": "stracić",
+        "back": "잃다",
+        "rep": 2,
+        "interval": 25,
+        "ef": 2.5,
+        "nextReview": "2026-10-25T00:00:00.000Z"
+      },
+      {
+        "id": 1790781445798.4753,
+        "front": "alone senior",
+        "back": "독거노인",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-24T22:00:00.000Z"
+      },
+      {
+        "id": 1790781445799.8186,
+        "front": "oczekiwac / czekac",
+        "back": "기대하다",
+        "rep": 3,
+        "interval": 11,
+        "ef": 1.8000000000000003,
+        "nextReview": "2026-10-24T22:00:00.000Z"
       }
     ]
   }
