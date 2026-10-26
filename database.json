@@ -2129,27 +2129,27 @@
       "front": "To stretch",
       "back": "늘어나다",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.795Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-26T23:00:00.000Z"
     },
     {
       "id": 1790781445795.5962,
       "front": "First of all",
       "back": "우선",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.795Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-26T23:00:00.000Z"
     },
     {
       "id": 1790781445795.5518,
       "front": "Difference",
       "back": "차이점",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.795Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-26T23:00:00.000Z"
     },
     {
       "id": 1790781445795.8826,
@@ -4907,12 +4907,12 @@
       ]
     },
     "2026-10-26": {
-      "again": 22,
+      "again": 25,
       "hard": 0,
       "good": 0,
       "easy": 31,
-      "completedAll": false,
-      "newCardsDone": 2,
+      "completedAll": true,
+      "newCardsDone": 5,
       "practicedMistakes": []
     }
   },
@@ -5114,6 +5114,33 @@
         "id": 1790781445795.048,
         "front": "Grow less",
         "back": "줄어들다",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.795Z"
+      },
+      {
+        "id": 1790781445795.8794,
+        "front": "To stretch",
+        "back": "늘어나다",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.795Z"
+      },
+      {
+        "id": 1790781445795.5962,
+        "front": "First of all",
+        "back": "우선",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.795Z"
+      },
+      {
+        "id": 1790781445795.5518,
+        "front": "Difference",
+        "back": "차이점",
         "rep": 0,
         "interval": 0,
         "ef": 2.5,
