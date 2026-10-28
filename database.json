@@ -8,146 +8,194 @@
     {
       "id": 1790965644904.4963,
       "ko": "보증금도",
-      "autoPl": "Błąd pobierania",
-      "custom": "Bezpieczeństwo"
+      "autoPl": "",
+      "custom": "Bezpieczeństwo",
+      "dictForm": "보증금도",
+      "contextSentence": ""
     },
     {
       "id": 1790965644908.8533,
       "ko": "애완동물을",
-      "autoPl": "Błąd pobierania",
-      "custom": "Zwierzę domowe"
+      "autoPl": "",
+      "custom": "Zwierzę domowe",
+      "dictForm": "애완동물을",
+      "contextSentence": ""
     },
     {
       "id": 1790971572930.908,
       "ko": "살펴봤어요",
-      "autoPl": "Błąd pobierania",
-      "custom": "To examine / rozejrzeć się"
+      "autoPl": "",
+      "custom": "To examine / rozejrzeć się",
+      "dictForm": "살펴봤어요",
+      "contextSentence": ""
     },
     {
       "id": 1792924233652.0383,
       "ko": "번번이",
-      "autoPl": "Błąd pobierania",
-      "custom": "Za każdym razem"
+      "autoPl": "",
+      "custom": "Za każdym razem",
+      "dictForm": "번번이",
+      "contextSentence": ""
     },
     {
       "id": 1792924233657.3557,
       "ko": "실패한",
-      "autoPl": "Błąd pobierania",
-      "custom": "Ponieść porażkę"
+      "autoPl": "",
+      "custom": "Ponieść porażkę",
+      "dictForm": "실패한",
+      "contextSentence": ""
     },
     {
       "id": 1792924233657.1655,
       "ko": "과제",
       "autoPl": "zadanie",
-      "custom": "Zadanie (np. Na uczelni)"
+      "custom": "Zadanie (np. Na uczelni)",
+      "dictForm": "과제",
+      "contextSentence": ""
     },
     {
       "id": 1792924233657.1152,
       "ko": "꼬박",
-      "autoPl": "Błąd pobierania",
-      "custom": "Od początku do konća"
+      "autoPl": "",
+      "custom": "Od początku do konća",
+      "dictForm": "꼬박",
+      "contextSentence": ""
     },
     {
       "id": 1792924233657.2234,
       "ko": "일쑤였다",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "일쑤였다",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.1892,
       "ko": "동네",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "동네",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.6685,
       "ko": "주최한",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "주최한",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.3032,
       "ko": "물류",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "물류",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.0574,
       "ko": "창업",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "창업",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.6604,
       "ko": "합류하라고",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "합류하라고",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.3804,
       "ko": "제안",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "제안",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.8594,
       "ko": "개선해",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "개선해",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.9377,
       "ko": "최신",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "최신",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.8206,
       "ko": "현장에",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "현장에",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.167,
       "ko": "업무였다",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "업무였다",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.5715,
       "ko": "불안을",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "불안을",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.2415,
       "ko": "마침내",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "마침내",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.663,
       "ko": "기적이",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "기적이",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.4148,
       "ko": "양복",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "양복",
+      "contextSentence": ""
     },
     {
       "id": 1792924233658.9321,
       "ko": "눈부신",
-      "autoPl": "Błąd pobierania",
-      "custom": ""
+      "autoPl": "",
+      "custom": "",
+      "dictForm": "눈부신",
+      "contextSentence": ""
     },
     {
       "id": 1792930131168.7024,
       "ko": "속에서",
       "autoPl": "W",
-      "custom": ""
+      "custom": "",
+      "dictForm": "속에서",
+      "contextSentence": ""
     }
   ],
   "flashcards": [
@@ -158,7 +206,10 @@
       "rep": 3,
       "interval": 43,
       "ef": 2.5,
-      "nextReview": "2026-11-29T23:00:00.000Z"
+      "nextReview": "2026-11-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445789.8032,
@@ -167,7 +218,10 @@
       "rep": 4,
       "interval": 10,
       "ef": 1.3,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445789.5615,
@@ -176,7 +230,10 @@
       "rep": 4,
       "interval": 10,
       "ef": 1.3,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445789.9983,
@@ -185,7 +242,10 @@
       "rep": 3,
       "interval": 38,
       "ef": 2.5,
-      "nextReview": "2026-11-21T23:00:00.000Z"
+      "nextReview": "2026-11-21T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445789.333,
@@ -194,7 +254,10 @@
       "rep": 4,
       "interval": 38,
       "ef": 2.5,
-      "nextReview": "2026-11-28T23:00:00.000Z"
+      "nextReview": "2026-11-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445789.2842,
@@ -203,7 +266,10 @@
       "rep": 3,
       "interval": 23,
       "ef": 2.5,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445790.445,
@@ -212,7 +278,10 @@
       "rep": 2,
       "interval": 42,
       "ef": 2.5,
-      "nextReview": "2026-11-11T00:00:00.000Z"
+      "nextReview": "2026-11-11T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.1658,
@@ -221,7 +290,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.5671,
@@ -230,7 +302,10 @@
       "rep": 4,
       "interval": 12,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-07T23:00:00.000Z"
+      "nextReview": "2026-11-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.51,
@@ -240,7 +315,10 @@
       "interval": 10,
       "ef": 1.4000000000000001,
       "nextReview": "2026-11-02T23:00:00.000Z",
-      "exampleSentence": "선생님하고 상담을 하고 싶어요"
+      "exampleSentence": "선생님하고 상담을 하고 싶어요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.8076,
@@ -249,7 +327,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.8203,
@@ -258,7 +339,10 @@
       "rep": 5,
       "interval": 21,
       "ef": 2.6,
-      "nextReview": "2026-11-02T23:00:00.000Z"
+      "nextReview": "2026-11-02T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.8435,
@@ -268,7 +352,10 @@
       "interval": 8,
       "ef": 1.4000000000000001,
       "nextReview": "2026-10-30T23:00:00.000Z",
-      "exampleSentence": "​서류 심사에 통과해서 다음 주에 면접을 보러 가요"
+      "exampleSentence": "​서류 심사에 통과해서 다음 주에 면접을 보러 가요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.913,
@@ -277,7 +364,10 @@
       "rep": 2,
       "interval": 46,
       "ef": 2.5,
-      "nextReview": "2026-11-15T00:00:00.000Z"
+      "nextReview": "2026-11-15T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.6255,
@@ -286,7 +376,10 @@
       "rep": 4,
       "interval": 38,
       "ef": 2.5,
-      "nextReview": "2026-11-28T23:00:00.000Z"
+      "nextReview": "2026-11-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.972,
@@ -295,7 +388,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.464,
@@ -304,16 +400,22 @@
       "rep": 4,
       "interval": 38,
       "ef": 2.5,
-      "nextReview": "2026-11-28T23:00:00.000Z"
+      "nextReview": "2026-11-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.3425,
       "front": "Przyczyna",
       "back": "원인",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.8000000000000003,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.3,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.8713,
@@ -322,7 +424,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-11T23:00:00.000Z"
+      "nextReview": "2026-11-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.1895,
@@ -331,17 +436,23 @@
       "rep": 4,
       "interval": 12,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-03T23:00:00.000Z"
+      "nextReview": "2026-11-03T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.993,
       "front": "Job seeker",
       "back": "취업 준비생",
-      "rep": 2,
-      "interval": 6,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z",
-      "exampleSentence": "저는 요즘 취업 준비생이라 매일 도서관에 가요"
+      "rep": 3,
+      "interval": 10,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-06T23:00:00.000Z",
+      "exampleSentence": "저는 요즘 취업 준비생이라 매일 도서관에 가요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.6094,
@@ -351,7 +462,10 @@
       "interval": 5,
       "ef": 1.4000000000000001,
       "nextReview": "2026-10-29T23:00:00.000Z",
-      "exampleSentence": "이 프로그램은 다양한 연령층에게 인기가 있습니다"
+      "exampleSentence": "이 프로그램은 다양한 연령층에게 인기가 있습니다",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.667,
@@ -360,17 +474,23 @@
       "rep": 5,
       "interval": 20,
       "ef": 2.5,
-      "nextReview": "2026-11-01T23:00:00.000Z"
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.943,
       "front": "Urząd statystyczny",
       "back": "통계청",
-      "rep": 2,
-      "interval": 6,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z",
-      "exampleSentence": "통계청 발표에 따르면 청년 실업률이 소폭 감소했습니다."
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "exampleSentence": "통계청 발표에 따르면 청년 실업률이 소폭 감소했습니다.",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.697,
@@ -379,7 +499,10 @@
       "rep": 2,
       "interval": 47,
       "ef": 2.5,
-      "nextReview": "2026-11-16T00:00:00.000Z"
+      "nextReview": "2026-11-16T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.819,
@@ -389,7 +512,10 @@
       "interval": 5,
       "ef": 1.4000000000000001,
       "nextReview": "2026-10-29T23:00:00.000Z",
-      "exampleSentence": "​자신의 적성에 맞는 직업을 구해야 해요."
+      "exampleSentence": "​자신의 적성에 맞는 직업을 구해야 해요.",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.0232,
@@ -399,7 +525,10 @@
       "interval": 8,
       "ef": 1.4000000000000001,
       "nextReview": "2026-10-30T23:00:00.000Z",
-      "exampleSentence": "저는 언어에 소질이 있어요"
+      "exampleSentence": "저는 언어에 소질이 있어요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.546,
@@ -408,17 +537,23 @@
       "rep": 4,
       "interval": 38,
       "ef": 2.5,
-      "nextReview": "2026-11-27T23:00:00.000Z"
+      "nextReview": "2026-11-27T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.6377,
       "front": "Expert",
       "back": "전문가",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z",
-      "exampleSentence": "토핔 후에 한국어 전문가가 되고 싶어요"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "exampleSentence": "토핔 후에 한국어 전문가가 되고 싶어요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.9622,
@@ -428,7 +563,10 @@
       "interval": 8,
       "ef": 1.4000000000000001,
       "nextReview": "2026-11-03T23:00:00.000Z",
-      "exampleSentence": "이번 시험에서 좋은 성적을 받았어요."
+      "exampleSentence": "이번 시험에서 좋은 성적을 받았어요.",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.5774,
@@ -438,7 +576,10 @@
       "interval": 38,
       "ef": 2.5,
       "nextReview": "2026-11-28T23:00:00.000Z",
-      "exampleSentence": ""
+      "exampleSentence": "",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.7559,
@@ -448,7 +589,10 @@
       "interval": 5,
       "ef": 1.4000000000000001,
       "nextReview": "2026-10-28T23:00:00.000Z",
-      "exampleSentence": "저는 한국어를 살려서 일하고 싶어요"
+      "exampleSentence": "저는 한국어를 살려서 일하고 싶어요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.1711,
@@ -457,7 +601,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.2812,
@@ -466,7 +613,10 @@
       "rep": 4,
       "interval": 10,
       "ef": 1.3,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.9595,
@@ -475,7 +625,10 @@
       "rep": 4,
       "interval": 32,
       "ef": 2.46,
-      "nextReview": "2026-11-20T23:00:00.000Z"
+      "nextReview": "2026-11-20T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.0383,
@@ -484,7 +637,10 @@
       "rep": 4,
       "interval": 28,
       "ef": 2.36,
-      "nextReview": "2026-11-15T23:00:00.000Z"
+      "nextReview": "2026-11-15T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.1184,
@@ -494,7 +650,10 @@
       "interval": 5,
       "ef": 1.4000000000000001,
       "nextReview": "2026-10-30T23:00:00.000Z",
-      "exampleSentence": "자기소개서에 성장 과정을 잘 써야 해요"
+      "exampleSentence": "자기소개서에 성장 과정을 잘 써야 해요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.8472,
@@ -503,7 +662,10 @@
       "rep": 4,
       "interval": 14,
       "ef": 1.5600000000000003,
-      "nextReview": "2026-11-04T23:00:00.000Z"
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.1482,
@@ -512,7 +674,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.8833,
@@ -522,16 +687,22 @@
       "interval": 8,
       "ef": 1.4000000000000001,
       "nextReview": "2026-10-30T23:00:00.000Z",
-      "exampleSentence": "자기소개서에 학교 생활 및 경력 사항을 잘 써야 합니다"
+      "exampleSentence": "자기소개서에 학교 생활 및 경력 사항을 잘 써야 합니다",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.371,
       "front": "Motywacja, reason",
       "back": "동기",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.7776,
@@ -540,7 +711,10 @@
       "rep": 4,
       "interval": 14,
       "ef": 1.5600000000000003,
-      "nextReview": "2026-11-05T23:00:00.000Z"
+      "nextReview": "2026-11-05T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.7012,
@@ -550,7 +724,10 @@
       "interval": 14,
       "ef": 1.5600000000000003,
       "nextReview": "2026-11-01T23:00:00.000Z",
-      "exampleSentence": "한국에서 장남은 책임감이 무겁습니다"
+      "exampleSentence": "한국에서 장남은 책임감이 무겁습니다",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.9163,
@@ -559,17 +736,23 @@
       "rep": 3,
       "interval": 43,
       "ef": 2.5,
-      "nextReview": "2026-11-29T23:00:00.000Z"
+      "nextReview": "2026-11-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.3064,
       "front": "Pośrednio",
       "back": "간접적으로",
-      "rep": 2,
-      "interval": 6,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z",
-      "exampleSentence": "그는 이 소식을 간접적으로 전달했어요"
+      "rep": 3,
+      "interval": 10,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-06T23:00:00.000Z",
+      "exampleSentence": "그는 이 소식을 간접적으로 전달했어요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.6162,
@@ -578,7 +761,10 @@
       "rep": 3,
       "interval": 12,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-04T23:00:00.000Z"
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.9436,
@@ -587,7 +773,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.6600000000000001,
-      "nextReview": "2026-11-01T23:00:00.000Z"
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.7493,
@@ -596,7 +785,10 @@
       "rep": 5,
       "interval": 33,
       "ef": 2.5,
-      "nextReview": "2026-11-21T23:00:00.000Z"
+      "nextReview": "2026-11-21T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.9336,
@@ -605,7 +797,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-02T23:00:00.000Z"
+      "nextReview": "2026-11-02T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.298,
@@ -615,7 +810,10 @@
       "interval": 10,
       "ef": 1.4000000000000001,
       "nextReview": "2026-11-02T23:00:00.000Z",
-      "exampleSentence": "한국에서 장남은 책임감이 무겁습니다"
+      "exampleSentence": "한국에서 장남은 책임감이 무겁습니다",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.974,
@@ -624,7 +822,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-11T23:00:00.000Z"
+      "nextReview": "2026-11-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.6511,
@@ -634,7 +835,10 @@
       "interval": 8,
       "ef": 1.3,
       "nextReview": "2026-10-29T23:00:00.000Z",
-      "exampleSentence": "시간이 부족해서 공부를 못 했어요"
+      "exampleSentence": "시간이 부족해서 공부를 못 했어요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.879,
@@ -643,7 +847,10 @@
       "rep": 2,
       "interval": 50,
       "ef": 2.5,
-      "nextReview": "2026-11-19T00:00:00.000Z"
+      "nextReview": "2026-11-19T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.8403,
@@ -652,7 +859,10 @@
       "rep": 6,
       "interval": 14,
       "ef": 1.6600000000000004,
-      "nextReview": "2026-11-08T23:00:00.000Z"
+      "nextReview": "2026-11-08T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.1204,
@@ -661,7 +871,10 @@
       "rep": 3,
       "interval": 38,
       "ef": 2.5,
-      "nextReview": "2026-11-21T23:00:00.000Z"
+      "nextReview": "2026-11-21T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445791.7766,
@@ -670,7 +883,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-12T23:00:00.000Z"
+      "nextReview": "2026-11-12T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445792.148,
@@ -679,7 +895,10 @@
       "rep": 2,
       "interval": 61,
       "ef": 2.5,
-      "nextReview": "2026-11-30T00:00:00.000Z"
+      "nextReview": "2026-11-30T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445792.5918,
@@ -688,7 +907,10 @@
       "rep": 3,
       "interval": 76,
       "ef": 2.6,
-      "nextReview": "2027-01-08T23:00:00.000Z"
+      "nextReview": "2027-01-08T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445792.1013,
@@ -697,7 +919,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445792.8267,
@@ -706,7 +931,10 @@
       "rep": 3,
       "interval": 40,
       "ef": 2.5,
-      "nextReview": "2026-11-24T23:00:00.000Z"
+      "nextReview": "2026-11-24T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445792.3806,
@@ -715,17 +943,23 @@
       "rep": 4,
       "interval": 14,
       "ef": 1.5600000000000003,
-      "nextReview": "2026-11-01T23:00:00.000Z"
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445792.8696,
       "front": "Pasja",
       "back": "열정",
-      "rep": 2,
-      "interval": 6,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z",
-      "exampleSentence": "처음의 열정을 잃지 마세요"
+      "rep": 3,
+      "interval": 10,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-06T23:00:00.000Z",
+      "exampleSentence": "처음의 열정을 잃지 마세요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.3418,
@@ -734,7 +968,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-01T23:00:00.000Z"
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.2202,
@@ -743,7 +980,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-11T23:00:00.000Z"
+      "nextReview": "2026-11-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.8699,
@@ -752,7 +992,10 @@
       "rep": 6,
       "interval": 28,
       "ef": 2.36,
-      "nextReview": "2026-11-17T23:00:00.000Z"
+      "nextReview": "2026-11-17T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.1165,
@@ -761,7 +1004,10 @@
       "rep": 2,
       "interval": 53,
       "ef": 2.5,
-      "nextReview": "2026-11-22T00:00:00.000Z"
+      "nextReview": "2026-11-22T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.656,
@@ -770,7 +1016,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.317,
@@ -779,7 +1028,10 @@
       "rep": 3,
       "interval": 82,
       "ef": 2.6,
-      "nextReview": "2027-01-16T23:00:00.000Z"
+      "nextReview": "2027-01-16T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.4814,
@@ -788,7 +1040,10 @@
       "rep": 4,
       "interval": 25,
       "ef": 2.5,
-      "nextReview": "2026-11-07T23:00:00.000Z"
+      "nextReview": "2026-11-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.3206,
@@ -798,7 +1053,10 @@
       "interval": 45,
       "ef": 2.5,
       "nextReview": "2026-11-14T00:00:00.000Z",
-      "exampleSentence": "선생님은 겸손한 사람을 좋아하세요"
+      "exampleSentence": "선생님은 겸손한 사람을 좋아하세요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.2493,
@@ -807,7 +1065,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-02T23:00:00.000Z"
+      "nextReview": "2026-11-02T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.7998,
@@ -816,7 +1077,10 @@
       "rep": 3,
       "interval": 8,
       "ef": 1.3,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.097,
@@ -825,7 +1089,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.753,
@@ -834,7 +1101,10 @@
       "rep": 3,
       "interval": 8,
       "ef": 1.3,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.0203,
@@ -843,7 +1113,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-11T23:00:00.000Z"
+      "nextReview": "2026-11-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.286,
@@ -852,7 +1125,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.6600000000000001,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.2224,
@@ -861,7 +1137,10 @@
       "rep": 4,
       "interval": 19,
       "ef": 2.36,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.4473,
@@ -870,16 +1149,22 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-11T23:00:00.000Z"
+      "nextReview": "2026-11-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.1423,
       "front": "To dry",
       "back": "말리다",
-      "rep": 3,
-      "interval": 8,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 4,
+      "interval": 12,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-08T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.5571,
@@ -889,26 +1174,35 @@
       "interval": 8,
       "ef": 1.3,
       "nextReview": "2026-10-29T23:00:00.000Z",
-      "exampleSentence": "이것을 남기세요"
+      "exampleSentence": "이것을 남기세요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.3206,
       "front": "Być pokornym",
       "back": "겸손하다",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z",
-      "exampleSentence": "선생님은 겸손한 사람을 좋아하세요"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "exampleSentence": "선생님은 겸손한 사람을 좋아하세요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.7969,
       "front": "Wyjeżdżać",
       "back": "떠나다",
-      "rep": 1,
-      "interval": 3,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.395,
@@ -917,7 +1211,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.4934,
@@ -926,17 +1223,23 @@
       "rep": 4,
       "interval": 46,
       "ef": 2.6,
-      "nextReview": "2026-12-07T23:00:00.000Z"
+      "nextReview": "2026-12-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.5874,
       "front": "Wylać",
       "back": "쏟기다",
-      "rep": 1,
-      "interval": 5,
+      "rep": 2,
+      "interval": 6,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-27T23:00:00.000Z",
-      "exampleSentence": "아이는 거실에서 물을 쏟겼어요"
+      "nextReview": "2026-11-02T23:00:00.000Z",
+      "exampleSentence": "아이는 거실에서 물을 쏟겼어요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.8381,
@@ -945,7 +1248,10 @@
       "rep": 4,
       "interval": 46,
       "ef": 2.6,
-      "nextReview": "2026-12-07T23:00:00.000Z"
+      "nextReview": "2026-12-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.0913,
@@ -954,17 +1260,23 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-13T23:00:00.000Z"
+      "nextReview": "2026-11-13T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.7258,
       "front": "Thanks to N",
       "back": "N은 덕분에",
-      "rep": 3,
-      "interval": 8,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z",
-      "exampleSentence": "선생님 덕분에 한국어 실력이 많이 늘었어요"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "exampleSentence": "선생님 덕분에 한국어 실력이 많이 늘었어요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.4822,
@@ -973,7 +1285,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.3538,
@@ -982,7 +1297,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.5745,
@@ -991,16 +1309,22 @@
       "rep": 3,
       "interval": 48,
       "ef": 2.5,
-      "nextReview": "2026-12-06T23:00:00.000Z"
+      "nextReview": "2026-12-06T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.1536,
       "front": "Zakup impulsywny",
       "back": "충동구매",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.3,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.6675,
@@ -1009,7 +1333,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.3286,
@@ -1018,7 +1345,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-14T23:00:00.000Z"
+      "nextReview": "2026-11-14T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.7493,
@@ -1027,16 +1357,22 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-14T23:00:00.000Z"
+      "nextReview": "2026-11-14T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.9573,
       "front": "Defect",
       "back": "하지",
-      "rep": 3,
-      "interval": 8,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 4,
+      "interval": 12,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-08T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.7942,
@@ -1045,16 +1381,22 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.4126,
       "front": "Refund",
       "back": "환불",
-      "rep": 3,
-      "interval": 8,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.0012,
@@ -1063,7 +1405,10 @@
       "rep": 3,
       "interval": 8,
       "ef": 1.3,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.3953,
@@ -1072,16 +1417,22 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.1626,
       "front": "Kupon wymiany",
       "back": "교환증",
-      "rep": 3,
-      "interval": 8,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 4,
+      "interval": 12,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-08T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.1943,
@@ -1090,7 +1441,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.8328,
@@ -1099,7 +1453,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.7000000000000002,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445793.8506,
@@ -1108,7 +1465,10 @@
       "rep": 3,
       "interval": 12,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-04T23:00:00.000Z"
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.2886,
@@ -1117,7 +1477,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-11T23:00:00.000Z"
+      "nextReview": "2026-11-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.9092,
@@ -1126,7 +1489,10 @@
       "rep": 4,
       "interval": 12,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-04T23:00:00.000Z"
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.048,
@@ -1135,7 +1501,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-11T23:00:00.000Z"
+      "nextReview": "2026-11-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.3787,
@@ -1144,7 +1513,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.086,
@@ -1154,7 +1526,10 @@
       "interval": 10,
       "ef": 1.4000000000000001,
       "nextReview": "2026-11-02T23:00:00.000Z",
-      "exampleSentence": "(폐차를 시키다 - to order car scrapping)"
+      "exampleSentence": "(폐차를 시키다 - to order car scrapping)",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.3867,
@@ -1163,7 +1538,10 @@
       "rep": 4,
       "interval": 14,
       "ef": 1.5600000000000003,
-      "nextReview": "2026-11-02T23:00:00.000Z"
+      "nextReview": "2026-11-02T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.3713,
@@ -1172,7 +1550,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.236,
@@ -1181,7 +1562,10 @@
       "rep": 4,
       "interval": 25,
       "ef": 2.5,
-      "nextReview": "2026-11-07T23:00:00.000Z"
+      "nextReview": "2026-11-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.6624,
@@ -1190,16 +1574,22 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.7000000000000002,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.8152,
       "front": "Shipping fee",
       "back": "택배비",
-      "rep": 1,
-      "interval": 5,
+      "rep": 2,
+      "interval": 6,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-11-02T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.4797,
@@ -1208,7 +1598,10 @@
       "rep": 3,
       "interval": 40,
       "ef": 2.5,
-      "nextReview": "2026-11-24T23:00:00.000Z"
+      "nextReview": "2026-11-24T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.5217,
@@ -1217,7 +1610,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-01T23:00:00.000Z"
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.204,
@@ -1226,7 +1622,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.7000000000000002,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.6804,
@@ -1236,7 +1635,10 @@
       "interval": 5,
       "ef": 1.4000000000000001,
       "nextReview": "2026-10-28T23:00:00.000Z",
-      "exampleSentence": "휴대폰 환면이 깨졌어요"
+      "exampleSentence": "휴대폰 환면이 깨졌어요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.913,
@@ -1246,7 +1648,10 @@
       "interval": 5,
       "ef": 1.4000000000000001,
       "nextReview": "2026-10-30T23:00:00.000Z",
-      "exampleSentence": "갑차기 큰 문에가 발생했어요"
+      "exampleSentence": "갑차기 큰 문에가 발생했어요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.3484,
@@ -1255,7 +1660,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-11T23:00:00.000Z"
+      "nextReview": "2026-11-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.23,
@@ -1264,7 +1672,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-11T23:00:00.000Z"
+      "nextReview": "2026-11-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.3245,
@@ -1273,7 +1684,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-04T23:00:00.000Z"
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.2202,
@@ -1282,7 +1696,10 @@
       "rep": 4,
       "interval": 38,
       "ef": 2.5,
-      "nextReview": "2026-11-27T23:00:00.000Z"
+      "nextReview": "2026-11-27T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.0125,
@@ -1291,16 +1708,22 @@
       "rep": 2,
       "interval": 43,
       "ef": 2.5,
-      "nextReview": "2026-11-12T00:00:00.000Z"
+      "nextReview": "2026-11-12T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.549,
       "front": "Wyraźnie, for sure",
       "back": "확실하다",
-      "rep": 3,
-      "interval": 8,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 4,
+      "interval": 12,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-08T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.8425,
@@ -1309,7 +1732,10 @@
       "rep": 2,
       "interval": 40,
       "ef": 2.5,
-      "nextReview": "2026-11-09T00:00:00.000Z"
+      "nextReview": "2026-11-09T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.2979,
@@ -1318,16 +1744,22 @@
       "rep": 6,
       "interval": 15,
       "ef": 2.0799999999999996,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.9575,
       "front": "Return request",
       "back": "반품 신청",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.3,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.7292,
@@ -1336,7 +1768,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-05T23:00:00.000Z"
+      "nextReview": "2026-11-05T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.9316,
@@ -1345,7 +1780,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-11T23:00:00.000Z"
+      "nextReview": "2026-11-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.5137,
@@ -1354,7 +1792,10 @@
       "rep": 3,
       "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-11-03T23:00:00.000Z"
+      "nextReview": "2026-11-03T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.6543,
@@ -1363,17 +1804,23 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.6600000000000001,
-      "nextReview": "2026-11-01T23:00:00.000Z"
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.5754,
       "front": "Temptation",
       "back": "유혹",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z",
-      "exampleSentence": "나를 맛있는 음식으로 유혹하지 마세요"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "exampleSentence": "나를 맛있는 음식으로 유혹하지 마세요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.1047,
@@ -1382,7 +1829,10 @@
       "rep": 2,
       "interval": 34,
       "ef": 2.5,
-      "nextReview": "2026-11-03T00:00:00.000Z"
+      "nextReview": "2026-11-03T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.6409,
@@ -1391,7 +1841,10 @@
       "rep": 3,
       "interval": 33,
       "ef": 2.5,
-      "nextReview": "2026-11-14T23:00:00.000Z"
+      "nextReview": "2026-11-14T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.4807,
@@ -1400,7 +1853,10 @@
       "rep": 3,
       "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-11-03T23:00:00.000Z"
+      "nextReview": "2026-11-03T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.713,
@@ -1410,7 +1866,10 @@
       "interval": 5,
       "ef": 1.4000000000000001,
       "nextReview": "2026-10-30T23:00:00.000Z",
-      "exampleSentence": "그는 자신의 잘못을 깊이 반성하고 있다"
+      "exampleSentence": "그는 자신의 잘못을 깊이 반성하고 있다",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.9143,
@@ -1419,7 +1878,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-02T23:00:00.000Z"
+      "nextReview": "2026-11-02T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.897,
@@ -1428,16 +1890,22 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.1106,
       "front": "Quantity",
       "back": "수량",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.5000000000000002,
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.438,
@@ -1446,7 +1914,10 @@
       "rep": 3,
       "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-11-05T23:00:00.000Z"
+      "nextReview": "2026-11-05T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.362,
@@ -1455,7 +1926,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.225,
@@ -1464,7 +1938,10 @@
       "rep": 3,
       "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-11-05T23:00:00.000Z"
+      "nextReview": "2026-11-05T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.992,
@@ -1473,7 +1950,10 @@
       "rep": 3,
       "interval": 15,
       "ef": 2.5,
-      "nextReview": "2026-11-05T23:00:00.000Z"
+      "nextReview": "2026-11-05T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.656,
@@ -1482,7 +1962,10 @@
       "rep": 4,
       "interval": 46,
       "ef": 2.6,
-      "nextReview": "2026-12-07T23:00:00.000Z"
+      "nextReview": "2026-12-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.3835,
@@ -1491,25 +1974,34 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.1472,
       "front": "Beginner",
       "back": "초보자",
-      "rep": 3,
-      "interval": 8,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 4,
+      "interval": 12,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-08T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.8896,
       "front": "Experienced candidate",
       "back": "경력자 우대",
-      "rep": 1,
-      "interval": 3,
+      "rep": 2,
+      "interval": 2,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.4958,
@@ -1518,7 +2010,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.8044,
@@ -1527,7 +2022,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-04T23:00:00.000Z"
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.6963,
@@ -1536,7 +2034,10 @@
       "rep": 3,
       "interval": 12,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-04T23:00:00.000Z"
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.2458,
@@ -1545,7 +2046,10 @@
       "rep": 3,
       "interval": 18,
       "ef": 2.6,
-      "nextReview": "2026-11-10T23:00:00.000Z"
+      "nextReview": "2026-11-10T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.6938,
@@ -1554,7 +2058,10 @@
       "rep": 4,
       "interval": 46,
       "ef": 2.6,
-      "nextReview": "2026-12-07T23:00:00.000Z"
+      "nextReview": "2026-12-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.5317,
@@ -1563,7 +2070,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.773,
@@ -1572,7 +2082,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.2112,
@@ -1581,7 +2094,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.4924,
@@ -1590,7 +2106,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445794.065,
@@ -1599,7 +2118,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.9348,
@@ -1608,7 +2130,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.3345,
@@ -1617,7 +2142,10 @@
       "rep": 3,
       "interval": 12,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-07T23:00:00.000Z"
+      "nextReview": "2026-11-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.0693,
@@ -1626,7 +2154,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.7585,
@@ -1635,7 +2166,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.3853,
@@ -1644,7 +2178,10 @@
       "rep": 4,
       "interval": 46,
       "ef": 2.6,
-      "nextReview": "2026-12-07T23:00:00.000Z"
+      "nextReview": "2026-12-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.0579,
@@ -1653,7 +2190,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.1938,
@@ -1662,16 +2202,22 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.5488,
       "front": "Fortunately",
       "back": "다행히",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.3,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.8848,
@@ -1680,7 +2226,10 @@
       "rep": 2,
       "interval": 42,
       "ef": 2.5,
-      "nextReview": "2026-11-11T00:00:00.000Z"
+      "nextReview": "2026-11-11T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.5166,
@@ -1689,7 +2238,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.1829,
@@ -1698,7 +2250,10 @@
       "rep": 3,
       "interval": 18,
       "ef": 2.6,
-      "nextReview": "2026-11-13T23:00:00.000Z"
+      "nextReview": "2026-11-13T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.4116,
@@ -1707,7 +2262,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.5261,
@@ -1716,7 +2274,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.3447,
@@ -1725,7 +2286,10 @@
       "rep": 4,
       "interval": 12,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-04T23:00:00.000Z"
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.5896,
@@ -1734,7 +2298,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-11T23:00:00.000Z"
+      "nextReview": "2026-11-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.5815,
@@ -1743,7 +2310,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.4854,
@@ -1752,7 +2322,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-02T23:00:00.000Z"
+      "nextReview": "2026-11-02T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.957,
@@ -1761,16 +2334,22 @@
       "rep": 3,
       "interval": 45,
       "ef": 2.5,
-      "nextReview": "2026-12-01T23:00:00.000Z"
+      "nextReview": "2026-12-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.9326,
       "front": "Mieć mały apetyt",
       "back": "입이 잛다",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.5000000000000002,
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.6304,
@@ -1779,7 +2358,10 @@
       "rep": 4,
       "interval": 10,
       "ef": 1.3,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.0378,
@@ -1788,7 +2370,10 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.988,
@@ -1797,7 +2382,10 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.3225,
@@ -1806,7 +2394,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-05T23:00:00.000Z"
+      "nextReview": "2026-11-05T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.7898,
@@ -1815,7 +2406,10 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.6807,
@@ -1824,7 +2418,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.213,
@@ -1833,16 +2430,22 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-01T23:00:00.000Z"
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.6624,
       "front": "Location",
       "back": "위치",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.5000000000000002,
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.576,
@@ -1851,7 +2454,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 2.6,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.4963,
@@ -1860,7 +2466,10 @@
       "rep": 3,
       "interval": 9,
       "ef": 1.42,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.4883,
@@ -1869,16 +2478,22 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.2222,
       "front": "Jak płacić / metoda płatności",
       "back": "돈을 내는 방법",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.5000000000000002,
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.9292,
@@ -1887,7 +2502,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-11T23:00:00.000Z"
+      "nextReview": "2026-11-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.2913,
@@ -1896,7 +2514,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.4648,
@@ -1905,7 +2526,10 @@
       "rep": 4,
       "interval": 46,
       "ef": 2.6,
-      "nextReview": "2026-12-07T23:00:00.000Z"
+      "nextReview": "2026-12-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.6125,
@@ -1914,16 +2538,22 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.2527,
       "front": "Przestronny",
       "back": "넓다",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.8000000000000003,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.3,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.8767,
@@ -1932,16 +2562,22 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.0808,
       "front": "College area",
       "back": "대학가",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.1,
@@ -1950,7 +2586,10 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.101,
@@ -1959,7 +2598,10 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.7908,
@@ -1969,7 +2611,10 @@
       "interval": 8,
       "ef": 1.3,
       "nextReview": "2026-10-29T23:00:00.000Z",
-      "exampleSentence": ""
+      "exampleSentence": "",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.4875,
@@ -1978,7 +2623,10 @@
       "rep": 4,
       "interval": 12,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-04T23:00:00.000Z"
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.062,
@@ -1987,16 +2635,22 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.071,
       "front": "Bookstore",
       "back": "서점",
-      "rep": 1,
-      "interval": 5,
-      "ef": 2.6,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 2,
+      "interval": 8,
+      "ef": 2.7,
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.2834,
@@ -2005,7 +2659,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.2703,
@@ -2014,7 +2671,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.7446,
@@ -2023,7 +2683,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.5793,
@@ -2032,7 +2695,10 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.9023,
@@ -2041,7 +2707,10 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.9187,
@@ -2050,7 +2719,10 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.4182,
@@ -2059,16 +2731,22 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.8618,
       "front": "Czasami X, czasami Y",
       "back": "X기도 하고 Y기도 하다",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.2268,
@@ -2077,7 +2755,10 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.4092,
@@ -2086,7 +2767,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.875,
@@ -2095,7 +2779,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.0977,
@@ -2104,16 +2791,22 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.0837,
       "front": "Population",
       "back": "인구",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.048,
@@ -2122,16 +2815,22 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.8794,
       "front": "To stretch",
       "back": "늘어나다",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.5962,
@@ -2140,7 +2839,10 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.5518,
@@ -2149,7 +2851,10 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.8826,
@@ -2157,8 +2862,11 @@
       "back": "방세",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "ef": 1.3,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.2979,
@@ -2167,7 +2875,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.683,
@@ -2176,7 +2887,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 2.6,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.542,
@@ -2184,8 +2898,11 @@
       "back": "마침",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "ef": 1.3,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.4973,
@@ -2193,8 +2910,11 @@
       "back": "부동산 중개사",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "ef": 1.3,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445795.9683,
@@ -2202,8 +2922,11 @@
       "back": "안전하다",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "ef": 1.3,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.0483,
@@ -2212,52 +2935,70 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.9084,
       "front": "Find out",
       "back": "알아보다",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.7627,
       "front": "Id card",
       "back": "신분증",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.0256,
       "front": "Bathroom",
       "back": "욕실",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.603,
       "front": "Pet",
       "back": "애완동물",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.5808,
       "front": "To keep, to raise animal",
       "back": "키우다",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.694,
@@ -2266,7 +3007,10 @@
       "rep": 4,
       "interval": 30,
       "ef": 2.36,
-      "nextReview": "2026-11-21T23:00:00.000Z"
+      "nextReview": "2026-11-21T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.3582,
@@ -2275,7 +3019,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "nextReview": "2026-09-30T15:17:25.796Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.0037,
@@ -2284,7 +3031,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "nextReview": "2026-09-30T15:17:25.796Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.9146,
@@ -2293,7 +3043,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "nextReview": "2026-09-30T15:17:25.796Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.7498,
@@ -2302,7 +3055,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "nextReview": "2026-09-30T15:17:25.796Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.9575,
@@ -2311,7 +3067,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "nextReview": "2026-09-30T15:17:25.796Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.9617,
@@ -2320,7 +3079,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "nextReview": "2026-09-30T15:17:25.796Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.2542,
@@ -2329,7 +3091,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "nextReview": "2026-09-30T15:17:25.796Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.7532,
@@ -2338,7 +3103,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "nextReview": "2026-09-30T15:17:25.796Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.7524,
@@ -2347,7 +3115,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "nextReview": "2026-09-30T15:17:25.796Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.5923,
@@ -2356,7 +3127,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "nextReview": "2026-09-30T15:17:25.796Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.6965,
@@ -2365,16 +3139,22 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.6504,
       "front": "Progress",
       "back": "진행",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.3,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.5276,
@@ -2383,7 +3163,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "nextReview": "2026-09-30T15:17:25.796Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.5544,
@@ -2392,7 +3175,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.796Z"
+      "nextReview": "2026-09-30T15:17:25.796Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.9954,
@@ -2401,7 +3187,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-05T23:00:00.000Z"
+      "nextReview": "2026-11-05T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.303,
@@ -2410,7 +3199,10 @@
       "rep": 4,
       "interval": 46,
       "ef": 2.6,
-      "nextReview": "2026-12-07T23:00:00.000Z"
+      "nextReview": "2026-12-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.137,
@@ -2419,7 +3211,10 @@
       "rep": 2,
       "interval": 166,
       "ef": 2.5,
-      "nextReview": "2027-03-15T00:00:00.000Z"
+      "nextReview": "2027-03-15T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.8423,
@@ -2428,7 +3223,10 @@
       "rep": 2,
       "interval": 130,
       "ef": 2.5,
-      "nextReview": "2027-02-07T00:00:00.000Z"
+      "nextReview": "2027-02-07T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.1384,
@@ -2437,7 +3235,10 @@
       "rep": 2,
       "interval": 77,
       "ef": 2.5,
-      "nextReview": "2026-12-16T00:00:00.000Z"
+      "nextReview": "2026-12-16T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.3706,
@@ -2446,7 +3247,10 @@
       "rep": 3,
       "interval": 45,
       "ef": 2.5,
-      "nextReview": "2026-12-01T23:00:00.000Z"
+      "nextReview": "2026-12-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.6653,
@@ -2455,16 +3259,22 @@
       "rep": 4,
       "interval": 26,
       "ef": 2.6,
-      "nextReview": "2026-11-07T23:00:00.000Z"
+      "nextReview": "2026-11-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.3418,
       "front": "lider spóźnialstwa",
       "back": "지각 대장",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.8000000000000003,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.9000000000000004,
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.2004,
@@ -2473,7 +3283,10 @@
       "rep": 2,
       "interval": 68,
       "ef": 2.5,
-      "nextReview": "2026-12-07T00:00:00.000Z"
+      "nextReview": "2026-12-07T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.272,
@@ -2483,7 +3296,10 @@
       "interval": 12,
       "ef": 1.8000000000000003,
       "nextReview": "2026-11-04T23:00:00.000Z",
-      "exampleSentence": ""
+      "exampleSentence": "",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.3953,
@@ -2492,7 +3308,10 @@
       "rep": 2,
       "interval": 41,
       "ef": 2.5,
-      "nextReview": "2026-11-10T00:00:00.000Z"
+      "nextReview": "2026-11-10T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.841,
@@ -2501,7 +3320,10 @@
       "rep": 3,
       "interval": 23,
       "ef": 2.5,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.23,
@@ -2510,7 +3332,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.9912,
@@ -2519,7 +3344,10 @@
       "rep": 3,
       "interval": 23,
       "ef": 2.5,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.3257,
@@ -2528,7 +3356,10 @@
       "rep": 4,
       "interval": 28,
       "ef": 2.36,
-      "nextReview": "2026-11-14T23:00:00.000Z"
+      "nextReview": "2026-11-14T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.851,
@@ -2537,7 +3368,10 @@
       "rep": 5,
       "interval": 28,
       "ef": 2.36,
-      "nextReview": "2026-11-17T23:00:00.000Z"
+      "nextReview": "2026-11-17T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.2563,
@@ -2546,7 +3380,10 @@
       "rep": 3,
       "interval": 45,
       "ef": 2.5,
-      "nextReview": "2026-12-01T23:00:00.000Z"
+      "nextReview": "2026-12-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.8035,
@@ -2555,7 +3392,10 @@
       "rep": 2,
       "interval": 32,
       "ef": 2.5,
-      "nextReview": "2026-11-01T00:00:00.000Z"
+      "nextReview": "2026-11-01T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.9402,
@@ -2564,7 +3404,10 @@
       "rep": 4,
       "interval": 31,
       "ef": 2.6,
-      "nextReview": "2026-11-15T23:00:00.000Z"
+      "nextReview": "2026-11-15T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.1436,
@@ -2573,7 +3416,10 @@
       "rep": 2,
       "interval": 36,
       "ef": 2.5,
-      "nextReview": "2026-11-05T00:00:00.000Z"
+      "nextReview": "2026-11-05T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.9973,
@@ -2582,7 +3428,10 @@
       "rep": 2,
       "interval": 52,
       "ef": 2.5,
-      "nextReview": "2026-11-21T00:00:00.000Z"
+      "nextReview": "2026-11-21T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.753,
@@ -2591,7 +3440,10 @@
       "rep": 2,
       "interval": 63,
       "ef": 2.5,
-      "nextReview": "2026-12-02T00:00:00.000Z"
+      "nextReview": "2026-12-02T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.0261,
@@ -2600,7 +3452,10 @@
       "rep": 4,
       "interval": 26,
       "ef": 2.6,
-      "nextReview": "2026-11-07T23:00:00.000Z"
+      "nextReview": "2026-11-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.019,
@@ -2609,7 +3464,10 @@
       "rep": 2,
       "interval": 243,
       "ef": 2.5,
-      "nextReview": "2027-05-31T00:00:00.000Z"
+      "nextReview": "2027-05-31T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.7383,
@@ -2618,7 +3476,10 @@
       "rep": 2,
       "interval": 47,
       "ef": 2.5,
-      "nextReview": "2026-11-16T00:00:00.000Z"
+      "nextReview": "2026-11-16T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.208,
@@ -2627,7 +3488,10 @@
       "rep": 4,
       "interval": 33,
       "ef": 2.5,
-      "nextReview": "2026-11-19T23:00:00.000Z"
+      "nextReview": "2026-11-19T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.4326,
@@ -2636,7 +3500,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-12T23:00:00.000Z"
+      "nextReview": "2026-11-12T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.786,
@@ -2645,7 +3512,10 @@
       "rep": 2,
       "interval": 93,
       "ef": 2.5,
-      "nextReview": "2027-01-01T00:00:00.000Z"
+      "nextReview": "2027-01-01T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.5535,
@@ -2654,7 +3524,10 @@
       "rep": 3,
       "interval": 13,
       "ef": 1.9000000000000004,
-      "nextReview": "2026-11-07T23:00:00.000Z"
+      "nextReview": "2026-11-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.748,
@@ -2663,7 +3536,10 @@
       "rep": 2,
       "interval": 73,
       "ef": 2.5,
-      "nextReview": "2026-12-12T00:00:00.000Z"
+      "nextReview": "2026-12-12T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.1445,
@@ -2672,7 +3548,10 @@
       "rep": 2,
       "interval": 87,
       "ef": 2.5,
-      "nextReview": "2026-12-26T00:00:00.000Z"
+      "nextReview": "2026-12-26T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.846,
@@ -2681,7 +3560,10 @@
       "rep": 4,
       "interval": 28,
       "ef": 2.36,
-      "nextReview": "2026-11-16T23:00:00.000Z"
+      "nextReview": "2026-11-16T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.3464,
@@ -2690,7 +3572,10 @@
       "rep": 5,
       "interval": 28,
       "ef": 2.36,
-      "nextReview": "2026-11-17T23:00:00.000Z"
+      "nextReview": "2026-11-17T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.6055,
@@ -2699,7 +3584,10 @@
       "rep": 3,
       "interval": 78,
       "ef": 2.6,
-      "nextReview": "2027-01-11T23:00:00.000Z"
+      "nextReview": "2027-01-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445796.7815,
@@ -2708,7 +3596,10 @@
       "rep": 2,
       "interval": 55,
       "ef": 2.5,
-      "nextReview": "2026-11-24T00:00:00.000Z"
+      "nextReview": "2026-11-24T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.326,
@@ -2717,7 +3608,10 @@
       "rep": 3,
       "interval": 12,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-07T23:00:00.000Z"
+      "nextReview": "2026-11-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.8804,
@@ -2726,7 +3620,10 @@
       "rep": 2,
       "interval": 46,
       "ef": 2.5,
-      "nextReview": "2026-11-15T00:00:00.000Z"
+      "nextReview": "2026-11-15T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.1016,
@@ -2735,7 +3632,10 @@
       "rep": 2,
       "interval": 118,
       "ef": 2.5,
-      "nextReview": "2027-01-26T00:00:00.000Z"
+      "nextReview": "2027-01-26T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.6099,
@@ -2744,16 +3644,22 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.1375,
       "front": "burden",
       "back": "부담",
-      "rep": 2,
-      "interval": 28,
+      "rep": 3,
+      "interval": 70,
       "ef": 2.5,
-      "nextReview": "2026-10-28T00:00:00.000Z"
+      "nextReview": "2027-01-05T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.205,
@@ -2762,7 +3668,10 @@
       "rep": 2,
       "interval": 51,
       "ef": 2.5,
-      "nextReview": "2026-11-20T00:00:00.000Z"
+      "nextReview": "2026-11-20T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.8555,
@@ -2771,7 +3680,10 @@
       "rep": 4,
       "interval": 38,
       "ef": 2.5,
-      "nextReview": "2026-11-27T23:00:00.000Z"
+      "nextReview": "2026-11-27T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.8164,
@@ -2780,16 +3692,22 @@
       "rep": 3,
       "interval": 45,
       "ef": 2.5,
-      "nextReview": "2026-12-01T23:00:00.000Z"
+      "nextReview": "2026-12-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.774,
       "front": "zasnąć",
       "back": "잠들다",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.8000000000000003,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.9000000000000004,
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.2373,
@@ -2798,7 +3716,10 @@
       "rep": 3,
       "interval": 76,
       "ef": 2.6,
-      "nextReview": "2027-01-08T23:00:00.000Z"
+      "nextReview": "2027-01-08T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.4827,
@@ -2807,7 +3728,10 @@
       "rep": 2,
       "interval": 49,
       "ef": 2.5,
-      "nextReview": "2026-11-18T00:00:00.000Z"
+      "nextReview": "2026-11-18T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.7812,
@@ -2816,7 +3740,10 @@
       "rep": 4,
       "interval": 46,
       "ef": 2.6,
-      "nextReview": "2026-12-07T23:00:00.000Z"
+      "nextReview": "2026-12-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.2607,
@@ -2825,7 +3752,10 @@
       "rep": 4,
       "interval": 46,
       "ef": 2.6,
-      "nextReview": "2026-12-07T23:00:00.000Z"
+      "nextReview": "2026-12-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.739,
@@ -2835,7 +3765,10 @@
       "interval": 10,
       "ef": 1.7000000000000002,
       "nextReview": "2026-10-29T23:00:00.000Z",
-      "exampleSentence": "토핔 후에 한국어를 계속 공부할지 아직 결정 안 했어요"
+      "exampleSentence": "토핔 후에 한국어를 계속 공부할지 아직 결정 안 했어요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.3813,
@@ -2844,7 +3777,10 @@
       "rep": 2,
       "interval": 159,
       "ef": 2.5,
-      "nextReview": "2027-03-08T00:00:00.000Z"
+      "nextReview": "2027-03-08T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.8345,
@@ -2853,7 +3789,10 @@
       "rep": 2,
       "interval": 42,
       "ef": 2.5,
-      "nextReview": "2026-11-11T00:00:00.000Z"
+      "nextReview": "2026-11-11T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.7917,
@@ -2862,7 +3801,10 @@
       "rep": 2,
       "interval": 55,
       "ef": 2.5,
-      "nextReview": "2026-11-24T00:00:00.000Z"
+      "nextReview": "2026-11-24T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.4065,
@@ -2871,7 +3813,10 @@
       "rep": 2,
       "interval": 35,
       "ef": 2.5,
-      "nextReview": "2026-11-04T00:00:00.000Z"
+      "nextReview": "2026-11-04T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.5652,
@@ -2880,7 +3825,10 @@
       "rep": 2,
       "interval": 108,
       "ef": 2.5,
-      "nextReview": "2027-01-16T00:00:00.000Z"
+      "nextReview": "2027-01-16T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.6345,
@@ -2889,7 +3837,10 @@
       "rep": 2,
       "interval": 43,
       "ef": 2.5,
-      "nextReview": "2026-11-12T00:00:00.000Z"
+      "nextReview": "2026-11-12T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.382,
@@ -2898,7 +3849,10 @@
       "rep": 3,
       "interval": 40,
       "ef": 2.5,
-      "nextReview": "2026-11-24T23:00:00.000Z"
+      "nextReview": "2026-11-24T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.7976,
@@ -2907,7 +3861,10 @@
       "rep": 2,
       "interval": 104,
       "ef": 2.5,
-      "nextReview": "2027-01-12T00:00:00.000Z"
+      "nextReview": "2027-01-12T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.0374,
@@ -2916,7 +3873,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.5637,
@@ -2925,7 +3885,10 @@
       "rep": 2,
       "interval": 96,
       "ef": 2.5,
-      "nextReview": "2027-01-04T00:00:00.000Z"
+      "nextReview": "2027-01-04T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.0227,
@@ -2934,7 +3897,10 @@
       "rep": 2,
       "interval": 68,
       "ef": 2.5,
-      "nextReview": "2026-12-07T00:00:00.000Z"
+      "nextReview": "2026-12-07T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.3855,
@@ -2943,7 +3909,10 @@
       "rep": 4,
       "interval": 46,
       "ef": 2.6,
-      "nextReview": "2026-12-07T23:00:00.000Z"
+      "nextReview": "2026-12-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.1362,
@@ -2952,7 +3921,10 @@
       "rep": 2,
       "interval": 111,
       "ef": 2.5,
-      "nextReview": "2027-01-19T00:00:00.000Z"
+      "nextReview": "2027-01-19T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.5862,
@@ -2961,7 +3933,10 @@
       "rep": 3,
       "interval": 28,
       "ef": 2.5,
-      "nextReview": "2026-11-09T23:00:00.000Z"
+      "nextReview": "2026-11-09T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445797.533,
@@ -2970,7 +3945,10 @@
       "rep": 2,
       "interval": 54,
       "ef": 2.5,
-      "nextReview": "2026-11-23T00:00:00.000Z"
+      "nextReview": "2026-11-23T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.555,
@@ -2979,7 +3957,10 @@
       "rep": 2,
       "interval": 54,
       "ef": 2.5,
-      "nextReview": "2026-11-23T00:00:00.000Z"
+      "nextReview": "2026-11-23T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.24,
@@ -2988,7 +3969,10 @@
       "rep": 2,
       "interval": 32,
       "ef": 2.5,
-      "nextReview": "2026-11-01T00:00:00.000Z"
+      "nextReview": "2026-11-01T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.5532,
@@ -2997,7 +3981,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-14T23:00:00.000Z"
+      "nextReview": "2026-11-14T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.3242,
@@ -3006,7 +3993,10 @@
       "rep": 3,
       "interval": 38,
       "ef": 2.5,
-      "nextReview": "2026-11-21T23:00:00.000Z"
+      "nextReview": "2026-11-21T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.5454,
@@ -3015,7 +4005,10 @@
       "rep": 2,
       "interval": 102,
       "ef": 2.5,
-      "nextReview": "2027-01-10T00:00:00.000Z"
+      "nextReview": "2027-01-10T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.4294,
@@ -3024,7 +4017,10 @@
       "rep": 3,
       "interval": 35,
       "ef": 2.5,
-      "nextReview": "2026-11-17T23:00:00.000Z"
+      "nextReview": "2026-11-17T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.8906,
@@ -3033,7 +4029,10 @@
       "rep": 4,
       "interval": 28,
       "ef": 2.36,
-      "nextReview": "2026-11-16T23:00:00.000Z"
+      "nextReview": "2026-11-16T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.8972,
@@ -3042,7 +4041,10 @@
       "rep": 3,
       "interval": 78,
       "ef": 2.6,
-      "nextReview": "2027-01-11T23:00:00.000Z"
+      "nextReview": "2027-01-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.5818,
@@ -3051,7 +4053,10 @@
       "rep": 4,
       "interval": 30,
       "ef": 2.36,
-      "nextReview": "2026-11-21T23:00:00.000Z"
+      "nextReview": "2026-11-21T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.138,
@@ -3060,7 +4065,10 @@
       "rep": 4,
       "interval": 46,
       "ef": 2.6,
-      "nextReview": "2026-12-07T23:00:00.000Z"
+      "nextReview": "2026-12-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.5522,
@@ -3069,17 +4077,23 @@
       "rep": 2,
       "interval": 228,
       "ef": 2.5,
-      "nextReview": "2027-05-16T00:00:00.000Z"
+      "nextReview": "2027-05-16T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.2935,
       "front": "participate",
       "back": "참가하다",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
-      "nextReview": "2026-10-27T23:00:00.000Z",
-      "exampleSentence": "내일 회의에 참가할 수 있어요?"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.3,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "exampleSentence": "내일 회의에 참가할 수 있어요?",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.4182,
@@ -3088,7 +4102,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-02T23:00:00.000Z"
+      "nextReview": "2026-11-02T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.4993,
@@ -3097,7 +4114,10 @@
       "rep": 2,
       "interval": 111,
       "ef": 2.5,
-      "nextReview": "2027-01-19T00:00:00.000Z"
+      "nextReview": "2027-01-19T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.9473,
@@ -3106,7 +4126,10 @@
       "rep": 2,
       "interval": 33,
       "ef": 2.5,
-      "nextReview": "2026-11-02T00:00:00.000Z"
+      "nextReview": "2026-11-02T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.9426,
@@ -3115,7 +4138,10 @@
       "rep": 2,
       "interval": 41,
       "ef": 2.5,
-      "nextReview": "2026-11-10T00:00:00.000Z"
+      "nextReview": "2026-11-10T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.821,
@@ -3124,7 +4150,10 @@
       "rep": 3,
       "interval": 12,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-06T23:00:00.000Z"
+      "nextReview": "2026-11-06T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.7703,
@@ -3133,7 +4162,10 @@
       "rep": 4,
       "interval": 46,
       "ef": 2.6,
-      "nextReview": "2026-12-07T23:00:00.000Z"
+      "nextReview": "2026-12-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.7488,
@@ -3142,7 +4174,10 @@
       "rep": 4,
       "interval": 12,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-04T23:00:00.000Z"
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.3748,
@@ -3151,7 +4186,10 @@
       "rep": 3,
       "interval": 38,
       "ef": 2.5,
-      "nextReview": "2026-11-21T23:00:00.000Z"
+      "nextReview": "2026-11-21T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.082,
@@ -3160,7 +4198,10 @@
       "rep": 5,
       "interval": 20,
       "ef": 2.5,
-      "nextReview": "2026-11-01T23:00:00.000Z"
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.0547,
@@ -3169,7 +4210,10 @@
       "rep": 4,
       "interval": 20,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-11T23:00:00.000Z"
+      "nextReview": "2026-11-11T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.1409,
@@ -3178,7 +4222,10 @@
       "rep": 2,
       "interval": 65,
       "ef": 2.5,
-      "nextReview": "2026-12-04T00:00:00.000Z"
+      "nextReview": "2026-12-04T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.4753,
@@ -3187,7 +4234,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.9592,
@@ -3196,25 +4246,34 @@
       "rep": 2,
       "interval": 30,
       "ef": 2.5,
-      "nextReview": "2026-10-30T00:00:00.000Z"
+      "nextReview": "2026-10-30T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.425,
       "front": "free / darmowy",
       "back": "무료",
-      "rep": 3,
-      "interval": 20,
-      "ef": 2.5,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.7000000000000002,
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.0042,
       "front": "meaning / znaczenie",
       "back": "의미",
-      "rep": 3,
-      "interval": 20,
-      "ef": 2.5,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 4,
+      "interval": 60,
+      "ef": 2.6,
+      "nextReview": "2026-12-26T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.3591,
@@ -3223,7 +4282,10 @@
       "rep": 1,
       "interval": 3,
       "ef": 1.3,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.9387,
@@ -3232,7 +4294,10 @@
       "rep": 2,
       "interval": 43,
       "ef": 2.5,
-      "nextReview": "2026-11-12T00:00:00.000Z"
+      "nextReview": "2026-11-12T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.7114,
@@ -3241,7 +4306,10 @@
       "rep": 2,
       "interval": 61,
       "ef": 2.5,
-      "nextReview": "2026-11-30T00:00:00.000Z"
+      "nextReview": "2026-11-30T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445798.7422,
@@ -3250,7 +4318,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.798Z"
+      "nextReview": "2026-09-30T15:17:25.798Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.2273,
@@ -3259,17 +4330,23 @@
       "rep": 3,
       "interval": 35,
       "ef": 2.5,
-      "nextReview": "2026-11-06T18:56:03.132Z"
+      "nextReview": "2026-11-06T18:56:03.132Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.2483,
       "front": "tylko / jedynie",
       "back": "단지",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.7000000000000002,
-      "nextReview": "2026-10-27T23:00:00.000Z",
-      "exampleSentence": "단지 가정일 뿐이에요"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.8000000000000003,
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "exampleSentence": "단지 가정일 뿐이에요",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.2698,
@@ -3279,7 +4356,10 @@
       "interval": 20,
       "ef": 2.5,
       "nextReview": "2026-11-01T23:00:00.000Z",
-      "exampleSentence": ""
+      "exampleSentence": "",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.039,
@@ -3288,7 +4368,10 @@
       "rep": 3,
       "interval": 28,
       "ef": 2.36,
-      "nextReview": "2026-10-30T18:56:14.796Z"
+      "nextReview": "2026-10-30T18:56:14.796Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.6602,
@@ -3297,7 +4380,10 @@
       "rep": 4,
       "interval": 25,
       "ef": 2.5,
-      "nextReview": "2026-11-07T23:00:00.000Z"
+      "nextReview": "2026-11-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.721,
@@ -3307,7 +4393,10 @@
       "interval": 20,
       "ef": 2.5,
       "nextReview": "2026-11-01T23:00:00.000Z",
-      "exampleSentence": ""
+      "exampleSentence": "",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.3972,
@@ -3316,7 +4405,10 @@
       "rep": 5,
       "interval": 28,
       "ef": 2.36,
-      "nextReview": "2026-11-17T23:00:00.000Z"
+      "nextReview": "2026-11-17T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.8186,
@@ -3325,7 +4417,10 @@
       "rep": 4,
       "interval": 24,
       "ef": 1.9000000000000004,
-      "nextReview": "2026-11-17T23:00:00.000Z"
+      "nextReview": "2026-11-17T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.3008,
@@ -3334,7 +4429,10 @@
       "rep": 4,
       "interval": 56,
       "ef": 2.7,
-      "nextReview": "2026-12-20T23:00:00.000Z"
+      "nextReview": "2026-12-20T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.0776,
@@ -3343,7 +4441,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.449,
@@ -3352,7 +4453,10 @@
       "rep": 3,
       "interval": 28,
       "ef": 2.5,
-      "nextReview": "2026-11-09T23:00:00.000Z"
+      "nextReview": "2026-11-09T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.4094,
@@ -3361,7 +4465,10 @@
       "rep": 2,
       "interval": 57,
       "ef": 2.5,
-      "nextReview": "2026-11-26T00:00:00.000Z"
+      "nextReview": "2026-11-26T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.079,
@@ -3370,7 +4477,10 @@
       "rep": 4,
       "interval": 33,
       "ef": 2.5,
-      "nextReview": "2026-11-19T23:00:00.000Z"
+      "nextReview": "2026-11-19T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.1802,
@@ -3379,7 +4489,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.7000000000000002,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.3955,
@@ -3388,7 +4501,10 @@
       "rep": 4,
       "interval": 46,
       "ef": 2.6,
-      "nextReview": "2026-12-07T23:00:00.000Z"
+      "nextReview": "2026-12-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.2114,
@@ -3397,7 +4513,10 @@
       "rep": 2,
       "interval": 32,
       "ef": 2.5,
-      "nextReview": "2026-11-01T00:00:00.000Z"
+      "nextReview": "2026-11-01T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.2615,
@@ -3406,7 +4525,10 @@
       "rep": 2,
       "interval": 63,
       "ef": 2.5,
-      "nextReview": "2026-12-02T00:00:00.000Z"
+      "nextReview": "2026-12-02T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.8354,
@@ -3415,7 +4537,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.1052,
@@ -3424,7 +4549,10 @@
       "rep": 2,
       "interval": 46,
       "ef": 2.5,
-      "nextReview": "2026-11-15T00:00:00.000Z"
+      "nextReview": "2026-11-15T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.7266,
@@ -3433,7 +4561,10 @@
       "rep": 3,
       "interval": 28,
       "ef": 2.5,
-      "nextReview": "2026-11-09T23:00:00.000Z"
+      "nextReview": "2026-11-09T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.7744,
@@ -3442,7 +4573,10 @@
       "rep": 3,
       "interval": 28,
       "ef": 2.5,
-      "nextReview": "2026-11-09T23:00:00.000Z"
+      "nextReview": "2026-11-09T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.325,
@@ -3452,7 +4586,10 @@
       "interval": 20,
       "ef": 2.5,
       "nextReview": "2026-11-01T23:00:00.000Z",
-      "exampleSentence": "(시간을 너무 낭비하는 것 같아요)"
+      "exampleSentence": "(시간을 너무 낭비하는 것 같아요)",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.7534,
@@ -3461,7 +4598,10 @@
       "rep": 2,
       "interval": 32,
       "ef": 2.5,
-      "nextReview": "2026-11-01T00:00:00.000Z"
+      "nextReview": "2026-11-01T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.5942,
@@ -3470,7 +4610,10 @@
       "rep": 3,
       "interval": 25,
       "ef": 2.5,
-      "nextReview": "2026-11-03T23:00:00.000Z"
+      "nextReview": "2026-11-03T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.9934,
@@ -3479,7 +4622,10 @@
       "rep": 3,
       "interval": 12,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-11-04T23:00:00.000Z"
+      "nextReview": "2026-11-04T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.6665,
@@ -3488,7 +4634,10 @@
       "rep": 2,
       "interval": 34,
       "ef": 2.5,
-      "nextReview": "2026-11-03T00:00:00.000Z"
+      "nextReview": "2026-11-03T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.2065,
@@ -3497,7 +4646,10 @@
       "rep": 2,
       "interval": 34,
       "ef": 2.5,
-      "nextReview": "2026-11-03T00:00:00.000Z"
+      "nextReview": "2026-11-03T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.662,
@@ -3506,7 +4658,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.799Z"
+      "nextReview": "2026-09-30T15:17:25.799Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.0693,
@@ -3515,7 +4670,10 @@
       "rep": 3,
       "interval": 43,
       "ef": 2.5,
-      "nextReview": "2026-11-29T23:00:00.000Z"
+      "nextReview": "2026-11-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.6172,
@@ -3524,7 +4682,10 @@
       "rep": 6,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.3633,
@@ -3533,7 +4694,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.799Z"
+      "nextReview": "2026-09-30T15:17:25.799Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.8052,
@@ -3542,7 +4706,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.799Z"
+      "nextReview": "2026-09-30T15:17:25.799Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.6812,
@@ -3551,7 +4718,10 @@
       "rep": 2,
       "interval": 40,
       "ef": 2.5,
-      "nextReview": "2026-11-09T00:00:00.000Z"
+      "nextReview": "2026-11-09T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.1099,
@@ -3560,7 +4730,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.7000000000000002,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.863,
@@ -3569,7 +4742,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.851,
@@ -3578,7 +4754,10 @@
       "rep": 2,
       "interval": 115,
       "ef": 2.5,
-      "nextReview": "2027-01-23T00:00:00.000Z"
+      "nextReview": "2027-01-23T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.2834,
@@ -3587,34 +4766,46 @@
       "rep": 3,
       "interval": 35,
       "ef": 2.5,
-      "nextReview": "2026-11-06T18:58:03.037Z"
+      "nextReview": "2026-11-06T18:58:03.037Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.2366,
       "front": "job/work",
       "back": "직장",
-      "rep": 3,
-      "interval": 8,
+      "rep": 0,
+      "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.163,
       "front": "szukac pracy",
       "back": "직장을 구하다",
-      "rep": 3,
-      "interval": 8,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 4,
+      "interval": 12,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-08T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.3042,
       "front": "aplikowac / wyslac aplikacje",
       "back": "지원서를 제출하다",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-10-27T23:00:00.000Z"
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445799.2327,
@@ -3623,7 +4814,10 @@
       "rep": 2,
       "interval": 40,
       "ef": 2.5,
-      "nextReview": "2026-11-09T00:00:00.000Z"
+      "nextReview": "2026-11-09T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.935,
@@ -3632,7 +4826,10 @@
       "rep": 2,
       "interval": 41,
       "ef": 2.5,
-      "nextReview": "2026-11-10T00:00:00.000Z"
+      "nextReview": "2026-11-10T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.1199,
@@ -3641,7 +4838,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-10-30T23:00:00.000Z"
+      "nextReview": "2026-10-30T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.3953,
@@ -3650,7 +4850,10 @@
       "rep": 4,
       "interval": 25,
       "ef": 2.5,
-      "nextReview": "2026-11-07T23:00:00.000Z"
+      "nextReview": "2026-11-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.6904,
@@ -3659,7 +4862,10 @@
       "rep": 3,
       "interval": 25,
       "ef": 2.5,
-      "nextReview": "2026-11-03T23:00:00.000Z"
+      "nextReview": "2026-11-03T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.794,
@@ -3668,7 +4874,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.7000000000000002,
-      "nextReview": "2026-10-29T23:00:00.000Z"
+      "nextReview": "2026-10-29T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.4922,
@@ -3677,7 +4886,10 @@
       "rep": 4,
       "interval": 46,
       "ef": 2.6,
-      "nextReview": "2026-12-07T23:00:00.000Z"
+      "nextReview": "2026-12-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.332,
@@ -3686,7 +4898,10 @@
       "rep": 3,
       "interval": 10,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-05T23:00:00.000Z"
+      "nextReview": "2026-11-05T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.0432,
@@ -3695,7 +4910,10 @@
       "rep": 5,
       "interval": 20,
       "ef": 2.5,
-      "nextReview": "2026-11-01T23:00:00.000Z"
+      "nextReview": "2026-11-01T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.517,
@@ -3704,7 +4922,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.800Z"
+      "nextReview": "2026-09-30T15:17:25.800Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.501,
@@ -3713,7 +4934,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.800Z"
+      "nextReview": "2026-09-30T15:17:25.800Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.2869,
@@ -3722,7 +4946,10 @@
       "rep": 4,
       "interval": 10,
       "ef": 1.3,
-      "nextReview": "2026-10-31T23:00:00.000Z"
+      "nextReview": "2026-10-31T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.839,
@@ -3731,7 +4958,10 @@
       "rep": 4,
       "interval": 25,
       "ef": 2.5,
-      "nextReview": "2026-11-07T23:00:00.000Z"
+      "nextReview": "2026-11-07T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.5193,
@@ -3740,7 +4970,10 @@
       "rep": 2,
       "interval": 34,
       "ef": 2.5,
-      "nextReview": "2026-11-03T00:00:00.000Z"
+      "nextReview": "2026-11-03T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.6287,
@@ -3749,7 +4982,10 @@
       "rep": 2,
       "interval": 43,
       "ef": 2.5,
-      "nextReview": "2026-11-12T00:00:00.000Z"
+      "nextReview": "2026-11-12T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.4363,
@@ -3758,7 +4994,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.800Z"
+      "nextReview": "2026-09-30T15:17:25.800Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.5225,
@@ -3767,7 +5006,10 @@
       "rep": 2,
       "interval": 61,
       "ef": 2.5,
-      "nextReview": "2026-11-30T00:00:00.000Z"
+      "nextReview": "2026-11-30T00:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.962,
@@ -3776,7 +5018,10 @@
       "rep": 4,
       "interval": 38,
       "ef": 2.5,
-      "nextReview": "2026-11-27T23:00:00.000Z"
+      "nextReview": "2026-11-27T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.2505,
@@ -3785,7 +5030,10 @@
       "rep": 1,
       "interval": 5,
       "ef": 1.8000000000000003,
-      "nextReview": "2026-10-28T23:00:00.000Z"
+      "nextReview": "2026-10-28T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.5435,
@@ -3794,7 +5042,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.800Z"
+      "nextReview": "2026-09-30T15:17:25.800Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.8818,
@@ -3803,7 +5054,10 @@
       "rep": 5,
       "interval": 28,
       "ef": 2.36,
-      "nextReview": "2026-11-17T23:00:00.000Z"
+      "nextReview": "2026-11-17T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.712,
@@ -3812,7 +5066,10 @@
       "rep": 2,
       "interval": 8,
       "ef": 1.4000000000000001,
-      "nextReview": "2026-11-03T23:00:00.000Z"
+      "nextReview": "2026-11-03T23:00:00.000Z",
+      "type": "standard",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1790781445800.902,
@@ -3821,7 +5078,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-09-30T15:17:25.800Z"
+      "nextReview": "2026-09-30T15:17:25.800Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790970755893.256,
@@ -3831,7 +5091,10 @@
       "interval": 0,
       "ef": 2.5,
       "nextReview": "2026-10-02T19:52:35.893Z",
-      "exampleSentence": ""
+      "exampleSentence": "",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790971276350.665,
@@ -3841,7 +5104,10 @@
       "interval": 0,
       "ef": 2.5,
       "nextReview": "2026-10-02T20:01:16.350Z",
-      "exampleSentence": ""
+      "exampleSentence": "",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1790971887089.701,
@@ -3850,7 +5116,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-10-02T20:11:27.089Z"
+      "nextReview": "2026-10-02T20:11:27.089Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1792925187861.1267,
@@ -3862,7 +5131,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-10-25T10:46:27.861Z"
+      "nextReview": "2026-10-25T10:46:27.861Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1792925200590.9148,
@@ -3874,7 +5146,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-10-25T10:46:40.590Z"
+      "nextReview": "2026-10-25T10:46:40.590Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1792925514913.8203,
@@ -3886,7 +5161,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-10-25T10:51:54.913Z"
+      "nextReview": "2026-10-25T10:51:54.913Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1792925525160.6768,
@@ -3898,7 +5176,10 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-10-25T10:52:05.160Z"
+      "nextReview": "2026-10-25T10:52:05.160Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1792930297499.7104,
@@ -3910,7 +5191,27 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-10-25T12:11:37.499Z"
+      "nextReview": "2026-10-25T12:11:37.499Z",
+      "type": "standard",
+      "learningStep": 0,
+      "intraDayDue": null
+    },
+    {
+      "id": 1793209936781.5105,
+      "type": "cloze",
+      "parentId": "cloze_1793209936780_f1fbz",
+      "clozeIndex": 0,
+      "rawSentence": "내일 회의에 {{słowo|참가할::słowo}} 수 있어요?",
+      "fullTranslation": "Możesz wziąć udział w jutrzejszym spotkaniu?",
+      "note": "",
+      "front": "Możesz wziąć udział w jutrzejszym spotkaniu?",
+      "back": "słowo",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "learningStep": 0,
+      "intraDayDue": null,
+      "nextReview": "2026-10-28T17:52:16.781Z"
     }
   ],
   "grammarFlashcards": [
@@ -3922,7 +5223,15 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-24T22:00:00.000Z",
+      "type": "cloze",
+      "rawSentence": "{{-(으)ㄹ 텐데|Na zewnątrz pewnie będzie padać deszcz, więc weź parasolkę.}}",
+      "fullTranslation": "Na zewnątrz pewnie będzie padać deszcz, więc weź parasolkę.",
+      "clozeIndex": 0,
+      "parentId": "p_1792146925903.123",
+      "note": "",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1792146938811.1487,
@@ -3932,7 +5241,15 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-24T22:00:00.000Z",
+      "type": "cloze",
+      "rawSentence": "{{-(으)ㄹ 텐데|Nie jadłeś obiadu, więc pewnie jesteś głodny, zjesz coś ze mną?}}",
+      "fullTranslation": "Nie jadłeś obiadu, więc pewnie jesteś głodny, zjesz coś ze mną?",
+      "clozeIndex": 0,
+      "parentId": "p_1792146938811.1487",
+      "note": "",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1792606037348.9333,
@@ -3942,43 +5259,75 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-24T22:00:00.000Z"
+      "nextReview": "2026-10-24T22:00:00.000Z",
+      "type": "cloze",
+      "rawSentence": "{{-(으)ㄹ 텐데|Pewnie jesteś dzisiaj bardzo zmęczony, więc odpocznij wcześnie.}}",
+      "fullTranslation": "Pewnie jesteś dzisiaj bardzo zmęczony, więc odpocznij wcześnie.",
+      "clozeIndex": 0,
+      "parentId": "p_1792606037348.9333",
+      "note": "",
+      "learningStep": 2,
+      "intraDayDue": null
     },
     {
       "id": 1792868874933.095,
       "front": "Przez to, że uczyłem się do egzaminu, nie mogłem wczory spać.",
-      "back": "어제 시험공부를 하느라고 잠을 못 잤어요.",
+      "back": "하느라고",
       "exampleSentence": "",
       "clozeSentence": "어제 시험공부를 ___ 잠을 못 잤어요.",
       "clozeAnswer": "하느라고",
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-10-24T19:07:54.933Z"
+      "nextReview": "2026-10-24T19:07:54.933Z",
+      "type": "cloze",
+      "rawSentence": "어제 시험공부를 {{하느라고|Przez to, że uczyłem się do egzaminu, nie mogłem wczory spać.}} 잠을 못 잤어요.",
+      "fullTranslation": "Przez to, że uczyłem się do egzaminu, nie mogłem wczory spać.",
+      "clozeIndex": 0,
+      "parentId": "p_1792868874933.095",
+      "note": "",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1792872812031.8994,
       "front": "Z powodu oglądania filmu nie zdołałem odrobić całej pracy domowej.",
-      "back": "영화를 보느라고 숙제를 다 못 했어요.",
+      "back": "보느라고",
       "exampleSentence": "",
       "clozeSentence": "영화를 ___ 숙제를 다 못 했어요.",
       "clozeAnswer": "보느라고",
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-10-24T20:13:32.031Z"
+      "nextReview": "2026-10-24T20:13:32.031Z",
+      "type": "cloze",
+      "rawSentence": "영화를 {{보느라고|Z powodu oglądania filmu nie zdołałem odrobić całej pracy domowej.}} 숙제를 다 못 했어요.",
+      "fullTranslation": "Z powodu oglądania filmu nie zdołałem odrobić całej pracy domowej.",
+      "clozeIndex": 0,
+      "parentId": "p_1792872812031.8994",
+      "note": "",
+      "learningStep": 0,
+      "intraDayDue": null
     },
     {
       "id": 1792872823576.0645,
       "front": "Spóźniłem się na spotkanie, ponieważ czekałem na kolegę.",
-      "back": "친구를 기다리느라고 약속 시간에 늦었어요.",
+      "back": "기다리느라고",
       "exampleSentence": "",
       "clozeSentence": "친구를 ___ 약속 시간에 늦었어요.",
       "clozeAnswer": "기다리느라고",
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-10-24T20:13:43.576Z"
+      "nextReview": "2026-10-24T20:13:43.576Z",
+      "type": "cloze",
+      "rawSentence": "친구를 {{기다리느라고|Spóźniłem się na spotkanie, ponieważ czekałem na kolegę.}} 약속 시간에 늦었어요.",
+      "fullTranslation": "Spóźniłem się na spotkanie, ponieważ czekałem na kolegę.",
+      "clozeIndex": 0,
+      "parentId": "p_1792872823576.0645",
+      "note": "",
+      "learningStep": 0,
+      "intraDayDue": null
     }
   ],
   "library": [
@@ -4954,20 +6303,827 @@
       ]
     },
     "2026-10-28": {
-      "again": 0,
-      "hard": 0,
-      "good": 0,
-      "easy": 0,
-      "completedAll": false,
-      "newCardsDone": 0,
+      "again": 35,
+      "hard": 1,
+      "good": 3,
+      "easy": 27,
+      "completedAll": true,
+      "newCardsDone": 5,
       "practicedMistakes": []
     }
   },
   "sessionStats": {
     "date": "2026-10-28",
-    "again": [],
-    "hard": [],
-    "good": [],
-    "easy": []
+    "again": [
+      {
+        "id": 1790781445791.3425,
+        "front": "Przyczyna",
+        "back": "원인",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.8000000000000003,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445791.943,
+        "front": "Urząd statystyczny",
+        "back": "통계청",
+        "rep": 2,
+        "interval": 6,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "exampleSentence": "통계청 발표에 따르면 청년 실업률이 소폭 감소했습니다.",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445793.7969,
+        "front": "Wyjeżdżać",
+        "back": "떠나다",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445793.7258,
+        "front": "Thanks to N",
+        "back": "N은 덕분에",
+        "rep": 3,
+        "interval": 8,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "exampleSentence": "선생님 덕분에 한국어 실력이 많이 늘었어요",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445793.1536,
+        "front": "Zakup impulsywny",
+        "back": "충동구매",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445793.4126,
+        "front": "Refund",
+        "back": "환불",
+        "rep": 3,
+        "interval": 8,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445794.9575,
+        "front": "Return request",
+        "back": "반품 신청",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.5488,
+        "front": "Fortunately",
+        "back": "다행히",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.0378,
+        "front": "Obrzydliwy",
+        "back": "징그럽다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.988,
+        "front": "Unique",
+        "back": "독특하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.7898,
+        "front": "Unfamiliar",
+        "back": "낯설다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.2527,
+        "front": "Przestronny",
+        "back": "넓다",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.8000000000000003,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.1,
+        "front": "Residential area",
+        "back": "주댁가",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.101,
+        "front": "Shopping district",
+        "back": "상점가",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.5793,
+        "front": "REal estate",
+        "back": "부동산",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.9023,
+        "front": "Pośrednik nieruchomości",
+        "back": "부동산 중개소",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.9187,
+        "front": "W otoczeniu, around",
+        "back": "주변에",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.4182,
+        "front": "Vacancy /wakat",
+        "back": "빈방",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.2268,
+        "front": "Historical site",
+        "back": "유적지",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.048,
+        "front": "Grow less",
+        "back": "줄어들다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.5962,
+        "front": "First of all",
+        "back": "우선",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.5518,
+        "front": "Difference",
+        "back": "차이점",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.8826,
+        "front": "Rent",
+        "back": "방세",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.542,
+        "front": "Just",
+        "back": "마침",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.4973,
+        "front": "Real estate agent",
+        "back": "부동산 중개사",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.9683,
+        "front": "It's safe",
+        "back": "안전하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445796.6504,
+        "front": "Progress",
+        "back": "진행",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445798.2935,
+        "front": "participate",
+        "back": "참가하다",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "exampleSentence": "내일 회의에 참가할 수 있어요?",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445798.425,
+        "front": "free / darmowy",
+        "back": "무료",
+        "rep": 3,
+        "interval": 20,
+        "ef": 2.5,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445799.2366,
+        "front": "job/work",
+        "back": "직장",
+        "rep": 3,
+        "interval": 8,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445796.9084,
+        "front": "Find out",
+        "back": "알아보다",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.796Z",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445796.7627,
+        "front": "Id card",
+        "back": "신분증",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.796Z",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445796.0256,
+        "front": "Bathroom",
+        "back": "욕실",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.796Z",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445796.603,
+        "front": "Pet",
+        "back": "애완동물",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.796Z",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445796.5808,
+        "front": "To keep, to raise animal",
+        "back": "키우다",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "nextReview": "2026-09-30T15:17:25.796Z",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null
+      }
+    ],
+    "hard": [
+      {
+        "id": 1790781445794.8896,
+        "front": "Experienced candidate",
+        "back": "경력자 우대",
+        "rep": 1,
+        "interval": 3,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      }
+    ],
+    "good": [
+      {
+        "id": 1790781445793.5874,
+        "front": "Wylać",
+        "back": "쏟기다",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "exampleSentence": "아이는 거실에서 물을 쏟겼어요",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445794.8152,
+        "front": "Shipping fee",
+        "back": "택배비",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445797.1375,
+        "front": "burden",
+        "back": "부담",
+        "rep": 2,
+        "interval": 28,
+        "ef": 2.5,
+        "nextReview": "2026-10-28T00:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      }
+    ],
+    "easy": [
+      {
+        "id": 1790781445791.993,
+        "front": "Job seeker",
+        "back": "취업 준비생",
+        "rep": 2,
+        "interval": 6,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "exampleSentence": "저는 요즘 취업 준비생이라 매일 도서관에 가요",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445791.6377,
+        "front": "Expert",
+        "back": "전문가",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "exampleSentence": "토핔 후에 한국어 전문가가 되고 싶어요",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445791.371,
+        "front": "Motywacja, reason",
+        "back": "동기",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445791.3064,
+        "front": "Pośrednio",
+        "back": "간접적으로",
+        "rep": 2,
+        "interval": 6,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "exampleSentence": "그는 이 소식을 간접적으로 전달했어요",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445792.8696,
+        "front": "Pasja",
+        "back": "열정",
+        "rep": 2,
+        "interval": 6,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "exampleSentence": "처음의 열정을 잃지 마세요",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445793.1423,
+        "front": "To dry",
+        "back": "말리다",
+        "rep": 3,
+        "interval": 8,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445793.3206,
+        "front": "Być pokornym",
+        "back": "겸손하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "exampleSentence": "선생님은 겸손한 사람을 좋아하세요",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445793.9573,
+        "front": "Defect",
+        "back": "하지",
+        "rep": 3,
+        "interval": 8,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445793.1626,
+        "front": "Kupon wymiany",
+        "back": "교환증",
+        "rep": 3,
+        "interval": 8,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445794.549,
+        "front": "Wyraźnie, for sure",
+        "back": "확실하다",
+        "rep": 3,
+        "interval": 8,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445794.5754,
+        "front": "Temptation",
+        "back": "유혹",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "exampleSentence": "나를 맛있는 음식으로 유혹하지 마세요",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445794.1106,
+        "front": "Quantity",
+        "back": "수량",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445794.1472,
+        "front": "Beginner",
+        "back": "초보자",
+        "rep": 3,
+        "interval": 8,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.9326,
+        "front": "Mieć mały apetyt",
+        "back": "입이 잛다",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.6624,
+        "front": "Location",
+        "back": "위치",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.2222,
+        "front": "Jak płacić / metoda płatności",
+        "back": "돈을 내는 방법",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.0808,
+        "front": "College area",
+        "back": "대학가",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.071,
+        "front": "Bookstore",
+        "back": "서점",
+        "rep": 1,
+        "interval": 5,
+        "ef": 2.6,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.8618,
+        "front": "Czasami X, czasami Y",
+        "back": "X기도 하고 Y기도 하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.0837,
+        "front": "Population",
+        "back": "인구",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445795.8794,
+        "front": "To stretch",
+        "back": "늘어나다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445796.3418,
+        "front": "lider spóźnialstwa",
+        "back": "지각 대장",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.8000000000000003,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445797.774,
+        "front": "zasnąć",
+        "back": "잠들다",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.8000000000000003,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445798.0042,
+        "front": "meaning / znaczenie",
+        "back": "의미",
+        "rep": 3,
+        "interval": 20,
+        "ef": 2.5,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445799.2483,
+        "front": "tylko / jedynie",
+        "back": "단지",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "exampleSentence": "단지 가정일 뿐이에요",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445799.163,
+        "front": "szukac pracy",
+        "back": "직장을 구하다",
+        "rep": 3,
+        "interval": 8,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      },
+      {
+        "id": 1790781445799.3042,
+        "front": "aplikowac / wyslac aplikacje",
+        "back": "지원서를 제출하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-27T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null
+      }
+    ]
   }
 }
