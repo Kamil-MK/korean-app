@@ -89,7 +89,7 @@
                         <input type="text" id="story-title" placeholder="Tytuł historii" style="margin-bottom:0; width: 65%;">
                         <button class="btn btn-success btn-sm" onclick="saveStoryToLibrary()">💾 Zapisz</button>
                     </div>
-                    <p class="hint">Klikaj nieznane słowa (żółte). Znane fiszki są zielone. Wybrane struktury będą <b>pogrubione</b>.</p>
+                    <p class="hint">Klikaj nieznane słowa (żółte). Znane fiszki są zielone, a uczone niebieskie. Wybrane struktury będą <b>pogrubione</b>.</p>
                     <div id="reader-content" class="reader-text"></div>
                     <div id="reader-actions" class="mt-4">
                         <button class="btn btn-primary w-100 mb-2" onclick="sumUpWords()">Wyodrębnij zaznaczone do słownika</button>
@@ -99,23 +99,15 @@
                 </div>
             </div>
 
-            <!-- PODZAKŁADKA: SŁÓWKA -->
+            <!-- PODZAKŁADKA: WYŁAPANE SŁÓWKA (KARTY ROBOCZE BEZ TABELI) -->
             <div id="czytelnia-words-container" class="hidden">
                 <div class="card">
-                    <p class="hint">Lista słówek wyłapanych podczas czytania. Przejrzyj tłumaczenia i dodaj wybrane do głównej talii fiszek.</p>
-                    <div class="table-responsive">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Słowo</th>
-                                    <th>Tłumaczenie API</th>
-                                    <th>Własne</th>
-                                    <th>Akcja</th>
-                                </tr>
-                            </thead>
-                            <tbody id="words-tbody"></tbody>
-                        </table>
+                    <div class="flex-between mb-2">
+                        <h3 style="margin:0;">Skrzynka Wyłapanych Słówek</h3>
+                        <span id="words-inbox-count" class="badge">0</span>
                     </div>
+                    <p class="hint">Przejrzyj wyłapane słówka w kontekście zdania, doprecyzuj formę słownikową i utwórz fiszkę klasyczną lub Cloze.</p>
+                    <div id="words-inbox-list" class="words-inbox-list mt-3"></div>
                 </div>
             </div>
         </section>
@@ -163,16 +155,20 @@
                 <div class="text-center mt-2 hint" style="font-size: 12px; cursor:pointer;" onclick="openStatsModal()">
                     Kliknij pasek, aby zobaczyć szczegóły (Skuteczność: <span id="prog-percent" style="font-weight:bold; color:var(--primary);">0</span>%)
                 </div>
+                <!-- Przycisk powtórki wewnątrz-dziennej (Intra-day Learning Step) -->
+                <button id="btn-intraday-review" class="btn btn-intraday w-100 mt-3 hidden" onclick="startIntraDaySession()">
+                    🌙 Dzisiejsze nowe – powtórka przed snem (0)
+                </button>
             </header>
 
             <div class="card" id="study-panel">
                 <div id="study-active" class="study-container hidden">
                     <div class="flex-between w-100 mb-2">
-                        <span></span>
-                        <button class="btn btn-outline btn-sm" onclick="openQuickEdit()">✏️ Edytuj kartę</button>
+                        <span id="active-card-badge" class="card-type-tag">KLASYCZNA</span>
+                        <button class="btn btn-outline btn-sm" onclick="openCardModal(currentCard ? currentCard.id : null)">✏️ Edytuj kartę</button>
                     </div>
                     
-                    <!-- KONTENER 1: Słówka (Klasyczne Fiszki & Hard Mode) -->
+                    <!-- KONTENER 1: Klasyczne Fiszki & Hard Mode -->
                     <div id="study-vocab-container" class="w-100">
                         <div class="study-card" id="study-front"></div>
                         <div class="study-card hidden" id="study-back"></div>
@@ -180,29 +176,38 @@
                         <button class="btn btn-primary w-100" id="btn-show-answer" onclick="showAnswer()">Pokaż odpowiedź</button>
                         
                         <div id="hard-mode-container" class="hidden mt-3">
-                            <div id="attemptCounter" class="attempt-counter">Próba: 1 / 4</div>
+                            <div id="attemptCounterStandard" class="attempt-counter">Próba: 1 / 4</div>
                             <input type="text" id="hardModeInput" placeholder="Wpisz po koreańsku..." autocomplete="off">
                             <div class="flex-between gap-2 mt-2">
                                 <button id="btnCheckHardMode" class="btn btn-primary w-100" onclick="checkHardMode()">Sprawdź</button>
                                 <button id="btnGiveUp" class="btn btn-danger w-100" onclick="giveUpHardMode()">Poddaję się</button>
                             </div>
-                            <button id="btnNextCard" class="btn btn-primary w-100 mt-2 hidden" onclick="advanceStudyView()">Dalej ➔</button>
+                            <button id="btnNextCardStandard" class="btn btn-primary w-100 mt-2 hidden" onclick="advanceStudyView()">Dalej ➔</button>
                         </div>
                     </div>
 
-                    <!-- KONTENER 2: Gramatyka (Cloze Deletion Mode) -->
+                    <!-- KONTENER 2: Nowy Moduł CLOZE DELETION (Wymuszone wpisywanie + 4 Próby) -->
                     <div id="study-cloze-container" class="hidden w-100">
                         <div class="study-card cloze-card">
-                            <div id="cloze-hint" class="cloze-hint"></div>
-                            <div id="cloze-content" class="cloze-sentence mt-4"></div>
+                            <div id="cloze-sentence-display" class="cloze-sentence"></div>
+                            <div id="cloze-hint-popup" class="cloze-hint-popup hidden"></div>
+                            <div id="cloze-full-translation" class="cloze-translation mt-3"></div>
+                            <div id="cloze-note-container" class="cloze-note-box hidden mt-3"></div>
                         </div>
-                        <div class="flex-between gap-2 mt-3">
-                            <button id="btn-check-cloze" class="btn btn-primary w-100" onclick="checkCloze()">Sprawdź</button>
-                            <button id="btn-give-up-cloze" class="btn btn-danger w-100" onclick="giveUpCloze()">Nie wiem</button>
+
+                        <div id="cloze-input-section" class="mt-3">
+                            <input type="text" id="clozeInput" placeholder="Wpisz brakujący fragment..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                            <button id="btnCheckCloze" class="btn-primary-full" onclick="checkCloze()">Sprawdź</button>
+                            <div class="flex-between mt-2">
+                                <button id="btnGiveUpCloze" class="btn-text-only" onclick="giveUpCloze()">Poddaję się</button>
+                                <div id="attemptCounter" class="attempt-counter" style="margin:0;">Próba: 1 / 4</div>
+                            </div>
                         </div>
+
+                        <button id="btnNextCard" class="btn-primary-full mt-3 hidden" onclick="advanceStudyView()">Dalej ➔</button>
                     </div>
 
-                    <!-- Przyciski oceny widoczne tylko po odsłonięciu (dla słówek w trybie normalnym) -->
+                    <!-- Przyciski oceny widoczne tylko po odsłonięciu dla kart standardowych (bez Hard Mode) -->
                     <div class="srs-buttons hidden mt-3" id="srs-actions">
                         <button class="btn-srs again" onclick="processAnswer(0)">Nie znam<small>mniej niż 1m</small></button>
                         <button class="btn-srs hard" onclick="processAnswer(3)">Słabo<small id="time-hard"></small></button>
@@ -213,47 +218,44 @@
 
                 <div id="study-empty" class="study-container text-center">
                     <h3>Brak fiszek do powtórki! 🎉</h3>
-                    <p class="hint">Wszystkie zaplanowane na dziś karty w tej talii zostały nadrobione.</p>
+                    <p class="hint">Wszystkie zaplanowane na teraz karty w tej talii zostały przerobione.</p>
+                    <button id="btn-intraday-empty" class="btn btn-intraday w-100 mt-3 hidden" onclick="startIntraDaySession()">
+                        🌙 Dzisiejsze nowe – powtórka przed snem (0)
+                    </button>
                     <button id="btn-practice-mistakes" class="btn btn-warning w-100 mt-3 hidden" onclick="startMatchingGame()" style="background-color: var(--warning); color: #FFF; font-weight:bold;">Przećwicz dzisiejsze błędy (0)</button>
                     <button class="btn btn-outline mt-3 w-100" onclick="refreshStudySession()">Odśwież sesję</button>
                 </div>
             </div>
 
-            <!-- Zarządzanie Talią (Słówka) -->
+            <!-- NOWA SEKCJA: BAZA FISZEK (Karty mobilne, wyszukiwarka, filtry) -->
             <div id="deck-management-section">
                 <div class="card">
                     <div class="flex-between mb-3">
-                        <h3>Zarządzanie Talią (Słówka)</h3>
-                        <button class="btn btn-outline btn-sm" onclick="toggleDeckList()">🗂️ Baza fiszek</button>
-                    </div>
-                    
-                    <div class="flex-wrap gap-2 mb-3">
-                        <button class="btn btn-outline" onclick="exportCSV()">Eksport .csv</button>
-                        <input type="file" id="import-csv-file" style="position: absolute; left: -9999px; opacity: 0;" accept=".csv,.txt,*/*" onchange="importCSV(event)">
-                        <button class="btn btn-outline" style="border-color: #8B5CF6; color: #8B5CF6;" onclick="document.getElementById('import-csv-file').click()">Wgraj tabelę Fiszek (.csv)</button>
-                    </div>
-                    
-                    <h4 class="mt-3">Dodaj fiszkę ręcznie</h4>
-                    <input type="text" id="manual-front" placeholder="Awers (Polski - Hasło)">
-                    <input type="text" id="manual-back" placeholder="Rewers (Koreański - Tłumaczenie)">
-                    <textarea id="manual-example" rows="2" placeholder="Zdanie przykładowe / Kontekst (opcjonalnie)"></textarea>
-                    <button class="btn btn-primary w-100" onclick="addManualFlashcard()">Dodaj fiszkę</button>
-
-                    <div id="deck-list-container" class="hidden mt-4">
-                        <h4 class="mt-4">Wszystkie słówka w bazie (<span id="total-cards-count">0</span>)</h4>
-                        <div class="table-responsive">
-                            <table class="data-table">
-                                <thead>
-                                    <tr>
-                                        <th>Awers</th>
-                                        <th>Rewers</th>
-                                        <th>Interwał</th>
-                                        <th style="min-width: 140px;">Akcja</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="deck-tbody"></tbody>
-                            </table>
+                        <div>
+                            <h3 style="margin:0;">Baza fiszek (<span id="total-cards-count">0</span>)</h3>
+                            <span class="hint" style="font-size:12px;">Klasyczne i zdania Cloze</span>
                         </div>
+                        <button id="btnOpenCreateModal" class="btn btn-primary btn-sm" onclick="openCardModal(null)">+ Dodaj fiszkę</button>
+                    </div>
+
+                    <div class="flex-wrap gap-2 mb-3">
+                        <button class="btn btn-outline btn-sm" onclick="exportCSV()">Eksport .csv</button>
+                        <input type="file" id="import-csv-file" style="position: absolute; left: -9999px; opacity: 0;" accept=".csv,.txt,*/*" onchange="importCSV(event)">
+                        <button class="btn btn-outline btn-sm" style="border-color: #8B5CF6; color: #8B5CF6;" onclick="document.getElementById('import-csv-file').click()">Import .csv</button>
+                        <button class="btn btn-outline btn-sm" onclick="toggleDeckList()">🗂️ Pokaż / Ukryj listę</button>
+                    </div>
+
+                    <div id="deck-list-container">
+                        <input type="search" id="searchFlashcards" placeholder="🔍 Szukaj (polski, koreański, zdanie)..." oninput="renderDeckList()">
+                        
+                        <div class="filter-pills mb-3">
+                            <button class="filter-pill active" data-filter="all" onclick="setDeckFilter('all')">Wszystkie</button>
+                            <button class="filter-pill" data-filter="standard" onclick="setDeckFilter('standard')">Klasyczne</button>
+                            <button class="filter-pill" data-filter="cloze" onclick="setDeckFilter('cloze')">Cloze</button>
+                            <button class="filter-pill" data-filter="learning" onclick="setDeckFilter('learning')">W nauce</button>
+                        </div>
+
+                        <div id="deck-cards-list" class="deck-cards-list"></div>
                     </div>
                 </div>
             </div>
@@ -270,7 +272,7 @@
                 <div class="mt-2 mb-2">
                     <label style="display: flex; align-items: center; gap: 8px; font-size: 15px; cursor: pointer; color: var(--text-dark);">
                         <input type="checkbox" id="hard-mode-setting" style="width: 22px; height: 22px; margin: 0; accent-color: var(--primary);">
-                        <div><b>Włącz Hard Mode (Tylko Słówka)</b> <br><span style="font-size: 12px; color: var(--text-light);">Wymuś samodzielne wpisywanie odpowiedzi w Fiszkach</span></div>
+                        <div><b>Włącz Hard Mode (Fiszki Klasyczne)</b> <br><span style="font-size: 12px; color: var(--text-light);">Wymuś wpisywanie odpowiedzi w fiszkach słownikowych (karty Cloze zawsze wymagają wpisywania)</span></div>
                     </label>
                 </div>
                 <button class="btn btn-primary w-100 mt-2" onclick="saveSettings()">Zapisz tryb</button>
@@ -325,25 +327,63 @@
         </section>
     </main>
 
-    <!-- Modale Edycji i Statystyk -->
-    <div id="modal-quick-edit" class="modal hidden">
-        <div class="modal-content">
-            <h3>Edytuj fiszkę</h3>
-            <input type="text" id="qe-front" placeholder="Awers (Polski - Hasło)">
-            <input type="text" id="qe-back" placeholder="Rewers (Koreański - Tłumaczenie)">
-            <textarea id="qe-example" rows="3" placeholder="Zdanie przykładowe / Kontekst (opcjonalnie)"></textarea>
-            
-            <!-- Pola dla fiszek gramatycznych (Cloze) -->
-            <input type="text" id="qe-cloze-sentence" placeholder="Zdanie z luką (użyj ___ jako pustego miejsca)" class="hidden mt-2">
-            <input type="text" id="qe-cloze-answer" placeholder="Odpowiedź do luki" class="hidden">
-            
+    <!-- NOWY MODAL TWORZENIA / EDYCJI FISZKI (Segmented Control: Klasyczna | Cloze) -->
+    <div id="modal-card-editor" class="modal hidden">
+        <div class="modal-content modal-lg">
+            <div class="flex-between mb-3">
+                <h3 id="modal-editor-title" style="margin:0;">Dodaj fiszkę</h3>
+                <button class="btn btn-outline btn-sm" onclick="closeModal('modal-card-editor')">✕</button>
+            </div>
+
+            <!-- Segmented Control -->
+            <div class="segmented-control mb-3">
+                <button type="button" id="seg-btn-standard" class="seg-btn active" onclick="switchEditorMode('standard')">Fiszka Klasyczna</button>
+                <button type="button" id="seg-btn-cloze" class="seg-btn" onclick="switchEditorMode('cloze')">Zdanie Cloze</button>
+            </div>
+
+            <!-- WIDOK 1: FISZKA KLASYCZNA -->
+            <div id="editor-view-standard">
+                <label class="field-label">Awers (Polski - Hasło)</label>
+                <input type="text" id="edit-std-front" placeholder="np. umowa / kontrakt">
+                
+                <label class="field-label">Rewers (Koreański - Tłumaczenie)</label>
+                <input type="text" id="edit-std-back" placeholder="np. 계약">
+                
+                <label class="field-label">Zdanie przykładowe / Kontekst (opcjonalnie)</label>
+                <textarea id="edit-std-example" rows="3" placeholder="np. 오늘 계약을 체결했어요."></textarea>
+            </div>
+
+            <!-- WIDOK 2: ZDANIE CLOZE -->
+            <div id="editor-view-cloze" class="hidden">
+                <div class="flex-between mb-2">
+                    <label class="field-label" style="margin:0;">Zdanie koreańskie z lukami</label>
+                    <button type="button" id="btnWrapCloze" class="btn-tool-cloze" onclick="wrapSelectionInCloze()">{ } Zrób lukę z zaznaczenia</button>
+                </div>
+                <textarea id="edit-cloze-raw" rows="3" placeholder="Zaznacz słowo i kliknij przycisk powyżej lub wpisz: 밖에 비가 {{올 텐데|pewnie będzie padać::오다}} 우산을 챙기세요." oninput="updateClozeLivePreview()"></textarea>
+                
+                <div class="cloze-live-preview-box mb-3">
+                    <div class="flex-between mb-1">
+                        <span class="preview-title">Podgląd na żywo:</span>
+                        <span id="cloze-count-badge" class="badge">Wykryte luki: 0</span>
+                    </div>
+                    <div id="cloze-live-preview-content" class="preview-sentence">Wpisz zdanie ze znacznikiem {{odpowiedź|podpowiedź::forma_słownikowa}}...</div>
+                </div>
+
+                <label class="field-label">Tłumaczenie całego zdania na polski</label>
+                <input type="text" id="edit-cloze-translation" placeholder="np. Na zewnątrz pewnie będzie padać deszcz, więc weź parasolkę.">
+
+                <label class="field-label">Notatka / Hanja / Gramatyka (opcjonalnie)</label>
+                <textarea id="edit-cloze-note" rows="2" placeholder="np. -(으)ㄹ 텐데 wyraża przypuszczenie mówiącego..."></textarea>
+            </div>
+
             <div class="flex-between mt-3 gap-2">
-                <button class="btn btn-outline w-100" onclick="closeModal('modal-quick-edit')">Anuluj</button>
-                <button class="btn btn-primary w-100" onclick="saveQuickEdit()">Zapisz</button>
+                <button class="btn btn-outline w-100" onclick="closeModal('modal-card-editor')">Anuluj</button>
+                <button class="btn btn-primary w-100" onclick="saveCardFromModal()">💾 Zapisz</button>
             </div>
         </div>
     </div>
 
+    <!-- Modal Statystyk Sesji -->
     <div id="modal-stats" class="modal hidden">
         <div class="modal-content">
             <h3>Szczegóły bieżącej sesji</h3>
