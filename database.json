@@ -4923,435 +4923,51 @@
       "easy": 18,
       "completedAll": true,
       "newCardsDone": 5,
+      "practicedMistakes": [
+        1790781445791.6377,
+        1790781445791.371,
+        1790781445793.3206,
+        1790781445794.5754,
+        1790781445795.0378,
+        1790781445795.988,
+        1790781445795.7898,
+        1790781445795.0808,
+        1790781445795.1,
+        1790781445795.101,
+        1790781445795.5793,
+        1790781445795.9023,
+        1790781445795.9187,
+        1790781445795.4182,
+        1790781445795.8618,
+        1790781445795.2268,
+        1790781445795.0837,
+        1790781445795.048,
+        1790781445795.8794,
+        1790781445795.5962,
+        1790781445795.5518,
+        1790781445799.2483,
+        1790781445799.3042,
+        1790781445795.8826,
+        1790781445795.542,
+        1790781445795.4973,
+        1790781445795.9683
+      ]
+    },
+    "2026-10-28": {
+      "again": 0,
+      "hard": 0,
+      "good": 0,
+      "easy": 0,
+      "completedAll": false,
+      "newCardsDone": 0,
       "practicedMistakes": []
     }
   },
   "sessionStats": {
-    "date": "2026-10-27",
-    "again": [
-      {
-        "id": 1790781445791.6377,
-        "front": "Expert",
-        "back": "전문가",
-        "rep": 3,
-        "interval": 8,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z",
-        "exampleSentence": "토핔 후에 한국어 전문가가 되고 싶어요"
-      },
-      {
-        "id": 1790781445791.371,
-        "front": "Motywacja, reason",
-        "back": "동기",
-        "rep": 3,
-        "interval": 8,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445793.3206,
-        "front": "Być pokornym",
-        "back": "겸손하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z",
-        "exampleSentence": "선생님은 겸손한 사람을 좋아하세요"
-      },
-      {
-        "id": 1790781445794.5754,
-        "front": "Temptation",
-        "back": "유혹",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z",
-        "exampleSentence": "나를 맛있는 음식으로 유혹하지 마세요"
-      },
-      {
-        "id": 1790781445795.0378,
-        "front": "Obrzydliwy",
-        "back": "징그럽다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.988,
-        "front": "Unique",
-        "back": "독특하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.7898,
-        "front": "Unfamiliar",
-        "back": "낯설다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.0808,
-        "front": "College area",
-        "back": "대학가",
-        "rep": 1,
-        "interval": 3,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.1,
-        "front": "Residential area",
-        "back": "주댁가",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.101,
-        "front": "Shopping district",
-        "back": "상점가",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.5793,
-        "front": "REal estate",
-        "back": "부동산",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.9023,
-        "front": "Pośrednik nieruchomości",
-        "back": "부동산 중개소",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.9187,
-        "front": "W otoczeniu, around",
-        "back": "주변에",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.4182,
-        "front": "Vacancy /wakat",
-        "back": "빈방",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.8618,
-        "front": "Czasami X, czasami Y",
-        "back": "X기도 하고 Y기도 하다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.2268,
-        "front": "Historical site",
-        "back": "유적지",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.0837,
-        "front": "Population",
-        "back": "인구",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.048,
-        "front": "Grow less",
-        "back": "줄어들다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.8794,
-        "front": "To stretch",
-        "back": "늘어나다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.5962,
-        "front": "First of all",
-        "back": "우선",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.5518,
-        "front": "Difference",
-        "back": "차이점",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445799.2483,
-        "front": "tylko / jedynie",
-        "back": "단지 (단지 가정일 뿐이에요)",
-        "rep": 2,
-        "interval": 27,
-        "ef": 2.5,
-        "nextReview": "2026-10-27T00:00:00.000Z"
-      },
-      {
-        "id": 1790781445799.3042,
-        "front": "aplikowac / wyslac aplikacje",
-        "back": "지원서를 제출하다",
-        "rep": 1,
-        "interval": 3,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.8826,
-        "front": "Rent",
-        "back": "방세",
-        "rep": 0,
-        "interval": 0,
-        "ef": 2.5,
-        "nextReview": "2026-09-30T15:17:25.795Z"
-      },
-      {
-        "id": 1790781445795.542,
-        "front": "Just",
-        "back": "마침",
-        "rep": 0,
-        "interval": 0,
-        "ef": 2.5,
-        "nextReview": "2026-09-30T15:17:25.795Z"
-      },
-      {
-        "id": 1790781445795.4973,
-        "front": "Real estate agent",
-        "back": "부동산 중개사",
-        "rep": 0,
-        "interval": 0,
-        "ef": 2.5,
-        "nextReview": "2026-09-30T15:17:25.795Z"
-      },
-      {
-        "id": 1790781445795.9683,
-        "front": "It's safe",
-        "back": "안전하다",
-        "rep": 0,
-        "interval": 0,
-        "ef": 2.5,
-        "nextReview": "2026-09-30T15:17:25.795Z"
-      }
-    ],
+    "date": "2026-10-28",
+    "again": [],
     "hard": [],
-    "good": [
-      {
-        "id": 1790781445798.3591,
-        "front": "assumption",
-        "back": "가정",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      }
-    ],
-    "easy": [
-      {
-        "id": 1790781445791.5671,
-        "front": "Specjalny wykład",
-        "back": "특강",
-        "rep": 3,
-        "interval": 8,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445791.9622,
-        "front": "Grade / results",
-        "back": "성적",
-        "rep": 1,
-        "interval": 3,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z",
-        "exampleSentence": "이번 시험에서 좋은 성적을 받았어요."
-      },
-      {
-        "id": 1790781445793.317,
-        "front": "Naprzeciwko",
-        "back": "맞으편",
-        "rep": 2,
-        "interval": 27,
-        "ef": 2.5,
-        "nextReview": "2026-10-27T00:00:00.000Z"
-      },
-      {
-        "id": 1790781445794.7292,
-        "front": "Personal",
-        "back": "개인",
-        "rep": 2,
-        "interval": 6,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.3345,
-        "front": "Washing dishes",
-        "back": "설거지",
-        "rep": 2,
-        "interval": 6,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.0693,
-        "front": "To solve",
-        "back": "풀다",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.7585,
-        "front": "Unconditionally",
-        "back": "무조건",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.1829,
-        "front": "Be similar",
-        "back": "비슷하다",
-        "rep": 2,
-        "interval": 6,
-        "ef": 2.5,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.5261,
-        "front": "Reklama / ogłoszenie",
-        "back": "광고",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.3225,
-        "front": "Absurd",
-        "back": "황당하다",
-        "rep": 2,
-        "interval": 6,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.2913,
-        "front": "Bardzo mały pokój na wynajem",
-        "back": "고시원",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.2703,
-        "front": "Depozyt za mieszkanie",
-        "back": "보증금",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.4092,
-        "front": "~on the other hand",
-        "back": "는 반면에",
-        "rep": 0,
-        "interval": 1,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445796.9954,
-        "front": "Rozwijać",
-        "back": "발전하다",
-        "rep": 2,
-        "interval": 6,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445797.326,
-        "front": "płacz",
-        "back": "울음소리",
-        "rep": 2,
-        "interval": 6,
-        "ef": 1.7000000000000002,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445800.332,
-        "front": "negatywny",
-        "back": "부정적",
-        "rep": 2,
-        "interval": 6,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445800.712,
-        "front": "dowolnie / free",
-        "back": "자유롭다",
-        "rep": 1,
-        "interval": 3,
-        "ef": 1.3,
-        "nextReview": "2026-10-26T23:00:00.000Z"
-      },
-      {
-        "id": 1790781445795.683,
-        "front": "To become a burden",
-        "back": "부담이 되다",
-        "rep": 0,
-        "interval": 0,
-        "ef": 2.5,
-        "nextReview": "2026-09-30T15:17:25.795Z"
-      }
-    ]
+    "good": [],
+    "easy": []
   }
 }
