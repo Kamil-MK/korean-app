@@ -1,10 +1,19 @@
 const DEFAULT_API_KEY = "";
 const STORAGE_KEY = "KoreanApp_Ecosystem_V6";
-const GEMINI_MODEL = "gemini-3.8-flash";
+const CLOZE_REGEX = /\{\{([^|}]+)\|([^:}]+)(?:::([^}]+))?\}\}/g;
 
 function getLocalToday() {
     const d = new Date();
     return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function escapeHtml(str) {
+    if (!str) return "";
+    return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
 }
 
 let appState = {
@@ -27,17 +36,114 @@ let appState = {
 let currentStoryId = null;
 let currentStoryText = "";
 let editingCardId = null;
+let editorMode = 'standard'; // 'standard' | 'cloze'
+let currentDeckFilter = 'all'; // 'all' | 'standard' | 'cloze' | 'learning'
+let pendingInboxWordId = null; // ID słówka ze skrzynki przy tworzeniu karty Cloze
 
 let currentDeckType = 'vocab'; // 'vocab' | 'grammar'
+let isIntraDayForcedSession = false;
 
 let activeGrammarCatIndex = null;
 let activeGrammarItemIndex = null;
 
-// Zmienna lokalna śledząca próby w Hard Mode dla bieżącej fiszki
+// Zmienna lokalna śledząca próby (1-4) dla bieżącej fiszki
 let currentAttempts = 0;
-// Flagi blokujące podwójne kliknięcia przy zapytaniach do AI
 let isGeneratingGrammar = false;
-let isGeneratingStory = false;
+
+// ==========================================
+// PARSER SKŁADNI CLOZE: {{target|hint::dictForm}}
+// ==========================================
+function parseClozeMatches(rawSentence) {
+    if (!rawSentence) return [];
+    const matches = [];
+    const regex = new RegExp(CLOZE_REGEX.source, 'g');
+    let m;
+    let idx = 0;
+    while ((m = regex.exec(rawSentence)) !== null) {
+        matches.push({
+            index: idx++,
+            fullMatch: m[0],
+            target: (m[1] || "").trim(),
+            hint: (m[2] || "").trim(),
+            dictForm: m[3] ? m[3].trim() : ""
+        });
+    }
+    return matches;
+}
+
+function getCompleteKoreanSentence(rawSentence) {
+    if (!rawSentence) return "";
+    return rawSentence.replace(CLOZE_REGEX, (match, target) => target.trim());
+}
+
+function getActiveClozeData(card) {
+    const matches = parseClozeMatches(card.rawSentence);
+    const activeIdx = typeof card.clozeIndex === 'number' ? card.clozeIndex : 0;
+    return matches[activeIdx] || matches[0] || {
+        target: card.clozeAnswer || card.back || "",
+        hint: card.front || "uzupełnij",
+        dictForm: ""
+    };
+}
+
+// Kompatybilność wsteczna i migracja danych w locie
+function migrateAndHealCards() {
+    const normalizeDeck = (deck, defaultIsGrammar = false) => {
+        if (!Array.isArray(deck)) return;
+        deck.forEach(card => {
+            if (!card.id) card.id = Date.now() + Math.random();
+            
+            // Konwersja dawnych fiszek gramatycznych z ___ na nowy format {{target|hint}}
+            if ((defaultIsGrammar || card.clozeSentence) && !card.rawSentence) {
+                card.type = 'cloze';
+                const ans = (card.clozeAnswer || card.back || "").trim();
+                const hintTxt = (card.front || "uzupełnij").trim();
+                if (card.clozeSentence && card.clozeSentence.includes('_')) {
+                    card.rawSentence = card.clozeSentence.replace(/_+/g, `{{${ans}|${hintTxt}}}`);
+                } else {
+                    card.rawSentence = `{{${ans}|${hintTxt}}}`;
+                }
+                card.fullTranslation = card.front || "";
+                card.clozeIndex = 0;
+                card.parentId = card.parentId || `p_${card.id}`;
+            }
+
+            if (!card.type) {
+                card.type = card.rawSentence ? 'cloze' : 'standard';
+            }
+
+            if (card.type === 'cloze') {
+                if (typeof card.clozeIndex !== 'number') card.clozeIndex = 0;
+                if (!card.parentId) card.parentId = `p_${card.id}`;
+                if (card.fullTranslation === undefined) card.fullTranslation = card.front || "";
+                if (card.note === undefined) card.note = "";
+                const active = getActiveClozeData(card);
+                card.front = card.fullTranslation || active.hint;
+                card.back = active.target;
+            }
+
+            if (typeof card.learningStep !== 'number') {
+                card.learningStep = (card.interval && card.interval > 0) ? 2 : 0;
+            }
+            if (card.intraDayDue === undefined) {
+                card.intraDayDue = null;
+            }
+        });
+    };
+
+    normalizeDeck(appState.flashcards, false);
+    normalizeDeck(appState.grammarFlashcards, true);
+
+    if (Array.isArray(appState.words)) {
+        appState.words.forEach(w => {
+            if (w.dictForm === undefined) w.dictForm = w.ko || "";
+            if (w.contextSentence === undefined) w.contextSentence = "";
+            if (w.autoPl === "Błąd pobierania" || w.autoPl === "Brak tłumaczenia" || w.autoPl === "Ładowanie...") {
+                w.autoPl = "";
+            }
+        });
+    }
+}
 
 function loadState() {
     const saved = localStorage.getItem(STORAGE_KEY);
@@ -50,7 +156,10 @@ function loadState() {
     if (!appState.history) appState.history = {};
     if (!appState.settings) appState.settings = { hardMode: false };
     if (!appState.grammarFlashcards) appState.grammarFlashcards = [];
+    if (!appState.words) appState.words = [];
     
+    migrateAndHealCards();
+
     if (!appState.grammarTree || appState.grammarTree.length === 0) {
         fetch('./grammar.json')
             .then(res => res.json())
@@ -267,6 +376,7 @@ async function syncFromGitHub() {
             if(!appState.grammarTree) appState.grammarTree = [];
             if(!appState.grammarFlashcards) appState.grammarFlashcards = [];
 
+            migrateAndHealCards();
             saveState();
             msg.textContent = "✅ Postępy pobrane i wczytane!";
             msg.style.color = "var(--success)";
@@ -295,6 +405,7 @@ function importData(event) {
             const imported = JSON.parse(e.target.result);
             if (imported && Array.isArray(imported.flashcards)) {
                 appState = imported;
+                migrateAndHealCards();
                 saveState();
                 alert(`Pomyślnie wgrano postępy!`);
                 location.reload();
@@ -305,64 +416,52 @@ function importData(event) {
     reader.readAsText(file);
 }
 
-// Eksport i import CSV dla słówek
-window.exportCSV = function() {
-    if (!appState.flashcards || appState.flashcards.length === 0) return alert("Brak fiszek do eksportu.");
-    const escapeCsv = (str) => `"${String(str || '').replace(/"/g, '""')}"`;
-    const rows = [["Front_PL", "Back_KO", "Example", "Interval", "Rep", "EF", "NextReview"]];
-    appState.flashcards.forEach(f => {
-        rows.push([
-            escapeCsv(f.front),
-            escapeCsv(f.back),
-            escapeCsv(f.exampleSentence || ""),
-            f.interval || 0,
-            f.rep || 0,
-            f.ef || 2.5,
-            escapeCsv(f.nextReview || "")
-        ]);
+function exportCSV() {
+    let csv = "Type,Front,Back,ExampleOrRawSentence,FullTranslation,Note,Interval\n";
+    appState.flashcards.forEach(c => {
+        const row = [
+            c.type || 'standard',
+            `"${(c.front || '').replace(/"/g, '""')}"`,
+            `"${(c.back || '').replace(/"/g, '""')}"`,
+            `"${((c.type === 'cloze' ? c.rawSentence : c.exampleSentence) || '').replace(/"/g, '""')}"`,
+            `"${(c.fullTranslation || '').replace(/"/g, '""')}"`,
+            `"${(c.note || '').replace(/"/g, '""')}"`,
+            c.interval || 0
+        ];
+        csv += row.join(",") + "\n";
     });
-    const csvContent = "data:text/csv;charset=utf-8,\uFEFF" + encodeURIComponent(rows.map(r => r.join(",")).join("\n"));
+    const dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
     const dl = document.createElement('a');
-    dl.setAttribute("href", csvContent);
-    dl.setAttribute("download", `korean_vocab_${getLocalToday()}.csv`);
+    dl.setAttribute("href", dataStr);
+    dl.setAttribute("download", `fiszki_export_${getLocalToday()}.csv`);
     dl.click();
-};
+}
 
-window.importCSV = function(event) {
+function importCSV(event) {
     const file = event.target.files[0];
     if (!file) return;
     const reader = new FileReader();
     reader.onload = function(e) {
-        try {
-            const lines = e.target.result.split(/\r?\n/).filter(l => l.trim() !== "");
-            let added = 0;
-            lines.forEach((line, idx) => {
-                if (idx === 0 && line.toLowerCase().includes("front")) return;
-                const cols = line.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g);
-                if (!cols || cols.length < 2) return;
-                const clean = s => s ? s.trim().replace(/^"|"$/g, '').replace(/""/g, '"') : "";
-                const front = clean(cols[0]);
-                const back = clean(cols[1]);
-                const example = cols[2] ? clean(cols[2]) : "";
-                const interval = cols[3] ? parseInt(clean(cols[3])) || 0 : 0;
-                const rep = cols[4] ? parseInt(clean(cols[4])) || 0 : 0;
-                const ef = cols[5] ? parseFloat(clean(cols[5])) || 2.5 : 2.5;
-                const nextRev = cols[6] ? clean(cols[6]) : null;
-                if (createFlashcardData(front, back, rep, interval, ef, nextRev, example, appState.flashcards)) {
-                    added++;
-                }
-            });
-            saveState();
-            renderDeckTable();
-            refreshStudySession();
-            alert(`Zaimportowano nowych fiszek: ${added}`);
-        } catch (err) {
-            alert("Błąd podczas importu pliku CSV.");
-        }
+        const lines = e.target.result.split(/\r?\n/).filter(l => l.trim().length > 0);
+        let added = 0;
+        lines.forEach((line, idx) => {
+            if (idx === 0 && line.toLowerCase().includes('front')) return;
+            const parts = line.split(',');
+            if (parts.length >= 2) {
+                const f = parts[0].replace(/^"|"$/g, '').trim();
+                const b = parts[1].replace(/^"|"$/g, '').trim();
+                const ex = parts[2] ? parts[2].replace(/^"|"$/g, '').trim() : "";
+                if (createFlashcardData(f, b, 0, 0, 2.5, null, ex, appState.flashcards)) added++;
+            }
+        });
+        saveState();
+        renderDeckList();
+        refreshStudySession();
+        alert(`Zaimportowano ${added} fiszek.`);
         event.target.value = '';
     };
     reader.readAsText(file);
-};
+}
 
 function updateSettingsUI() {
     document.getElementById('api-key').value = appState.apiKey;
@@ -398,75 +497,79 @@ function deleteApiKey() {
 }
 
 // ==========================================
-// ZOPTYMALIZOWANY KLIENT GEMINI 3.8 FLASH
+// ZOPTYMALIZOWANY KLIENT GEMINI API (gemini-3.8-flash)
 // ==========================================
-async function callGeminiAPI(prompt, expectJson = false) {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${appState.apiKey.trim()}`;
-    
-    async function sendRequest(useThinkingZero) {
+async function callGeminiAPI(prompt, expectJson = false, customSchema = null) {
+    const model = 'gemini-3.8-flash';
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${appState.apiKey.trim()}`;
+
+    const baseGenerationConfig = {
+        temperature: 0.7,
+        maxOutputTokens: 2048
+    };
+
+    if (expectJson) {
+        baseGenerationConfig.responseMimeType = "application/json";
+        if (customSchema) {
+            baseGenerationConfig.responseSchema = customSchema;
+        }
+    }
+
+    const configsToTry = [
+        { ...baseGenerationConfig, thinkingConfig: { thinkingBudget: 0 } },
+        baseGenerationConfig
+    ];
+
+    let lastError = null;
+
+    for (let i = 0; i < configsToTry.length; i++) {
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 30000); // 30s bezpieczny timeout
-
-        const generationConfig = {
-            temperature: expectJson ? 0.4 : 0.7,
-            maxOutputTokens: expectJson ? 1200 : 2048
-        };
-
-        if (expectJson) {
-            generationConfig.responseMimeType = "application/json";
-        }
-
-        // Wyłączenie ukrytych tokenów myślowych ("thinking") oszczędza limit tokenów i skraca czas odpowiedzi z 30s do ~2s
-        if (useThinkingZero) {
-            generationConfig.thinkingConfig = { thinkingBudget: 0 };
-        }
+        const timeoutId = setTimeout(() => controller.abort(), 25000);
 
         try {
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                generationConfig: configsToTry[i]
+            };
+
             const response = await fetch(url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }],
-                    generationConfig
-                }),
+                body: JSON.stringify(payload),
                 signal: controller.signal
             });
+
             clearTimeout(timeoutId);
             const data = await response.json();
-            return { response, data };
+
+            if (response.ok && data.candidates && data.candidates[0]?.content?.parts) {
+                const parts = data.candidates[0].content.parts;
+                const textPart = parts.find(p => p.text && !p.thought) || parts[0];
+                if (textPart && textPart.text) {
+                    return textPart.text;
+                }
+            }
+
+            const errMsg = data.error ? data.error.message : `Kod błędu HTTP: ${response.status}`;
+            if (response.status === 400 && i === 0) {
+                continue;
+            }
+            throw new Error(errMsg);
         } catch (err) {
             clearTimeout(timeoutId);
             if (err.name === 'AbortError') {
-                throw new Error("Serwer Gemini nie odpowiedział w ciągu 30 sekund. Spróbuj ponownie za chwilę.");
+                lastError = new Error("Przekroczono czas oczekiwania (25s). Spróbuj ponownie za chwilę.");
+                break;
             }
-            throw err;
+            lastError = err;
+            if (i === 0 && err.message && err.message.includes('thinkingConfig')) {
+                continue;
+            }
+            break;
         }
     }
 
-    // Pierwsza próba: szybka (bez marnowania tokenów na thinking)
-    let { response, data } = await sendRequest(true);
-
-    // Jeśli endpoint modelu 3.8 odrzuci parametr thinkingConfig (status 400), ponów raz bez niego
-    if (response.status === 400 && data?.error?.message?.toLowerCase().includes('thinking')) {
-        ({ response, data } = await sendRequest(false));
-    }
-
-    if (!response.ok) {
-        if (response.status === 429) {
-            throw new Error("Przekroczono darmowy limit zapytań/tokenów na minutę (429). Odczekaj ok. 60 sekund i kliknij ponownie.");
-        }
-        throw new Error(data.error ? data.error.message : `Błąd HTTP ${response.status}`);
-    }
-
-    // Wyciągnięcie właściwego tekstu (pomija ewentualne części thought: true)
-    const parts = data.candidates?.[0]?.content?.parts || [];
-    const textPart = parts.find(p => typeof p.text === 'string' && !p.thought) || parts[0];
-
-    if (!textPart || !textPart.text) {
-        throw new Error("Model zwrócił pustą odpowiedź.");
-    }
-
-    return textPart.text;
+    throw lastError || new Error("Nie udało się wygenerować odpowiedzi z Gemini API.");
 }
 
 // --- CZYTELNIA I PODZAKŁADKI ---
@@ -486,14 +589,10 @@ window.switchCzytelniaTab = function(tab) {
 }
 
 async function generateAIStory() {
-    if (isGeneratingStory) return;
     if (!appState.apiKey || appState.apiKey.trim() === "") return alert("Podaj swój klucz Gemini API w Ustawieniach.");
-    
     const loader = document.getElementById('ai-loader');
     const errorP = document.getElementById('ai-error');
-    isGeneratingStory = true;
-    loader.style.display = 'block'; 
-    errorP.style.display = 'none';
+    loader.style.display = 'block'; errorP.style.display = 'none';
 
     function shuffleArray(array) {
         let curId = array.length;
@@ -508,8 +607,8 @@ async function generateAIStory() {
     const learningPool = appState.flashcards.filter(f => f.interval <= 10).map(f => f.back);
     const sampledKnown = shuffleArray([...knownPool]).slice(0, 20);
     const sampledLearning = shuffleArray([...learningPool]).slice(0, 8);
-    const knownStr = sampledKnown.join(', ');
-    const learningStr = sampledLearning.join(', ');
+    const knownStr = sampledKnown.length > 0 ? sampledKnown.join(', ') : "brak";
+    const learningStr = sampledLearning.length > 0 ? sampledLearning.join(', ') : "brak";
 
     let forcedGrammar = [];
     if(appState.grammarTree) {
@@ -519,16 +618,27 @@ async function generateAIStory() {
             });
         });
     }
+    const grammarStr = forcedGrammar.length > 0 ? forcedGrammar.join(', ') : "brak (użyj naturalnych struktur średniozaawansowanych)";
 
-    let prompt = `Napisz po koreańsku wciągające opowiadanie (ok. 150-200 słów). Tematyka powinna oscylować wokół pracy w e-commerce, nowinek technologicznych, podróży lub wyzwań i rytuałów codzienności.
-Użyj tych znanych słów jako bazy: [${knownStr}].
-Wpleć te słowa, których uczeń aktualnie się uczy: [${learningStr}].
-Wprowadź 2 ZUPEŁNIE NOWE słowa (poziom TOPIK II), których nie ma na listach i pogrub je (<b>).`;
+    const prompt = `Jesteś native speakerem języka koreańskiego i profesjonalnym autorem tekstów edukacyjnych (poziom TOPIK II). Napisz spójne, wciągające opowiadanie po koreańsku (ok. 150-200 słów).
 
-    if (forcedGrammar.length > 0) {
-        prompt += `\nKRYTYCZNE: Użyj naturalnie tych struktur gramatycznych: [${forcedGrammar.join(', ')}]. Pogrub je używając tagu <b>.`;
-    }
-    prompt += `\nZwróć sam tekst opowiadania w formacie HTML (paragrafy w <p>), bez żadnych komentarzy.`;
+Lista słów do wykorzystania:
+- Słowa dobrze znane: [${knownStr}]
+- Słowa w trakcie nauki: [${learningStr}]
+- Wymuszone struktury gramatyczne: [${grammarStr}]
+
+KRYTYCZNE ZASADY GRAMATYCZNE I FORMATOWANIA (BEZWZGLĘDNIE PRZESTRZEGAJ):
+1. Naturalna koniugacja (Odmiana): NIGDY nie zostawiaj czasowników ani przymiotników w formie słownikowej (z końcówką -다), jeśli gramatyka zdania wymaga ich odmiany! Zawsze poprawnie odrzucaj -다 i stosuj odpowiednie modyfikatory (np. dla 전달하다 określającego rzeczownik napisz 전달하는 업무, NIGDY 전달하다는 업무; dla 저렴하다 napisz 저렴한, a przy czasownikach nieregularnych stosuj poprawną wymianę rdzenia, np. 줍다 -> 주워서).
+2. Bezbłędne odstępy (띄어쓰기): Przestrzegaj oficjalnych zasad koreańskiej pisowni (맞춤법). Partykuły (조사: -이/가, -을/를, -에서 itd.) oraz łącznik 이다 (-이었다/였다) ZAWSZE zapisuj łącznie z poprzedzającym rzeczownikiem, bez żadnej spacji (np. 취업 준비생이었다, 지원서를). Dwa osobne czasowniki łączone przez -아/어 zapisuj ze spacją, jeśli nie tworzą jednego wyrazu słownikowego (np. 사 입을 생각에, a nie 사입을).
+3. Zakaz nawiasów: NIGDY nie powtarzaj formy podstawowej słowa w nawiasie (absolutny zakaz konstrukcji typu 창업(창업)한 czy 제안(제안)했다).
+4. Inteligentne tagowanie HTML (Zamiast surowego tekstu):
+- Gdy używasz słowa z listy 'dobrze znanych', owiń całą odmienioną formę wyrazu (lub rzeczownik, ale bez odrywania go spacją od partykuły) w tag: <span class="known-word" data-base="FORMA_SŁOWNIKOWA">ODMIENIONE_SŁOWO</span>.
+- Przykład dla czasownika: <span class="known-word" data-base="선택하다">선택하다가</span> lub <span class="known-word" data-base="전달하다">전달하는</span>. Nie rozdzielaj czasownika od jego końcówki gramatycznej!
+- Przykład dla rzeczownika z partykułą: <span class="known-word" data-base="지원서">지원서</span>를 (UWAGA: między </span> a partykułą 를 NIE MOŻE być spacji w kodzie HTML!) lub owiń całość razem z partykułą: <span class="known-word" data-base="지원서">지원서를</span>.
+- Gdy używasz słowa z listy 'w trakcie nauki', użyj analogicznie klasy learning-word: <span class="learning-word" data-base="FORMA_SŁOWNIKOWA">ODMIENIONE_SŁOWO</span>.
+- Wymuszone struktury gramatyczne pogrub za pomocą <b>...</b>.
+
+Zwróć wyłącznie czysty kod HTML opowiadania (akapity w tagach <p>), bez znaczników markdown (\`\`\`html).`;
 
     try {
         const rawText = await callGeminiAPI(prompt, false);
@@ -543,13 +653,11 @@ Wprowadź 2 ZUPEŁNIE NOWE słowa (poziom TOPIK II), których nie ma na listach 
         }
         setupReaderContent(aiText);
     } catch (err) {
-        errorP.textContent = "Błąd: " + err.message; 
-        errorP.style.display = 'block';
-    } finally { 
-        isGeneratingStory = false;
-        loader.style.display = 'none'; 
-    }
+        errorP.textContent = "Błąd: " + err.message; errorP.style.display = 'block';
+    } finally { loader.style.display = 'none'; }
 }
+
+window.generateStory = generateAIStory;
 
 function setupReaderContent(text) {
     document.getElementById('reader-setup').classList.add('hidden');
@@ -562,36 +670,83 @@ function setupReaderContent(text) {
 
     function processNode(node, currentContainer, isBold) {
         if (node.nodeType === Node.TEXT_NODE) {
-            const words = node.nodeValue.split(/([\s]+)/);
-            words.forEach(token => {
-                if (/\s+/.test(token)) {
+            const tokens = node.nodeValue.split(/(\s+)/);
+            tokens.forEach(token => {
+                if (/^\s+$/.test(token)) {
                     currentContainer.appendChild(document.createTextNode(token));
                 } else if (token.length > 0) {
-                    const cleanWord = token.replace(/[.,!?()\[\]"'“”]/g, '').trim();
-                    const isFiszka = appState.flashcards.some(f => f.back === cleanWord || f.front === cleanWord);
                     const span = document.createElement('span');
                     span.className = 'word-span';
-                    if (isFiszka) span.classList.add('known-word');
                     if (isBold) {
                         span.style.fontWeight = 'bold';
-                        if (!isFiszka) span.style.color = 'var(--primary)'; 
+                        span.style.color = 'var(--primary)';
                     }
                     span.textContent = token;
-                    span.onclick = () => { if (!isFiszka) span.classList.toggle('selected'); };
+                    span.onclick = () => handleReaderWordClick(span);
                     currentContainer.appendChild(span);
                 }
             });
         } else if (node.nodeType === Node.ELEMENT_NODE) {
+            if (node.tagName === 'SPAN' && (node.classList.contains('known-word') || node.classList.contains('learning-word'))) {
+                const span = document.createElement('span');
+                const isKnown = node.classList.contains('known-word');
+                span.className = isKnown ? 'known-word' : 'learning-word';
+                
+                const baseAttr = node.getAttribute('data-base');
+                if (baseAttr) {
+                    span.setAttribute('data-base', baseAttr.trim());
+                }
+                if (isBold) {
+                    span.style.fontWeight = 'bold';
+                }
+                span.textContent = node.textContent;
+                span.onclick = () => handleReaderWordClick(span);
+                currentContainer.appendChild(span);
+                return;
+            }
+
             let newContainer = currentContainer;
             let nextIsBold = isBold || node.tagName === 'B' || node.tagName === 'STRONG';
             if (node.tagName === 'P') {
-                const p = document.createElement('p'); p.style.marginBottom = '12px';
-                currentContainer.appendChild(p); newContainer = p;
-            } else if (node.tagName === 'BR') { currentContainer.appendChild(document.createElement('br')); }
-            node.childNodes.forEach(child => { processNode(child, newContainer, nextIsBold); });
+                const p = document.createElement('p');
+                p.style.marginBottom = '12px';
+                currentContainer.appendChild(p);
+                newContainer = p;
+            } else if (node.tagName === 'BR') {
+                currentContainer.appendChild(document.createElement('br'));
+            }
+            node.childNodes.forEach(child => {
+                processNode(child, newContainer, nextIsBold);
+            });
         }
     }
-    tempDiv.childNodes.forEach(child => { processNode(child, container, false); });
+
+    tempDiv.childNodes.forEach(child => {
+        processNode(child, container, false);
+    });
+}
+
+function handleReaderWordClick(spanEl) {
+    if (spanEl.classList.contains('known-word')) return;
+    spanEl.classList.toggle('selected');
+}
+
+// Wycinanie pełnego zdania (od kropki do kropki) wokół klikniętego słowa w Czytelni
+function extractContextSentenceFromDOM(spanEl) {
+    const blockParent = spanEl.closest('p') || document.getElementById('reader-content');
+    if (!blockParent) return spanEl.textContent.trim();
+
+    const fullBlockText = blockParent.textContent.replace(/\s+/g, ' ').trim();
+    const targetWord = spanEl.textContent.replace(/[.,!?()\[\]"'“”]/g, '').trim();
+    
+    // Podział akapitu na zdania po znakach końca zdania (. ! ? 。)
+    const sentences = fullBlockText.match(/[^.!?。\n]+[.!?。]?/g) || [fullBlockText];
+    for (const s of sentences) {
+        if (s.includes(targetWord)) {
+            return s.trim();
+        }
+    }
+    return fullBlockText;
 }
 
 function closeReader() {
@@ -608,19 +763,33 @@ function startReadingCustom() {
 }
 
 function sumUpWords() {
-    const selected = document.querySelectorAll('.word-span.selected');
-    if (selected.length === 0) return alert("Zaznacz słowa.");
+    const selected = document.querySelectorAll('#reader-content .selected');
+    if (selected.length === 0) return alert("Zaznacz słowa w tekście.");
     let count = 0;
     selected.forEach(span => {
-        let clean = span.textContent.replace(/[.,!?()\[\]"'“”]/g, '').trim();
-        if (clean && !appState.words.find(w => w.ko === clean)) {
-            const wObj = { id: Date.now() + Math.random(), ko: clean, autoPl: "Ładowanie...", custom: "" };
-            appState.words.push(wObj); fetchTranslation(clean, wObj.id); count++;
+        const surfaceClean = span.textContent.replace(/[.,!?()\[\]"'“”]/g, '').trim();
+        const baseAttr = span.getAttribute('data-base');
+        const dictFormClean = (baseAttr ? baseAttr : surfaceClean).replace(/[.,!?()\[\]"'“”]/g, '').trim();
+        const contextSentence = extractContextSentenceFromDOM(span);
+
+        if (surfaceClean && !appState.words.find(w => w.ko === surfaceClean && w.contextSentence === contextSentence)) {
+            const wObj = {
+                id: Date.now() + Math.random(),
+                ko: surfaceClean,
+                dictForm: dictFormClean,
+                contextSentence: contextSentence,
+                autoPl: "",
+                custom: ""
+            };
+            appState.words.unshift(wObj);
+            fetchTranslation(dictFormClean, wObj.id);
+            count++;
         }
     });
     saveState();
-    document.getElementById('sumup-result').textContent = `Wyodrębniono ${count} słów!`;
+    document.getElementById('sumup-result').textContent = `Wyodrębniono ${count} słów wraz ze zdaniami kontekstowymi!`;
     selected.forEach(s => s.classList.remove('selected'));
+    renderWordsTable();
 }
 
 async function fetchTranslation(word, id) {
@@ -628,54 +797,179 @@ async function fetchTranslation(word, id) {
         const targetUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=ko&tl=pl&dt=t&q=${encodeURIComponent(word)}`;
         const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
         const res = await fetch(proxyUrl);
-        if (!res.ok) throw new Error("Błąd proxy");
+        if (!res.ok) throw new Error("Proxy error");
         const proxyData = await res.json();
         const data = JSON.parse(proxyData.contents);
-        let tr = data[0][0][0];
-        if (!tr || tr === word) tr = "Brak tłumaczenia";
+        let tr = data?.[0]?.[0]?.[0] || "";
+        // Jeśli proxy zwróciło to samo słowo po koreańsku lub błąd, zostawiamy czyste pole z placeholderem
+        if (!tr || tr.trim() === word.trim()) tr = "";
         const w = appState.words.find(item => item.id == id);
-        if (w) { w.autoPl = tr; saveState(); renderWordsTable(); }
+        if (w) {
+            w.autoPl = tr;
+            if (!w.custom && tr) w.custom = tr;
+            saveState();
+            renderWordsTable();
+        }
     } catch (e) {
+        // Zgodnie ze specyfikacją: NIE wstawiamy "Błąd pobierania", zostawiamy czyste pole z placeholderem
         const w = appState.words.find(item => item.id == id);
-        if (w) { w.autoPl = "Błąd pobierania"; saveState(); renderWordsTable(); }
+        if (w) {
+            w.autoPl = "";
+            saveState();
+            renderWordsTable();
+        }
     }
 }
 
-function renderWordsTable() {
-    const tbody = document.getElementById('words-tbody');
-    tbody.innerHTML = "";
-    appState.words.forEach(w => {
-        const isAdded = appState.flashcards.some(f => f.back === w.ko || f.front === w.ko);
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td><strong>${w.ko}</strong></td>
-            <td>${w.autoPl}</td>
-            <td><input type="text" value="${w.custom}" placeholder="Własne..." onchange="updateCustomTranslation('${w.id}', this.value)"></td>
-            <td><div style="display: flex; gap: 5px;"><button class="btn btn-primary btn-sm" style="flex: 1;" ${isAdded ? 'disabled' : ''} onclick="addWordToSRS('${w.id}')">${isAdded ? 'Dodane' : 'Fiszka'}</button><button class="btn btn-danger btn-sm" onclick="deleteWord('${w.id}')">Usuń</button></div></td>
-        `;
-        tbody.appendChild(tr);
-    });
-}
-function deleteWord(id) {
-    if (confirm("Usunąć to słówko z listy?")) {
-        appState.words = appState.words.filter(w => w.id != id); saveState(); renderWordsTable();
+// Wsparcie AI (przycisk ✨) w Wyłapanych Słówkach: tłumaczy słowo w kontekście zdania i ustala formę słownikową
+window.translateInboxWordWithAI = async function(id, btnEl) {
+    if (!appState.apiKey || appState.apiKey.trim() === "") {
+        return alert("Podaj klucz Gemini API w Ustawieniach!");
     }
-}
-function updateCustomTranslation(id, val) {
-    const w = appState.words.find(item => item.id == id);
-    if (w) { w.custom = val; saveState(); }
-}
-
-function addWordToSRS(id) {
     const w = appState.words.find(item => item.id == id);
     if (!w) return;
-    const frontTranslation = w.custom.trim() !== "" ? w.custom : w.autoPl;
-    if (createFlashcardData(frontTranslation, w.ko, 0, 0, 2.5, null, "", appState.flashcards)) {
-        saveState(); renderDeckTable(); refreshStudySession();
+
+    if (btnEl) btnEl.disabled = true;
+
+    const schema = {
+        type: "OBJECT",
+        properties: {
+            dictForm: { type: "STRING" },
+            polishMeaning: { type: "STRING" }
+        },
+        required: ["dictForm", "polishMeaning"]
+    };
+
+    const prompt = `Przeanalizuj koreańskie słowo "${w.ko}" użyte w zdaniu: "${w.contextSentence || w.ko}".
+Zwróć obiekt JSON zawierający:
+- "dictForm": podstawowa forma słownikowa tego słowa po koreańsku (np. dla czasownika/przymiotnika z końcówką -다, dla rzeczownika bez partykuł),
+- "polishMeaning": zwięzłe, trafne polskie znaczenie pasujące dokładnie do tego kontekstu.`;
+
+    try {
+        const raw = await callGeminiAPI(prompt, true, schema);
+        const match = raw.match(/\{[\s\S]*\}/);
+        const parsed = JSON.parse(match ? match[0] : raw);
+        if (parsed.dictForm) w.dictForm = parsed.dictForm.trim();
+        if (parsed.polishMeaning) {
+            w.custom = parsed.polishMeaning.trim();
+            w.autoPl = parsed.polishMeaning.trim();
+        }
+        saveState();
+        renderWordsTable();
+    } catch (err) {
+        alert("Błąd Gemini: " + err.message);
+    } finally {
+        if (btnEl) btnEl.disabled = false;
     }
-    renderWordsTable();
-    if(!document.getElementById('reader-view').classList.contains('hidden')) setupReaderContent(currentStoryText);
+};
+
+// ==========================================
+// CZĘŚĆ 4: PRZEPROJEKTOWANE „WYŁAPANE SŁÓWKA” (Karty .word-inbox-card bez tabeli)
+// ==========================================
+function renderWordsTable() {
+    const listContainer = document.getElementById('words-inbox-list');
+    const countBadge = document.getElementById('words-inbox-count');
+    if (!listContainer) return;
+
+    listContainer.innerHTML = "";
+    if (countBadge) countBadge.textContent = appState.words.length;
+
+    if (appState.words.length === 0) {
+        listContainer.innerHTML = `<p class="hint text-center mt-2">Brak wyłapanych słówek. Kliknij nieznane słowa podczas czytania tekstu w Czytelni!</p>`;
+        return;
+    }
+
+    appState.words.forEach(w => {
+        const card = document.createElement('div');
+        card.className = 'word-inbox-card';
+
+        const dictVal = w.dictForm || w.ko || "";
+        const plVal = (w.custom && w.custom.trim() !== "") ? w.custom : (w.autoPl || "");
+
+        // Wyróżnienie wyłapanego słowa znacznikiem <mark> w zdaniu kontekstowym
+        let highlightedContext = escapeHtml(w.contextSentence || w.ko);
+        if (w.ko) {
+            const safeKo = escapeHtml(w.ko).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            highlightedContext = highlightedContext.replace(new RegExp(safeKo, 'g'), `<mark>${escapeHtml(w.ko)}</mark>`);
+        }
+
+        card.innerHTML = `
+            <div class="inbox-row-1">
+                <span class="inbox-captured-word">${escapeHtml(w.ko)}</span>
+                <input type="text" class="inbox-dict-input" value="${escapeHtml(dictVal)}" placeholder="Forma słownikowa..." onchange="updateInboxWordField('${w.id}', 'dictForm', this.value)">
+                <button class="btn-icon danger" title="Usuń słówko" onclick="deleteWord('${w.id}')">🗑️</button>
+            </div>
+            <div class="inbox-row-2">
+                <input type="text" class="inbox-pl-input" value="${escapeHtml(plVal)}" placeholder="Wpisz polskie znaczenie..." onchange="updateInboxWordField('${w.id}', 'custom', this.value)">
+                <button class="btn-ai-sparkle" title="Przetłumacz w kontekście z Gemini AI" onclick="translateInboxWordWithAI('${w.id}', this)">✨</button>
+            </div>
+            <div class="inbox-context-box">${highlightedContext}</div>
+            <div class="inbox-row-4">
+                <button class="btn-inbox-action btn-inbox-std" onclick="createStandardFromInbox('${w.id}')">+ Zwykła fiszka</button>
+                <button class="btn-inbox-action btn-inbox-cloze" onclick="openClozeModalFromInbox('${w.id}')">+ Fiszka Cloze</button>
+            </div>
+        `;
+        listContainer.appendChild(card);
+    });
 }
+
+window.updateInboxWordField = function(id, field, val) {
+    const w = appState.words.find(item => item.id == id);
+    if (w) {
+        w[field] = val.trim();
+        saveState();
+    }
+};
+
+function deleteWord(id) {
+    if (confirm("Usunąć to słówko ze skrzynki?")) {
+        appState.words = appState.words.filter(w => w.id != id);
+        saveState();
+        renderWordsTable();
+    }
+}
+
+window.createStandardFromInbox = function(id) {
+    const w = appState.words.find(item => item.id == id);
+    if (!w) return;
+    const plMeaning = (w.custom && w.custom.trim() !== "") ? w.custom.trim() : (w.autoPl || "").trim();
+    if (!plMeaning) {
+        return alert("Wpisz najpierw polskie znaczenie (lub kliknij ✨, aby wygenerować je z Gemini)!");
+    }
+    const targetBack = (w.dictForm && w.dictForm.trim() !== "") ? w.dictForm.trim() : w.ko.trim();
+
+    if (createFlashcardData(plMeaning, targetBack, 0, 0, 2.5, null, w.contextSentence || "", appState.flashcards)) {
+        appState.words = appState.words.filter(item => item.id != id);
+        saveState();
+        renderWordsTable();
+        renderDeckTable();
+        refreshStudySession();
+    } else {
+        alert("Taka fiszka już istnieje w Twojej talii!");
+    }
+};
+
+window.openClozeModalFromInbox = function(id) {
+    const w = appState.words.find(item => item.id == id);
+    if (!w) return;
+    const plMeaning = (w.custom && w.custom.trim() !== "") ? w.custom.trim() : ((w.autoPl || "").trim() || "wpisz_znaczenie");
+    const dictForm = (w.dictForm && w.dictForm.trim() !== "") ? w.dictForm.trim() : w.ko.trim();
+    const tag = `{{${w.ko}|${plMeaning}::${dictForm}}}`;
+
+    let rawSentence = w.contextSentence || w.ko;
+    if (rawSentence.includes(w.ko)) {
+        rawSentence = rawSentence.replace(w.ko, tag);
+    } else {
+        rawSentence = `${rawSentence} ${tag}`.trim();
+    }
+
+    pendingInboxWordId = w.id;
+    openCardModal(null, 'cloze', {
+        rawSentence: rawSentence,
+        fullTranslation: "",
+        note: ""
+    });
+};
 
 function toggleLibrary() {
     const libView = document.getElementById('library-view'); const setupView = document.getElementById('reader-setup'); const readerView = document.getElementById('reader-view');
@@ -687,7 +981,8 @@ function renderLibrary() {
     if (!appState.library || appState.library.length === 0) { list.innerHTML = '<p class="hint text-center">Brak zapisanych historii. Wygeneruj lub wklej nową!</p>'; return; }
     appState.library.forEach(story => {
         const div = document.createElement('div'); div.className = 'library-item'; div.onclick = () => loadStoryFromLibrary(story.id);
-        div.innerHTML = `<div class="flex-between"><h4>${story.title || "Bez tytułu"}</h4><button class="btn btn-danger btn-sm" onclick="deleteStory(event, '${story.id}')">Usuń</button></div><p>${story.text.substring(0, 80)}...</p>`;
+        const plainPreview = story.text.replace(/<[^>]*>?/gm, '');
+        div.innerHTML = `<div class="flex-between"><h4>${escapeHtml(story.title || "Bez tytułu")}</h4><button class="btn btn-danger btn-sm" onclick="deleteStory(event, '${story.id}')">Usuń</button></div><p>${escapeHtml(plainPreview.substring(0, 80))}...</p>`;
         list.appendChild(div);
     });
 }
@@ -852,25 +1147,39 @@ async function explainGrammarWithGemini() {
         explainBtn.textContent = "⏳ Generowanie...";
     }
 
+    const grammarSchema = {
+        type: "OBJECT",
+        properties: {
+            meaning: { type: "STRING" },
+            rule: { type: "STRING" },
+            examples: {
+                type: "ARRAY",
+                items: {
+                    type: "OBJECT",
+                    properties: {
+                        ko: { type: "STRING" },
+                        pl: { type: "STRING" },
+                        cloze_sentence: { type: "STRING" },
+                        cloze_answer: { type: "STRING" },
+                        base_verb: { type: "STRING" }
+                    },
+                    required: ["ko", "pl", "cloze_sentence", "cloze_answer"]
+                }
+            }
+        },
+        required: ["meaning", "rule", "examples"]
+    };
+
     const prompt = `Wytłumacz krótko po polsku gramatykę koreańską "${item.title}".
-Zwróć wyłącznie czysty obiekt JSON w formacie:
-{
-  "meaning": "znaczenie po polsku",
-  "rule": "krótka reguła tworzenia i łączenia (max 2-3 zdania)",
-  "examples": [
-    {
-      "ko": "pełne zdanie koreańskie z użyciem struktury",
-      "pl": "polskie tłumaczenie",
-      "cloze_sentence": "zdanie koreańskie z luką ___ dokładnie zamiast odmienionego słowa ze strukturą",
-      "cloze_answer": "dokładny fragment tekstu usunięty w luce"
-    }
-  ]
-}
-Podaj dokładnie 3 przykłady.`;
+Podaj znaczenie (meaning), krótką regułę łączenia (rule) oraz dokładnie 3 przykłady (examples), gdzie:
+- "ko": pełne zdanie po koreańsku,
+- "pl": tłumaczenie na polski,
+- "cloze_sentence": zdanie koreańskie z luką ___ w miejscu odmienionej konstrukcji gramatycznej,
+- "cloze_answer": dokładne słowo/forma wycięta w miejsce ___,
+- "base_verb": forma słownikowa wyciętego czasownika/przymiotnika (np. 가다).`;
 
     try {
-        const rawResponse = await callGeminiAPI(prompt, true);
-        
+        const rawResponse = await callGeminiAPI(prompt, true, grammarSchema);
         const jsonMatch = rawResponse.match(/\{[\s\S]*\}/);
         const cleanJsonStr = jsonMatch ? jsonMatch[0] : rawResponse.replace(/```json/gi, '').replace(/```/g, '').trim();
         const parsed = JSON.parse(cleanJsonStr);
@@ -900,41 +1209,415 @@ function addGrammarFlashcard(exIndex) {
     
     if (!appState.grammarFlashcards) appState.grammarFlashcards = [];
     
-    if (createFlashcardData(ex.pl, ex.ko, 0, 0, 2.5, null, "", appState.grammarFlashcards, ex.cloze_sentence, ex.cloze_answer)) {
+    const hintText = `${item.title}${item.meaning ? ' - ' + item.meaning : ''}`;
+    const dictPart = ex.base_verb ? `::${ex.base_verb}` : '';
+    const rawSentence = ex.cloze_sentence.replace(/_+/g, `{{${ex.cloze_answer}|${hintText}${dictPart}}}`);
+
+    const addedCount = createClozeFlashcardsFromRaw(rawSentence, ex.pl, `Struktura: ${item.title}. ${item.rule || ''}`, appState.grammarFlashcards);
+    if (addedCount > 0) {
         saveState();
         updateGrammarWidget();
         alert("Utworzono fiszkę gramatyczną (Cloze)!");
-    } else { alert("Taka fiszka już istnieje."); }
+    } else {
+        alert("Taka fiszka już istnieje.");
+    }
 }
 
-// --- UNIWERSALNE ZARZĄDZANIE FISZKAMI I SRS ---
-function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = null, exampleSentence = "", targetDeck = appState.flashcards, clozeSentence = "", clozeAnswer = "") {
-    if(!front || !back || targetDeck.some(f => f.front === front && f.back === back)) return false;
+// ==========================================
+// CZĘŚĆ 1 & 3: TWORZENIE FISZEK (STANDARD & MULTI-CLOZE) ORAZ MODAL
+// ==========================================
+function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = null, exampleSentence = "", targetDeck = appState.flashcards) {
+    if(!front || !back || targetDeck.some(f => f.type !== 'cloze' && f.front === front.trim() && f.back === back.trim())) return false;
     targetDeck.push({
         id: Date.now() + Math.random(),
+        type: 'standard',
         front: front.trim(),
         back: back.trim(),
-        exampleSentence: exampleSentence.trim(),
-        clozeSentence: (clozeSentence || "").trim(),
-        clozeAnswer: (clozeAnswer || "").trim(),
+        exampleSentence: (exampleSentence || "").trim(),
         rep: rep > 0 ? rep : (interval > 0 ? 1 : 0),
         interval: interval > 0 ? interval : 0,
         ef: ef >= 1.3 ? ef : 2.5,
+        learningStep: interval > 0 ? 2 : 0,
+        intraDayDue: null,
         nextReview: nextReviewStr || (interval > 0 ? new Date(Date.now() + interval * 86400000).toISOString() : new Date().toISOString())
     });
     return true;
 }
 
-function addManualFlashcard() {
-    const front = document.getElementById('manual-front').value.trim();
-    const back = document.getElementById('manual-back').value.trim();
-    const example = document.getElementById('manual-example').value.trim();
-    if (!front || !back) return alert("Uzupełnij przynajmniej pola Awers i Rewers.");
-    
-    if (createFlashcardData(front, back, 0, 0, 2.5, null, example, appState.flashcards)) {
-        saveState(); renderDeckTable(); refreshStudySession();
-        document.getElementById('manual-front').value = ""; document.getElementById('manual-back').value = ""; document.getElementById('manual-example').value = "";
-    } else { alert("Taka fiszka już istnieje w słówkach!"); }
+// Tworzy N osobnych fiszek Cloze ze wspólnym parentId dla zdania posiadającego N znaczników {{...}}
+function createClozeFlashcardsFromRaw(rawSentence, fullTranslation, note = "", targetDeck = appState.flashcards) {
+    const matches = parseClozeMatches(rawSentence);
+    if (matches.length === 0) return 0;
+
+    const parentId = `cloze_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+    let createdCount = 0;
+
+    matches.forEach(m => {
+        const exists = targetDeck.some(f => f.type === 'cloze' && f.rawSentence === rawSentence.trim() && f.clozeIndex === m.index);
+        if (!exists) {
+            targetDeck.push({
+                id: Date.now() + Math.random() + m.index,
+                type: 'cloze',
+                parentId: parentId,
+                clozeIndex: m.index,
+                rawSentence: rawSentence.trim(),
+                fullTranslation: (fullTranslation || "").trim(),
+                note: (note || "").trim(),
+                front: (fullTranslation || m.hint).trim(),
+                back: m.target,
+                rep: 0,
+                interval: 0,
+                ef: 2.5,
+                learningStep: 0,
+                intraDayDue: null,
+                nextReview: new Date().toISOString()
+            });
+            createdCount++;
+        }
+    });
+
+    return createdCount;
+}
+
+// Obsługa Modala Tworzenia / Edycji Fiszki
+window.openCardModal = function(cardId = null, forcedMode = null, prefillData = null) {
+    editingCardId = cardId;
+    const modal = document.getElementById('modal-card-editor');
+    const titleEl = document.getElementById('modal-editor-title');
+
+    if (cardId !== null && cardId !== undefined) {
+        const deck = getActiveDeck();
+        const card = deck.find(c => c.id == cardId) || appState.flashcards.find(c => c.id == cardId);
+        if (!card) return;
+
+        titleEl.textContent = "Edytuj fiszkę";
+        const mode = card.type === 'cloze' ? 'cloze' : 'standard';
+        switchEditorMode(mode);
+
+        if (mode === 'cloze') {
+            document.getElementById('edit-cloze-raw').value = card.rawSentence || "";
+            document.getElementById('edit-cloze-translation').value = card.fullTranslation || card.front || "";
+            document.getElementById('edit-cloze-note').value = card.note || "";
+            updateClozeLivePreview();
+        } else {
+            document.getElementById('edit-std-front').value = card.front || "";
+            document.getElementById('edit-std-back').value = card.back || "";
+            document.getElementById('edit-std-example').value = card.exampleSentence || "";
+        }
+    } else {
+        titleEl.textContent = "Dodaj nową fiszkę";
+        const mode = forcedMode || 'standard';
+        switchEditorMode(mode);
+
+        document.getElementById('edit-std-front').value = prefillData?.front || "";
+        document.getElementById('edit-std-back').value = prefillData?.back || "";
+        document.getElementById('edit-std-example').value = prefillData?.exampleSentence || "";
+
+        document.getElementById('edit-cloze-raw').value = prefillData?.rawSentence || "";
+        document.getElementById('edit-cloze-translation').value = prefillData?.fullTranslation || "";
+        document.getElementById('edit-cloze-note').value = prefillData?.note || "";
+        updateClozeLivePreview();
+    }
+
+    modal.classList.remove('hidden');
+};
+
+window.openQuickEdit = function(id = null) {
+    openCardModal(id || (currentCard ? currentCard.id : null));
+};
+
+window.switchEditorMode = function(mode) {
+    editorMode = mode;
+    const btnStd = document.getElementById('seg-btn-standard');
+    const btnCloze = document.getElementById('seg-btn-cloze');
+    const viewStd = document.getElementById('editor-view-standard');
+    const viewCloze = document.getElementById('editor-view-cloze');
+
+    if (mode === 'cloze') {
+        btnStd.classList.remove('active');
+        btnCloze.classList.add('active');
+        viewStd.classList.add('hidden');
+        viewCloze.classList.remove('hidden');
+        updateClozeLivePreview();
+    } else {
+        btnCloze.classList.remove('active');
+        btnStd.classList.add('active');
+        viewCloze.classList.add('hidden');
+        viewStd.classList.remove('hidden');
+    }
+};
+
+// Przycisk narzędziowy "{ } Zrób lukę z zaznaczenia"
+window.wrapSelectionInCloze = function() {
+    const textarea = document.getElementById('edit-cloze-raw');
+    if (!textarea) return;
+
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = textarea.value;
+    const selectedText = text.substring(start, end).trim() || "słowo";
+
+    const placeholderHint = "wpisz_podpowiedź";
+    const replacement = `{{${selectedText}|${placeholderHint}::${selectedText}}}`;
+
+    textarea.value = text.substring(0, start) + replacement + text.substring(end);
+    textarea.focus();
+
+    // Zaznaczenie tekstu "wpisz_podpowiedź" do natychmiastowego nadpisania
+    const hintStart = start + 2 + selectedText.length + 1;
+    const hintEnd = hintStart + placeholderHint.length;
+    textarea.setSelectionRange(hintStart, hintEnd);
+
+    updateClozeLivePreview();
+};
+
+window.updateClozeLivePreview = function() {
+    const raw = document.getElementById('edit-cloze-raw').value;
+    const previewEl = document.getElementById('cloze-live-preview-content');
+    const badgeEl = document.getElementById('cloze-count-badge');
+    if (!previewEl || !badgeEl) return;
+
+    const matches = parseClozeMatches(raw);
+    badgeEl.textContent = `Wykryte luki: ${matches.length}`;
+
+    if (!raw.trim()) {
+        previewEl.innerHTML = `<span class="hint">Wpisz zdanie ze znacznikiem {{odpowiedź|podpowiedź::forma_słownikowa}}...</span>`;
+        return;
+    }
+
+    const formatted = escapeHtml(raw).replace(CLOZE_REGEX, (m, target, hint, dictForm) => {
+        return `<span class="cloze-pill">[ ${escapeHtml(hint.trim())} 💡 ]</span>`;
+    });
+    previewEl.innerHTML = formatted;
+};
+
+window.saveCardFromModal = function() {
+    const targetDeck = (editingCardId && currentDeckType === 'grammar') ? appState.grammarFlashcards : appState.flashcards;
+
+    if (editorMode === 'standard') {
+        const f = document.getElementById('edit-std-front').value.trim();
+        const b = document.getElementById('edit-std-back').value.trim();
+        const ex = document.getElementById('edit-std-example').value.trim();
+
+        if (!f || !b) return alert("Uzupełnij oba główne pola: Awers i Rewers!");
+
+        if (editingCardId !== null && editingCardId !== undefined) {
+            const card = appState.flashcards.find(c => c.id == editingCardId) || appState.grammarFlashcards.find(c => c.id == editingCardId);
+            if (card) {
+                card.type = 'standard';
+                card.front = f;
+                card.back = b;
+                card.exampleSentence = ex;
+            }
+        } else {
+            if (!createFlashcardData(f, b, 0, 0, 2.5, null, ex, appState.flashcards)) {
+                return alert("Taka fiszka już istnieje w bazie!");
+            }
+        }
+    } else {
+        // Zapis karty / kart Cloze
+        const raw = document.getElementById('edit-cloze-raw').value.trim();
+        const trans = document.getElementById('edit-cloze-translation').value.trim();
+        const note = document.getElementById('edit-cloze-note').value.trim();
+
+        const matches = parseClozeMatches(raw);
+        if (matches.length === 0) {
+            return alert("Zdanie Cloze musi zawierać przynajmniej jeden znacznik w formacie:\n{{odpowiedź|podpowiedź::forma_słownikowa}}");
+        }
+        if (!trans) {
+            return alert("Podaj tłumaczenie całego zdania na język polski!");
+        }
+
+        if (editingCardId !== null && editingCardId !== undefined) {
+            const card = appState.flashcards.find(c => c.id == editingCardId) || appState.grammarFlashcards.find(c => c.id == editingCardId);
+            if (card) {
+                card.type = 'cloze';
+                card.rawSentence = raw;
+                card.fullTranslation = trans;
+                card.note = note;
+                if (card.clozeIndex >= matches.length) card.clozeIndex = 0;
+                const active = getActiveClozeData(card);
+                card.front = trans;
+                card.back = active.target;
+
+                // Jeśli podczas edycji użytkownik dodał nowe luki w tym samym zdaniu, utwórz brakujące karty braterskie
+                if (matches.length > 1) {
+                    const pid = card.parentId || `p_${card.id}`;
+                    card.parentId = pid;
+                    const deckRef = appState.flashcards.includes(card) ? appState.flashcards : appState.grammarFlashcards;
+                    matches.forEach(m => {
+                        const siblingExists = deckRef.some(s => s.parentId === pid && s.clozeIndex === m.index);
+                        if (!siblingExists) {
+                            deckRef.push({
+                                id: Date.now() + Math.random() + m.index,
+                                type: 'cloze',
+                                parentId: pid,
+                                clozeIndex: m.index,
+                                rawSentence: raw,
+                                fullTranslation: trans,
+                                note: note,
+                                front: trans,
+                                back: m.target,
+                                rep: 0,
+                                interval: 0,
+                                ef: 2.5,
+                                learningStep: 0,
+                                intraDayDue: null,
+                                nextReview: new Date().toISOString()
+                            });
+                        } else {
+                            const sib = deckRef.find(s => s.parentId === pid && s.clozeIndex === m.index);
+                            if (sib) {
+                                sib.rawSentence = raw;
+                                sib.fullTranslation = trans;
+                                sib.note = note;
+                                sib.front = trans;
+                                sib.back = m.target;
+                            }
+                        }
+                    });
+                }
+            }
+        } else {
+            const count = createClozeFlashcardsFromRaw(raw, trans, note, targetDeck);
+            if (count === 0) return alert("Taka karta Cloze już istnieje!");
+            if (pendingInboxWordId !== null) {
+                appState.words = appState.words.filter(w => w.id != pendingInboxWordId);
+                pendingInboxWordId = null;
+                renderWordsTable();
+            }
+        }
+    }
+
+    saveState();
+    renderDeckList();
+    updateGrammarWidget();
+
+    if (currentCard && editingCardId && currentCard.id == editingCardId) {
+        nextStudyCard();
+    } else {
+        refreshStudySession();
+    }
+
+    closeModal('modal-card-editor');
+    editingCardId = null;
+};
+
+// ==========================================
+// CZĘŚĆ 3: NOWA BAZA FISZEK (Karty .deck-card-item, Wyszukiwarka, Filtry)
+// ==========================================
+window.setDeckFilter = function(filter) {
+    currentDeckFilter = filter;
+    document.querySelectorAll('.filter-pill').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-filter') === filter);
+    });
+    renderDeckList();
+};
+
+function renderDeckList() {
+    const listEl = document.getElementById('deck-cards-list');
+    const countSpan = document.getElementById('total-cards-count');
+    const searchInput = document.getElementById('searchFlashcards');
+    if (!listEl) return;
+
+    if (countSpan) countSpan.textContent = appState.flashcards.length;
+    const query = (searchInput ? searchInput.value : "").trim().toLowerCase();
+
+    const filtered = appState.flashcards.filter(card => {
+        const cType = card.type || 'standard';
+        if (currentDeckFilter === 'standard' && cType !== 'standard') return false;
+        if (currentDeckFilter === 'cloze' && cType !== 'cloze') return false;
+        if (currentDeckFilter === 'learning' && (card.interval > 10 && card.learningStep === 2)) return false;
+
+        if (!query) return true;
+        const hay = [
+            card.front || "",
+            card.back || "",
+            card.rawSentence || "",
+            card.fullTranslation || "",
+            card.exampleSentence || "",
+            card.note || ""
+        ].join(" ").toLowerCase();
+        return hay.includes(query);
+    });
+
+    listEl.innerHTML = "";
+
+    if (filtered.length === 0) {
+        listEl.innerHTML = `<p class="hint text-center mt-3">Brak fiszek spełniających kryteria wyszukiwania.</p>`;
+        return;
+    }
+
+    filtered.forEach(card => {
+        const item = document.createElement('div');
+        item.className = 'deck-card-item';
+
+        const isCloze = card.type === 'cloze';
+        const typeLabel = isCloze ? `[CLOZE #${(card.clozeIndex || 0) + 1}]` : `[KLASYCZNA]`;
+        const typeClass = isCloze ? 'tag-cloze' : 'tag-standard';
+        const stepBadge = (isCloze && card.learningStep === 1) ? `<span class="interval-pill" style="background:#FEF3C7;color:#B45309;">🌙 Przed snem</span>` : '';
+
+        let koDisplay = "";
+        let plDisplay = "";
+
+        if (isCloze) {
+            const matches = parseClozeMatches(card.rawSentence);
+            const activeIdx = card.clozeIndex || 0;
+            let cur = 0;
+            koDisplay = escapeHtml(card.rawSentence || "").replace(CLOZE_REGEX, (m, target, hint) => {
+                const isThisActive = (cur === activeIdx);
+                cur++;
+                if (isThisActive) {
+                    return `<span class="cloze-highlight">[${escapeHtml(target.trim())} | ${escapeHtml(hint.trim())}]</span>`;
+                }
+                return escapeHtml(target.trim());
+            });
+            plDisplay = escapeHtml(card.fullTranslation || card.front || "");
+        } else {
+            koDisplay = escapeHtml(card.back || "");
+            plDisplay = escapeHtml(card.front || "");
+            if (card.exampleSentence) {
+                plDisplay += `<br><small style="color:var(--text-light);font-style:italic;">${escapeHtml(card.exampleSentence)}</small>`;
+            }
+        }
+
+        item.innerHTML = `
+            <div class="deck-card-main">
+                <div class="deck-card-tags">
+                    <span class="card-type-tag ${typeClass}">${typeLabel}</span>
+                    <span class="interval-pill">⏱️ ${card.interval || 0}d</span>
+                    ${stepBadge}
+                </div>
+                <div class="deck-card-ko">${koDisplay}</div>
+                <div class="deck-card-pl">${plDisplay}</div>
+            </div>
+            <div class="deck-card-actions">
+                <button class="btn-icon" title="Edytuj fiszkę" onclick="openCardModal('${card.id}')">✏️</button>
+                <button class="btn-icon danger" title="Usuń fiszkę" onclick="deleteCard('${card.id}')">🗑️</button>
+            </div>
+        `;
+        listEl.appendChild(item);
+    });
+}
+
+// Alias zachowujący kompatybilność z wywołaniami w innych funkcjach
+function renderDeckTable() {
+    renderDeckList();
+}
+
+function toggleDeckList() {
+    document.getElementById('deck-list-container').classList.toggle('hidden');
+}
+
+function deleteCard(id) {
+    if (confirm("Usunąć tę fiszkę na stałe?")) {
+        appState.flashcards = appState.flashcards.filter(item => item.id != id);
+        appState.grammarFlashcards = appState.grammarFlashcards.filter(item => item.id != id);
+        saveState();
+        renderDeckList();
+        refreshStudySession();
+        renderWordsTable();
+    }
 }
 
 function getActiveDeck() {
@@ -943,14 +1626,15 @@ function getActiveDeck() {
 
 window.startSession = function(type) {
     currentDeckType = type;
+    isIntraDayForcedSession = false;
     const mgmt = document.getElementById('deck-management-section');
     const title = document.getElementById('srs-session-title');
     
     if(type === 'grammar') {
-        title.textContent = "Trening Gramatyki";
+        title.textContent = "Trening Gramatyki (Cloze)";
         if(mgmt) mgmt.classList.add('hidden');
     } else {
-        title.textContent = "Sesja SRS (Słówka)";
+        title.textContent = "Sesja SRS (Słówka & Cloze)";
         if(mgmt) mgmt.classList.remove('hidden');
     }
     
@@ -962,42 +1646,65 @@ window.startSession = function(type) {
     
     document.getElementById('tab-fiszki').classList.add('active');
     refreshStudySession();
-}
+};
 
-function toggleDeckList() { document.getElementById('deck-list-container').classList.toggle('hidden'); }
-
-function renderDeckTable() {
-    const tbody = document.getElementById('deck-tbody');
-    tbody.innerHTML = "";
-    const countSpan = document.getElementById('total-cards-count');
-    if(countSpan) countSpan.textContent = appState.flashcards.length;
-
-    appState.flashcards.forEach(f => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td><input type="text" value="${f.front}" onchange="updateCardField('${f.id}', 'front', this.value)"></td>
-            <td><input type="text" value="${f.back}" onchange="updateCardField('${f.id}', 'back', this.value)"></td>
-            <td>${f.interval}d</td>
-            <td><div style="display: flex; gap: 5px;"><button class="btn btn-outline btn-sm" style="flex: 1; padding: 4px;" onclick="openQuickEdit('${f.id}')">✏️ Edytuj</button><button class="btn btn-danger btn-sm" style="flex: 1; padding: 4px;" onclick="deleteCard('${f.id}')">Usuń</button></div></td>
-        `;
-        tbody.appendChild(tr);
-    });
-}
-function updateCardField(id, field, val) {
-    const c = appState.flashcards.find(item => item.id == id);
-    if (c) { c[field] = val; saveState(); }
-}
-function deleteCard(id) {
-    if (confirm("Usunąć fiszkę?")) {
-        appState.flashcards = appState.flashcards.filter(item => item.id != id);
-        saveState(); renderDeckTable(); refreshStudySession(); renderWordsTable();
-    }
-}
-
+// ==========================================
+// SIBLING BURYING & INTRA-DAY LEARNING STEP QUEUE
+// ==========================================
 let studyQueue = [];
 let currentCard = null;
 
-function updateStudyCounter() { document.getElementById('study-stats').textContent = `Do powtórki: ${studyQueue.length}`; }
+function applySiblingBurying(queue) {
+    if (queue.length <= 2) return queue;
+    const result = [...queue];
+    for (let i = 1; i < result.length; i++) {
+        const prev = result[i - 1];
+        const curr = result[i];
+        if (prev.parentId && curr.parentId && prev.parentId === curr.parentId) {
+            // Znajdź następną kartę z innym parentId i zamień miejscami
+            let swapIdx = -1;
+            for (let j = i + 1; j < result.length; j++) {
+                if (!result[j].parentId || result[j].parentId !== prev.parentId) {
+                    swapIdx = j;
+                    break;
+                }
+            }
+            if (swapIdx !== -1) {
+                const temp = result[i];
+                result[i] = result[swapIdx];
+                result[swapIdx] = temp;
+            }
+        }
+    }
+    return result;
+}
+
+function updateIntraDayButtons() {
+    const deck = getActiveDeck();
+    const intraDayCards = deck.filter(c => c.type === 'cloze' && c.learningStep === 1);
+    const count = intraDayCards.length;
+
+    const btnHeader = document.getElementById('btn-intraday-review');
+    const btnEmpty = document.getElementById('btn-intraday-empty');
+
+    if (count > 0) {
+        const label = `🌙 Dzisiejsze nowe – powtórka przed snem (${count})`;
+        if (btnHeader) { btnHeader.textContent = label; btnHeader.classList.remove('hidden'); }
+        if (btnEmpty) { btnEmpty.textContent = label; btnEmpty.classList.remove('hidden'); }
+    } else {
+        if (btnHeader) btnHeader.classList.add('hidden');
+        if (btnEmpty) btnEmpty.classList.add('hidden');
+    }
+}
+
+window.startIntraDaySession = function() {
+    isIntraDayForcedSession = true;
+    refreshStudySession();
+};
+
+function updateStudyCounter() {
+    document.getElementById('study-stats').textContent = `Do powtórki: ${studyQueue.length}`;
+}
 
 function refreshStudySession() {
     const todayStr = getLocalToday();
@@ -1009,29 +1716,52 @@ function refreshStudySession() {
     let newCardsDone = hist[limitKey] || 0;
     let newCardsInQueue = 0;
     
+    const nowMs = Date.now();
     const todayObj = new Date(); todayObj.setHours(0, 0, 0, 0); 
     const deckToStudy = getActiveDeck();
-    
-    studyQueue = deckToStudy.filter(c => {
-        let isDue = false;
-        if (!c.nextReview) { isDue = true; } else {
-            const reviewDate = new Date(c.nextReview); reviewDate.setHours(0, 0, 0, 0); 
-            if (reviewDate.getTime() <= todayObj.getTime()) { isDue = true; }
+
+    if (isIntraDayForcedSession) {
+        studyQueue = deckToStudy.filter(c => c.type === 'cloze' && c.learningStep === 1);
+        if (studyQueue.length === 0) {
+            isIntraDayForcedSession = false;
         }
-        if (isDue) {
-            if (c.interval === 0) {
-                if (newCardsDone + newCardsInQueue >= appState.dailyLimit) return false;
-                newCardsInQueue++;
+    }
+
+    if (!isIntraDayForcedSession) {
+        studyQueue = deckToStudy.filter(c => {
+            // Jeśli karta jest w kroku wewnątrz-dziennym (learningStep === 1), wchodzi do zwykłej kolejki dopiero gdy minie intraDayDue (3h)
+            if (c.type === 'cloze' && c.learningStep === 1) {
+                return c.intraDayDue && nowMs >= c.intraDayDue;
             }
-            return true;
-        }
-        return false;
-    });
+
+            let cardDue = false;
+            if (!c.nextReview) {
+                cardDue = true;
+            } else {
+                const reviewDate = new Date(c.nextReview);
+                reviewDate.setHours(0, 0, 0, 0);
+                if (reviewDate.getTime() <= todayObj.getTime()) {
+                    cardDue = true;
+                }
+            }
+
+            if (cardDue) {
+                if (c.interval === 0 && (c.learningStep === 0 || c.learningStep === undefined)) {
+                    if (newCardsDone + newCardsInQueue >= appState.dailyLimit) return false;
+                    newCardsInQueue++;
+                }
+                return true;
+            }
+            return false;
+        });
+    }
 
     studyQueue.sort((a, b) => (a.interval > 0 && b.interval === 0 ? -1 : (a.interval === 0 && b.interval > 0 ? 1 : 0)));
+    studyQueue = applySiblingBurying(studyQueue);
 
     updateSessionProgressUI();
     updateStudyCounter();
+    updateIntraDayButtons();
 
     if (studyQueue.length === 0) {
         if(currentDeckType === 'vocab') appState.history[todayStr].completedAll = true; 
@@ -1059,47 +1789,46 @@ function refreshStudySession() {
     }
 }
 
+// ==========================================
+// CZĘŚĆ 2: SESJA SRS DLA KART CLOZE (STANY A, B, C) ORAZ KART STANDARDOWYCH
+// ==========================================
 function nextStudyCard() {
-    if (studyQueue.length === 0) { refreshStudySession(); return; }
+    if (studyQueue.length === 0) {
+        isIntraDayForcedSession = false;
+        refreshStudySession();
+        return;
+    }
     currentCard = studyQueue[0];
-    
-    // Reset licznika prób dla nowej fiszki
     currentAttempts = 0;
-    
+
     document.getElementById('srs-actions').classList.add('hidden');
-    
-    if (currentDeckType === 'grammar' && currentCard.clozeSentence) {
-        // --- TRYB CLOZE (GRAMATYKA) ---
+    const badgeEl = document.getElementById('active-card-badge');
+
+    if (currentCard.type === 'cloze' || currentDeckType === 'grammar') {
+        // --- STAN A: WIDOK PYTANIA CLOZE (PRZED ROZWIĄZANIEM) ---
+        if (badgeEl) {
+            badgeEl.textContent = currentCard.learningStep === 1 ? "CLOZE • POWTÓRKA PRZED SNEM" : "ZDANIE CLOZE";
+            badgeEl.className = "card-type-tag tag-cloze";
+        }
+
         document.getElementById('study-vocab-container').classList.add('hidden');
         document.getElementById('study-cloze-container').classList.remove('hidden');
-        
-        document.getElementById('cloze-hint').textContent = currentCard.front;
-        
-        const sentenceHtml = currentCard.clozeSentence.replace(/_+/g, '<input type="text" id="cloze-input" class="cloze-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">');
-        document.getElementById('cloze-content').innerHTML = sentenceHtml;
-        
-        const btnCheck = document.getElementById('btn-check-cloze');
-        btnCheck.textContent = "Sprawdź";
-        btnCheck.className = "btn btn-primary w-100";
-        btnCheck.onclick = checkCloze;
-        document.getElementById('btn-give-up-cloze').classList.remove('hidden');
-        
-        const clozeInput = document.getElementById('cloze-input');
-        if (clozeInput) {
-            clozeInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') checkCloze();
-            });
-            setTimeout(() => clozeInput.focus(), 150);
-        }
+
+        renderClozeQuestionState(currentCard);
     } else {
-        // --- TRYB STANDARDOWY & HARD MODE (SŁÓWKA) ---
+        // --- TRYB KLASYCZNY & HARD MODE (SŁÓWKA) ---
+        if (badgeEl) {
+            badgeEl.textContent = "FISZKA KLASYCZNA";
+            badgeEl.className = "card-type-tag tag-standard";
+        }
+
         document.getElementById('study-cloze-container').classList.add('hidden');
         document.getElementById('study-vocab-container').classList.remove('hidden');
         
         document.getElementById('study-front').textContent = currentCard.front;
         
-        let backHtml = `<div class="study-back-content"><div>${currentCard.back}</div>`;
-        if (currentCard.exampleSentence) { backHtml += `<div class="example-sentence">${currentCard.exampleSentence}</div>`; }
+        let backHtml = `<div class="study-back-content"><div>${escapeHtml(currentCard.back)}</div>`;
+        if (currentCard.exampleSentence) { backHtml += `<div class="example-sentence">${escapeHtml(currentCard.exampleSentence)}</div>`; }
         backHtml += `</div>`;
         document.getElementById('study-back').innerHTML = backHtml;
         
@@ -1111,7 +1840,7 @@ function nextStudyCard() {
             document.getElementById('btn-show-answer').classList.add('hidden');
             document.getElementById('hard-mode-container').classList.remove('hidden');
             
-            const attemptCounterEl = document.getElementById('attemptCounter');
+            const attemptCounterEl = document.getElementById('attemptCounterStandard');
             if (attemptCounterEl) attemptCounterEl.textContent = "Próba: 1 / 4";
             
             const hmInput = document.getElementById('hardModeInput');
@@ -1132,95 +1861,97 @@ function nextStudyCard() {
             const btnGiveUp = document.getElementById('btnGiveUp');
             if (btnGiveUp) btnGiveUp.classList.remove('hidden');
             
-            const btnNext = document.getElementById('btnNextCard');
+            const btnNext = document.getElementById('btnNextCardStandard');
             if (btnNext) btnNext.classList.add('hidden');
             
-            setTimeout(() => { if (hmInput) hmInput.focus(); }, 150);
+            setTimeout(() => { if (hmInput) hmInput.focus(); }, 120);
         } else {
             document.getElementById('btn-show-answer').classList.remove('hidden');
             document.getElementById('hard-mode-container').classList.add('hidden');
         }
-    }
 
-    document.getElementById('time-hard').textContent = previewSM2(currentCard, 3);
-    document.getElementById('time-good').textContent = previewSM2(currentCard, 4);
-    document.getElementById('time-easy').textContent = previewSM2(currentCard, 5);
+        document.getElementById('time-hard').textContent = previewSM2(currentCard, 3);
+        document.getElementById('time-good').textContent = previewSM2(currentCard, 4);
+        document.getElementById('time-easy').textContent = previewSM2(currentCard, 5);
+    }
 }
 
-// Walidacja Cloze (Gramatyka)
+// Renderowanie Stanu A dla karty Cloze (Multi-Cloze obsługuje tylko aktywny clozeIndex jako lukę)
+function renderClozeQuestionState(card) {
+    const activeIdx = typeof card.clozeIndex === 'number' ? card.clozeIndex : 0;
+    let matchCounter = 0;
+
+    const raw = card.rawSentence || `{{${card.back}|${card.front}}}`;
+    const sentenceHtml = escapeHtml(raw).replace(CLOZE_REGEX, (full, target, hint, dictForm) => {
+        const isCurrentHole = (matchCounter === activeIdx);
+        matchCounter++;
+        if (isCurrentHole) {
+            return `<span class="cloze-pill">[ ${escapeHtml(hint.trim())} <button type="button" class="btn-cloze-hint" title="Podpowiedź" onclick="showClozeHintPopup(event)">💡</button> ]</span>`;
+        }
+        // Pozostałe znaczniki w tym samym zdaniu wyświetlają się jako normalny tekst koreański (kontekst)
+        return escapeHtml(target.trim());
+    });
+
+    document.getElementById('cloze-sentence-display').innerHTML = sentenceHtml;
+
+    const hintPopup = document.getElementById('cloze-hint-popup');
+    hintPopup.classList.add('hidden');
+    hintPopup.textContent = "";
+
+    const transEl = document.getElementById('cloze-full-translation');
+    transEl.textContent = `"${card.fullTranslation || card.front || ''}"`;
+
+    const noteEl = document.getElementById('cloze-note-container');
+    noteEl.classList.add('hidden');
+    noteEl.innerHTML = "";
+
+    const inputSection = document.getElementById('cloze-input-section');
+    inputSection.classList.remove('hidden');
+
+    const clozeInput = document.getElementById('clozeInput');
+    clozeInput.value = "";
+    clozeInput.disabled = false;
+    clozeInput.classList.remove('error', 'success-input');
+
+    const attemptCounter = document.getElementById('attemptCounter');
+    if (attemptCounter) attemptCounter.textContent = "Próba: 1 / 4";
+
+    const btnNext = document.getElementById('btnNextCard');
+    btnNext.classList.add('hidden');
+
+    setTimeout(() => clozeInput.focus(), 120);
+}
+
+// Kliknięcie ikony 💡 wewnątrz .cloze-pill
+window.showClozeHintPopup = function(event) {
+    if (event) event.stopPropagation();
+    if (!currentCard) return;
+    const active = getActiveClozeData(currentCard);
+    const firstSyllable = active.target ? (active.target.trim().charAt(0) + '...') : '';
+    const dictPart = active.dictForm ? `Forma słownikowa: ${active.dictForm} | ` : '';
+    
+    const popup = document.getElementById('cloze-hint-popup');
+    popup.textContent = `💡 ${dictPart}Początek: "${firstSyllable}"`;
+    popup.classList.remove('hidden');
+    
+    const clozeInput = document.getElementById('clozeInput');
+    if (clozeInput && !clozeInput.disabled) clozeInput.focus();
+};
+
+// Stan B: Walidacja odpowiedzi Cloze, Automatyczny SM-2 i Haptic Feedback
 window.checkCloze = function() {
-    const inputEl = document.getElementById('cloze-input');
-    if (!inputEl) return;
-    const answerRaw = inputEl.value;
-    const targetRaw = currentCard.clozeAnswer;
-    
-    if (!answerRaw.trim()) return;
+    const inputEl = document.getElementById('clozeInput');
+    if (!inputEl || inputEl.disabled || !currentCard) return;
 
-    const normalize = str => str.replace(/\s+/g, '').toLowerCase();
-    
-    if (normalize(answerRaw) === normalize(targetRaw)) {
-        inputEl.classList.add('success-input');
-        inputEl.disabled = true;
-        
-        if ('vibrate' in navigator) navigator.vibrate(50);
-        
-        const btnCheck = document.getElementById('btn-check-cloze');
-        btnCheck.textContent = "Dalej ➔";
-        btnCheck.className = "btn btn-success w-100";
-        btnCheck.onclick = () => processAnswer(4, true, true);
-        
-        document.getElementById('btn-give-up-cloze').classList.add('hidden');
-        
-        setTimeout(() => { processAnswer(4, true, true); }, 1000);
-    } else {
-        inputEl.classList.add('error');
-        setTimeout(() => {
-            inputEl.classList.remove('error');
-            inputEl.focus();
-        }, 400);
-    }
-}
-
-window.giveUpCloze = function() {
-    const inputEl = document.getElementById('cloze-input');
-    if (!inputEl) return;
-    
-    inputEl.value = currentCard.clozeAnswer;
-    inputEl.disabled = true;
-    inputEl.style.color = "var(--danger)";
-    inputEl.style.borderBottomColor = "var(--danger)";
-    
-    const btnCheck = document.getElementById('btn-check-cloze');
-    btnCheck.textContent = "Dalej (Ucz się) ➔";
-    btnCheck.className = "btn btn-danger w-100";
-    btnCheck.onclick = () => processAnswer(0, true, true);
-    
-    document.getElementById('btn-give-up-cloze').classList.add('hidden');
-    
-    setTimeout(() => { processAnswer(0, true, true); }, 2000); 
-}
-
-// ==========================================
-// LOGIKA HARD MODE (Maszyna Stanów i Próby)
-// ==========================================
-function checkHardMode() {
-    const inputEl = document.getElementById('hardModeInput');
-    if (!inputEl || inputEl.disabled) return;
-    
-    const userVal = inputEl.value.trim();
-    // Ignoruj puste kliknięcia (nie nabijaj licznika prób)
-    if (!userVal) return;
+    const userInput = inputEl.value.trim();
+    if (!userInput) return; // Ignoruj pusty input
 
     currentAttempts++;
-    const targetVal = currentCard.back.trim();
+    const active = getActiveClozeData(currentCard);
+    const target = active.target.trim();
 
-    if (userVal === targetVal) {
-        // SCENARIUSZ A: Odpowiedź POPRAWNA
-        inputEl.classList.remove('error');
-        inputEl.classList.add('success-input');
-        inputEl.disabled = true;
-        document.getElementById('study-back').classList.remove('hidden');
-
+    if (userInput === target) {
+        // SCENARIUSZ 1: Wpisano POPRAWNIE
         let rating = 5;
         if (currentAttempts <= 2) {
             rating = 5; // Bardzo dobrze (Easy)
@@ -1232,22 +1963,127 @@ function checkHardMode() {
             rating = 3; // Słabo (Hard) - BRAK WIBRACJI
         }
 
-        // Zapisz wynik w SM-2 w tle (bez natychmiastowego przeładowania widoku i bez duplikowania wibracji)
+        const evaluatedCard = currentCard;
+        processAnswer(rating, false, true);
+        enterClozeRevealedState(evaluatedCard, false);
+    } else {
+        // SCENARIUSZ 2: Wpisano BŁĘDNIE (Brak wibracji)
+        if (currentAttempts < 4) {
+            // Próby 1, 2, 3
+            inputEl.classList.remove('error');
+            void inputEl.offsetWidth;
+            inputEl.classList.add('error');
+
+            const counterEl = document.getElementById('attemptCounter');
+            if (counterEl) counterEl.textContent = `Próba: ${currentAttempts + 1} / 4`;
+
+            setTimeout(() => {
+                inputEl.classList.remove('error');
+                inputEl.focus();
+                inputEl.select();
+            }, 400);
+        } else {
+            // Spalona 4. szansa
+            const evaluatedCard = currentCard;
+            processAnswer(0, false, true);
+            enterClozeRevealedState(evaluatedCard, true);
+        }
+    }
+};
+
+window.giveUpCloze = function() {
+    if (!currentCard) return;
+    const evaluatedCard = currentCard;
+    processAnswer(0, false, true);
+    enterClozeRevealedState(evaluatedCard, true);
+};
+
+// Stan C: Widok odpowiedzi (Back – po odgadnięciu lub po porażce)
+function enterClozeRevealedState(card, isFailed) {
+    const activeIdx = typeof card.clozeIndex === 'number' ? card.clozeIndex : 0;
+    let matchCounter = 0;
+
+    const raw = card.rawSentence || `{{${card.back}|${card.front}}}`;
+    const fullKoreanSentence = getCompleteKoreanSentence(raw);
+    const safeFullSentForAttr = escapeHtml(fullKoreanSentence).replace(/'/g, "\\'");
+
+    const sentenceHtml = escapeHtml(raw).replace(CLOZE_REGEX, (full, target, hint, dictForm) => {
+        const isCurrentHole = (matchCounter === activeIdx);
+        matchCounter++;
+        if (isCurrentHole) {
+            const dictText = dictForm ? ` (${escapeHtml(dictForm.trim())})` : '';
+            const statusClass = isFailed ? 'cloze-revealed cloze-failed' : 'cloze-revealed';
+            return `<span class="${statusClass}">${escapeHtml(target.trim())}${dictText} <button type="button" class="btn-tts" title="Odsłuchaj zdanie" onclick="speakKorean('${safeFullSentForAttr}')">🔊</button></span>`;
+        }
+        return escapeHtml(target.trim());
+    });
+
+    document.getElementById('cloze-sentence-display').innerHTML = sentenceHtml;
+    document.getElementById('cloze-hint-popup').classList.add('hidden');
+
+    // Wyświetlenie notatki jeśli istnieje
+    const noteEl = document.getElementById('cloze-note-container');
+    if (card.note && card.note.trim() !== "") {
+        noteEl.innerHTML = `📌 <strong>Notatka:</strong> ${escapeHtml(card.note)}`;
+        noteEl.classList.remove('hidden');
+    } else {
+        noteEl.classList.add('hidden');
+    }
+
+    // Ukryj pole input, przycisk Sprawdź, Poddaję się oraz licznik prób
+    document.getElementById('cloze-input-section').classList.add('hidden');
+
+    // Pokaż jeden duży przycisk "Dalej ➔"
+    const btnNext = document.getElementById('btnNextCard');
+    btnNext.classList.remove('hidden');
+    setTimeout(() => btnNext.focus(), 100);
+
+    // Auto-TTS: automatycznie odczytaj na głos całe kompletne zdanie koreańskie (rate = 0.95)
+    speakKorean(fullKoreanSentence, 0.95);
+}
+
+// ==========================================
+// LOGIKA HARD MODE DLA KART KLASYCZNYCH (Słówka)
+// ==========================================
+function checkHardMode() {
+    const inputEl = document.getElementById('hardModeInput');
+    if (!inputEl || inputEl.disabled) return;
+    
+    const userVal = inputEl.value.trim();
+    if (!userVal) return;
+
+    currentAttempts++;
+    const targetVal = currentCard.back.trim();
+
+    if (userVal === targetVal) {
+        inputEl.classList.remove('error');
+        inputEl.classList.add('success-input');
+        inputEl.disabled = true;
+        document.getElementById('study-back').classList.remove('hidden');
+
+        let rating = 5;
+        if (currentAttempts <= 2) {
+            rating = 5;
+            if ('vibrate' in navigator) navigator.vibrate([30, 50, 30]);
+        } else if (currentAttempts === 3) {
+            rating = 4;
+            if ('vibrate' in navigator) navigator.vibrate(50);
+        } else {
+            rating = 3;
+        }
+
         processAnswer(rating, false, true);
 
-        // Po krótkim opóźnieniu (500 ms) załaduj kolejną fiszkę
         setTimeout(() => {
             advanceStudyView();
         }, 500);
     } else {
-        // SCENARIUSZ B: Odpowiedź BŁĘDNA (Brak wibracji)
         if (currentAttempts < 4) {
-            // Próby 1, 2, 3
             inputEl.classList.remove('error');
-            void inputEl.offsetWidth; // Reflow dla ponownego uruchomienia animacji shake
+            void inputEl.offsetWidth;
             inputEl.classList.add('error');
 
-            const attemptCounterEl = document.getElementById('attemptCounter');
+            const attemptCounterEl = document.getElementById('attemptCounterStandard');
             if (attemptCounterEl) {
                 attemptCounterEl.textContent = `Próba: ${currentAttempts + 1} / 4`;
             }
@@ -1258,7 +2094,6 @@ function checkHardMode() {
                 inputEl.select();
             }, 400);
         } else {
-            // Spalona 4. próba
             handleHardModeFailure();
         }
     }
@@ -1277,17 +2112,14 @@ function handleHardModeFailure() {
         inputEl.classList.remove('error');
     }
 
-    // Automatycznie zapisz w SM-2 ocenę Nie znam (Again = 0), ale NIE ładuj jeszcze kolejnej fiszki
     processAnswer(0, false, true);
 
-    // Wyświetl poprawną odpowiedź oraz zdanie przykładowe (znajdujące się w #study-back)
     document.getElementById('study-back').classList.remove('hidden');
 
-    // Ukryj przyciski "Sprawdź" oraz "Poddaję się", odkryj przycisk "Dalej" (#btnNextCard)
     document.getElementById('btnCheckHardMode').classList.add('hidden');
     document.getElementById('btnGiveUp').classList.add('hidden');
     
-    const btnNext = document.getElementById('btnNextCard');
+    const btnNext = document.getElementById('btnNextCardStandard');
     btnNext.classList.remove('hidden');
     setTimeout(() => btnNext.focus(), 100);
 }
@@ -1298,9 +2130,15 @@ function showAnswer() {
     document.getElementById('srs-actions').classList.remove('hidden');
 }
 
-function previewSM2(card, quality) { let temp = { ...card }; applySM2(temp, quality); return `${temp.interval}d`; }
+function previewSM2(card, quality) {
+    let temp = { ...card };
+    applySM2(temp, quality);
+    return `${temp.interval}d`;
+}
 
-// Rozdzielona aktualizacja danych w SM-2 od przeładowania widoku karty
+// ==========================================
+// ALGORYTM SM-2 + INTRA-DAY LEARNING STEP
+// ==========================================
 function processAnswer(quality, advanceView = true, suppressVibrate = false) {
     if (!suppressVibrate && 'vibrate' in navigator) {
         if (quality === 4) { navigator.vibrate(50); }
@@ -1320,7 +2158,7 @@ function processAnswer(quality, advanceView = true, suppressVibrate = false) {
         appState.history[today][cat]++; 
     }
 
-    if (currentCard.interval === 0) {
+    if (currentCard.interval === 0 && (currentCard.learningStep === 0 || currentCard.learningStep === undefined)) {
         const limitKey = currentDeckType === 'grammar' ? 'newGrammarDone' : 'newCardsDone';
         appState.history[today][limitKey] = (appState.history[today][limitKey] || 0) + 1;
     }
@@ -1329,10 +2167,11 @@ function processAnswer(quality, advanceView = true, suppressVibrate = false) {
     studyQueue.shift(); 
     saveState(); 
     
-    if(currentDeckType === 'vocab') renderDeckTable(); 
+    if(currentDeckType === 'vocab') renderDeckList(); 
     updateGrammarWidget();
     updateStudyCounter(); 
     updateSessionProgressUI();
+    updateIntraDayButtons();
 
     if (advanceView) {
         advanceStudyView();
@@ -1342,6 +2181,7 @@ function processAnswer(quality, advanceView = true, suppressVibrate = false) {
 function advanceStudyView() {
     const today = getLocalToday();
     if (studyQueue.length === 0) {
+        isIntraDayForcedSession = false;
         if(currentDeckType === 'vocab') appState.history[today].completedAll = true;
         saveState();
         document.getElementById('study-empty').classList.remove('hidden');
@@ -1354,19 +2194,86 @@ function advanceStudyView() {
 }
 
 function applySM2(card, quality) {
-    if (quality < 3) { card.rep = 0; card.interval = 1; } else {
+    // Specjalna ścieżka Intra-day Learning Step dla kart Cloze
+    if (card.type === 'cloze') {
+        const step = typeof card.learningStep === 'number' ? card.learningStep : (card.interval > 0 ? 2 : 0);
+
+        if (step === 0) {
+            if (quality >= 4) {
+                // Pierwsze zaliczenie pozytywne (Good lub Easy) nowej karty Cloze: wraca dzisiaj po 3h
+                card.learningStep = 1;
+                card.intraDayDue = Date.now() + (3 * 60 * 60 * 1000);
+                card.interval = 0;
+                const todayMidnight = new Date();
+                todayMidnight.setHours(0, 0, 0, 0);
+                card.nextReview = todayMidnight.toISOString();
+                return;
+            } else if (quality === 3) {
+                // Słabo (4. próba): pozostaje do powtórki dzisiaj w kroku wewnątrz-dziennym
+                card.learningStep = 1;
+                card.intraDayDue = Date.now() + (60 * 60 * 1000);
+                card.interval = 0;
+                const todayMidnight = new Date();
+                todayMidnight.setHours(0, 0, 0, 0);
+                card.nextReview = todayMidnight.toISOString();
+                return;
+            } else {
+                // Again (0): reset
+                card.learningStep = 0;
+                card.intraDayDue = null;
+                card.rep = 0;
+                card.interval = 1;
+                let next = new Date();
+                next.setHours(0, 0, 0, 0);
+                card.nextReview = next.toISOString();
+                return;
+            }
+        } else if (step === 1) {
+            if (quality >= 3) {
+                // Drugie zaliczenie tego samego dnia: karta przechodzi do cyklu wielodniowego SM-2 z interwałem 1d na jutro
+                card.learningStep = 2;
+                card.intraDayDue = null;
+                card.rep = 1;
+                card.interval = 1;
+                let next = new Date();
+                next.setDate(next.getDate() + 1);
+                next.setHours(0, 0, 0, 0);
+                card.nextReview = next.toISOString();
+                return;
+            } else {
+                // Porażka na powtórce przed snem: zostaje w learningStep 1
+                card.learningStep = 1;
+                card.intraDayDue = Date.now() + (30 * 60 * 1000);
+                return;
+            }
+        }
+    }
+
+    // Standardowy cykl wielodniowy SM-2
+    if (quality < 3) {
+        card.rep = 0;
+        card.interval = 1;
+    } else {
         if (card.rep === 0) {
-            if (quality === 3) card.interval = 1; else if (quality === 4) card.interval = 3; else if (quality === 5) card.interval = 5;
+            if (quality === 3) card.interval = 1;
+            else if (quality === 4) card.interval = 3;
+            else if (quality === 5) card.interval = 5;
         } else if (card.rep === 1) {
-            if (quality === 3) card.interval = 2; else if (quality === 4) card.interval = 6; else if (quality === 5) card.interval = 8;
+            if (quality === 3) card.interval = 2;
+            else if (quality === 4) card.interval = 6;
+            else if (quality === 5) card.interval = 8;
         } else {
             card.interval = Math.round(card.interval * card.ef);
-            if (quality === 3) card.interval = Math.max(1, Math.round(card.interval * 0.8)); else if (quality === 5) card.interval = Math.round(card.interval * 1.2);
+            if (quality === 3) card.interval = Math.max(1, Math.round(card.interval * 0.8));
+            else if (quality === 5) card.interval = Math.round(card.interval * 1.2);
         }
         card.rep++;
     }
     card.ef = Math.max(1.3, card.ef + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)));
-    let next = new Date(); next.setDate(next.getDate() + card.interval); next.setHours(0, 0, 0, 0); card.nextReview = next.toISOString();
+    let next = new Date();
+    next.setDate(next.getDate() + card.interval);
+    next.setHours(0, 0, 0, 0);
+    card.nextReview = next.toISOString();
 }
 
 function updateSessionProgressUI() {
@@ -1398,82 +2305,17 @@ function openStatsModal() {
     cats.forEach(c => {
         if(c.data.length > 0) {
             html += `<h4 style="color: ${c.color}; margin-top: 10px;">${c.name} (${c.data.length})</h4><ul class="stats-list">`;
-            c.data.forEach(card => { html += `<li><b>${card.front}</b> - ${card.back}</li>`; }); html += `</ul>`;
+            c.data.forEach(card => { html += `<li><b>${escapeHtml(card.front)}</b> - ${escapeHtml(card.back)}</li>`; }); html += `</ul>`;
         }
     });
     if(html === '') html = '<p class="text-center hint">Brak danych w dzisiejszej sesji.</p>';
     container.innerHTML = html; document.getElementById('modal-stats').classList.remove('hidden');
 }
 
-function openQuickEdit(id = null) {
-    const deck = getActiveDeck();
-    let cardToEdit;
-    if (id) { cardToEdit = deck.find(c => c.id == id); } else { cardToEdit = currentCard; }
-    if (!cardToEdit) return;
-    
-    editingCardId = cardToEdit.id;
-    document.getElementById('qe-front').value = cardToEdit.front;
-    document.getElementById('qe-back').value = cardToEdit.back;
-    
-    if (currentDeckType === 'grammar') {
-        document.getElementById('qe-cloze-sentence').value = cardToEdit.clozeSentence || "";
-        document.getElementById('qe-cloze-answer').value = cardToEdit.clozeAnswer || "";
-        document.getElementById('qe-cloze-sentence').classList.remove('hidden');
-        document.getElementById('qe-cloze-answer').classList.remove('hidden');
-        document.getElementById('qe-example').classList.add('hidden');
-    } else {
-        document.getElementById('qe-example').value = cardToEdit.exampleSentence || "";
-        document.getElementById('qe-cloze-sentence').classList.add('hidden');
-        document.getElementById('qe-cloze-answer').classList.add('hidden');
-        document.getElementById('qe-example').classList.remove('hidden');
-    }
-
-    document.getElementById('modal-quick-edit').classList.remove('hidden');
+function closeModal(id) {
+    document.getElementById(id).classList.add('hidden');
+    if (id === 'modal-card-editor') pendingInboxWordId = null;
 }
-
-function saveQuickEdit() {
-    if (!editingCardId) return;
-    const f = document.getElementById('qe-front').value.trim();
-    const b = document.getElementById('qe-back').value.trim();
-    if(!f || !b) return alert("Wypełnij oba główne pola (Awers i Rewers)!");
-    
-    const deck = getActiveDeck();
-    const idx = deck.findIndex(x => x.id == editingCardId);
-    if(idx !== -1) {
-        deck[idx].front = f; 
-        deck[idx].back = b; 
-        if (currentDeckType === 'grammar') {
-            deck[idx].clozeSentence = document.getElementById('qe-cloze-sentence').value.trim();
-            deck[idx].clozeAnswer = document.getElementById('qe-cloze-answer').value.trim();
-        } else {
-            deck[idx].exampleSentence = document.getElementById('qe-example').value.trim();
-        }
-    }
-    saveState(); 
-    if(currentDeckType === 'vocab') renderDeckTable(); 
-    
-    if (currentCard && currentCard.id == editingCardId) {
-        currentCard.front = f; currentCard.back = b; 
-        if (currentDeckType === 'grammar') {
-            currentCard.clozeSentence = document.getElementById('qe-cloze-sentence').value.trim();
-            currentCard.clozeAnswer = document.getElementById('qe-cloze-answer').value.trim();
-        } else {
-            currentCard.exampleSentence = document.getElementById('qe-example').value.trim();
-        }
-        if (studyQueue[0] && studyQueue[0].id == editingCardId) {
-            nextStudyCard();
-        } else {
-            document.getElementById('study-front').textContent = currentCard.front;
-            let backHtml = `<div class="study-back-content"><div>${currentCard.back}</div>`;
-            if (currentCard.exampleSentence) { backHtml += `<div class="example-sentence">${currentCard.exampleSentence}</div>`; }
-            backHtml += `</div>`;
-            document.getElementById('study-back').innerHTML = backHtml;
-        }
-    }
-    closeModal('modal-quick-edit'); editingCardId = null;
-}
-
-function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
 
 // --- LOGIKA AKTYWNOŚCI ---
 function updateActivityStats() {
@@ -1630,11 +2472,16 @@ function handleMatchClick(type, id, text, el) {
     }
 }
 
-function speakKorean(text) {
-    if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = 'ko-KR'; window.speechSynthesis.speak(u);
+window.speakKorean = function(text, rate = 0.95) {
+    if ('speechSynthesis' in window && text) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'ko-KR';
+        u.rate = rate;
+        window.speechSynthesis.speak(u);
     }
-}
+};
+
 function closeMatchingGame() {
     document.getElementById('matching-game-view').classList.add('hidden');
     matchSelKo = null; matchSelPl = null; refreshStudySession(); 
@@ -1643,13 +2490,24 @@ function closeMatchingGame() {
 window.addEventListener('DOMContentLoaded', () => {
     loadState();
     
-    // Obsługa zatwierdzania klawiszem Enter w Hard Mode
+    // Obsługa zatwierdzania klawiszem Enter w Hard Mode (Standard)
     const hmInput = document.getElementById('hardModeInput');
     if (hmInput) {
         hmInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 checkHardMode();
+            }
+        });
+    }
+
+    // Obsługa zatwierdzania klawiszem Enter w polu Cloze
+    const clInput = document.getElementById('clozeInput');
+    if (clInput) {
+        clInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                checkCloze();
             }
         });
     }
