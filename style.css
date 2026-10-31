@@ -37,8 +37,8 @@ h2 { font-size: 22px; }
 h3 { font-size: 18px; margin-bottom: 12px; } 
 h4 { font-size: 16px; margin-bottom: 8px; color: var(--text-light); }
 
-input, textarea { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; font-size: 16px; background: #FFF; outline: none; transition: all 0.2s; resize: vertical; }
-input:focus, textarea:focus { border-color: var(--primary); }
+input, textarea, .select-input { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; font-size: 16px; background: #FFF; outline: none; transition: all 0.2s; resize: vertical; }
+input:focus, textarea:focus, .select-input:focus { border-color: var(--primary); }
 
 .field-label {
     display: block;
@@ -66,7 +66,7 @@ input:focus, textarea:focus { border-color: var(--primary); }
     40%, 80% { transform: translateX(6px); } 
 }
 
-/* NOWY MODUŁ CLOZE DELETION INTERFACE */
+/* MODUŁ CLOZE DELETION INTERFACE */
 .cloze-card { 
     padding: 28px 18px; 
     display: flex; 
@@ -243,6 +243,9 @@ input:focus, textarea:focus { border-color: var(--primary); }
 .btn { padding: 12px 20px; border-radius: 12px; font-size: 16px; font-weight: 600; border: none; cursor: pointer; transition: background 0.2s; display: inline-flex; align-items: center; justify-content: center; }
 .btn-primary { background-color: var(--primary); color: white; } 
 .btn-primary:hover { background-color: var(--primary-hover); }
+.btn-secondary { background-color: var(--secondary); color: white; }
+.btn-secondary:hover { background-color: #059669; }
+.btn-secondary:disabled { background-color: #94A3B8; cursor: not-allowed; opacity: 0.85; }
 .btn-success { background-color: var(--success); color: white; } 
 .btn-success:hover { background-color: #059669; }
 .btn-ai { background-color: #8B5CF6; color: white; } 
@@ -331,7 +334,7 @@ input:focus, textarea:focus { border-color: var(--primary); }
 }
 
 /* ==========================================
-   NOWY DESIGN: BAZA FISZEK (KARTY MOBILNE)
+   BAZA FISZEK (KARTY MOBILNE)
    ========================================== */
 .filter-pills {
     display: flex;
@@ -457,7 +460,7 @@ input:focus, textarea:focus { border-color: var(--primary); }
 }
 
 /* ==========================================
-   NOWY DESIGN: WYŁAPANE SŁÓWKA (.word-inbox-card)
+   WYŁAPANE SŁÓWKA (.word-inbox-card)
    ========================================== */
 .words-inbox-list {
     display: flex;
@@ -695,10 +698,157 @@ input:focus, textarea:focus { border-color: var(--primary); }
 .library-item h4 { color: var(--primary); margin-bottom: 4px; }
 .library-item p { font-size: 13px; color: var(--text-light); text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
 
-/* Aktywność i Wykresy */
-.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-.stat-box { background: #FFF; border-radius: 16px; padding: 16px; text-align: center; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
-.stat-box.full-width { display: flex; justify-content: center; align-items: center; gap: 10px; width: 100%; }
+/* === AKTYWNOŚĆ: Kompaktowy Streak === */
+.streak-compact-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.streak-pill {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+.streak-val {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.1;
+}
+.streak-lbl {
+    font-size: 0.72rem;
+    color: #64748b;
+}
+
+/* === AKTYWNOŚĆ: Kapitał Wiedzy === */
+.section-subtitle {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    margin: 0 0 10px 4px;
+    font-weight: 700;
+}
+.capital-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.capital-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.capital-card-wide {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 16px;
+}
+.capital-header {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 6px;
+}
+.capital-main-value {
+    font-size: 1.9rem;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.1;
+}
+.capital-fraction {
+    font-size: 1.05rem;
+    color: #94a3b8;
+    font-weight: 600;
+}
+.capital-sub-label {
+    font-size: 0.76rem;
+    color: #64748b;
+    margin-top: 4px;
+}
+.capital-badge-positive {
+    display: inline-block;
+    margin-top: 8px;
+    background: #dcfce7;
+    color: #15803d;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    align-self: flex-start;
+}
+.capital-mini-bar {
+    width: 100%;
+    height: 6px;
+    background: #f1f5f9;
+    border-radius: 999px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+.capital-mini-fill {
+    height: 100%;
+    background: #6366f1;
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+/* === AKTYWNOŚĆ: Pasek Dojrzałości Pamięci === */
+.maturity-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 16px;
+}
+.maturity-header, .weekly-chart-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.88rem;
+    color: #334155;
+    margin-bottom: 8px;
+}
+.maturity-stacked-bar {
+    display: flex;
+    height: 12px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: #f1f5f9;
+    margin-bottom: 10px;
+}
+.bar-seg-mastered { background: #22c55e; transition: width 0.3s ease; }
+.bar-seg-learning { background: #3b82f6; transition: width 0.3s ease; }
+.bar-seg-new { background: #cbd5e1; transition: width 0.3s ease; }
+.maturity-legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.74rem;
+    color: #475569;
+}
+.maturity-legend i {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+}
+.dot-mastered { background: #22c55e; }
+.dot-learning { background: #3b82f6; }
+.dot-new { background: #cbd5e1; }
+
+/* Wykresy i Kalendarz */
 .chart-container { display: flex; justify-content: space-around; align-items: flex-end; height: 180px; padding-bottom: 5px; }
 .chart-col { display: flex; flex-direction: column; justify-content: flex-end; align-items: center; width: 12%; height: 100%; }
 .bar-wrapper { width: 12px; display: flex; flex-direction: column; justify-content: flex-end; border-radius: 6px; overflow: hidden; background: #F1F5F9; margin-bottom: 5px; }
@@ -724,6 +874,65 @@ input:focus, textarea:focus { border-color: var(--primary); }
 .match-card.selected { border-color: var(--warning); background: #FFFBEB; transform: scale(0.97); }
 .match-card.matched { border-color: var(--success); background: #D1FAE5; color: #065F46; opacity: 0.5; pointer-events: none; transform: scale(0.95); }
 
+/* === GRAMATYKA: Podzakładki Beginner / Intermediate === */
+.grammar-level-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #f1f5f9;
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    gap: 4px;
+}
+.level-tab-btn {
+    background: transparent;
+    border: none;
+    padding: 10px 8px;
+    border-radius: 9px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+.level-tab-btn.active {
+    background: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+.level-tab-counter {
+    font-size: 0.75rem;
+    background: #e2e8f0;
+    color: #475569;
+    padding: 2px 7px;
+    border-radius: 999px;
+    font-weight: 600;
+}
+.level-tab-btn.active .level-tab-counter {
+    background: #eef2ff;
+    color: #4f46e5;
+}
+.btn-mark-unit {
+    background: #f1f5f9;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.btn-mark-unit:hover {
+    background: #dcfce7;
+    color: #15803d;
+    border-color: #86efac;
+}
+
 /* GRAMATYKA ACCORDION */
 .filter-label { font-size: 14px; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 5px; }
 .status-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; }
@@ -731,7 +940,7 @@ input:focus, textarea:focus { border-color: var(--primary); }
 .status-1 { background-color: var(--warning); }
 .status-2 { background-color: var(--success); }
 .accordion { background: var(--card-bg); border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--border); overflow: hidden; }
-.accordion-header { padding: 14px 16px; background: #F8FAFC; cursor: pointer; font-weight: 600; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+.accordion-header { padding: 14px 16px; background: #F8FAFC; cursor: pointer; font-weight: 600; display: flex; justify-content: space-between; align-items: center; user-select: none; gap: 8px; }
 .accordion-content { padding: 0; display: none; }
 .accordion-content.open { display: block; border-top: 1px solid var(--border); }
 .grammar-item { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: background 0.2s; }
