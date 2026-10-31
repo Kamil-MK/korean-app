@@ -1,12 +1,281 @@
 /**
  * KOREAN SRS & AI READER (PWA) - COMPLETE APPLICATION ENGINE
  * LocalStorage Key: KoreanApp_Ecosystem_V6
- * Architecture: 100% Vanilla JS (ES6+), SM-2 + Intra-Day Cloze Engine
+ * Architecture: 100% Vanilla JS (ES6+), SM-2 + Intra-Day Cloze Engine + Knowledge Capital Dashboard
  */
 
 const DEFAULT_API_KEY = "";
 const STORAGE_KEY = "KoreanApp_Ecosystem_V6";
 const CLOZE_REGEX = /\{\{([^|}]+)\|([^:}]+)(?:::([^}]+))?\}\}/g;
+const MASTERED_INTERVAL_THRESHOLD = 10; // Próg opanowania fiszki (interval > 10 dni)
+
+// ==========================================
+// DANE WSADOWE: BEGINNER_GRAMMAR_DATA (112 zagadnień w 25 działach)
+// ==========================================
+const BEGINNER_GRAMMAR_DATA = [
+  {
+    "level": "beginner",
+    "category": "Getting Ready (Podstawy)",
+    "items": [
+      { "id": "b0_1", "title": "이다 (to be)", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b0_2", "title": "있다 (to exist/be, to have)", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b0_3", "title": "Numbers", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b0_4", "title": "Dates and Days of the Week", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b0_5", "title": "Time", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 1. Tenses (Czasy)",
+    "items": [
+      { "id": "b1_1", "title": "Present Tense A/V-(스)ㅂ니다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b1_2", "title": "Present Tense A/V-아/어요", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b1_3", "title": "Past Tense A/V-았/었어요", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b1_4", "title": "Future Tense V-(으)ㄹ 거예요 ①", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b1_5", "title": "Progressive Tense V-고 있다 ①", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b1_6", "title": "Past Perfect Tense A/V-았/었었어요", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 2. Negative Expressions (Przeczenia)",
+    "items": [
+      { "id": "b2_1", "title": "Word Negation", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b2_2", "title": "안 A/V-아/어요 (A/V-지 않아요)", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b2_3", "title": "못 V-아/어요 (V-지 못해요)", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 3. Particles (Partykuły)",
+    "items": [
+      { "id": "b3_1", "title": "N이/가", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_2", "title": "N은/는", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_3", "title": "N을/를", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_4", "title": "N와/과, N(이)랑, N하고", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_5", "title": "N의", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_6", "title": "N에 ①", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_7", "title": "N에 ②", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_8", "title": "N에서", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_9", "title": "N에서 N까지, N부터 N까지", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_10", "title": "N에게/한테", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_11", "title": "N도", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_12", "title": "N만", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_13", "title": "N밖에", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_14", "title": "N(으)로", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_15", "title": "N(이)나 ①", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_16", "title": "N(이)나 ②", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_17", "title": "N쯤", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_18", "title": "N처럼, N같이", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_19", "title": "N보다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b3_20", "title": "N마다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 4. Listing and Contrast (Wyliczanie i Kontrast)",
+    "items": [
+      { "id": "b4_1", "title": "A/V-고", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b4_2", "title": "A/V-거나", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b4_3", "title": "A/V-지만", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b4_4", "title": "A/V-(으)ㄴ/는데 ①", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 5. Time Expressions (Wyrażenia Czasowe)",
+    "items": [
+      { "id": "b5_1", "title": "N 전에, V-기 전에", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b5_2", "title": "N 후에, V-(으)ㄴ 후에", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b5_3", "title": "V-고 나서", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b5_4", "title": "V-아/어서 ①", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b5_5", "title": "N 때, A/V-(으)ㄹ 때", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b5_6", "title": "V-(으)면서", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b5_7", "title": "N 중, V-는 중", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b5_8", "title": "V-자마자", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b5_9", "title": "N 동안, V-는 동안", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b5_10", "title": "V-(으)ㄴ 지", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 6. Ability and Possibility (Umiejętność i Możliwość)",
+    "items": [
+      { "id": "b6_1", "title": "V-(으)ㄹ 수 있다/없다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b6_2", "title": "V-(으)ㄹ 줄 알다/모르다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 7. Demands, Obligations, Permission & Prohibition",
+    "items": [
+      { "id": "b7_1", "title": "V-(으)세요", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b7_2", "title": "V-지 마세요", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b7_3", "title": "A/V-아/어야 되다/하다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b7_4", "title": "A/V-아/어도 되다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b7_5", "title": "A/V-(으)면 안 되다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b7_6", "title": "A/V-지 않아도 되다 (안 A/V-아/어도 되다)", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 8. Expressions of Hope (Wyrażanie Nadziei)",
+    "items": [
+      { "id": "b8_1", "title": "V-고 싶다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b8_2", "title": "A/V-았/었으면 좋겠다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 9. Reasons and Causes (Powody i Przyczyny)",
+    "items": [
+      { "id": "b9_1", "title": "A/V-아/어서 ②", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b9_2", "title": "A/V-(으)니까 ①", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b9_3", "title": "N 때문에, A/V-기 때문에", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 10. Making Requests and Assisting (Prośby i Pomoc)",
+    "items": [
+      { "id": "b10_1", "title": "V-아/어 주세요, V-아/어 주시겠어요?", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b10_2", "title": "V-아/어 줄게요, V-아/어 줄까요?", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 11. Trying New Things and Experiences (Doświadczenia)",
+    "items": [
+      { "id": "b11_1", "title": "V-아/어 보다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b11_2", "title": "V-(으)ㄴ 적이 있다/없다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 12. Asking Opinions and Making Suggestions (Sugestie)",
+    "items": [
+      { "id": "b12_1", "title": "V-(으)ㄹ까요? ①", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b12_2", "title": "V-(으)ㄹ까요? ②", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b12_3", "title": "V-(으)ㅂ시다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b12_4", "title": "V-(으)시겠어요?", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b12_5", "title": "V-(으)ㄹ래요? ①", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 13. Intentions and Plans (Intencje i Plany)",
+    "items": [
+      { "id": "b13_1", "title": "A/V-겠어요 ①", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b13_2", "title": "V-(으)ㄹ게요", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b13_3", "title": "V-(으)ㄹ래요 ②", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 14. Background Information and Explanations (Tło i Wyjaśnienia)",
+    "items": [
+      { "id": "b14_1", "title": "A/V-(으)ㄴ/는데 ②", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b14_2", "title": "V-(으)니까 ②", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 15. Purpose and Intention (Cel i Zamiar)",
+    "items": [
+      { "id": "b15_1", "title": "V-(으)러 가다/오다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b15_2", "title": "V-(으)려고", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b15_3", "title": "V-(으)려고 하다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b15_4", "title": "N을/를 위해(서), V-기 위해(서)", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b15_5", "title": "V-기로 하다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 16. Conditions and Suppositions (Warunki)",
+    "items": [
+      { "id": "b16_1", "title": "A/V-(으)면", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b16_2", "title": "V-(으)려면", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b16_3", "title": "A/V-아/어도", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 17. Conjecture (Przypuszczenia)",
+    "items": [
+      { "id": "b17_1", "title": "A/V-겠어요 ②", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b17_2", "title": "A/V-(으)ㄹ 거예요 ②", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b17_3", "title": "A/V-(으)ㄹ까요? ③", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b17_4", "title": "A/V-(으)ㄴ/는/(으)ㄹ 것 같다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 18. Changes in Parts of Speech (Zmiana Części Mowy)",
+    "items": [
+      { "id": "b18_1", "title": "관형형 -(으)ㄴ/-는/-(으)ㄹ N", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b18_2", "title": "A/V-기", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b18_3", "title": "A-게", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b18_4", "title": "A-아/어하다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 19. Expressions of State (Wyrażanie Stanu)",
+    "items": [
+      { "id": "b19_1", "title": "V-고 있다 ②", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b19_2", "title": "V-아/어 있다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b19_3", "title": "A-아/어지다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b19_4", "title": "V-게 되다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 20. Confirming Information (Potwierdzanie Informacji)",
+    "items": [
+      { "id": "b20_1", "title": "A/V-(으)ㄴ/는지", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b20_2", "title": "V-는 데 걸리다/들다", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b20_3", "title": "A/V-지요?", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 21. Discovery and Surprise (Odkrycie i Zaskoczenie)",
+    "items": [
+      { "id": "b21_1", "title": "A/V-군요/는군요", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b21_2", "title": "A/V-네요", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 22. Additional Endings (Dodatkowe Końcówki)",
+    "items": [
+      { "id": "b22_1", "title": "A-(으)ㄴ가요?, V-나요?", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b22_2", "title": "A/V-(으)ㄴ/는데요", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 23. Quotations (Mowa Zależna i Niezależna)",
+    "items": [
+      { "id": "b23_1", "title": "Direct Quotations", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b23_2", "title": "Indirect Quotations", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b23_3", "title": "Indirect Quotation Contracted Forms", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  },
+  {
+    "level": "beginner",
+    "category": "Unit 24. Irregular Conjugations (Odmiany Nieregularne 불규칙)",
+    "items": [
+      { "id": "b24_1", "title": "'ㅡ' 불규칙 (Irregular Conjugation)", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b24_2", "title": "'ㄹ' 불규칙 (Irregular Conjugation)", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b24_3", "title": "'ㅂ' 불규칙 (Irregular Conjugation)", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b24_4", "title": "'ㄷ' 불규칙 (Irregular Conjugation)", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b24_5", "title": "'르' 불규칙 (Irregular Conjugation)", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b24_6", "title": "'ㅎ' 불규칙 (Irregular Conjugation)", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false },
+      { "id": "b24_7", "title": "'ㅅ' 불규칙 (Irregular Conjugation)", "status": 0, "meaning": "", "rule": "", "examples": [], "forceInStory": false }
+    ]
+  }
+];
 
 // ==========================================
 // 1. NARZĘDZIA POMOCNICZE I DATY
@@ -50,6 +319,10 @@ let appState = {
     settings: {
         hardMode: false
     },
+    stats: {
+        storiesReadCount: 0,
+        totalWordsRead: 0
+    },
     words: [],
     flashcards: [],
     grammarFlashcards: [],
@@ -76,6 +349,8 @@ let pendingInboxWordId = null;
 let currentDeckType = 'vocab'; // 'vocab' | 'grammar'
 let isIntraDayForcedSession = false;
 
+// Aktywny poziom gramatyki ('beginner' | 'intermediate')
+let activeGrammarLevel = 'beginner';
 let activeGrammarCatIndex = null;
 let activeGrammarItemIndex = null;
 
@@ -95,7 +370,7 @@ let matchedInRound = 0;
 let currentCalDate = new Date(getLocalToday());
 
 // ==========================================
-// 3. PARSER SKŁADNI CLOZE I MIGRACJA DANYCH
+// 3. PARSER SKŁADNI CLOZE I MIGRACJA DANYCH (ensureDataStructures)
 // ==========================================
 function parseClozeMatches(rawSentence) {
     if (!rawSentence || typeof rawSentence !== 'string') return [];
@@ -143,7 +418,67 @@ function getActiveClozeData(card) {
     };
 }
 
-function migrateAndHealCards() {
+/**
+ * Funkcja migracyjna zapewniająca integralność struktur danych:
+ * - Przypisuje level = 'intermediate' dotychczasowym kategoriom gramatycznym (as-is)
+ * - Wstawia brakujące działy BEGINNER_GRAMMAR_DATA na początek appState.grammarTree
+ * - Inicjalizuje obiekt appState.stats
+ * - Uzupełnia pola Cloze, Intra-day oraz masteredAt dla fiszek
+ */
+function ensureDataStructures() {
+    if (!Array.isArray(appState.words)) appState.words = [];
+    if (!Array.isArray(appState.flashcards)) appState.flashcards = [];
+    if (!Array.isArray(appState.grammarFlashcards)) appState.grammarFlashcards = [];
+    if (!Array.isArray(appState.library)) appState.library = [];
+    if (!Array.isArray(appState.grammarTree)) appState.grammarTree = [];
+    if (!appState.history || typeof appState.history !== 'object') appState.history = {};
+    if (!appState.settings || typeof appState.settings !== 'object') {
+        appState.settings = { hardMode: false };
+    }
+
+    // 1. Inicjalizacja Statystyk Czytelni (appState.stats)
+    if (!appState.stats || typeof appState.stats !== 'object') {
+        appState.stats = {
+            storiesReadCount: appState.library ? appState.library.length : 0,
+            totalWordsRead: 0
+        };
+    } else {
+        if (typeof appState.stats.storiesReadCount !== 'number' || isNaN(appState.stats.storiesReadCount)) {
+            appState.stats.storiesReadCount = appState.library ? appState.library.length : 0;
+        }
+        if (typeof appState.stats.totalWordsRead !== 'number' || isNaN(appState.stats.totalWordsRead)) {
+            appState.stats.totalWordsRead = 0;
+        }
+    }
+
+    // 2. Migracja Gramatyki (appState.grammarTree)
+    appState.grammarTree.forEach(cat => {
+        if (!cat.level) {
+            cat.level = 'intermediate';
+        }
+        if (!Array.isArray(cat.items)) {
+            cat.items = [];
+        }
+    });
+
+    // Sprawdzenie brakujących kategorii z BEGINNER_GRAMMAR_DATA i wstawienie na początek
+    const missingBeginnerCategories = [];
+    BEGINNER_GRAMMAR_DATA.forEach(begCat => {
+        const exists = appState.grammarTree.some(
+            existingCat => existingCat.category === begCat.category
+        );
+        if (!exists) {
+            missingBeginnerCategories.push(JSON.parse(JSON.stringify(begCat)));
+        }
+    });
+
+    if (missingBeginnerCategories.length > 0) {
+        appState.grammarTree.unshift(...missingBeginnerCategories);
+    }
+
+    // 3. Normalizacja talii fiszek (flashcards + grammarFlashcards) oraz masteredAt
+    const todayIsoDate = new Date().toISOString().slice(0, 10);
+
     const normalizeDeck = (deck, defaultIsGrammar = false) => {
         if (!Array.isArray(deck)) return;
 
@@ -152,7 +487,7 @@ function migrateAndHealCards() {
                 card.id = Date.now() + Math.random();
             }
 
-            // Konwersja starszych kart gramatycznych z luką ___ na nową składnię {{odpowiedź|podpowiedź}}
+            // Konwersja starszych kart gramatycznych z luką ___ na składnię {{odpowiedź|podpowiedź}}
             if ((defaultIsGrammar || card.clozeSentence) && !card.rawSentence) {
                 card.type = 'cloze';
                 const ans = (card.clozeAnswer || card.back || "").trim();
@@ -207,7 +542,6 @@ function migrateAndHealCards() {
                 card.ef = 2.5;
             }
 
-            // Nowe pola kroku wewnątrz-dziennego (Intra-day Learning Step)
             if (typeof card.learningStep !== 'number') {
                 card.learningStep = card.interval > 0 ? 2 : 0;
             }
@@ -217,34 +551,37 @@ function migrateAndHealCards() {
             if (!card.nextReview) {
                 card.nextReview = new Date().toISOString();
             }
+
+            // Jeśli karta przekroczyła już próg opanowania w przeszłości, a nie ma pola masteredAt
+            if (card.interval > MASTERED_INTERVAL_THRESHOLD && !card.masteredAt) {
+                card.masteredAt = todayIsoDate;
+            }
         });
     };
 
     normalizeDeck(appState.flashcards, false);
     normalizeDeck(appState.grammarFlashcards, true);
 
-    // Czyszczenie i uzupełnianie pól w Wyłapanych Słówkach
-    if (Array.isArray(appState.words)) {
-        appState.words.forEach(w => {
-            if (!w.id) w.id = Date.now() + Math.random();
-            if (w.dictForm === undefined || w.dictForm === "") {
-                w.dictForm = w.ko || "";
-            }
-            if (w.contextSentence === undefined) {
-                w.contextSentence = "";
-            }
-            if (
-                w.autoPl === "Błąd pobierania" ||
-                w.autoPl === "Brak tłumaczenia" ||
-                w.autoPl === "Ładowanie..."
-            ) {
-                w.autoPl = "";
-            }
-            if (w.custom === undefined) {
-                w.custom = "";
-            }
-        });
-    }
+    // 4. Czyszczenie skrzynki Wyłapanych Słówek
+    appState.words.forEach(w => {
+        if (!w.id) w.id = Date.now() + Math.random();
+        if (w.dictForm === undefined || w.dictForm === "") {
+            w.dictForm = w.ko || "";
+        }
+        if (w.contextSentence === undefined) {
+            w.contextSentence = "";
+        }
+        if (
+            w.autoPl === "Błąd pobierania" ||
+            w.autoPl === "Brak tłumaczenia" ||
+            w.autoPl === "Ładowanie..."
+        ) {
+            w.autoPl = "";
+        }
+        if (w.custom === undefined) {
+            w.custom = "";
+        }
+    });
 }
 
 // ==========================================
@@ -262,25 +599,29 @@ function loadState() {
     }
 
     if (!appState.apiKey) appState.apiKey = DEFAULT_API_KEY;
-    if (!Array.isArray(appState.words)) appState.words = [];
-    if (!Array.isArray(appState.flashcards)) appState.flashcards = [];
-    if (!Array.isArray(appState.grammarFlashcards)) appState.grammarFlashcards = [];
-    if (!Array.isArray(appState.library)) appState.library = [];
-    if (!appState.history || typeof appState.history !== 'object') appState.history = {};
-    if (!appState.settings || typeof appState.settings !== 'object') {
-        appState.settings = { hardMode: false };
-    }
 
-    migrateAndHealCards();
+    // KRYTYCZNE: Wywołanie migracji zaraz po wczytaniu stanu z localStorage
+    ensureDataStructures();
 
-    // Asynchroniczne ładowanie bazy gramatyki KGIU z grammar.json jeśli jest pusta
-    if (!appState.grammarTree || appState.grammarTree.length === 0) {
+    // Sprawdzenie, czy w bazie są już kategorie Intermediate; jeśli nie, dociągnij z grammar.json
+    const hasIntermediate = appState.grammarTree.some(cat => cat.level === 'intermediate');
+    if (!hasIntermediate) {
         fetch('./grammar.json')
             .then(res => res.json())
             .then(data => {
-                appState.grammarTree = data;
-                saveState();
-                renderGrammarTab();
+                if (Array.isArray(data)) {
+                    data.forEach(cat => {
+                        cat.level = 'intermediate';
+                        const exists = appState.grammarTree.some(c => c.category === cat.category);
+                        if (!exists) {
+                            appState.grammarTree.push(cat);
+                        }
+                    });
+                    ensureDataStructures();
+                    saveState();
+                    renderGrammarTab();
+                    updateActivityStats();
+                }
             })
             .catch(err => console.error("Błąd ładowania pliku grammar.json:", err));
     }
@@ -331,13 +672,13 @@ function loadState() {
         }
     }
 
+    saveState();
     updateSettingsUI();
     renderWordsTable();
     renderDeckList();
     updateGrammarWidget();
-    if (appState.grammarTree && appState.grammarTree.length > 0) {
-        renderGrammarTab();
-    }
+    renderGrammarTab();
+    updateActivityStats();
     refreshStudySession();
 }
 
@@ -378,16 +719,34 @@ function setupNavigation() {
             }
         });
     });
+
+    // Podpięcie przełącznika poziomów gramatyki (Beginner / Intermediate)
+    const btnBeg = document.getElementById('tabGrammarBeginner');
+    const btnInt = document.getElementById('tabGrammarIntermediate');
+
+    if (btnBeg) {
+        btnBeg.addEventListener('click', () => switchGrammarLevel('beginner'));
+    }
+    if (btnInt) {
+        btnInt.addEventListener('click', () => switchGrammarLevel('intermediate'));
+    }
+
+    // Podpięcie przycisku oznaczania historii jako przeczytanej
+    const btnMarkRead = document.getElementById('btnMarkStoryRead');
+    if (btnMarkRead) {
+        btnMarkRead.addEventListener('click', markStoryAsRead);
+    }
 }
 
 // ==========================================
-// 5. GITHUB CLOUD SYNC & LOKALNY BACKUP (JSON / CSV)
+// 5. GITHUB CLOUD SYNC (Z ZABEZPIECZENIEM 64 KB KEEPALIVE) & BACKUP
 // ==========================================
 function buildSafeStateForCloud() {
     return {
         dailyLimit: appState.dailyLimit,
         autoSync: appState.autoSync || false,
         settings: appState.settings || { hardMode: false },
+        stats: appState.stats || { storiesReadCount: 0, totalWordsRead: 0 },
         words: appState.words || [],
         flashcards: appState.flashcards || [],
         grammarFlashcards: appState.grammarFlashcards || [],
@@ -422,23 +781,30 @@ async function silentSyncToGitHub() {
         }
 
         const safeState = buildSafeStateForCloud();
-        const body = {
+        const bodyObj = {
             message: `Auto-sync w tle (${getLocalToday()} ${new Date().toLocaleTimeString('pl-PL')})`,
             content: encodeBase64Unicode(JSON.stringify(safeState, null, 2))
         };
         if (sha) {
-            body.sha = sha;
+            bodyObj.sha = sha;
         }
 
-        await fetch(url, {
+        const bodyStr = JSON.stringify(bodyObj);
+        const fetchOptions = {
             method: 'PUT',
             headers: {
                 "Authorization": `token ${appState.ghToken}`,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(body),
-            keepalive: true
-        });
+            body: bodyStr
+        };
+
+        // KRYTYCZNE ZABEZPIECZENIE 64 KB: keepalive tylko gdy payload < 60000 znaków
+        if (bodyStr.length < 60000) {
+            fetchOptions.keepalive = true;
+        }
+
+        await fetch(url, fetchOptions);
 
         const msg = document.getElementById('sync-msg');
         if (msg) {
@@ -480,12 +846,12 @@ async function syncToGitHub() {
         }
 
         const safeState = buildSafeStateForCloud();
-        const body = {
+        const bodyObj = {
             message: `Zapis postępów z aplikacji (${getLocalToday()})`,
             content: encodeBase64Unicode(JSON.stringify(safeState, null, 2))
         };
         if (sha) {
-            body.sha = sha;
+            bodyObj.sha = sha;
         }
 
         const putRes = await fetch(url, {
@@ -494,7 +860,7 @@ async function syncToGitHub() {
                 "Authorization": `token ${appState.ghToken}`,
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(body)
+            body: JSON.stringify(bodyObj)
         });
 
         if (putRes.ok) {
@@ -557,10 +923,11 @@ async function syncFromGitHub() {
                 ghRepo: currentGhRepo
             };
 
-            migrateAndHealCards();
+            // KRYTYCZNE: Migracja natychmiast po pobraniu z GitHuba przed zapisem do localStorage
+            ensureDataStructures();
             saveState();
 
-            msg.textContent = "✅ Postępy pobrane i wczytane!";
+            msg.textContent = "✅ Postępy pobrane i zaktualizowane!";
             msg.style.color = "var(--success)";
             setTimeout(() => location.reload(), 1200);
         } else {
@@ -574,7 +941,6 @@ async function syncFromGitHub() {
     }
 }
 
-// Interwał cichej synchronizacji co 5 minut oraz przy minimalizacji karty
 setInterval(() => {
     if (document.visibilityState === 'visible') {
         silentSyncToGitHub();
@@ -610,7 +976,7 @@ function importData(event) {
                 if (!appState.apiKey && preservedApiKey) appState.apiKey = preservedApiKey;
                 if (!appState.ghToken && preservedGhToken) appState.ghToken = preservedGhToken;
 
-                migrateAndHealCards();
+                ensureDataStructures();
                 saveState();
                 alert("Pomyślnie wgrano kopię zapasową JSON!");
                 location.reload();
@@ -625,7 +991,6 @@ function importData(event) {
     reader.readAsText(file);
 }
 
-// Pełny parser CSV obsługujący cudzysłowy i przecinki wewnątrz zdań
 function parseCSVLine(line) {
     const result = [];
     let current = "";
@@ -700,12 +1065,11 @@ function importCSV(event) {
                 const front = (cols[1] || "").trim();
                 const back = (cols[2] || "").trim();
                 const example = (cols[3] || "").trim();
-                const interval = parseInt(cols[6]) || 0;
+                const interval = parseInt(cols[6], 10) || 0;
                 if (createFlashcardData(front, back, interval > 0 ? 1 : 0, interval, 2.5, null, example, appState.flashcards)) {
                     addedCount++;
                 }
             } else if (cols.length >= 2) {
-                // Klasyczny import 2 lub 3-kolumnowy: Front, Back, Example
                 const front = (cols[0] || "").trim();
                 const back = (cols[1] || "").trim();
                 const example = (cols[2] || "").trim();
@@ -715,8 +1079,10 @@ function importCSV(event) {
             }
         });
 
+        ensureDataStructures();
         saveState();
         renderDeckList();
+        updateActivityStats();
         refreshStudySession();
         alert(`Pomyślnie zaimportowano ${addedCount} nowych fiszek z pliku CSV!`);
         event.target.value = '';
@@ -794,7 +1160,6 @@ async function callGeminiAPI(prompt, expectJson = false, customSchema = null) {
         }
     }
 
-    // Pierwsza konfiguracja wyłącza ukryte myślenie (thinkingBudget: 0), oszczędzając tokeny i przyspieszając odpowiedź do 1-2s
     const configsToTry = [
         { ...baseGenerationConfig, thinkingConfig: { thinkingBudget: 0 } },
         baseGenerationConfig
@@ -853,7 +1218,7 @@ async function callGeminiAPI(prompt, expectJson = false, customSchema = null) {
 }
 
 // ==========================================
-// 8. CZYTELNIA AI, PARSER DOM I WYŁAPANE SŁÓWKA (.word-inbox-card)
+// 8. CZYTELNIA AI, ZLICZANIE PRZECZYTANYCH HISTORII I WYŁAPANE SŁÓWKA
 // ==========================================
 window.switchCzytelniaTab = function(tab) {
     const readerCont = document.getElementById('czytelnia-reader-container');
@@ -888,6 +1253,47 @@ function shuffleArrayFisherYates(array) {
     return arr;
 }
 
+// Reset przycisku "✅ Oznacz historię jako przeczytaną" przy wczytaniu lub wygenerowaniu nowego tekstu
+function resetMarkStoryReadButton() {
+    const btn = document.getElementById('btnMarkStoryRead');
+    if (btn) {
+        btn.disabled = false;
+        btn.textContent = "✅ Oznacz historię jako przeczytaną";
+    }
+}
+
+// Funkcja oznaczająca historię jako przeczytaną i doliczająca wolumen słów KR do Kapitału Wiedzy
+window.markStoryAsRead = function() {
+    const btn = document.getElementById('btnMarkStoryRead');
+    if (btn && btn.disabled) return;
+
+    const readerContentEl = document.getElementById('reader-content');
+    const plainText = readerContentEl
+        ? readerContentEl.textContent
+        : (currentStoryText || "").replace(/<[^>]*>?/gm, ' ');
+
+    const wordCount = plainText.trim().split(/\s+/).filter(Boolean).length;
+
+    if (!appState.stats) {
+        appState.stats = { storiesReadCount: 0, totalWordsRead: 0 };
+    }
+
+    appState.stats.storiesReadCount = (appState.stats.storiesReadCount || 0) + 1;
+    appState.stats.totalWordsRead = (appState.stats.totalWordsRead || 0) + wordCount;
+
+    if (btn) {
+        btn.disabled = true;
+        btn.textContent = `Ukończono! (+${wordCount} słów do statystyk)`;
+    }
+
+    if ('vibrate' in navigator) {
+        navigator.vibrate(50);
+    }
+
+    saveState();
+    updateActivityStats();
+};
+
 async function generateAIStory() {
     if (!appState.apiKey || appState.apiKey.trim() === "") {
         return alert("Podaj swój klucz Gemini API w zakładce Ustawienia.");
@@ -898,8 +1304,8 @@ async function generateAIStory() {
     loader.style.display = 'block';
     errorP.style.display = 'none';
 
-    const knownPool = appState.flashcards.filter(f => f.interval > 10).map(f => f.back);
-    const learningPool = appState.flashcards.filter(f => f.interval <= 10).map(f => f.back);
+    const knownPool = appState.flashcards.filter(f => f.interval > MASTERED_INTERVAL_THRESHOLD).map(f => f.back);
+    const learningPool = appState.flashcards.filter(f => f.interval <= MASTERED_INTERVAL_THRESHOLD).map(f => f.back);
 
     const sampledKnown = shuffleArrayFisherYates(knownPool).slice(0, 20);
     const sampledLearning = shuffleArrayFisherYates(learningPool).slice(0, 8);
@@ -974,6 +1380,8 @@ function setupReaderContent(text) {
     document.getElementById('reader-view').classList.remove('hidden');
     document.getElementById('sumup-result').textContent = "";
 
+    resetMarkStoryReadButton();
+
     const container = document.getElementById('reader-content');
     container.innerHTML = "";
     const tempDiv = document.createElement('div');
@@ -1047,7 +1455,6 @@ function handleReaderWordClick(spanEl) {
     spanEl.classList.toggle('selected');
 }
 
-// Wycinanie pełnego zdania (od kropki do kropki) wokół wybranego słowa w Czytelni
 function extractContextSentenceFromDOM(spanEl) {
     const blockParent = spanEl.closest('p') || document.getElementById('reader-content');
     if (!blockParent) return spanEl.textContent.trim();
@@ -1141,7 +1548,6 @@ async function fetchTranslation(word, id) {
             renderWordsTable();
         }
     } catch (e) {
-        // Zgodnie ze specyfikacją: brak tekstu "Błąd pobierania", zostaje czysty input z placeholderem
         const w = appState.words.find(item => item.id == id);
         if (w) {
             w.autoPl = "";
@@ -1151,7 +1557,6 @@ async function fetchTranslation(word, id) {
     }
 }
 
-// Tłumaczenie kontekstowe słowa i wyznaczanie formy słownikowej przez Gemini (przycisk ✨)
 window.translateInboxWordWithAI = async function(id, btnEl) {
     if (!appState.apiKey || appState.apiKey.trim() === "") {
         return alert("Podaj swój klucz Gemini API w zakładce Ustawienia!");
@@ -1197,7 +1602,6 @@ Zwróć obiekt JSON:
     }
 };
 
-// Renderowanie Kart Roboczych (.word-inbox-card) w zakładce „Wyłapane Słówka” (Zero tabel)
 function renderWordsTable() {
     const listContainer = document.getElementById('words-inbox-list');
     const countBadge = document.getElementById('words-inbox-count');
@@ -1281,6 +1685,7 @@ window.createStandardFromInbox = function(id) {
         saveState();
         renderWordsTable();
         renderDeckList();
+        updateActivityStats();
         refreshStudySession();
     } else {
         alert("Taka fiszka klasyczna już istnieje w Twojej bazie!");
@@ -1397,7 +1802,7 @@ function deleteStory(event, id) {
 }
 
 // ==========================================
-// 9. MODUŁ GRAMATYKI (KGIU)
+// 9. MODUŁ GRAMATYKI (PODZAKŁADKI BEGINNER / INTERMEDIATE, SZYBKIE OZNACZANIE DZIAŁÓW)
 // ==========================================
 function isDue(c) {
     if (c.type === 'cloze' && c.learningStep === 1) {
@@ -1411,10 +1816,38 @@ function isDue(c) {
     return reviewDate.getTime() <= todayObj.getTime();
 }
 
+window.switchGrammarLevel = function(level) {
+    activeGrammarLevel = level === 'intermediate' ? 'intermediate' : 'beginner';
+
+    const btnBeg = document.getElementById('tabGrammarBeginner');
+    const btnInt = document.getElementById('tabGrammarIntermediate');
+
+    if (btnBeg) btnBeg.classList.toggle('active', activeGrammarLevel === 'beginner');
+    if (btnInt) btnInt.classList.toggle('active', activeGrammarLevel === 'intermediate');
+
+    renderGrammarTab();
+    populateCustomGrammarCategorySelect();
+};
+
+function updateGrammarLevelCounters() {
+    const metrics = getKnowledgeMetrics();
+    const gStats = metrics.grammarStats;
+
+    const countBegEl = document.getElementById('countBeginner');
+    const countIntEl = document.getElementById('countIntermediate');
+
+    if (countBegEl) {
+        countBegEl.textContent = `${gStats.beginnerMastered}/${gStats.beginnerTotal}`;
+    }
+    if (countIntEl) {
+        countIntEl.textContent = `${gStats.intermediateMastered}/${gStats.intermediateTotal}`;
+    }
+}
+
 window.updateGrammarWidget = function() {
     if (!appState.grammarFlashcards) return;
     const total = appState.grammarFlashcards.length;
-    const mastered = appState.grammarFlashcards.filter(c => c.interval > 10).length;
+    const mastered = appState.grammarFlashcards.filter(c => c.interval > MASTERED_INTERVAL_THRESHOLD).length;
     const due = appState.grammarFlashcards.filter(c => isDue(c)).length;
 
     const masteredEl = document.getElementById('grammar-mastered-count');
@@ -1427,12 +1860,32 @@ window.updateGrammarWidget = function() {
         const pct = total === 0 ? 0 : (mastered / total) * 100;
         barEl.style.width = `${pct}%`;
     }
+
+    updateGrammarLevelCounters();
+};
+
+// Szybkie oznaczenie całego działu jako opanowany (status = 2)
+window.markGrammarUnitAsMastered = function(event, catIndex) {
+    if (event) event.stopPropagation();
+    const cat = appState.grammarTree[catIndex];
+    if (!cat || !Array.isArray(cat.items)) return;
+
+    cat.items.forEach(item => {
+        item.status = 2;
+    });
+
+    saveState();
+    updateGrammarLevelCounters();
+    renderGrammarTab();
+    updateActivityStats();
 };
 
 function renderGrammarTab() {
     const container = document.getElementById('grammar-list-container');
     if (!container) return;
     container.innerHTML = "";
+
+    updateGrammarLevelCounters();
 
     if (!appState.grammarTree || appState.grammarTree.length === 0) return;
 
@@ -1441,7 +1894,10 @@ function renderGrammarTab() {
     const s2 = document.getElementById('filter-g2')?.checked ?? true;
 
     appState.grammarTree.forEach((cat, catIndex) => {
-        const filteredItems = cat.items.filter(item => {
+        const catLevel = cat.level || 'intermediate';
+        if (catLevel !== activeGrammarLevel) return;
+
+        const filteredItems = (cat.items || []).filter(item => {
             if (item.status === 0 && s0) return true;
             if (item.status === 1 && s1) return true;
             if (item.status === 2 && s2) return true;
@@ -1459,8 +1915,11 @@ function renderGrammarTab() {
         const header = document.createElement('div');
         header.className = 'accordion-header';
         header.innerHTML = `
-            <span>${escapeHtml(cat.category)}</span>
-            <span style="font-size: 13px; color: var(--text-light); font-weight: normal;">${learnedCount}/${totalCount}</span>
+            <span style="flex: 1; padding-right: 8px;">${escapeHtml(cat.category)}</span>
+            <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+                <span style="font-size: 13px; color: var(--text-light); font-weight: normal;">${learnedCount}/${totalCount}</span>
+                <button type="button" class="btn-mark-unit" title="Oznacz cały dział jako opanowany" onclick="markGrammarUnitAsMastered(event, ${catIndex})">✓ Oznacz dział</button>
+            </div>
         `;
 
         const content = document.createElement('div');
@@ -1484,6 +1943,105 @@ function renderGrammarTab() {
         container.appendChild(accordion);
     });
 }
+
+// Obsługa Modala „Dodaj własną gramatykę” (jeśli występuje w HTML)
+window.populateCustomGrammarCategorySelect = function() {
+    const selectEl =
+        document.getElementById('custom-grammar-category') ||
+        document.getElementById('new-grammar-category') ||
+        document.querySelector('#modal-add-grammar select');
+    if (!selectEl || !Array.isArray(appState.grammarTree)) return;
+
+    selectEl.innerHTML = "";
+
+    const optGroupBeg = document.createElement('optgroup');
+    optGroupBeg.label = "Beginner";
+    const optGroupInt = document.createElement('optgroup');
+    optGroupInt.label = "Intermediate";
+
+    appState.grammarTree.forEach((cat, idx) => {
+        const opt = document.createElement('option');
+        opt.value = String(idx);
+        opt.textContent = cat.category;
+        if ((cat.level || 'intermediate') === 'beginner') {
+            optGroupBeg.appendChild(opt);
+        } else {
+            optGroupInt.appendChild(opt);
+        }
+    });
+
+    if (activeGrammarLevel === 'beginner') {
+        selectEl.appendChild(optGroupBeg);
+        selectEl.appendChild(optGroupInt);
+    } else {
+        selectEl.appendChild(optGroupInt);
+        selectEl.appendChild(optGroupBeg);
+    }
+};
+
+window.openAddGrammarModal = function() {
+    populateCustomGrammarCategorySelect();
+    const modal = document.getElementById('modal-add-grammar');
+    if (modal) modal.classList.remove('hidden');
+};
+
+window.saveCustomGrammarItem = function() {
+    const selectEl =
+        document.getElementById('custom-grammar-category') ||
+        document.getElementById('new-grammar-category') ||
+        document.querySelector('#modal-add-grammar select');
+    const titleInput =
+        document.getElementById('custom-grammar-title') ||
+        document.getElementById('new-grammar-title');
+    const meaningInput =
+        document.getElementById('custom-grammar-meaning') ||
+        document.getElementById('new-grammar-meaning');
+    const ruleInput =
+        document.getElementById('custom-grammar-rule') ||
+        document.getElementById('new-grammar-rule');
+
+    if (!titleInput) return;
+    const title = titleInput.value.trim();
+    if (!title) {
+        return alert("Podaj nazwę zagadnienia gramatycznego!");
+    }
+
+    // Globalna walidacja duplikatów w całym appState.grammarTree (Beginner + Intermediate)
+    const isDuplicate = appState.grammarTree.some(cat =>
+        Array.isArray(cat.items) &&
+        cat.items.some(item => item.title.trim().toLowerCase() === title.toLowerCase())
+    );
+    if (isDuplicate) {
+        return alert("Taka struktura gramatyczna istnieje już w bazie!");
+    }
+
+    let targetCatIndex = selectEl ? parseInt(selectEl.value, 10) : -1;
+    if (isNaN(targetCatIndex) || !appState.grammarTree[targetCatIndex]) {
+        targetCatIndex = appState.grammarTree.findIndex(c => (c.level || 'intermediate') === activeGrammarLevel);
+        if (targetCatIndex === -1) targetCatIndex = 0;
+    }
+
+    const targetCat = appState.grammarTree[targetCatIndex];
+    targetCat.items.push({
+        id: `custom_${Date.now()}`,
+        title: title,
+        status: 0,
+        meaning: meaningInput ? meaningInput.value.trim() : "",
+        rule: ruleInput ? ruleInput.value.trim() : "",
+        examples: [],
+        forceInStory: false
+    });
+
+    if (titleInput) titleInput.value = "";
+    if (meaningInput) meaningInput.value = "";
+    if (ruleInput) ruleInput.value = "";
+
+    saveState();
+    updateGrammarLevelCounters();
+    renderGrammarTab();
+    updateActivityStats();
+    closeModal('modal-add-grammar');
+};
 
 function openGrammarModal(catIndex, itemIndex) {
     activeGrammarCatIndex = catIndex;
@@ -1545,7 +2103,9 @@ function setGrammarStatus(status) {
 
     document.querySelectorAll('.grammar-status-buttons button').forEach(b => b.classList.remove('active'));
     document.getElementById(`g-stat-${status}`).classList.add('active');
+    updateGrammarLevelCounters();
     renderGrammarTab();
+    updateActivityStats();
 }
 
 function toggleForceGrammar() {
@@ -1676,6 +2236,8 @@ function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = nul
     );
     if (duplicate) return false;
 
+    const isMastered = interval > MASTERED_INTERVAL_THRESHOLD;
+
     targetDeck.push({
         id: Date.now() + Math.random(),
         type: 'standard',
@@ -1687,6 +2249,7 @@ function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = nul
         ef: ef >= 1.3 ? ef : 2.5,
         learningStep: interval > 0 ? 2 : 0,
         intraDayDue: null,
+        masteredAt: isMastered ? new Date().toISOString().slice(0, 10) : null,
         nextReview: nextReviewStr || (interval > 0
             ? new Date(Date.now() + interval * 86400000).toISOString()
             : new Date().toISOString())
@@ -1694,7 +2257,6 @@ function createFlashcardData(front, back, rep, interval, ef, nextReviewStr = nul
     return true;
 }
 
-// Multi-Cloze: generuje N osobnych fiszek dla zdania z N znacznikami {{...}}
 function createClozeFlashcardsFromRaw(rawSentence, fullTranslation, note = "", targetDeck = appState.flashcards) {
     const matches = parseClozeMatches(rawSentence);
     if (matches.length === 0) return 0;
@@ -1726,6 +2288,7 @@ function createClozeFlashcardsFromRaw(rawSentence, fullTranslation, note = "", t
                 ef: 2.5,
                 learningStep: 0,
                 intraDayDue: null,
+                masteredAt: null,
                 nextReview: new Date().toISOString()
             });
             createdCount++;
@@ -1803,7 +2366,6 @@ window.switchEditorMode = function(mode) {
     }
 };
 
-// Narzędzie "{ } Zrób lukę z zaznaczenia"
 window.wrapSelectionInCloze = function() {
     const textarea = document.getElementById('edit-cloze-raw');
     if (!textarea) return;
@@ -1905,7 +2467,6 @@ window.saveCardFromModal = function() {
                 card.front = trans;
                 card.back = active.target;
 
-                // Aktualizacja lub dogenerowanie kart braterskich (Multi-Cloze)
                 if (matches.length > 1) {
                     const pid = card.parentId || `p_${card.id}`;
                     card.parentId = pid;
@@ -1933,6 +2494,7 @@ window.saveCardFromModal = function() {
                                 ef: 2.5,
                                 learningStep: 0,
                                 intraDayDue: null,
+                                masteredAt: null,
                                 nextReview: new Date().toISOString()
                             });
                         } else {
@@ -1961,6 +2523,7 @@ window.saveCardFromModal = function() {
     saveState();
     renderDeckList();
     updateGrammarWidget();
+    updateActivityStats();
 
     if (currentCard && editingCardId && currentCard.id == editingCardId) {
         nextStudyCard();
@@ -1972,7 +2535,6 @@ window.saveCardFromModal = function() {
     editingCardId = null;
 };
 
-// Filtrowanie i renderowanie listy kart w „Baza fiszek” (Zero tabel)
 window.setDeckFilter = function(filter) {
     currentDeckFilter = filter;
     document.querySelectorAll('.filter-pill').forEach(btn => {
@@ -1997,7 +2559,7 @@ function renderDeckList() {
         const cType = card.type || 'standard';
         if (currentDeckFilter === 'standard' && cType !== 'standard') return false;
         if (currentDeckFilter === 'cloze' && cType !== 'cloze') return false;
-        if (currentDeckFilter === 'learning' && (card.interval > 10 && card.learningStep === 2)) return false;
+        if (currentDeckFilter === 'learning' && (card.interval > MASTERED_INTERVAL_THRESHOLD && card.learningStep === 2)) return false;
 
         if (!query) return true;
 
@@ -2088,6 +2650,7 @@ function deleteCard(id) {
         appState.grammarFlashcards = appState.grammarFlashcards.filter(item => item.id != id);
         saveState();
         renderDeckList();
+        updateActivityStats();
         refreshStudySession();
         renderWordsTable();
     }
@@ -2127,7 +2690,6 @@ window.startSession = function(type) {
     refreshStudySession();
 };
 
-// Sibling Burying: rozdziela karty z tym samym parentId, aby nie pojawiały się bezpośrednio po sobie
 function applySiblingBurying(queue) {
     if (!Array.isArray(queue) || queue.length <= 2) return queue;
     const result = [...queue];
@@ -2227,7 +2789,6 @@ function refreshStudySession() {
 
     if (!isIntraDayForcedSession) {
         studyQueue = deckToStudy.filter(c => {
-            // Karta Cloze na kroku wewnątrz-dziennym (learningStep === 1) wraca automatycznie po upływie intraDayDue (3h)
             if (c.type === 'cloze' && c.learningStep === 1) {
                 return Boolean(c.intraDayDue && nowMs >= c.intraDayDue);
             }
@@ -2408,7 +2969,6 @@ function nextStudyCard() {
     }
 }
 
-// Stan A: Widok pytania dla karty Cloze
 function renderClozeQuestionState(card) {
     const activeIdx = typeof card.clozeIndex === 'number' ? card.clozeIndex : 0;
     let matchCounter = 0;
@@ -2453,7 +3013,6 @@ function renderClozeQuestionState(card) {
     setTimeout(() => clozeInput.focus(), 120);
 }
 
-// Kliknięcie ikony 💡 w bloku luki (.cloze-pill)
 window.showClozeHintPopup = function(event) {
     if (event) event.stopPropagation();
     if (!currentCard) return;
@@ -2472,36 +3031,33 @@ window.showClozeHintPopup = function(event) {
     }
 };
 
-// Stan B: Walidacja odpowiedzi Cloze, Automatyczny SM-2 i Haptic Feedback
 window.checkCloze = function() {
     const inputEl = document.getElementById('clozeInput');
     if (!inputEl || inputEl.disabled || !currentCard) return;
 
     const userInput = inputEl.value.trim();
-    if (!userInput) return; // Ignoruj pusty input (nie nabijaj prób)
+    if (!userInput) return;
 
     currentAttempts++;
     const active = getActiveClozeData(currentCard);
     const target = active.target.trim();
 
     if (userInput === target) {
-        // SCENARIUSZ 1: Odpowiedź POPRAWNA
         let rating = 5;
         if (currentAttempts <= 2) {
-            rating = 5; // Bardzo dobrze (Easy)
+            rating = 5;
             if ('vibrate' in navigator) navigator.vibrate([30, 50, 30]);
         } else if (currentAttempts === 3) {
-            rating = 4; // Dobrze (Good)
+            rating = 4;
             if ('vibrate' in navigator) navigator.vibrate(50);
         } else {
-            rating = 3; // Słabo (Hard) - BRAK WIBRACJI
+            rating = 3;
         }
 
         const evaluatedCard = currentCard;
         processAnswer(rating, false, true);
         enterClozeRevealedState(evaluatedCard, false);
     } else {
-        // SCENARIUSZ 2: Odpowiedź BŁĘDNA (Brak wibracji)
         if (currentAttempts < 4) {
             inputEl.classList.remove('error');
             void inputEl.offsetWidth;
@@ -2518,7 +3074,6 @@ window.checkCloze = function() {
                 inputEl.select();
             }, 400);
         } else {
-            // Spalona 4. próba
             const evaluatedCard = currentCard;
             processAnswer(0, false, true);
             enterClozeRevealedState(evaluatedCard, true);
@@ -2533,7 +3088,6 @@ window.giveUpCloze = function() {
     enterClozeRevealedState(evaluatedCard, true);
 };
 
-// Stan C: Widok odpowiedzi (Back – po odgadnięciu lub po porażce)
 function enterClozeRevealedState(card, isFailed) {
     const activeIdx = typeof card.clozeIndex === 'number' ? card.clozeIndex : 0;
     let matchCounter = 0;
@@ -2570,7 +3124,6 @@ function enterClozeRevealedState(card, isFailed) {
     btnNext.classList.remove('hidden');
     setTimeout(() => btnNext.focus(), 100);
 
-    // Auto-TTS po wejściu w Stan C
     speakKorean(fullKoreanSentence, 0.95);
 }
 
@@ -2662,7 +3215,7 @@ function showAnswer() {
 }
 
 // ==========================================
-// 14. OBLICZENIA ALGORYTMU SM-2 I POSTĘP SESJI
+// 14. OBLICZENIA ALGORYTMU SM-2, ŚLEDZENIE masteredAt I POSTĘP SESJI
 // ==========================================
 function previewSM2(card, quality) {
     const temp = { ...card };
@@ -2718,6 +3271,12 @@ function processAnswer(quality, advanceView = true, suppressVibrate = false) {
     }
 
     applySM2(currentCard, quality);
+
+    // Śledzenie daty opanowania fiszki (masteredAt) po przekroczeniu progu
+    if (currentCard.interval > MASTERED_INTERVAL_THRESHOLD && !currentCard.masteredAt) {
+        currentCard.masteredAt = new Date().toISOString().slice(0, 10);
+    }
+
     studyQueue.shift();
     saveState();
 
@@ -2728,6 +3287,7 @@ function processAnswer(quality, advanceView = true, suppressVibrate = false) {
     updateStudyCounter();
     updateSessionProgressUI();
     updateIntraDayButtons();
+    updateActivityStats();
 
     if (advanceView) {
         advanceStudyView();
@@ -2752,7 +3312,6 @@ function advanceStudyView() {
 }
 
 function applySM2(card, quality) {
-    // Logika Intra-day Learning Step dla kart Cloze
     if (card.type === 'cloze') {
         const step = typeof card.learningStep === 'number'
             ? card.learningStep
@@ -2760,7 +3319,6 @@ function applySM2(card, quality) {
 
         if (step === 0) {
             if (quality >= 4) {
-                // Pierwsze zaliczenie pozytywne (Good lub Easy) nowej karty Cloze: wraca dzisiaj po 3h
                 card.learningStep = 1;
                 card.intraDayDue = Date.now() + (3 * 60 * 60 * 1000);
                 card.interval = 0;
@@ -2788,7 +3346,6 @@ function applySM2(card, quality) {
             }
         } else if (step === 1) {
             if (quality >= 3) {
-                // Drugie zaliczenie tego samego dnia: karta przechodzi na learningStep = 2 i interwał 1d na jutro
                 card.learningStep = 2;
                 card.intraDayDue = null;
                 card.rep = 1;
@@ -2806,7 +3363,6 @@ function applySM2(card, quality) {
         }
     }
 
-    // Standardowy algorytm wielodniowy SM-2
     if (quality < 3) {
         card.rep = 0;
         card.interval = 1;
@@ -2907,8 +3463,98 @@ function closeModal(id) {
 }
 
 // ==========================================
-// 15. AKTYWNOŚĆ, STREAKS, WYKRES 7-DNIOWY I KALENDARZ
+// 15. DASHBOARD KAPITAŁU WIEDZY (getKnowledgeMetrics, updateActivityStats, Wykres i Kalendarz)
 // ==========================================
+function getKnowledgeMetrics() {
+    const cards = Array.isArray(appState.flashcards) ? appState.flashcards : [];
+    const currentMonthPrefix = new Date().toISOString().slice(0, 7); // np. "2026-10"
+
+    let masteredWordsTotal = 0;
+    let masteredThisMonth = 0;
+    let learningWordsTotal = 0;
+    let newOrHardWordsTotal = 0;
+
+    cards.forEach(c => {
+        const isMastered = (c.interval || 0) > MASTERED_INTERVAL_THRESHOLD;
+        if (isMastered) {
+            masteredWordsTotal++;
+            if (c.masteredAt && String(c.masteredAt).startsWith(currentMonthPrefix)) {
+                masteredThisMonth++;
+            }
+        } else if ((c.rep || 0) > 0 || (c.interval || 0) > 0 || c.learningStep === 1) {
+            learningWordsTotal++;
+        } else {
+            newOrHardWordsTotal++;
+        }
+    });
+
+    // Statystyki Gramatyki (Beginner vs Intermediate)
+    let beginnerMastered = 0;
+    let beginnerTotal = 0;
+    let intermediateMastered = 0;
+    let intermediateTotal = 0;
+
+    if (Array.isArray(appState.grammarTree)) {
+        appState.grammarTree.forEach(cat => {
+            const lvl = cat.level || 'intermediate';
+            const items = Array.isArray(cat.items) ? cat.items : [];
+            items.forEach(item => {
+                if (lvl === 'beginner') {
+                    beginnerTotal++;
+                    if (item.status === 2) beginnerMastered++;
+                } else {
+                    intermediateTotal++;
+                    if (item.status === 2) intermediateMastered++;
+                }
+            });
+        });
+    }
+
+    const masteredGrammarTotal = beginnerMastered + intermediateMastered;
+    const totalGrammarItems = beginnerTotal + intermediateTotal;
+
+    // Skuteczność z ostatnich 7 dni (weeklyRetentionRate)
+    const todayObj = new Date(getLocalToday());
+    let sumGoodEasy = 0;
+    let sumAllReviews = 0;
+
+    for (let i = 6; i >= 0; i--) {
+        const d = new Date(todayObj);
+        d.setDate(d.getDate() - i);
+        const ds = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+        const st = (appState.history && appState.history[ds])
+            ? appState.history[ds]
+            : { again: 0, hard: 0, good: 0, easy: 0 };
+
+        const dayGoodEasy = (st.good || 0) + (st.easy || 0);
+        const dayTotal = (st.again || 0) + (st.hard || 0) + dayGoodEasy;
+
+        sumGoodEasy += dayGoodEasy;
+        sumAllReviews += dayTotal;
+    }
+
+    const weeklyRetentionRate = sumAllReviews > 0
+        ? Math.round((sumGoodEasy / sumAllReviews) * 100)
+        : 0;
+
+    return {
+        masteredWordsTotal,
+        masteredThisMonth,
+        learningWordsTotal,
+        newOrHardWordsTotal,
+        totalCards: cards.length,
+        grammarStats: {
+            beginnerMastered,
+            beginnerTotal,
+            intermediateMastered,
+            intermediateTotal,
+            masteredGrammarTotal,
+            totalGrammarItems
+        },
+        weeklyRetentionRate
+    };
+}
+
 function updateActivityStats() {
     if (!appState.history) return;
     const today = getLocalToday();
@@ -2947,9 +3593,69 @@ function updateActivityStats() {
         }
     }
 
-    document.getElementById('streak-current').textContent = currentStreak;
-    document.getElementById('streak-max').textContent = maxStreak;
-    document.getElementById('streak-total').textContent = totalDays;
+    // 1. Aktualizacja Kompaktowego Paska Streaka (+ fallback dla starszych ID)
+    const setElText = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = val;
+    };
+
+    setElText('statCurrentStreak', currentStreak);
+    setElText('statBestStreak', maxStreak);
+    setElText('statActiveDays', totalDays);
+
+    setElText('streak-current', currentStreak);
+    setElText('streak-max', maxStreak);
+    setElText('streak-total', totalDays);
+
+    // 2. Aktualizacja Dashboardu Kapitału Wiedzy
+    const metrics = getKnowledgeMetrics();
+    const g = metrics.grammarStats;
+
+    setElText('statMasteredWords', metrics.masteredWordsTotal);
+    setElText('statMasteredDelta', `+${metrics.masteredThisMonth} w tym mies.`);
+
+    setElText('statMasteredGrammar', g.masteredGrammarTotal);
+    setElText('statTotalGrammar', g.totalGrammarItems);
+    setElText(
+        'statGrammarBreakdown',
+        `Beg: ${g.beginnerMastered}/${g.beginnerTotal} | Int: ${g.intermediateMastered}/${g.intermediateTotal}`
+    );
+
+    const grammarBarEl = document.getElementById('statGrammarBar');
+    if (grammarBarEl) {
+        const gPct = g.totalGrammarItems > 0
+            ? Math.min(100, (g.masteredGrammarTotal / g.totalGrammarItems) * 100)
+            : 0;
+        grammarBarEl.style.width = `${gPct.toFixed(1)}%`;
+    }
+
+    const storiesRead = appState.stats?.storiesReadCount ?? 0;
+    const wordsVolume = appState.stats?.totalWordsRead ?? 0;
+    setElText('statStoriesRead', storiesRead);
+    setElText('statWordsReadVolume', wordsVolume.toLocaleString('pl-PL'));
+
+    // 3. Pasek Dojrzałości Pamięci (Memory Maturity Bar)
+    const totalVocab = metrics.totalCards;
+    const pctMastered = totalVocab > 0 ? (metrics.masteredWordsTotal / totalVocab) * 100 : 0;
+    const pctLearning = totalVocab > 0 ? (metrics.learningWordsTotal / totalVocab) * 100 : 0;
+    const pctNew = totalVocab > 0 ? (metrics.newOrHardWordsTotal / totalVocab) * 100 : 100;
+
+    setElText('statMaturityPercent', `${Math.round(pctMastered)}% Opanowane`);
+
+    const barMasteredEl = document.getElementById('barMastered');
+    const barLearningEl = document.getElementById('barLearning');
+    const barNewEl = document.getElementById('barNew');
+
+    if (barMasteredEl) barMasteredEl.style.width = `${pctMastered}%`;
+    if (barLearningEl) barLearningEl.style.width = `${pctLearning}%`;
+    if (barNewEl) barNewEl.style.width = `${pctNew}%`;
+
+    setElText('legMastered', metrics.masteredWordsTotal);
+    setElText('legLearning', metrics.learningWordsTotal);
+    setElText('legNew', metrics.newOrHardWordsTotal);
+
+    // 4. Skuteczność tygodniowa nad wykresem
+    setElText('statWeeklyRetention', `${metrics.weeklyRetentionRate}%`);
 
     render7DayChart();
     renderCalendar();
@@ -3026,7 +3732,10 @@ function renderCalendar() {
         "styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec",
         "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"
     ];
-    document.getElementById('calendar-month-label').textContent = `${monthNames[month]} ${year}`;
+    const labelEl = document.getElementById('calendar-month-label');
+    if (labelEl) {
+        labelEl.textContent = `${monthNames[month]} ${year}`;
+    }
 
     const daysOfWeek = ["pon", "wt", "śr", "czw", "pt", "sob", "nd"];
     daysOfWeek.forEach(d => {
