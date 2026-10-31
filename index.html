@@ -12,29 +12,95 @@
 
     <main class="app-container">
         
-        <!-- ZAKŁADKA 1: AKTYWNOŚĆ -->
+        <!-- ZAKŁADKA 1: AKTYWNOŚĆ (DASHBOARD KAPITAŁU WIEDZY) -->
         <section id="tab-aktywnosc" class="tab-content">
             <header class="section-header">
                 <h2>Aktywność</h2>
             </header>
             
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <span style="color: var(--warning); font-size: 24px;">🔥</span><br>
-                    <span id="streak-current" style="font-size: 28px; color: var(--text-dark);">0</span><br>
-                    <span style="font-size: 13px; font-weight: 500; color: var(--text-light);">Seria nauki</span>
+            <!-- 1. Kompaktowy Pasek Streaka (1 wiersz, 3 kolumny) -->
+            <div class="streak-compact-bar">
+                <div class="streak-pill">
+                    <span class="streak-icon">🔥</span>
+                    <div>
+                        <div class="streak-val" id="statCurrentStreak">0</div>
+                        <div class="streak-lbl">Seria dni</div>
+                    </div>
                 </div>
-                <div class="stat-box">
-                    <span style="color: var(--primary); font-size: 24px;">🏆</span><br>
-                    <span id="streak-max" style="font-size: 28px; color: var(--text-dark);">0</span><br>
-                    <span style="font-size: 13px; font-weight: 500; color: var(--text-light);">Najdłuższa seria</span>
+                <div class="streak-pill">
+                    <span class="streak-icon">🏆</span>
+                    <div>
+                        <div class="streak-val" id="statBestStreak">0</div>
+                        <div class="streak-lbl">Rekord</div>
+                    </div>
+                </div>
+                <div class="streak-pill">
+                    <span class="streak-icon">✔️</span>
+                    <div>
+                        <div class="streak-val" id="statActiveDays">0</div>
+                        <div class="streak-lbl">Aktywne dni</div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="stat-box full-width mb-3">
-                <span style="color: var(--primary); font-size: 18px;">✔️</span> 
-                <span id="streak-total" style="font-size: 18px; font-weight: bold;">0</span> 
-                <span style="font-size: 14px; font-weight: 500; color: var(--text-light);">Aktywnych dni</span>
+
+            <!-- 2. Sekcja Hero: Twój Kapitał Wiedzy -->
+            <div class="knowledge-capital-section">
+                <h3 class="section-subtitle">Twój Kapitał Wiedzy</h3>
+                
+                <div class="capital-grid">
+                    <!-- Kafel 1: Opanowane Słówka -->
+                    <div class="capital-card">
+                        <div class="capital-header">🧠 Słówka</div>
+                        <div class="capital-main-value" id="statMasteredWords">0</div>
+                        <div class="capital-sub-label">Opanowane na stałe</div>
+                        <div class="capital-badge-positive" id="statMasteredDelta">+0 w tym mies.</div>
+                    </div>
+
+                    <!-- Kafel 2: Opanowana Gramatyka (Beginner + Intermediate) -->
+                    <div class="capital-card">
+                        <div class="capital-header">📐 Gramatyka</div>
+                        <div class="capital-main-value">
+                            <span id="statMasteredGrammar">0</span><span class="capital-fraction">/<span id="statTotalGrammar">0</span></span>
+                        </div>
+                        <div class="capital-sub-label" id="statGrammarBreakdown">Beg: 0/112 | Int: 0/0</div>
+                        <div class="capital-mini-bar">
+                            <div class="capital-mini-fill" id="statGrammarBar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kafel 3: Przeczytane Historie -->
+                <div class="capital-card capital-card-wide">
+                    <div class="capital-wide-left">
+                        <div class="capital-header">📖 Przeczytane historie</div>
+                        <div class="capital-sub-label">Przerobiony tekst: <strong id="statWordsReadVolume">0</strong> słów KR</div>
+                    </div>
+                    <div class="capital-main-value" id="statStoriesRead">0</div>
+                </div>
+            </div>
+
+            <!-- 3. Pasek Dojrzałości Pamięci (Memory Maturity Bar) -->
+            <div class="maturity-card">
+                <div class="maturity-header">
+                    <span>Struktura Twojej Pamięci</span>
+                    <strong id="statMaturityPercent">0% Opanowane</strong>
+                </div>
+                <div class="maturity-stacked-bar">
+                    <div id="barMastered" class="bar-seg-mastered" style="width: 0%"></div>
+                    <div id="barLearning" class="bar-seg-learning" style="width: 0%"></div>
+                    <div id="barNew" class="bar-seg-new" style="width: 100%"></div>
+                </div>
+                <div class="maturity-legend">
+                    <span><i class="dot-mastered"></i> Opanowane (<b id="legMastered">0</b>)</span>
+                    <span><i class="dot-learning"></i> W nauce (<b id="legLearning">0</b>)</span>
+                    <span><i class="dot-new"></i> Nowe/Trudne (<b id="legNew">0</b>)</span>
+                </div>
+            </div>
+
+            <!-- 4. Nagłówek nad istniejącym wykresem tygodniowym -->
+            <div class="weekly-chart-header">
+                <span>Powtórki (7 dni)</span>
+                <span>Skuteczność: <strong id="statWeeklyRetention">0%</strong></span>
             </div>
             
             <div class="card pb-0">
@@ -92,6 +158,7 @@
                     <p class="hint">Klikaj nieznane słowa (żółte). Znane fiszki są zielone, a uczone niebieskie. Wybrane struktury będą <b>pogrubione</b>.</p>
                     <div id="reader-content" class="reader-text"></div>
                     <div id="reader-actions" class="mt-4">
+                        <button id="btnMarkStoryRead" class="btn btn-secondary w-100 mb-2" onclick="markStoryAsRead()">✅ Oznacz historię jako przeczytaną</button>
                         <button class="btn btn-primary w-100 mb-2" onclick="sumUpWords()">Wyodrębnij zaznaczone do słownika</button>
                         <button class="btn btn-outline w-100" onclick="closeReader()">Zakończ czytanie</button>
                     </div>
@@ -114,17 +181,28 @@
 
         <!-- ZAKŁADKA 3: GRAMATYKA -->
         <section id="tab-gramatyka" class="tab-content">
-            <header class="section-header">
-                <h2>Gramatyka (KGIU)</h2>
+            <header class="section-header flex-between">
+                <h2 style="margin:0;">Gramatyka (KGIU)</h2>
+                <button class="btn btn-outline btn-sm" onclick="openAddGrammarModal()">+ Dodaj własną</button>
             </header>
             
-            <div class="grammar-widget card mb-4">
+            <div class="grammar-widget card mb-3">
                 <h3 style="margin-bottom: 5px;">Trening Gramatyki</h3>
-                <p>Opanowane karty: <span id="grammar-mastered-count" style="font-weight: bold; color: #FFF;">0 / 0</span></p>
+                <p>Opanowane karty Cloze: <span id="grammar-mastered-count" style="font-weight: bold; color: #FFF;">0 / 0</span></p>
                 <div class="progress-bar-bg mb-3">
                     <div id="grammar-progress-bar" style="background: var(--success); width: 0%; height: 100%;"></div>
                 </div>
                 <button class="btn btn-primary w-100" onclick="startSession('grammar')">Ucz się: <span id="grammar-due-count">0</span> kart</button>
+            </div>
+
+            <!-- Przełącznik poziomów (Segmented Control: Beginner / Intermediate) -->
+            <div class="grammar-level-tabs">
+                <button type="button" class="level-tab-btn active" data-level="beginner" id="tabGrammarBeginner" onclick="switchGrammarLevel('beginner')">
+                    Beginner <span class="level-tab-counter" id="countBeginner">0/112</span>
+                </button>
+                <button type="button" class="level-tab-btn" data-level="intermediate" id="tabGrammarIntermediate" onclick="switchGrammarLevel('intermediate')">
+                    Intermediate <span class="level-tab-counter" id="countIntermediate">0/0</span>
+                </button>
             </div>
 
             <div class="card mb-3">
@@ -186,7 +264,7 @@
                         </div>
                     </div>
 
-                    <!-- KONTENER 2: Nowy Moduł CLOZE DELETION (Wymuszone wpisywanie + 4 Próby) -->
+                    <!-- KONTENER 2: Moduł CLOZE DELETION (Wymuszone wpisywanie + 4 Próby) -->
                     <div id="study-cloze-container" class="hidden w-100">
                         <div class="study-card cloze-card">
                             <div id="cloze-sentence-display" class="cloze-sentence"></div>
@@ -227,7 +305,7 @@
                 </div>
             </div>
 
-            <!-- NOWA SEKCJA: BAZA FISZEK (Karty mobilne, wyszukiwarka, filtry) -->
+            <!-- SEKCJA: BAZA FISZEK (Karty mobilne, wyszukiwarka, filtry) -->
             <div id="deck-management-section">
                 <div class="card">
                     <div class="flex-between mb-3">
@@ -327,7 +405,7 @@
         </section>
     </main>
 
-    <!-- NOWY MODAL TWORZENIA / EDYCJI FISZKI (Segmented Control: Klasyczna | Cloze) -->
+    <!-- MODAL TWORZENIA / EDYCJI FISZKI (Segmented Control: Klasyczna | Cloze) -->
     <div id="modal-card-editor" class="modal hidden">
         <div class="modal-content modal-lg">
             <div class="flex-between mb-3">
@@ -379,6 +457,32 @@
             <div class="flex-between mt-3 gap-2">
                 <button class="btn btn-outline w-100" onclick="closeModal('modal-card-editor')">Anuluj</button>
                 <button class="btn btn-primary w-100" onclick="saveCardFromModal()">💾 Zapisz</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: DODAJ WŁASNĄ GRAMATYKĘ -->
+    <div id="modal-add-grammar" class="modal hidden">
+        <div class="modal-content">
+            <div class="flex-between mb-3">
+                <h3 style="margin:0;">Dodaj własną gramatykę</h3>
+                <button class="btn btn-outline btn-sm" onclick="closeModal('modal-add-grammar')">✕</button>
+            </div>
+            <label class="field-label">Kategoria (Dział)</label>
+            <select id="add-grammar-category" class="select-input"></select>
+
+            <label class="field-label">Nazwa struktury (np. -기 마련이다)</label>
+            <input type="text" id="add-grammar-title" placeholder="Wpisz strukturę gramatyczną...">
+
+            <label class="field-label">Znaczenie po polsku (opcjonalnie)</label>
+            <input type="text" id="add-grammar-meaning" placeholder="np. jest rzeczą naturalną, że...">
+
+            <label class="field-label">Reguła tworzenia (opcjonalnie)</label>
+            <textarea id="add-grammar-rule" rows="2" placeholder="np. Czasownik / Przymiotnik + -기 마련이다"></textarea>
+
+            <div class="flex-between mt-3 gap-2">
+                <button class="btn btn-outline w-100" onclick="closeModal('modal-add-grammar')">Anuluj</button>
+                <button class="btn btn-primary w-100" onclick="saveCustomGrammar()">💾 Dodaj</button>
             </div>
         </div>
     </div>
