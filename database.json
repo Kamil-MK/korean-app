@@ -5885,15 +5885,15 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-10-24T19:07:54.933Z",
+      "nextReview": "2026-10-30T23:00:00.000Z",
       "type": "cloze",
       "rawSentence": "어제 시험공부를 {{하느라고|Przez to, że uczyłem się do egzaminu, nie mogłem wczory spać.}} 잠을 못 잤어요.",
       "fullTranslation": "Przez to, że uczyłem się do egzaminu, nie mogłem wczory spać.",
       "clozeIndex": 0,
       "parentId": "p_1792868874933.095",
       "note": "",
-      "learningStep": 0,
-      "intraDayDue": null
+      "learningStep": 1,
+      "intraDayDue": 1793498131194
     },
     {
       "id": 1792872812031.8994,
@@ -5905,15 +5905,15 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-10-24T20:13:32.031Z",
+      "nextReview": "2026-10-30T23:00:00.000Z",
       "type": "cloze",
       "rawSentence": "영화를 {{보느라고|Z powodu oglądania filmu nie zdołałem odrobić całej pracy domowej.}} 숙제를 다 못 했어요.",
       "fullTranslation": "Z powodu oglądania filmu nie zdołałem odrobić całej pracy domowej.",
       "clozeIndex": 0,
       "parentId": "p_1792872812031.8994",
       "note": "",
-      "learningStep": 0,
-      "intraDayDue": null
+      "learningStep": 1,
+      "intraDayDue": 1793498150363
     },
     {
       "id": 1792872823576.0645,
@@ -5925,15 +5925,15 @@
       "rep": 0,
       "interval": 0,
       "ef": 2.5,
-      "nextReview": "2026-10-24T20:13:43.576Z",
+      "nextReview": "2026-10-30T23:00:00.000Z",
       "type": "cloze",
       "rawSentence": "친구를 {{기다리느라고|Spóźniłem się na spotkanie, ponieważ czekałem na kolegę.}} 약속 시간에 늦었어요.",
       "fullTranslation": "Spóźniłem się na spotkanie, ponieważ czekałem na kolegę.",
       "clozeIndex": 0,
       "parentId": "p_1792872823576.0645",
       "note": "",
-      "learningStep": 0,
-      "intraDayDue": null
+      "learningStep": 1,
+      "intraDayDue": 1793498175604
     }
   ],
   "library": [
@@ -8108,7 +8108,8 @@
       "easy": 35,
       "completedAll": true,
       "newCardsDone": 5,
-      "practicedMistakes": []
+      "practicedMistakes": [],
+      "newGrammarDone": 3
     }
   },
   "sessionStats": {
