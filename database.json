@@ -277,10 +277,10 @@
       "id": 1790781445789.2842,
       "front": "Wykształcenie",
       "back": "학력",
-      "rep": 3,
-      "interval": 23,
-      "ef": 2.5,
-      "nextReview": "2026-10-31T23:00:00.000Z",
+      "rep": 4,
+      "interval": 70,
+      "ef": 2.6,
+      "nextReview": "2027-01-09T23:00:00.000Z",
       "type": "standard",
       "learningStep": 2,
       "intraDayDue": null,
@@ -8115,7 +8115,7 @@
       "again": 0,
       "hard": 0,
       "good": 0,
-      "easy": 0,
+      "easy": 1,
       "completedAll": false,
       "newCardsDone": 0,
       "newGrammarDone": 0,
@@ -8127,6 +8127,21 @@
     "again": [],
     "hard": [],
     "good": [],
-    "easy": []
+    "easy": [
+      {
+        "id": 1790781445789.2842,
+        "front": "Wykształcenie",
+        "back": "학력",
+        "rep": 3,
+        "interval": 23,
+        "ef": 2.5,
+        "nextReview": "2026-10-31T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null,
+        "exampleSentence": "",
+        "masteredAt": "2026-10-31"
+      }
+    ]
   }
 }
