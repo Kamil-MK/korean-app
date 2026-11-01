@@ -3302,7 +3302,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-10-31T23:00:00.000Z",
+      "nextReview": "2026-11-01T23:00:00.000Z",
       "type": "standard",
       "learningStep": 0,
       "intraDayDue": null,
@@ -8119,7 +8119,7 @@
       "newGrammarDone": 3
     },
     "2026-11-01": {
-      "again": 21,
+      "again": 22,
       "hard": 0,
       "good": 2,
       "easy": 29,
@@ -8396,6 +8396,19 @@
         "id": 1790781445796.0256,
         "front": "Bathroom",
         "back": "욕실",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-10-31T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null,
+        "exampleSentence": ""
+      },
+      {
+        "id": 1790781445796.603,
+        "front": "Pet",
+        "back": "애완동물",
         "rep": 0,
         "interval": 1,
         "ef": 1.3,
