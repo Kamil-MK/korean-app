@@ -7154,7 +7154,7 @@
         {
           "id": "i1_3",
           "title": "-(으)ㄹ 텐데",
-          "status": 1,
+          "status": 0,
           "meaning": "Wyraża silne przypuszczenie, oczekiwanie lub intencję mówcy, stanowiące tło sytuacyjne (powód, kontrast lub przesłankę do sugestii) dla drugiej części zdania. Najczęściej tłumaczone jako: 'pewnie / na pewno [jest tak], więc/ale...'.",
           "rule": "Do rdzenia czasownika/przymiotnika: po samogłosce lub spółgłosce 'ㄹ' dodaje się '-ㄹ 텐데' (dla 'ㄹ' forma to po prostu '텐데'), po spółgłosce dodaje się '-을 텐데'. W czasie przeszłym stosuje się '-았/었을 텐데', a z rzeczownikami '-(이)ㄹ 텐데'.",
           "examples": [
@@ -7179,7 +7179,7 @@
         {
           "id": "i1_4",
           "title": "-(으)ㄹ 테니까",
-          "status": 1,
+          "status": 0,
           "meaning": "",
           "rule": "",
           "examples": [],
