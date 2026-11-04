@@ -5836,6 +5836,38 @@
       "learningStep": 0,
       "intraDayDue": null,
       "nextReview": "2026-10-28T17:52:16.781Z"
+    },
+    {
+      "id": 1793820328163.9192,
+      "type": "standard",
+      "front": "Fryzura",
+      "back": "머리 모양",
+      "exampleSentence": "",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "learningStep": 0,
+      "intraDayDue": null,
+      "masteredAt": null,
+      "nextReview": "2026-11-04T19:25:28.163Z"
+    },
+    {
+      "id": 1793820429837.8816,
+      "type": "cloze",
+      "parentId": "cloze_1793820429836_jyzq6",
+      "clozeIndex": 0,
+      "rawSentence": "{{머리 모양을|fryzura::머리 모양을}} 바꾸니까 훨씬 어려 보이네요",
+      "fullTranslation": "Wyglądasz dużo młodziej po zmianie fryzury",
+      "note": "",
+      "front": "Wyglądasz dużo młodziej po zmianie fryzury",
+      "back": "머리 모양을",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "learningStep": 0,
+      "intraDayDue": null,
+      "masteredAt": null,
+      "nextReview": "2026-11-04T19:27:09.837Z"
     }
   ],
   "grammarFlashcards": [
