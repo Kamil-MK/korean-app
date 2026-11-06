@@ -2964,14 +2964,15 @@
       "id": 1790781445795.2834,
       "front": "Monthly paid rent",
       "back": "월세",
-      "rep": 2,
-      "interval": 8,
-      "ef": 1.9000000000000004,
-      "nextReview": "2026-11-05T23:00:00.000Z",
+      "rep": 3,
+      "interval": 18,
+      "ef": 2.0000000000000004,
+      "nextReview": "2026-11-23T23:00:00.000Z",
       "type": "standard",
       "learningStep": 2,
       "intraDayDue": null,
-      "exampleSentence": ""
+      "exampleSentence": "",
+      "masteredAt": "2026-11-06"
     },
     {
       "id": 1790781445795.2703,
@@ -8296,7 +8297,7 @@
       "again": 16,
       "hard": 0,
       "good": 1,
-      "easy": 22,
+      "easy": 23,
       "completedAll": false,
       "newCardsDone": 0,
       "newGrammarDone": 0,
@@ -8824,6 +8825,19 @@
         "intraDayDue": null,
         "exampleSentence": "",
         "masteredAt": "2026-10-31"
+      },
+      {
+        "id": 1790781445795.2834,
+        "front": "Monthly paid rent",
+        "back": "월세",
+        "rep": 2,
+        "interval": 8,
+        "ef": 1.9000000000000004,
+        "nextReview": "2026-11-05T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null,
+        "exampleSentence": ""
       }
     ]
   }
