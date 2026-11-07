@@ -2671,7 +2671,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-11-06T23:00:00.000Z",
+      "nextReview": "2026-11-07T23:00:00.000Z",
       "type": "standard",
       "learningStep": 2,
       "intraDayDue": null,
@@ -2684,7 +2684,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-11-06T23:00:00.000Z",
+      "nextReview": "2026-11-07T23:00:00.000Z",
       "type": "standard",
       "learningStep": 2,
       "intraDayDue": null,
@@ -8311,7 +8311,7 @@
       "practicedMistakes": []
     },
     "2026-11-07": {
-      "again": 10,
+      "again": 12,
       "hard": 0,
       "good": 2,
       "easy": 10,
@@ -8454,6 +8454,32 @@
         "learningStep": 2,
         "intraDayDue": null,
         "exampleSentence": "그 가게는 독특한 분위기 때문에 인기가 많아요"
+      },
+      {
+        "id": 1790781445795.3225,
+        "front": "Absurd",
+        "back": "황당하다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-11-06T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null,
+        "exampleSentence": ""
+      },
+      {
+        "id": 1790781445795.7898,
+        "front": "Unfamiliar",
+        "back": "낯설다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-11-06T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 2,
+        "intraDayDue": null,
+        "exampleSentence": ""
       }
     ],
     "hard": [],
