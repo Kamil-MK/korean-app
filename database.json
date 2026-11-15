@@ -6083,6 +6083,52 @@
       "intraDayDue": null,
       "masteredAt": null,
       "nextReview": "2026-11-15T18:07:02.549Z"
+    },
+    {
+      "id": 1794766140595.6345,
+      "type": "standard",
+      "front": "Be hospitalized",
+      "back": "입원하다",
+      "exampleSentence": "",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "learningStep": 0,
+      "intraDayDue": null,
+      "masteredAt": null,
+      "nextReview": "2026-11-15T18:09:00.595Z"
+    },
+    {
+      "id": 1794766214377.2659,
+      "type": "standard",
+      "front": "Traffic accident",
+      "back": "교통사고",
+      "exampleSentence": "",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "learningStep": 0,
+      "intraDayDue": null,
+      "masteredAt": null,
+      "nextReview": "2026-11-15T18:10:14.377Z"
+    },
+    {
+      "id": 1794766311043.8022,
+      "type": "cloze",
+      "parentId": "cloze_1794766311042_mnq10",
+      "clozeIndex": 0,
+      "rawSentence": "{{교통사고|wypadek::교통사고}}가 나는 바람에 다쳐서 병원에 입원했다",
+      "fullTranslation": "Przez wypadek drogowy jest zraniony i trafił do szpitala",
+      "note": "",
+      "front": "Przez wypadek drogowy jest zraniony i trafił do szpitala",
+      "back": "교통사고",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "learningStep": 0,
+      "intraDayDue": null,
+      "masteredAt": null,
+      "nextReview": "2026-11-15T18:11:51.043Z"
     }
   ],
   "grammarFlashcards": [
