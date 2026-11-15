@@ -6027,6 +6027,62 @@
       "intraDayDue": null,
       "masteredAt": null,
       "nextReview": "2026-11-15T12:08:19.788Z"
+    },
+    {
+      "id": 1794765516081.796,
+      "type": "standard",
+      "front": "To wrap up",
+      "back": "마무리하다",
+      "exampleSentence": "보고시를 마무리하느라고 야근했어요",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "learningStep": 0,
+      "intraDayDue": null,
+      "masteredAt": null,
+      "nextReview": "2026-11-15T17:58:36.081Z"
+    },
+    {
+      "id": 1794765640030.1462,
+      "type": "standard",
+      "front": "Previous day / dzien wczesniej",
+      "back": "전날",
+      "exampleSentence": "",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "learningStep": 0,
+      "intraDayDue": null,
+      "masteredAt": null,
+      "nextReview": "2026-11-15T18:00:40.030Z"
+    },
+    {
+      "id": 1794765856474.5518,
+      "type": "standard",
+      "front": "Przedwczoraj",
+      "back": "그저께",
+      "exampleSentence": "",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "learningStep": 0,
+      "intraDayDue": null,
+      "masteredAt": null,
+      "nextReview": "2026-11-15T18:04:16.475Z"
+    },
+    {
+      "id": 1794766022549.213,
+      "type": "standard",
+      "front": "To clean up",
+      "back": "치우다",
+      "exampleSentence": "",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "learningStep": 0,
+      "intraDayDue": null,
+      "masteredAt": null,
+      "nextReview": "2026-11-15T18:07:02.549Z"
     }
   ],
   "grammarFlashcards": [
