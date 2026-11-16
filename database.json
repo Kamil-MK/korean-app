@@ -5944,7 +5944,7 @@
       "interval": 0,
       "ef": 2.5,
       "learningStep": 1,
-      "intraDayDue": 1794089108047,
+      "intraDayDue": 1794834391066,
       "masteredAt": null,
       "nextReview": "2026-11-05T23:00:00.000Z"
     },
@@ -5958,13 +5958,13 @@
       "note": "",
       "front": "Ta kawiarnia jest popularna przez swoją szczególną atmosferę",
       "back": "독특한",
-      "rep": 1,
-      "interval": 1,
-      "ef": 2.5,
+      "rep": 2,
+      "interval": 8,
+      "ef": 2.6,
       "learningStep": 2,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-07T23:00:00.000Z"
+      "nextReview": "2026-11-23T23:00:00.000Z"
     },
     {
       "id": 1793828430176.6812,
@@ -5980,7 +5980,7 @@
       "interval": 0,
       "ef": 2.5,
       "learningStep": 1,
-      "intraDayDue": 1794089132452,
+      "intraDayDue": 1794834408493,
       "masteredAt": null,
       "nextReview": "2026-11-05T23:00:00.000Z"
     },
@@ -5998,7 +5998,7 @@
       "interval": 0,
       "ef": 2.5,
       "learningStep": 1,
-      "intraDayDue": 1794098154081,
+      "intraDayDue": 1794834414876,
       "masteredAt": null,
       "nextReview": "2026-11-06T23:00:00.000Z"
     },
@@ -6013,12 +6013,12 @@
       "front": "Alarm nie zadzwonił, więc zaspałem",
       "back": "는 바람에",
       "rep": 0,
-      "interval": 0,
+      "interval": 1,
       "ef": 2.5,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-15T12:07:19.034Z"
+      "nextReview": "2026-11-15T23:00:00.000Z"
     },
     {
       "id": 1794744499787.404,
@@ -6026,13 +6026,13 @@
       "front": "Alarm dzwoni",
       "back": "알람이 울리다",
       "exampleSentence": "알람이 울리지 않는 발암에 늦잠을 잤어요",
-      "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
+      "rep": 1,
+      "interval": 5,
+      "ef": 2.6,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-15T12:08:19.788Z"
+      "nextReview": "2026-11-20T23:00:00.000Z"
     },
     {
       "id": 1794765516081.796,
@@ -6041,12 +6041,12 @@
       "back": "마무리하다",
       "exampleSentence": "보고시를 마무리하느라고 야근했어요",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
+      "interval": 1,
+      "ef": 1.7000000000000002,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-15T17:58:36.081Z"
+      "nextReview": "2026-11-16T23:00:00.000Z"
     },
     {
       "id": 1794765640030.1462,
@@ -6055,12 +6055,12 @@
       "back": "전날",
       "exampleSentence": "",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
+      "interval": 1,
+      "ef": 1.7000000000000002,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-15T18:00:40.030Z"
+      "nextReview": "2026-11-16T23:00:00.000Z"
     },
     {
       "id": 1794765856474.5518,
@@ -6069,12 +6069,12 @@
       "back": "그저께",
       "exampleSentence": "",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
+      "interval": 1,
+      "ef": 1.7000000000000002,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-15T18:04:16.475Z"
+      "nextReview": "2026-11-16T23:00:00.000Z"
     },
     {
       "id": 1794766022549.213,
@@ -8559,12 +8559,12 @@
       "practicedMistakes": []
     },
     "2026-11-16": {
-      "again": 43,
+      "again": 50,
       "hard": 0,
       "good": 3,
-      "easy": 52,
+      "easy": 54,
       "completedAll": false,
-      "newCardsDone": 0,
+      "newCardsDone": 5,
       "newGrammarDone": 0,
       "practicedMistakes": []
     }
@@ -9150,6 +9150,120 @@
         "intraDayDue": null,
         "masteredAt": null,
         "nextReview": "2026-11-07T23:00:00.000Z"
+      },
+      {
+        "id": 1793827807610.5718,
+        "type": "cloze",
+        "parentId": "cloze_1793827807608_ytmv5",
+        "clozeIndex": 0,
+        "rawSentence": "선생님은 {{겸손한|pokornych::겸손한}} 사람을 좋아하세요",
+        "fullTranslation": "Nauczycielka lubi pokornych uczniów",
+        "note": "",
+        "front": "Nauczycielka lubi pokornych uczniów",
+        "back": "겸손한",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 1,
+        "intraDayDue": 1794089108047,
+        "masteredAt": null,
+        "nextReview": "2026-11-05T23:00:00.000Z"
+      },
+      {
+        "id": 1793828430176.6812,
+        "type": "cloze",
+        "parentId": "cloze_1793828430176_iy1gm",
+        "clozeIndex": 0,
+        "rawSentence": "10년 전 초등학교 {{시절로|czasy::시절로}} 돌아가고 싶어요",
+        "fullTranslation": "Chciałbym wrócić do czasów szkolnych 10 lat temu",
+        "note": "",
+        "front": "Chciałbym wrócić do czasów szkolnych 10 lat temu",
+        "back": "시절로",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 1,
+        "intraDayDue": 1794089132452,
+        "masteredAt": null,
+        "nextReview": "2026-11-05T23:00:00.000Z"
+      },
+      {
+        "id": 1793989394775.2644,
+        "type": "cloze",
+        "parentId": "cloze_1793989394773_nal2n",
+        "clozeIndex": 0,
+        "rawSentence": "저는 {{개인적인|osobistego::개인적인}} 시간이 필요해요.",
+        "fullTranslation": "Potrzebuję czasu dla siebie",
+        "note": "",
+        "front": "Potrzebuję czasu dla siebie",
+        "back": "개인적인",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 1,
+        "intraDayDue": 1794098154081,
+        "masteredAt": null,
+        "nextReview": "2026-11-06T23:00:00.000Z"
+      },
+      {
+        "id": 1794744439034.3052,
+        "type": "cloze",
+        "parentId": "cloze_1794744439031_e4djt",
+        "clozeIndex": 0,
+        "rawSentence": "알람이 울리지 않{{는 바람에|więc::는 바람에}} 늦잠을 잤어요",
+        "fullTranslation": "Alarm nie zadzwonił, więc zaspałem",
+        "note": "",
+        "front": "Alarm nie zadzwonił, więc zaspałem",
+        "back": "는 바람에",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-15T12:07:19.034Z"
+      },
+      {
+        "id": 1794765516081.796,
+        "type": "standard",
+        "front": "To wrap up",
+        "back": "마무리하다",
+        "exampleSentence": "보고시를 마무리하느라고 야근했어요",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-15T17:58:36.081Z"
+      },
+      {
+        "id": 1794765640030.1462,
+        "type": "standard",
+        "front": "Previous day / dzien wczesniej",
+        "back": "전날",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-15T18:00:40.030Z"
+      },
+      {
+        "id": 1794765856474.5518,
+        "type": "standard",
+        "front": "Przedwczoraj",
+        "back": "그저께",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-15T18:04:16.475Z"
       }
     ],
     "hard": [],
@@ -9906,6 +10020,38 @@
         "learningStep": 2,
         "intraDayDue": null,
         "nextReview": "2026-11-14T23:00:00.000Z"
+      },
+      {
+        "id": 1793828168547.8372,
+        "type": "cloze",
+        "parentId": "cloze_1793828168545_4lc5s",
+        "clozeIndex": 0,
+        "rawSentence": "그 가게는 {{독특한|szczególny::독특한}} 분위기 때문에 인기가 많아요",
+        "fullTranslation": "Ta kawiarnia jest popularna przez swoją szczególną atmosferę",
+        "note": "",
+        "front": "Ta kawiarnia jest popularna przez swoją szczególną atmosferę",
+        "back": "독특한",
+        "rep": 1,
+        "interval": 1,
+        "ef": 2.5,
+        "learningStep": 2,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-07T23:00:00.000Z"
+      },
+      {
+        "id": 1794744499787.404,
+        "type": "standard",
+        "front": "Alarm dzwoni",
+        "back": "알람이 울리다",
+        "exampleSentence": "알람이 울리지 않는 발암에 늦잠을 잤어요",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-15T12:08:19.788Z"
       }
     ]
   }
