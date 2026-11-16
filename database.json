@@ -5940,13 +5940,13 @@
       "note": "",
       "front": "Nauczycielka lubi pokornych uczniów",
       "back": "겸손한",
-      "rep": 0,
-      "interval": 0,
+      "rep": 1,
+      "interval": 1,
       "ef": 2.5,
-      "learningStep": 1,
-      "intraDayDue": 1794834391066,
+      "learningStep": 2,
+      "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-05T23:00:00.000Z"
+      "nextReview": "2026-11-16T23:00:00.000Z"
     },
     {
       "id": 1793828168547.8372,
@@ -5976,13 +5976,13 @@
       "note": "",
       "front": "Chciałbym wrócić do czasów szkolnych 10 lat temu",
       "back": "시절로",
-      "rep": 0,
-      "interval": 0,
+      "rep": 1,
+      "interval": 1,
       "ef": 2.5,
-      "learningStep": 1,
-      "intraDayDue": 1794834408493,
+      "learningStep": 2,
+      "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-05T23:00:00.000Z"
+      "nextReview": "2026-11-16T23:00:00.000Z"
     },
     {
       "id": 1793989394775.2644,
@@ -5998,7 +5998,7 @@
       "interval": 0,
       "ef": 2.5,
       "learningStep": 1,
-      "intraDayDue": 1794834414876,
+      "intraDayDue": 1794863429856,
       "masteredAt": null,
       "nextReview": "2026-11-06T23:00:00.000Z"
     },
@@ -6013,10 +6013,10 @@
       "front": "Alarm nie zadzwonił, więc zaspałem",
       "back": "는 바람에",
       "rep": 0,
-      "interval": 1,
+      "interval": 0,
       "ef": 2.5,
-      "learningStep": 0,
-      "intraDayDue": null,
+      "learningStep": 1,
+      "intraDayDue": 1794872389199,
       "masteredAt": null,
       "nextReview": "2026-11-15T23:00:00.000Z"
     },
@@ -8559,11 +8559,11 @@
       "practicedMistakes": []
     },
     "2026-11-16": {
-      "again": 51,
+      "again": 52,
       "hard": 0,
       "good": 3,
-      "easy": 54,
-      "completedAll": false,
+      "easy": 57,
+      "completedAll": true,
       "newCardsDone": 5,
       "newGrammarDone": 0,
       "practicedMistakes": []
@@ -9282,6 +9282,24 @@
         "intraDayDue": null,
         "masteredAt": null,
         "nextReview": "2026-11-15T23:00:00.000Z"
+      },
+      {
+        "id": 1793989394775.2644,
+        "type": "cloze",
+        "parentId": "cloze_1793989394773_nal2n",
+        "clozeIndex": 0,
+        "rawSentence": "저는 {{개인적인|osobistego::개인적인}} 시간이 필요해요.",
+        "fullTranslation": "Potrzebuję czasu dla siebie",
+        "note": "",
+        "front": "Potrzebuję czasu dla siebie",
+        "back": "개인적인",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 1,
+        "intraDayDue": 1794834414876,
+        "masteredAt": null,
+        "nextReview": "2026-11-06T23:00:00.000Z"
       }
     ],
     "hard": [],
@@ -10070,6 +10088,60 @@
         "intraDayDue": null,
         "masteredAt": null,
         "nextReview": "2026-11-15T12:08:19.788Z"
+      },
+      {
+        "id": 1794744439034.3052,
+        "type": "cloze",
+        "parentId": "cloze_1794744439031_e4djt",
+        "clozeIndex": 0,
+        "rawSentence": "알람이 울리지 않{{는 바람에|więc::는 바람에}} 늦잠을 잤어요",
+        "fullTranslation": "Alarm nie zadzwonił, więc zaspałem",
+        "note": "",
+        "front": "Alarm nie zadzwonił, więc zaspałem",
+        "back": "는 바람에",
+        "rep": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-15T23:00:00.000Z"
+      },
+      {
+        "id": 1793827807610.5718,
+        "type": "cloze",
+        "parentId": "cloze_1793827807608_ytmv5",
+        "clozeIndex": 0,
+        "rawSentence": "선생님은 {{겸손한|pokornych::겸손한}} 사람을 좋아하세요",
+        "fullTranslation": "Nauczycielka lubi pokornych uczniów",
+        "note": "",
+        "front": "Nauczycielka lubi pokornych uczniów",
+        "back": "겸손한",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 1,
+        "intraDayDue": 1794834391066,
+        "masteredAt": null,
+        "nextReview": "2026-11-05T23:00:00.000Z"
+      },
+      {
+        "id": 1793828430176.6812,
+        "type": "cloze",
+        "parentId": "cloze_1793828430176_iy1gm",
+        "clozeIndex": 0,
+        "rawSentence": "10년 전 초등학교 {{시절로|czasy::시절로}} 돌아가고 싶어요",
+        "fullTranslation": "Chciałbym wrócić do czasów szkolnych 10 lat temu",
+        "note": "",
+        "front": "Chciałbym wrócić do czasów szkolnych 10 lat temu",
+        "back": "시절로",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 1,
+        "intraDayDue": 1794834408493,
+        "masteredAt": null,
+        "nextReview": "2026-11-05T23:00:00.000Z"
       }
     ]
   }
