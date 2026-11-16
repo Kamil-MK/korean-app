@@ -8559,7 +8559,7 @@
       "practicedMistakes": []
     },
     "2026-11-16": {
-      "again": 50,
+      "again": 51,
       "hard": 0,
       "good": 3,
       "easy": 54,
@@ -9264,6 +9264,24 @@
         "intraDayDue": null,
         "masteredAt": null,
         "nextReview": "2026-11-15T18:04:16.475Z"
+      },
+      {
+        "id": 1794744439034.3052,
+        "type": "cloze",
+        "parentId": "cloze_1794744439031_e4djt",
+        "clozeIndex": 0,
+        "rawSentence": "알람이 울리지 않{{는 바람에|więc::는 바람에}} 늦잠을 잤어요",
+        "fullTranslation": "Alarm nie zadzwonił, więc zaspałem",
+        "note": "",
+        "front": "Alarm nie zadzwonił, więc zaspałem",
+        "back": "는 바람에",
+        "rep": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-15T23:00:00.000Z"
       }
     ],
     "hard": [],
