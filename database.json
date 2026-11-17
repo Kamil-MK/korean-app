@@ -5913,7 +5913,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-16T23:00:00.000Z"
+      "nextReview": "2026-11-17T23:00:00.000Z"
     },
     {
       "id": 1793820429837.8816,
@@ -5925,13 +5925,13 @@
       "note": "",
       "front": "Wyglądasz dużo młodziej po zmianie fryzury",
       "back": "머리 모양을",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.7000000000000002,
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.8000000000000003,
       "learningStep": 2,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-16T23:00:00.000Z"
+      "nextReview": "2026-11-21T23:00:00.000Z"
     },
     {
       "id": 1793827807610.5718,
@@ -5943,13 +5943,13 @@
       "note": "",
       "front": "Nauczycielka lubi pokornych uczniów",
       "back": "겸손한",
-      "rep": 1,
-      "interval": 1,
-      "ef": 2.5,
+      "rep": 2,
+      "interval": 8,
+      "ef": 2.6,
       "learningStep": 2,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-16T23:00:00.000Z"
+      "nextReview": "2026-11-24T23:00:00.000Z"
     },
     {
       "id": 1793828168547.8372,
@@ -5979,13 +5979,13 @@
       "note": "",
       "front": "Chciałbym wrócić do czasów szkolnych 10 lat temu",
       "back": "시절로",
-      "rep": 1,
-      "interval": 1,
-      "ef": 2.5,
+      "rep": 2,
+      "interval": 8,
+      "ef": 2.6,
       "learningStep": 2,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-16T23:00:00.000Z"
+      "nextReview": "2026-11-24T23:00:00.000Z"
     },
     {
       "id": 1793989394775.2644,
@@ -6001,7 +6001,7 @@
       "interval": 0,
       "ef": 2.5,
       "learningStep": 1,
-      "intraDayDue": 1794863429856,
+      "intraDayDue": 1794951438515,
       "masteredAt": null,
       "nextReview": "2026-11-06T23:00:00.000Z"
     },
@@ -6015,13 +6015,13 @@
       "note": "",
       "front": "Alarm nie zadzwonił, więc zaspałem",
       "back": "는 바람에",
-      "rep": 0,
-      "interval": 0,
+      "rep": 1,
+      "interval": 1,
       "ef": 2.5,
-      "learningStep": 1,
-      "intraDayDue": 1794872389199,
+      "learningStep": 2,
+      "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-15T23:00:00.000Z"
+      "nextReview": "2026-11-17T23:00:00.000Z"
     },
     {
       "id": 1794744499787.404,
@@ -6045,11 +6045,11 @@
       "exampleSentence": "보고시를 마무리하느라고 야근했어요",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
+      "ef": 1.3,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-16T23:00:00.000Z"
+      "nextReview": "2026-11-17T23:00:00.000Z"
     },
     {
       "id": 1794765640030.1462,
@@ -6059,11 +6059,11 @@
       "exampleSentence": "",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
+      "ef": 1.3,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-16T23:00:00.000Z"
+      "nextReview": "2026-11-17T23:00:00.000Z"
     },
     {
       "id": 1794765856474.5518,
@@ -6073,11 +6073,11 @@
       "exampleSentence": "",
       "rep": 0,
       "interval": 1,
-      "ef": 1.7000000000000002,
+      "ef": 1.3,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-16T23:00:00.000Z"
+      "nextReview": "2026-11-17T23:00:00.000Z"
     },
     {
       "id": 1794766022549.213,
@@ -6086,12 +6086,12 @@
       "back": "치우다",
       "exampleSentence": "",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
+      "interval": 1,
+      "ef": 1.7000000000000002,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-15T18:07:02.549Z"
+      "nextReview": "2026-11-17T23:00:00.000Z"
     },
     {
       "id": 1794766140595.6345,
@@ -6100,12 +6100,12 @@
       "back": "입원하다",
       "exampleSentence": "",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
+      "interval": 1,
+      "ef": 1.7000000000000002,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-15T18:09:00.595Z"
+      "nextReview": "2026-11-17T23:00:00.000Z"
     },
     {
       "id": 1794766214377.2659,
@@ -6114,12 +6114,12 @@
       "back": "교통사고",
       "exampleSentence": "",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
+      "interval": 1,
+      "ef": 1.7000000000000002,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-15T18:10:14.377Z"
+      "nextReview": "2026-11-17T23:00:00.000Z"
     },
     {
       "id": 1794766311043.8022,
@@ -8572,12 +8572,12 @@
       "practicedMistakes": []
     },
     "2026-11-17": {
-      "again": 26,
+      "again": 34,
       "hard": 1,
       "good": 1,
-      "easy": 32,
+      "easy": 36,
       "completedAll": false,
-      "newCardsDone": 0,
+      "newCardsDone": 3,
       "newGrammarDone": 0,
       "practicedMistakes": []
     }
@@ -8931,6 +8931,122 @@
         "type": "standard",
         "learningStep": 0,
         "intraDayDue": null
+      },
+      {
+        "id": 1793820328163.9192,
+        "type": "standard",
+        "front": "Fryzura",
+        "back": "머리 모양",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-16T23:00:00.000Z"
+      },
+      {
+        "id": 1794765516081.796,
+        "type": "standard",
+        "front": "To wrap up",
+        "back": "마무리하다",
+        "exampleSentence": "보고시를 마무리하느라고 야근했어요",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-16T23:00:00.000Z"
+      },
+      {
+        "id": 1794765640030.1462,
+        "type": "standard",
+        "front": "Previous day / dzien wczesniej",
+        "back": "전날",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-16T23:00:00.000Z"
+      },
+      {
+        "id": 1794765856474.5518,
+        "type": "standard",
+        "front": "Przedwczoraj",
+        "back": "그저께",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-16T23:00:00.000Z"
+      },
+      {
+        "id": 1793989394775.2644,
+        "type": "cloze",
+        "parentId": "cloze_1793989394773_nal2n",
+        "clozeIndex": 0,
+        "rawSentence": "저는 {{개인적인|osobistego::개인적인}} 시간이 필요해요.",
+        "fullTranslation": "Potrzebuję czasu dla siebie",
+        "note": "",
+        "front": "Potrzebuję czasu dla siebie",
+        "back": "개인적인",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 1,
+        "intraDayDue": 1794863429856,
+        "masteredAt": null,
+        "nextReview": "2026-11-06T23:00:00.000Z"
+      },
+      {
+        "id": 1794766022549.213,
+        "type": "standard",
+        "front": "To clean up",
+        "back": "치우다",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-15T18:07:02.549Z"
+      },
+      {
+        "id": 1794766140595.6345,
+        "type": "standard",
+        "front": "Be hospitalized",
+        "back": "입원하다",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-15T18:09:00.595Z"
+      },
+      {
+        "id": 1794766214377.2659,
+        "type": "standard",
+        "front": "Traffic accident",
+        "back": "교통사고",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-15T18:10:14.377Z"
       }
     ],
     "hard": [
@@ -9392,6 +9508,78 @@
         "type": "standard",
         "learningStep": 0,
         "intraDayDue": null
+      },
+      {
+        "id": 1793820429837.8816,
+        "type": "cloze",
+        "parentId": "cloze_1793820429836_jyzq6",
+        "clozeIndex": 0,
+        "rawSentence": "{{머리 모양을|fryzura::머리 모양을}} 바꾸니까 훨씬 어려 보이네요",
+        "fullTranslation": "Wyglądasz dużo młodziej po zmianie fryzury",
+        "note": "",
+        "front": "Wyglądasz dużo młodziej po zmianie fryzury",
+        "back": "머리 모양을",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "learningStep": 2,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-16T23:00:00.000Z"
+      },
+      {
+        "id": 1793827807610.5718,
+        "type": "cloze",
+        "parentId": "cloze_1793827807608_ytmv5",
+        "clozeIndex": 0,
+        "rawSentence": "선생님은 {{겸손한|pokornych::겸손한}} 사람을 좋아하세요",
+        "fullTranslation": "Nauczycielka lubi pokornych uczniów",
+        "note": "",
+        "front": "Nauczycielka lubi pokornych uczniów",
+        "back": "겸손한",
+        "rep": 1,
+        "interval": 1,
+        "ef": 2.5,
+        "learningStep": 2,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-16T23:00:00.000Z"
+      },
+      {
+        "id": 1793828430176.6812,
+        "type": "cloze",
+        "parentId": "cloze_1793828430176_iy1gm",
+        "clozeIndex": 0,
+        "rawSentence": "10년 전 초등학교 {{시절로|czasy::시절로}} 돌아가고 싶어요",
+        "fullTranslation": "Chciałbym wrócić do czasów szkolnych 10 lat temu",
+        "note": "",
+        "front": "Chciałbym wrócić do czasów szkolnych 10 lat temu",
+        "back": "시절로",
+        "rep": 1,
+        "interval": 1,
+        "ef": 2.5,
+        "learningStep": 2,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-16T23:00:00.000Z"
+      },
+      {
+        "id": 1794744439034.3052,
+        "type": "cloze",
+        "parentId": "cloze_1794744439031_e4djt",
+        "clozeIndex": 0,
+        "rawSentence": "알람이 울리지 않{{는 바람에|więc::는 바람에}} 늦잠을 잤어요",
+        "fullTranslation": "Alarm nie zadzwonił, więc zaspałem",
+        "note": "",
+        "front": "Alarm nie zadzwonił, więc zaspałem",
+        "back": "는 바람에",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 1,
+        "intraDayDue": 1794872389199,
+        "masteredAt": null,
+        "nextReview": "2026-11-15T23:00:00.000Z"
       }
     ]
   }
