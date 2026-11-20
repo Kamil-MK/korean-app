@@ -6258,10 +6258,10 @@
       "front": "wczoraj Minsu mial urwanie glowy",
       "back": "정신이 없었어요",
       "rep": 0,
-      "interval": 1,
+      "interval": 0,
       "ef": 2.5,
-      "learningStep": 0,
-      "intraDayDue": null,
+      "learningStep": 1,
+      "intraDayDue": 1795224264272,
       "masteredAt": null,
       "nextReview": "2026-11-19T23:00:00.000Z"
     },
@@ -8865,11 +8865,11 @@
       ]
     },
     "2026-11-20": {
-      "again": 30,
+      "again": 31,
       "hard": 1,
       "good": 3,
-      "easy": 27,
-      "completedAll": false,
+      "easy": 28,
+      "completedAll": true,
       "newCardsDone": 5,
       "newGrammarDone": 0,
       "practicedMistakes": []
@@ -9293,6 +9293,24 @@
         "intraDayDue": null,
         "masteredAt": null,
         "nextReview": "2026-11-20T21:32:35.374Z"
+      },
+      {
+        "id": 1795210355374.7954,
+        "type": "cloze",
+        "parentId": "cloze_1795210355374_vdlxs",
+        "clozeIndex": 0,
+        "rawSentence": "어제 아침에 민수 씨는 정말 {{정신이 없었어요|mieć urwanie głowy::정신이 없다}}.",
+        "fullTranslation": "wczoraj Minsu mial urwanie glowy",
+        "note": "",
+        "front": "wczoraj Minsu mial urwanie glowy",
+        "back": "정신이 없었어요",
+        "rep": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-19T23:00:00.000Z"
       }
     ],
     "hard": [
@@ -9732,6 +9750,24 @@
         "intraDayDue": null,
         "masteredAt": null,
         "nextReview": "2026-11-20T21:43:21.960Z"
+      },
+      {
+        "id": 1795210355374.7954,
+        "type": "cloze",
+        "parentId": "cloze_1795210355374_vdlxs",
+        "clozeIndex": 0,
+        "rawSentence": "어제 아침에 민수 씨는 정말 {{정신이 없었어요|mieć urwanie głowy::정신이 없다}}.",
+        "fullTranslation": "wczoraj Minsu mial urwanie glowy",
+        "note": "",
+        "front": "wczoraj Minsu mial urwanie glowy",
+        "back": "정신이 없었어요",
+        "rep": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-19T23:00:00.000Z"
       }
     ]
   }
