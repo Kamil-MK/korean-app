@@ -6370,6 +6370,24 @@
       "intraDayDue": null,
       "masteredAt": null,
       "nextReview": "2026-11-21T23:00:00.000Z"
+    },
+    {
+      "id": 1795300758222.4326,
+      "type": "cloze",
+      "parentId": "cloze_1795300758222_cza15",
+      "clozeIndex": 0,
+      "rawSentence": "영화는 무서워서 {{중간에|w trakcie::중간에}} TV를 껐어요",
+      "fullTranslation": "film byl straszny, wiec w trakcie wylaczylem TV",
+      "note": "",
+      "front": "film byl straszny, wiec w trakcie wylaczylem TV",
+      "back": "중간에",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "learningStep": 1,
+      "intraDayDue": 1795311566627,
+      "masteredAt": null,
+      "nextReview": "2026-11-20T23:00:00.000Z"
     }
   ],
   "grammarFlashcards": [
@@ -8909,9 +8927,9 @@
       "again": 28,
       "hard": 0,
       "good": 0,
-      "easy": 36,
+      "easy": 37,
       "completedAll": true,
-      "newCardsDone": 4,
+      "newCardsDone": 5,
       "newGrammarDone": 0,
       "practicedMistakes": []
     }
@@ -9817,6 +9835,24 @@
         "intraDayDue": null,
         "masteredAt": null,
         "nextReview": "2026-11-20T23:00:00.000Z"
+      },
+      {
+        "id": 1795300758222.4326,
+        "type": "cloze",
+        "parentId": "cloze_1795300758222_cza15",
+        "clozeIndex": 0,
+        "rawSentence": "영화는 무서워서 {{중간에|w trakcie::중간에}} TV를 껐어요",
+        "fullTranslation": "film byl straszny, wiec w trakcie wylaczylem TV",
+        "note": "",
+        "front": "film byl straszny, wiec w trakcie wylaczylem TV",
+        "back": "중간에",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-21T22:39:18.222Z"
       }
     ]
   }
