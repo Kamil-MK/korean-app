@@ -5924,10 +5924,10 @@
       "exampleSentence": "",
       "clozeSentence": "",
       "clozeAnswer": "",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-11-20T23:00:00.000Z",
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-25T23:00:00.000Z",
       "type": "standard",
       "learningStep": 0,
       "intraDayDue": null
@@ -5957,7 +5957,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-11-20T23:00:00.000Z",
+      "nextReview": "2026-11-21T23:00:00.000Z",
       "type": "standard",
       "learningStep": 0,
       "intraDayDue": null
@@ -5969,10 +5969,10 @@
       "exampleSentence": "피곤해서 입이 짧다 보니 아침 식사도 걸렀어요",
       "clozeSentence": "",
       "clozeAnswer": "",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-11-20T23:00:00.000Z",
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-25T23:00:00.000Z",
       "type": "standard",
       "learningStep": 0,
       "intraDayDue": null
@@ -6123,13 +6123,13 @@
       "front": "Alarm dzwoni",
       "back": "알람이 울리다",
       "exampleSentence": "알람이 울리지 않는 발암에 늦잠을 잤어요",
-      "rep": 1,
-      "interval": 5,
-      "ef": 2.6,
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.8000000000000003,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-20T23:00:00.000Z"
+      "nextReview": "2026-11-21T23:00:00.000Z"
     },
     {
       "id": 1794765516081.796,
@@ -6143,7 +6143,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-20T23:00:00.000Z"
+      "nextReview": "2026-11-21T23:00:00.000Z"
     },
     {
       "id": 1794765640030.1462,
@@ -6171,7 +6171,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-20T23:00:00.000Z"
+      "nextReview": "2026-11-21T23:00:00.000Z"
     },
     {
       "id": 1794766022549.213,
@@ -6185,7 +6185,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-20T23:00:00.000Z"
+      "nextReview": "2026-11-21T23:00:00.000Z"
     },
     {
       "id": 1794766140595.6345,
@@ -6239,13 +6239,13 @@
       "front": "być mokrym",
       "back": "젖다",
       "exampleSentence": "민수 씨는 젖은 옷을 입은 채로 조용히 자리에 앉았습니다.",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.7000000000000002,
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.8000000000000003,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-20T23:00:00.000Z"
+      "nextReview": "2026-11-25T23:00:00.000Z"
     },
     {
       "id": 1795210355374.7954,
@@ -6261,7 +6261,7 @@
       "interval": 0,
       "ef": 2.5,
       "learningStep": 1,
-      "intraDayDue": 1795216915839,
+      "intraDayDue": 1795300906616,
       "masteredAt": null,
       "nextReview": "2026-11-19T23:00:00.000Z"
     },
@@ -6289,13 +6289,13 @@
       "note": "",
       "front": "Otworzyłem oczy dopiero gdy wybiła ósma rano",
       "back": "눈을 떴어요",
-      "rep": 1,
+      "rep": 0,
       "interval": 1,
-      "ef": 2.5,
+      "ef": 1.7000000000000002,
       "learningStep": 2,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-20T23:00:00.000Z"
+      "nextReview": "2026-11-21T23:00:00.000Z"
     },
     {
       "id": 1795211001960.2524,
@@ -6322,12 +6322,12 @@
       "front": "To make matters worse, it suddenly started raining, so I had to run in the rain without an umbrella",
       "back": "설상가상으로",
       "rep": 0,
-      "interval": 0,
+      "interval": 1,
       "ef": 2.5,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-20T21:45:30.385Z"
+      "nextReview": "2026-11-20T23:00:00.000Z"
     },
     {
       "id": 1795211167978.701,
@@ -6336,12 +6336,12 @@
       "back": "동료들",
       "exampleSentence": "회사에 도착했을 때 사무실 문은 이미 닫혀 있었고, 동료들은 모두 회의실에 앉아 있었습니다.",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
+      "interval": 1,
+      "ef": 1.7000000000000002,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-20T21:46:07.978Z"
+      "nextReview": "2026-11-21T23:00:00.000Z"
     },
     {
       "id": 1795211294312.9058,
@@ -8906,12 +8906,12 @@
       ]
     },
     "2026-11-21": {
-      "again": 16,
+      "again": 25,
       "hard": 0,
       "good": 0,
-      "easy": 32,
+      "easy": 35,
       "completedAll": false,
-      "newCardsDone": 0,
+      "newCardsDone": 2,
       "newGrammarDone": 0,
       "practicedMistakes": []
     }
@@ -9130,6 +9130,145 @@
         "type": "standard",
         "learningStep": 0,
         "intraDayDue": null
+      },
+      {
+        "id": 1792925525160.6768,
+        "front": "Od początku do konća",
+        "back": "꼬박",
+        "exampleSentence": "밤을 꼬박 새웠다",
+        "clozeSentence": "",
+        "clozeAnswer": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-11-20T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null
+      },
+      {
+        "id": 1794744499787.404,
+        "type": "standard",
+        "front": "Alarm dzwoni",
+        "back": "알람이 울리다",
+        "exampleSentence": "알람이 울리지 않는 발암에 늦잠을 잤어요",
+        "rep": 1,
+        "interval": 5,
+        "ef": 2.6,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-20T23:00:00.000Z"
+      },
+      {
+        "id": 1794765516081.796,
+        "type": "standard",
+        "front": "To wrap up",
+        "back": "마무리하다",
+        "exampleSentence": "보고시를 마무리하느라고 야근했어요",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-20T23:00:00.000Z"
+      },
+      {
+        "id": 1794765856474.5518,
+        "type": "standard",
+        "front": "Przedwczoraj",
+        "back": "그저께",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-20T23:00:00.000Z"
+      },
+      {
+        "id": 1794766022549.213,
+        "type": "standard",
+        "front": "To clean up",
+        "back": "치우다",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-20T23:00:00.000Z"
+      },
+      {
+        "id": 1795210949675.6553,
+        "type": "cloze",
+        "parentId": "cloze_1795210949675_k3z66",
+        "clozeIndex": 0,
+        "rawSentence": "아침 여덟 시가 되어서야 {{눈을 떴어요|Otworzyć oczy::눈을 뜨다}}.",
+        "fullTranslation": "Otworzyłem oczy dopiero gdy wybiła ósma rano",
+        "note": "",
+        "front": "Otworzyłem oczy dopiero gdy wybiła ósma rano",
+        "back": "눈을 떴어요",
+        "rep": 1,
+        "interval": 1,
+        "ef": 2.5,
+        "learningStep": 2,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-20T23:00:00.000Z"
+      },
+      {
+        "id": 1795210355374.7954,
+        "type": "cloze",
+        "parentId": "cloze_1795210355374_vdlxs",
+        "clozeIndex": 0,
+        "rawSentence": "어제 아침에 민수 씨는 정말 {{정신이 없었어요|mieć urwanie głowy::정신이 없다}}.",
+        "fullTranslation": "wczoraj Minsu mial urwanie glowy",
+        "note": "",
+        "front": "wczoraj Minsu mial urwanie glowy",
+        "back": "정신이 없었어요",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 1,
+        "intraDayDue": 1795216915839,
+        "masteredAt": null,
+        "nextReview": "2026-11-19T23:00:00.000Z"
+      },
+      {
+        "id": 1795211130385.2087,
+        "type": "cloze",
+        "parentId": "cloze_1795211130385_f8i8z",
+        "clozeIndex": 0,
+        "rawSentence": "{{설상가상으로|Na domiar zlego::설상가상으로}} 비까지 갑자기 내리는 바람에 우산도 없이 빗속을 뛰어다녀야 했습니다.",
+        "fullTranslation": "To make matters worse, it suddenly started raining, so I had to run in the rain without an umbrella",
+        "note": "",
+        "front": "To make matters worse, it suddenly started raining, so I had to run in the rain without an umbrella",
+        "back": "설상가상으로",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-20T21:45:30.385Z"
+      },
+      {
+        "id": 1795211167978.701,
+        "type": "standard",
+        "front": "Koledzy z pracy",
+        "back": "동료들",
+        "exampleSentence": "회사에 도착했을 때 사무실 문은 이미 닫혀 있었고, 동료들은 모두 회의실에 앉아 있었습니다.",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-20T21:46:07.978Z"
       }
     ],
     "hard": [],
@@ -9570,6 +9709,50 @@
         "learningStep": 0,
         "intraDayDue": null,
         "exampleSentence": ""
+      },
+      {
+        "id": 1792925200590.9148,
+        "front": "Ponieść porażkę",
+        "back": "실패하다",
+        "exampleSentence": "",
+        "clozeSentence": "",
+        "clozeAnswer": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-11-20T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null
+      },
+      {
+        "id": 1792930297499.7104,
+        "front": "Opuszczać, pomijać (np. Posiłek, turę)",
+        "back": "거르다",
+        "exampleSentence": "피곤해서 입이 짧다 보니 아침 식사도 걸렀어요",
+        "clozeSentence": "",
+        "clozeAnswer": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-11-20T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null
+      },
+      {
+        "id": 1795210238425.2134,
+        "type": "standard",
+        "front": "być mokrym",
+        "back": "젖다",
+        "exampleSentence": "민수 씨는 젖은 옷을 입은 채로 조용히 자리에 앉았습니다.",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.7000000000000002,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-20T23:00:00.000Z"
       }
     ]
   }
