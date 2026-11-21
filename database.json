@@ -6322,10 +6322,10 @@
       "front": "To make matters worse, it suddenly started raining, so I had to run in the rain without an umbrella",
       "back": "설상가상으로",
       "rep": 0,
-      "interval": 1,
+      "interval": 0,
       "ef": 2.5,
-      "learningStep": 0,
-      "intraDayDue": null,
+      "learningStep": 1,
+      "intraDayDue": 1795309995136,
       "masteredAt": null,
       "nextReview": "2026-11-20T23:00:00.000Z"
     },
@@ -6350,12 +6350,12 @@
       "back": "뛰어다니다",
       "exampleSentence": "설상가상으로 비까지 갑자기 내리는 바람에 우산도 없이 빗속을 뛰어다녀야 했습니다.",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
+      "interval": 1,
+      "ef": 1.7000000000000002,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-20T21:48:14.312Z"
+      "nextReview": "2026-11-21T23:00:00.000Z"
     },
     {
       "id": 1795211331681.9143,
@@ -6364,12 +6364,12 @@
       "back": "뛰어나가다",
       "exampleSentence": "민수 씨는 급하게 옷을 입고 집 밖으로 뛰어나갔습니다.",
       "rep": 0,
-      "interval": 0,
-      "ef": 2.5,
+      "interval": 1,
+      "ef": 1.7000000000000002,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-20T21:48:51.681Z"
+      "nextReview": "2026-11-21T23:00:00.000Z"
     }
   ],
   "grammarFlashcards": [
@@ -8906,12 +8906,12 @@
       ]
     },
     "2026-11-21": {
-      "again": 25,
+      "again": 28,
       "hard": 0,
       "good": 0,
-      "easy": 35,
-      "completedAll": false,
-      "newCardsDone": 2,
+      "easy": 36,
+      "completedAll": true,
+      "newCardsDone": 4,
       "newGrammarDone": 0,
       "practicedMistakes": []
     }
@@ -9269,6 +9269,52 @@
         "intraDayDue": null,
         "masteredAt": null,
         "nextReview": "2026-11-20T21:46:07.978Z"
+      },
+      {
+        "id": 1795211294312.9058,
+        "type": "standard",
+        "front": "biegac tam i z powrotem",
+        "back": "뛰어다니다",
+        "exampleSentence": "설상가상으로 비까지 갑자기 내리는 바람에 우산도 없이 빗속을 뛰어다녀야 했습니다.",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-20T21:48:14.312Z"
+      },
+      {
+        "id": 1795211331681.9143,
+        "type": "standard",
+        "front": "wybiedz na zewnatrz",
+        "back": "뛰어나가다",
+        "exampleSentence": "민수 씨는 급하게 옷을 입고 집 밖으로 뛰어나갔습니다.",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-20T21:48:51.681Z"
+      },
+      {
+        "id": 1795211130385.2087,
+        "type": "cloze",
+        "parentId": "cloze_1795211130385_f8i8z",
+        "clozeIndex": 0,
+        "rawSentence": "{{설상가상으로|Na domiar zlego::설상가상으로}} 비까지 갑자기 내리는 바람에 우산도 없이 빗속을 뛰어다녀야 했습니다.",
+        "fullTranslation": "To make matters worse, it suddenly started raining, so I had to run in the rain without an umbrella",
+        "note": "",
+        "front": "To make matters worse, it suddenly started raining, so I had to run in the rain without an umbrella",
+        "back": "설상가상으로",
+        "rep": 0,
+        "interval": 1,
+        "ef": 2.5,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-20T23:00:00.000Z"
       }
     ],
     "hard": [],
@@ -9749,6 +9795,24 @@
         "rep": 0,
         "interval": 1,
         "ef": 1.7000000000000002,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-20T23:00:00.000Z"
+      },
+      {
+        "id": 1795211130385.2087,
+        "type": "cloze",
+        "parentId": "cloze_1795211130385_f8i8z",
+        "clozeIndex": 0,
+        "rawSentence": "{{설상가상으로|Na domiar zlego::설상가상으로}} 비까지 갑자기 내리는 바람에 우산도 없이 빗속을 뛰어다녀야 했습니다.",
+        "fullTranslation": "To make matters worse, it suddenly started raining, so I had to run in the rain without an umbrella",
+        "note": "",
+        "front": "To make matters worse, it suddenly started raining, so I had to run in the rain without an umbrella",
+        "back": "설상가상으로",
+        "rep": 0,
+        "interval": 1,
+        "ef": 2.5,
         "learningStep": 0,
         "intraDayDue": null,
         "masteredAt": null,
