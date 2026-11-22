@@ -6416,6 +6416,20 @@
       "intraDayDue": null,
       "masteredAt": null,
       "nextReview": "2026-11-22T11:22:14.464Z"
+    },
+    {
+      "id": 1795346770646.1487,
+      "type": "standard",
+      "front": "zalatwiac sprawy",
+      "back": "볼일을 보다",
+      "exampleSentence": "",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "learningStep": 0,
+      "intraDayDue": null,
+      "masteredAt": null,
+      "nextReview": "2026-11-22T11:26:10.646Z"
     }
   ],
   "grammarFlashcards": [
