@@ -6261,7 +6261,7 @@
       "interval": 0,
       "ef": 2.5,
       "learningStep": 1,
-      "intraDayDue": 1795303367758,
+      "intraDayDue": 1795300906616,
       "masteredAt": null,
       "nextReview": "2026-11-19T23:00:00.000Z"
     },
@@ -8924,7 +8924,7 @@
       ]
     },
     "2026-11-21": {
-      "again": 29,
+      "again": 28,
       "hard": 0,
       "good": 0,
       "easy": 37,
@@ -9333,24 +9333,6 @@
         "intraDayDue": null,
         "masteredAt": null,
         "nextReview": "2026-11-20T23:00:00.000Z"
-      },
-      {
-        "id": 1795210355374.7954,
-        "type": "cloze",
-        "parentId": "cloze_1795210355374_vdlxs",
-        "clozeIndex": 0,
-        "rawSentence": "어제 아침에 민수 씨는 정말 {{정신이 없었어요|mieć urwanie głowy::정신이 없다}}.",
-        "fullTranslation": "wczoraj Minsu mial urwanie glowy",
-        "note": "",
-        "front": "wczoraj Minsu mial urwanie glowy",
-        "back": "정신이 없었어요",
-        "rep": 0,
-        "interval": 0,
-        "ef": 2.5,
-        "learningStep": 1,
-        "intraDayDue": 1795300906616,
-        "masteredAt": null,
-        "nextReview": "2026-11-19T23:00:00.000Z"
       }
     ],
     "hard": [],
