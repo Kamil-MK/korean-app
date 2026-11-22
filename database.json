@@ -6388,6 +6388,34 @@
       "intraDayDue": 1795311566627,
       "masteredAt": null,
       "nextReview": "2026-11-20T23:00:00.000Z"
+    },
+    {
+      "id": 1795346410722.4316,
+      "type": "standard",
+      "front": "byc uderzonym przez pilke",
+      "back": "공에 맞다",
+      "exampleSentence": "",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "learningStep": 0,
+      "intraDayDue": null,
+      "masteredAt": null,
+      "nextReview": "2026-11-22T11:20:10.722Z"
+    },
+    {
+      "id": 1795346534464.4802,
+      "type": "standard",
+      "front": "wachać się czy zrobić coś czy nie",
+      "back": "할까 말까 망설이다",
+      "exampleSentence": "할까 말까 망설이다가 기회를 놓쳐 버렸어요",
+      "rep": 0,
+      "interval": 0,
+      "ef": 2.5,
+      "learningStep": 0,
+      "intraDayDue": null,
+      "masteredAt": null,
+      "nextReview": "2026-11-22T11:22:14.464Z"
     }
   ],
   "grammarFlashcards": [
