@@ -6066,13 +6066,13 @@
       "note": "",
       "front": "Wyglądasz dużo młodziej po zmianie fryzury",
       "back": "머리 모양을",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.8000000000000003,
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.3,
       "learningStep": 2,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-21T23:00:00.000Z"
+      "nextReview": "2026-11-23T23:00:00.000Z"
     },
     {
       "id": 1793827807610.5718,
@@ -6170,13 +6170,13 @@
       "front": "Alarm dzwoni",
       "back": "알람이 울리다",
       "exampleSentence": "알람이 울리지 않는 발암에 늦잠을 잤어요",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.8000000000000003,
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.9000000000000004,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-21T23:00:00.000Z"
+      "nextReview": "2026-11-27T23:00:00.000Z"
     },
     {
       "id": 1794765516081.796,
@@ -6190,7 +6190,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-21T23:00:00.000Z"
+      "nextReview": "2026-11-23T23:00:00.000Z"
     },
     {
       "id": 1794765640030.1462,
@@ -6198,13 +6198,13 @@
       "front": "Previous day / dzien wczesniej",
       "back": "전날",
       "exampleSentence": "",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.5000000000000002,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-22T23:00:00.000Z"
+      "nextReview": "2026-11-30T23:00:00.000Z"
     },
     {
       "id": 1794765856474.5518,
@@ -6218,7 +6218,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-21T23:00:00.000Z"
+      "nextReview": "2026-11-23T23:00:00.000Z"
     },
     {
       "id": 1794766022549.213,
@@ -6232,7 +6232,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-21T23:00:00.000Z"
+      "nextReview": "2026-11-23T23:00:00.000Z"
     },
     {
       "id": 1794766140595.6345,
@@ -9001,10 +9001,10 @@
       "practicedMistakes": []
     },
     "2026-11-23": {
-      "again": 21,
+      "again": 25,
       "hard": 1,
       "good": 3,
-      "easy": 50,
+      "easy": 52,
       "completedAll": false,
       "newCardsDone": 0,
       "newGrammarDone": 0,
@@ -9296,6 +9296,66 @@
         "type": "standard",
         "learningStep": 0,
         "intraDayDue": null
+      },
+      {
+        "id": 1793820429837.8816,
+        "type": "cloze",
+        "parentId": "cloze_1793820429836_jyzq6",
+        "clozeIndex": 0,
+        "rawSentence": "{{머리 모양을|fryzura::머리 모양을}} 바꾸니까 훨씬 어려 보이네요",
+        "fullTranslation": "Wyglądasz dużo młodziej po zmianie fryzury",
+        "note": "",
+        "front": "Wyglądasz dużo młodziej po zmianie fryzury",
+        "back": "머리 모양을",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.8000000000000003,
+        "learningStep": 2,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-21T23:00:00.000Z"
+      },
+      {
+        "id": 1794765516081.796,
+        "type": "standard",
+        "front": "To wrap up",
+        "back": "마무리하다",
+        "exampleSentence": "보고시를 마무리하느라고 야근했어요",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-21T23:00:00.000Z"
+      },
+      {
+        "id": 1794765856474.5518,
+        "type": "standard",
+        "front": "Przedwczoraj",
+        "back": "그저께",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-21T23:00:00.000Z"
+      },
+      {
+        "id": 1794766022549.213,
+        "type": "standard",
+        "front": "To clean up",
+        "back": "치우다",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-21T23:00:00.000Z"
       }
     ],
     "hard": [
@@ -10026,6 +10086,34 @@
         "type": "standard",
         "learningStep": 0,
         "intraDayDue": null
+      },
+      {
+        "id": 1794744499787.404,
+        "type": "standard",
+        "front": "Alarm dzwoni",
+        "back": "알람이 울리다",
+        "exampleSentence": "알람이 울리지 않는 발암에 늦잠을 잤어요",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.8000000000000003,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-21T23:00:00.000Z"
+      },
+      {
+        "id": 1794765640030.1462,
+        "type": "standard",
+        "front": "Previous day / dzien wczesniej",
+        "back": "전날",
+        "exampleSentence": "",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-22T23:00:00.000Z"
       }
     ]
   }
