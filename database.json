@@ -5929,14 +5929,15 @@
       "id": 1790971276350.665,
       "front": "Zwierzę domowe",
       "back": "애완동물",
-      "rep": 2,
-      "interval": 8,
-      "ef": 1.5000000000000002,
-      "nextReview": "2026-11-23T23:00:00.000Z",
+      "rep": 3,
+      "interval": 14,
+      "ef": 1.6000000000000003,
+      "nextReview": "2026-12-07T23:00:00.000Z",
       "exampleSentence": "",
       "type": "standard",
       "learningStep": 0,
-      "intraDayDue": null
+      "intraDayDue": null,
+      "masteredAt": "2026-11-24"
     },
     {
       "id": 1790971887089.701,
@@ -5945,7 +5946,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-11-23T23:00:00.000Z",
+      "nextReview": "2026-11-24T23:00:00.000Z",
       "type": "standard",
       "learningStep": 0,
       "intraDayDue": null,
@@ -5961,7 +5962,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-11-23T23:00:00.000Z",
+      "nextReview": "2026-11-24T23:00:00.000Z",
       "type": "standard",
       "learningStep": 0,
       "intraDayDue": null
@@ -6003,10 +6004,10 @@
       "exampleSentence": "밤을 꼬박 새웠다",
       "clozeSentence": "",
       "clozeAnswer": "",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-11-23T23:00:00.000Z",
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-28T23:00:00.000Z",
       "type": "standard",
       "learningStep": 0,
       "intraDayDue": null
@@ -6050,13 +6051,13 @@
       "front": "Fryzura",
       "back": "머리 모양",
       "exampleSentence": "",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.3,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-23T23:00:00.000Z"
+      "nextReview": "2026-11-24T23:00:00.000Z"
     },
     {
       "id": 1793820429837.8816,
@@ -9013,10 +9014,10 @@
       "practicedMistakes": []
     },
     "2026-11-24": {
-      "again": 10,
+      "again": 13,
       "hard": 1,
       "good": 1,
-      "easy": 26,
+      "easy": 28,
       "completedAll": false,
       "newCardsDone": 0,
       "newGrammarDone": 0,
@@ -9157,6 +9158,48 @@
         "learningStep": 0,
         "intraDayDue": null,
         "exampleSentence": ""
+      },
+      {
+        "id": 1790971887089.701,
+        "front": "To examine / rozejrzeć się",
+        "back": "살펴보다",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-11-23T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null,
+        "exampleSentence": ""
+      },
+      {
+        "id": 1792925187861.1267,
+        "front": "Za każdym razem",
+        "back": "번번이",
+        "exampleSentence": "",
+        "clozeSentence": "",
+        "clozeAnswer": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-11-23T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null
+      },
+      {
+        "id": 1793820328163.9192,
+        "type": "standard",
+        "front": "Fryzura",
+        "back": "머리 모양",
+        "exampleSentence": "",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-23T23:00:00.000Z"
       }
     ],
     "hard": [
@@ -9545,6 +9588,34 @@
         "learningStep": 2,
         "intraDayDue": null,
         "exampleSentence": ""
+      },
+      {
+        "id": 1790971276350.665,
+        "front": "Zwierzę domowe",
+        "back": "애완동물",
+        "rep": 2,
+        "interval": 8,
+        "ef": 1.5000000000000002,
+        "nextReview": "2026-11-23T23:00:00.000Z",
+        "exampleSentence": "",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null
+      },
+      {
+        "id": 1792925525160.6768,
+        "front": "Od początku do konća",
+        "back": "꼬박",
+        "exampleSentence": "밤을 꼬박 새웠다",
+        "clozeSentence": "",
+        "clozeAnswer": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-11-23T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null
       }
     ]
   }
