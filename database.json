@@ -6069,13 +6069,13 @@
       "note": "",
       "front": "Wyglądasz dużo młodziej po zmianie fryzury",
       "back": "머리 모양을",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
       "learningStep": 2,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-23T23:00:00.000Z"
+      "nextReview": "2026-11-28T23:00:00.000Z"
     },
     {
       "id": 1793827807610.5718,
@@ -6105,13 +6105,13 @@
       "note": "",
       "front": "Ta kawiarnia jest popularna przez swoją szczególną atmosferę",
       "back": "독특한",
-      "rep": 2,
-      "interval": 8,
-      "ef": 2.6,
+      "rep": 3,
+      "interval": 25,
+      "ef": 2.7,
       "learningStep": 2,
       "intraDayDue": null,
-      "masteredAt": null,
-      "nextReview": "2026-11-23T23:00:00.000Z"
+      "masteredAt": "2026-11-24",
+      "nextReview": "2026-12-18T23:00:00.000Z"
     },
     {
       "id": 1793828430176.6812,
@@ -6193,7 +6193,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-23T23:00:00.000Z"
+      "nextReview": "2026-11-24T23:00:00.000Z"
     },
     {
       "id": 1794765640030.1462,
@@ -6221,7 +6221,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-23T23:00:00.000Z"
+      "nextReview": "2026-11-24T23:00:00.000Z"
     },
     {
       "id": 1794766022549.213,
@@ -6235,7 +6235,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-23T23:00:00.000Z"
+      "nextReview": "2026-11-24T23:00:00.000Z"
     },
     {
       "id": 1794766140595.6345,
@@ -6311,7 +6311,7 @@
       "interval": 0,
       "ef": 2.5,
       "learningStep": 1,
-      "intraDayDue": 1795466775175,
+      "intraDayDue": 1795554155469,
       "masteredAt": null,
       "nextReview": "2026-11-19T23:00:00.000Z"
     },
@@ -6339,13 +6339,13 @@
       "note": "",
       "front": "Otworzyłem oczy dopiero gdy wybiła ósma rano",
       "back": "눈을 떴어요",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
       "learningStep": 2,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-23T23:00:00.000Z"
+      "nextReview": "2026-11-28T23:00:00.000Z"
     },
     {
       "id": 1795211001960.2524,
@@ -6391,7 +6391,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-23T23:00:00.000Z"
+      "nextReview": "2026-11-24T23:00:00.000Z"
     },
     {
       "id": 1795211294312.9058,
@@ -6405,7 +6405,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-23T23:00:00.000Z"
+      "nextReview": "2026-11-24T23:00:00.000Z"
     },
     {
       "id": 1795211331681.9143,
@@ -9014,10 +9014,10 @@
       "practicedMistakes": []
     },
     "2026-11-24": {
-      "again": 13,
+      "again": 19,
       "hard": 1,
       "good": 1,
-      "easy": 28,
+      "easy": 31,
       "completedAll": false,
       "newCardsDone": 0,
       "newGrammarDone": 0,
@@ -9200,6 +9200,94 @@
         "intraDayDue": null,
         "masteredAt": null,
         "nextReview": "2026-11-23T23:00:00.000Z"
+      },
+      {
+        "id": 1794765516081.796,
+        "type": "standard",
+        "front": "To wrap up",
+        "back": "마무리하다",
+        "exampleSentence": "보고시를 마무리하느라고 야근했어요",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-23T23:00:00.000Z"
+      },
+      {
+        "id": 1794765856474.5518,
+        "type": "standard",
+        "front": "Przedwczoraj",
+        "back": "그저께",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-23T23:00:00.000Z"
+      },
+      {
+        "id": 1794766022549.213,
+        "type": "standard",
+        "front": "To clean up",
+        "back": "치우다",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-23T23:00:00.000Z"
+      },
+      {
+        "id": 1795211167978.701,
+        "type": "standard",
+        "front": "Koledzy z pracy",
+        "back": "동료들",
+        "exampleSentence": "회사에 도착했을 때 사무실 문은 이미 닫혀 있었고, 동료들은 모두 회의실에 앉아 있었습니다.",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-23T23:00:00.000Z"
+      },
+      {
+        "id": 1795211294312.9058,
+        "type": "standard",
+        "front": "biegac tam i z powrotem",
+        "back": "뛰어다니다",
+        "exampleSentence": "설상가상으로 비까지 갑자기 내리는 바람에 우산도 없이 빗속을 뛰어다녀야 했습니다.",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-23T23:00:00.000Z"
+      },
+      {
+        "id": 1795210355374.7954,
+        "type": "cloze",
+        "parentId": "cloze_1795210355374_vdlxs",
+        "clozeIndex": 0,
+        "rawSentence": "어제 아침에 민수 씨는 정말 {{정신이 없었어요|mieć urwanie głowy::정신이 없다}}.",
+        "fullTranslation": "wczoraj Minsu mial urwanie glowy",
+        "note": "",
+        "front": "wczoraj Minsu mial urwanie glowy",
+        "back": "정신이 없었어요",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 1,
+        "intraDayDue": 1795466775175,
+        "masteredAt": null,
+        "nextReview": "2026-11-19T23:00:00.000Z"
       }
     ],
     "hard": [
@@ -9616,6 +9704,60 @@
         "type": "standard",
         "learningStep": 0,
         "intraDayDue": null
+      },
+      {
+        "id": 1793820429837.8816,
+        "type": "cloze",
+        "parentId": "cloze_1793820429836_jyzq6",
+        "clozeIndex": 0,
+        "rawSentence": "{{머리 모양을|fryzura::머리 모양을}} 바꾸니까 훨씬 어려 보이네요",
+        "fullTranslation": "Wyglądasz dużo młodziej po zmianie fryzury",
+        "note": "",
+        "front": "Wyglądasz dużo młodziej po zmianie fryzury",
+        "back": "머리 모양을",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 2,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-23T23:00:00.000Z"
+      },
+      {
+        "id": 1793828168547.8372,
+        "type": "cloze",
+        "parentId": "cloze_1793828168545_4lc5s",
+        "clozeIndex": 0,
+        "rawSentence": "그 가게는 {{독특한|szczególny::독특한}} 분위기 때문에 인기가 많아요",
+        "fullTranslation": "Ta kawiarnia jest popularna przez swoją szczególną atmosferę",
+        "note": "",
+        "front": "Ta kawiarnia jest popularna przez swoją szczególną atmosferę",
+        "back": "독특한",
+        "rep": 2,
+        "interval": 8,
+        "ef": 2.6,
+        "learningStep": 2,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-23T23:00:00.000Z"
+      },
+      {
+        "id": 1795210949675.6553,
+        "type": "cloze",
+        "parentId": "cloze_1795210949675_k3z66",
+        "clozeIndex": 0,
+        "rawSentence": "아침 여덟 시가 되어서야 {{눈을 떴어요|Otworzyć oczy::눈을 뜨다}}.",
+        "fullTranslation": "Otworzyłem oczy dopiero gdy wybiła ósma rano",
+        "note": "",
+        "front": "Otworzyłem oczy dopiero gdy wybiła ósma rano",
+        "back": "눈을 떴어요",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 2,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-23T23:00:00.000Z"
       }
     ]
   }
