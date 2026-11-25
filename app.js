@@ -326,6 +326,7 @@ let appState = {
     words: [],
     flashcards: [],
     grammarFlashcards: [],
+    grammarProductionCards: [],
     library: [],
     grammarTree: [],
     sessionStats: {
@@ -349,8 +350,9 @@ let pendingInboxWordId = null;
 let currentDeckType = 'vocab'; // 'vocab' | 'grammar'
 let isIntraDayForcedSession = false;
 
-// Aktywny poziom gramatyki ('beginner' | 'intermediate')
+// Aktywny poziom gramatyki ('beginner' | 'intermediate' | 'production')
 let activeGrammarLevel = 'beginner';
+let currentProductionCardId = null;
 let activeGrammarCatIndex = null;
 let activeGrammarItemIndex = null;
 
@@ -422,6 +424,7 @@ function ensureDataStructures() {
     if (!Array.isArray(appState.words)) appState.words = [];
     if (!Array.isArray(appState.flashcards)) appState.flashcards = [];
     if (!Array.isArray(appState.grammarFlashcards)) appState.grammarFlashcards = [];
+    if (!Array.isArray(appState.grammarProductionCards)) appState.grammarProductionCards = [];
     if (!Array.isArray(appState.library)) appState.library = [];
     if (!Array.isArray(appState.grammarTree)) appState.grammarTree = [];
     if (!appState.history || typeof appState.history !== 'object') appState.history = {};
@@ -709,12 +712,16 @@ function setupNavigation() {
 
     const btnBeg = document.getElementById('tabGrammarBeginner');
     const btnInt = document.getElementById('tabGrammarIntermediate');
+    const btnProd = document.getElementById('tabGrammarProduction');
 
     if (btnBeg) {
         btnBeg.addEventListener('click', () => switchGrammarLevel('beginner'));
     }
     if (btnInt) {
         btnInt.addEventListener('click', () => switchGrammarLevel('intermediate'));
+    }
+    if (btnProd) {
+        btnProd.addEventListener('click', () => switchGrammarLevel('production'));
     }
 
     const btnMarkRead = document.getElementById('btnMarkStoryRead');
@@ -735,6 +742,7 @@ function buildSafeStateForCloud() {
         words: appState.words || [],
         flashcards: appState.flashcards || [],
         grammarFlashcards: appState.grammarFlashcards || [],
+        grammarProductionCards: appState.grammarProductionCards || [],
         library: appState.library || [],
         grammarTree: appState.grammarTree || [],
         history: appState.history || {},
@@ -1797,16 +1805,34 @@ function isDue(c) {
 }
 
 window.switchGrammarLevel = function(level) {
-    activeGrammarLevel = level === 'intermediate' ? 'intermediate' : 'beginner';
+    if (level === 'production') {
+        activeGrammarLevel = 'production';
+    } else if (level === 'intermediate') {
+        activeGrammarLevel = 'intermediate';
+    } else {
+        activeGrammarLevel = 'beginner';
+    }
 
     const btnBeg = document.getElementById('tabGrammarBeginner');
     const btnInt = document.getElementById('tabGrammarIntermediate');
+    const btnProd = document.getElementById('tabGrammarProduction');
+    const kgiuCont = document.getElementById('grammar-kgiu-container');
+    const prodCont = document.getElementById('grammar-production-container');
 
     if (btnBeg) btnBeg.classList.toggle('active', activeGrammarLevel === 'beginner');
     if (btnInt) btnInt.classList.toggle('active', activeGrammarLevel === 'intermediate');
+    if (btnProd) btnProd.classList.toggle('active', activeGrammarLevel === 'production');
 
-    renderGrammarTab();
-    populateCustomGrammarCategorySelect();
+    if (activeGrammarLevel === 'production') {
+        if (kgiuCont) kgiuCont.classList.add('hidden');
+        if (prodCont) prodCont.classList.remove('hidden');
+        renderProductionTab();
+    } else {
+        if (kgiuCont) kgiuCont.classList.remove('hidden');
+        if (prodCont) prodCont.classList.add('hidden');
+        renderGrammarTab();
+        populateCustomGrammarCategorySelect();
+    }
 };
 
 function updateGrammarLevelCounters() {
@@ -1815,6 +1841,7 @@ function updateGrammarLevelCounters() {
 
     const countBegEl = document.getElementById('countBeginner');
     const countIntEl = document.getElementById('countIntermediate');
+    const countProdEl = document.getElementById('countProduction');
 
     if (countBegEl) {
         countBegEl.textContent = `${gStats.beginnerMastered}/${gStats.beginnerTotal}`;
@@ -1822,7 +1849,133 @@ function updateGrammarLevelCounters() {
     if (countIntEl) {
         countIntEl.textContent = `${gStats.intermediateMastered}/${gStats.intermediateTotal}`;
     }
+    if (countProdEl) {
+        countProdEl.textContent = (appState.grammarProductionCards || []).length;
+    }
 }
+
+// ==========================================
+// 9B. PRODUKCJA ZDAŃ (LOSOWANIE PAR GRAMATYCZNYCH)
+// ==========================================
+function renderProductionTab() {
+    const listEl = document.getElementById('prod-cards-list');
+    const totalEl = document.getElementById('prod-total-count');
+    const cards = Array.isArray(appState.grammarProductionCards) ? appState.grammarProductionCards : [];
+
+    updateGrammarLevelCounters();
+    if (totalEl) totalEl.textContent = cards.length;
+    if (!listEl) return;
+
+    listEl.innerHTML = "";
+
+    if (cards.length === 0) {
+        listEl.innerHTML = `<p class="hint text-center mt-2">Brak fiszek. Dodaj pierwszą parę lub konstrukcję powyżej!</p>`;
+        return;
+    }
+
+    cards.forEach(card => {
+        const item = document.createElement('div');
+        item.className = 'deck-card-item';
+        item.innerHTML = `
+            <div class="deck-card-main">
+                <div class="deck-card-ko">${escapeHtml(card.prompt)}</div>
+                ${card.note ? `<div class="deck-card-pl">${escapeHtml(card.note)}</div>` : ''}
+            </div>
+            <div class="deck-card-actions">
+                <button type="button" class="btn-icon danger" title="Usuń fiszkę" onclick="deleteProductionCard('${card.id}')">🗑️</button>
+            </div>
+        `;
+        listEl.appendChild(item);
+    });
+}
+
+window.addProductionCard = function() {
+    const promptInput = document.getElementById('prod-new-prompt');
+    const noteInput = document.getElementById('prod-new-note');
+    if (!promptInput) return;
+
+    const promptVal = promptInput.value.trim();
+    const noteVal = noteInput ? noteInput.value.trim() : "";
+
+    if (!promptVal) {
+        return alert("Wpisz parę lub konstrukcję gramatyczną po koreańsku!");
+    }
+
+    if (!Array.isArray(appState.grammarProductionCards)) {
+        appState.grammarProductionCards = [];
+    }
+
+    appState.grammarProductionCards.unshift({
+        id: Date.now() + Math.random(),
+        prompt: promptVal,
+        note: noteVal
+    });
+
+    promptInput.value = "";
+    if (noteInput) noteInput.value = "";
+
+    saveState();
+    renderProductionTab();
+};
+
+window.deleteProductionCard = function(id) {
+    if (!confirm("Usunąć tę fiszkę z bazy produkcji zdań?")) return;
+
+    appState.grammarProductionCards = (appState.grammarProductionCards || []).filter(c => c.id != id);
+
+    if (currentProductionCardId == id) {
+        currentProductionCardId = null;
+        const promptEl = document.getElementById('prod-current-prompt');
+        const noteEl = document.getElementById('prod-current-note');
+        if (promptEl) promptEl.textContent = "Kliknij „Losuj”, aby zacząć";
+        if (noteEl) {
+            noteEl.textContent = "";
+            noteEl.classList.add('hidden');
+        }
+    }
+
+    saveState();
+    renderProductionTab();
+};
+
+window.drawProductionCard = function() {
+    const cards = Array.isArray(appState.grammarProductionCards) ? appState.grammarProductionCards : [];
+    if (cards.length === 0) {
+        return alert("Dodaj najpierw przynajmniej jedną fiszkę do bazy poniżej!");
+    }
+
+    const sentenceInput = document.getElementById('prod-sentence-input');
+    if (sentenceInput && sentenceInput.value.trim().length > 0) {
+        if ('vibrate' in navigator) navigator.vibrate(50);
+    }
+
+    let pool = cards;
+    if (cards.length > 1 && currentProductionCardId !== null) {
+        pool = cards.filter(c => c.id != currentProductionCardId);
+    }
+
+    const picked = pool[Math.floor(Math.random() * pool.length)];
+    currentProductionCardId = picked.id;
+
+    const promptEl = document.getElementById('prod-current-prompt');
+    const noteEl = document.getElementById('prod-current-note');
+
+    if (promptEl) promptEl.textContent = picked.prompt;
+    if (noteEl) {
+        if (picked.note && picked.note.trim() !== "") {
+            noteEl.textContent = picked.note;
+            noteEl.classList.remove('hidden');
+        } else {
+            noteEl.textContent = "";
+            noteEl.classList.add('hidden');
+        }
+    }
+
+    if (sentenceInput) {
+        sentenceInput.value = "";
+        sentenceInput.focus();
+    }
+};
 
 window.updateGrammarWidget = function() {
     if (!appState.grammarFlashcards) return;
