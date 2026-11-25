@@ -418,13 +418,6 @@ function getActiveClozeData(card) {
     };
 }
 
-/**
- * Funkcja migracyjna zapewniająca integralność struktur danych:
- * - Przypisuje level = 'intermediate' dotychczasowym kategoriom gramatycznym (as-is)
- * - Wstawia brakujące działy BEGINNER_GRAMMAR_DATA na początek appState.grammarTree
- * - Inicjalizuje obiekt appState.stats
- * - Uzupełnia pola Cloze, Intra-day oraz masteredAt dla fiszek
- */
 function ensureDataStructures() {
     if (!Array.isArray(appState.words)) appState.words = [];
     if (!Array.isArray(appState.flashcards)) appState.flashcards = [];
@@ -461,7 +454,6 @@ function ensureDataStructures() {
         }
     });
 
-    // Sprawdzenie brakujących kategorii z BEGINNER_GRAMMAR_DATA i wstawienie na początek
     const missingBeginnerCategories = [];
     BEGINNER_GRAMMAR_DATA.forEach(begCat => {
         const exists = appState.grammarTree.some(
@@ -487,7 +479,6 @@ function ensureDataStructures() {
                 card.id = Date.now() + Math.random();
             }
 
-            // Konwersja starszych kart gramatycznych z luką ___ na składnię {{odpowiedź|podpowiedź}}
             if ((defaultIsGrammar || card.clozeSentence) && !card.rawSentence) {
                 card.type = 'cloze';
                 const ans = (card.clozeAnswer || card.back || "").trim();
@@ -552,7 +543,6 @@ function ensureDataStructures() {
                 card.nextReview = new Date().toISOString();
             }
 
-            // Jeśli karta przekroczyła już próg opanowania w przeszłości, a nie ma pola masteredAt
             if (card.interval > MASTERED_INTERVAL_THRESHOLD && !card.masteredAt) {
                 card.masteredAt = todayIsoDate;
             }
@@ -600,10 +590,8 @@ function loadState() {
 
     if (!appState.apiKey) appState.apiKey = DEFAULT_API_KEY;
 
-    // KRYTYCZNE: Wywołanie migracji zaraz po wczytaniu stanu z localStorage
     ensureDataStructures();
 
-    // Sprawdzenie, czy w bazie są już kategorie Intermediate; jeśli nie, dociągnij z grammar.json
     const hasIntermediate = appState.grammarTree.some(cat => cat.level === 'intermediate');
     if (!hasIntermediate) {
         fetch('./grammar.json')
@@ -628,7 +616,6 @@ function loadState() {
 
     const today = getLocalToday();
 
-    // Data Healing dla statystyk sesji i historii
     if (!appState.sessionStats || appState.sessionStats.date !== today) {
         appState.sessionStats = {
             date: today,
@@ -720,7 +707,6 @@ function setupNavigation() {
         });
     });
 
-    // Podpięcie przełącznika poziomów gramatyki (Beginner / Intermediate)
     const btnBeg = document.getElementById('tabGrammarBeginner');
     const btnInt = document.getElementById('tabGrammarIntermediate');
 
@@ -731,7 +717,6 @@ function setupNavigation() {
         btnInt.addEventListener('click', () => switchGrammarLevel('intermediate'));
     }
 
-    // Podpięcie przycisku oznaczania historii jako przeczytanej
     const btnMarkRead = document.getElementById('btnMarkStoryRead');
     if (btnMarkRead) {
         btnMarkRead.addEventListener('click', markStoryAsRead);
@@ -799,7 +784,6 @@ async function silentSyncToGitHub() {
             body: bodyStr
         };
 
-        // KRYTYCZNE ZABEZPIECZENIE 64 KB: keepalive tylko gdy payload < 60000 znaków
         if (bodyStr.length < 60000) {
             fetchOptions.keepalive = true;
         }
@@ -923,7 +907,6 @@ async function syncFromGitHub() {
                 ghRepo: currentGhRepo
             };
 
-            // KRYTYCZNE: Migracja natychmiast po pobraniu z GitHuba przed zapisem do localStorage
             ensureDataStructures();
             saveState();
 
@@ -1253,7 +1236,6 @@ function shuffleArrayFisherYates(array) {
     return arr;
 }
 
-// Reset przycisku "✅ Oznacz historię jako przeczytaną" przy wczytaniu lub wygenerowaniu nowego tekstu
 function resetMarkStoryReadButton() {
     const btn = document.getElementById('btnMarkStoryRead');
     if (btn) {
@@ -1262,7 +1244,6 @@ function resetMarkStoryReadButton() {
     }
 }
 
-// Funkcja oznaczająca historię jako przeczytaną i doliczająca wolumen słów KR do Kapitału Wiedzy
 window.markStoryAsRead = function() {
     const btn = document.getElementById('btnMarkStoryRead');
     if (btn && btn.disabled) return;
@@ -1717,7 +1698,6 @@ window.openClozeModalFromInbox = function(id) {
     });
 };
 
-// Biblioteka zapisanych tekstów w Czytelni
 function toggleLibrary() {
     const libView = document.getElementById('library-view');
     const setupView = document.getElementById('reader-setup');
@@ -1864,7 +1844,6 @@ window.updateGrammarWidget = function() {
     updateGrammarLevelCounters();
 };
 
-// Szybkie oznaczenie całego działu jako opanowany (status = 2)
 window.markGrammarUnitAsMastered = function(event, catIndex) {
     if (event) event.stopPropagation();
     const cat = appState.grammarTree[catIndex];
@@ -1944,7 +1923,6 @@ function renderGrammarTab() {
     });
 }
 
-// Obsługa Modala „Dodaj własną gramatykę” (jeśli występuje w HTML)
 window.populateCustomGrammarCategorySelect = function() {
     const selectEl =
         document.getElementById('custom-grammar-category') ||
@@ -2006,7 +1984,6 @@ window.saveCustomGrammarItem = function() {
         return alert("Podaj nazwę zagadnienia gramatycznego!");
     }
 
-    // Globalna walidacja duplikatów w całym appState.grammarTree (Beginner + Intermediate)
     const isDuplicate = appState.grammarTree.some(cat =>
         Array.isArray(cat.items) &&
         cat.items.some(item => item.title.trim().toLowerCase() === title.toLowerCase())
@@ -2953,7 +2930,10 @@ function nextStudyCard() {
             if (btnGiveUp) btnGiveUp.classList.remove('hidden');
 
             const btnNext = document.getElementById('btnNextCardStandard');
-            if (btnNext) btnNext.classList.add('hidden');
+            if (btnNext) {
+                btnNext.className = "btn btn-primary w-100 mt-2 hidden";
+                btnNext.classList.add('hidden');
+            }
 
             setTimeout(() => {
                 if (hmInput) hmInput.focus();
@@ -3128,7 +3108,7 @@ function enterClozeRevealedState(card, isFailed) {
 }
 
 // ==========================================
-// 13. HARD MODE DLA KART KLASYCZNYCH
+// 13. HARD MODE DLA KART KLASYCZNYCH (BEZ AUTO-PRZEJŚCIA PO POPRAWNEJ ODPOWIEDZI)
 // ==========================================
 function checkHardMode() {
     const inputEl = document.getElementById('hardModeInput');
@@ -3144,6 +3124,8 @@ function checkHardMode() {
         inputEl.classList.remove('error');
         inputEl.classList.add('success-input');
         inputEl.disabled = true;
+
+        // Odsłoń rewers wraz ze zdaniem przykładowym do spokojnego przeczytania
         document.getElementById('study-back').classList.remove('hidden');
 
         let rating = 5;
@@ -3157,11 +3139,17 @@ function checkHardMode() {
             rating = 3;
         }
 
+        // Zapisz wynik w SM-2 w tle bez zamykania widoku karty
         processAnswer(rating, false, true);
 
-        setTimeout(() => {
-            advanceStudyView();
-        }, 500);
+        // Ukryj przyciski akcji i pokaż przycisk "Dalej ➔" czekający na interakcję użytkownika
+        document.getElementById('btnCheckHardMode').classList.add('hidden');
+        document.getElementById('btnGiveUp').classList.add('hidden');
+
+        const btnNext = document.getElementById('btnNextCardStandard');
+        btnNext.className = "btn btn-success w-100 mt-2";
+        btnNext.classList.remove('hidden');
+        setTimeout(() => btnNext.focus(), 100);
     } else {
         if (currentAttempts < 4) {
             inputEl.classList.remove('error');
@@ -3204,6 +3192,7 @@ function handleHardModeFailure() {
     document.getElementById('btnGiveUp').classList.add('hidden');
 
     const btnNext = document.getElementById('btnNextCardStandard');
+    btnNext.className = "btn btn-primary w-100 mt-2";
     btnNext.classList.remove('hidden');
     setTimeout(() => btnNext.focus(), 100);
 }
@@ -3272,7 +3261,6 @@ function processAnswer(quality, advanceView = true, suppressVibrate = false) {
 
     applySM2(currentCard, quality);
 
-    // Śledzenie daty opanowania fiszki (masteredAt) po przekroczeniu progu
     if (currentCard.interval > MASTERED_INTERVAL_THRESHOLD && !currentCard.masteredAt) {
         currentCard.masteredAt = new Date().toISOString().slice(0, 10);
     }
@@ -3340,6 +3328,7 @@ function applySM2(card, quality) {
                 card.rep = 0;
                 card.interval = 1;
                 const next = new Date();
+                next.setDate(next.getDate() + 1);
                 next.setHours(0, 0, 0, 0);
                 card.nextReview = next.toISOString();
                 return;
@@ -3356,8 +3345,14 @@ function applySM2(card, quality) {
                 card.nextReview = next.toISOString();
                 return;
             } else {
-                card.learningStep = 1;
-                card.intraDayDue = Date.now() + (30 * 60 * 1000);
+                card.learningStep = 0;
+                card.intraDayDue = null;
+                card.rep = 0;
+                card.interval = 1;
+                const next = new Date();
+                next.setDate(next.getDate() + 1);
+                next.setHours(0, 0, 0, 0);
+                card.nextReview = next.toISOString();
                 return;
             }
         }
@@ -3467,7 +3462,7 @@ function closeModal(id) {
 // ==========================================
 function getKnowledgeMetrics() {
     const cards = Array.isArray(appState.flashcards) ? appState.flashcards : [];
-    const currentMonthPrefix = new Date().toISOString().slice(0, 7); // np. "2026-10"
+    const currentMonthPrefix = new Date().toISOString().slice(0, 7);
 
     let masteredWordsTotal = 0;
     let masteredThisMonth = 0;
@@ -3488,7 +3483,6 @@ function getKnowledgeMetrics() {
         }
     });
 
-    // Statystyki Gramatyki (Beginner vs Intermediate)
     let beginnerMastered = 0;
     let beginnerTotal = 0;
     let intermediateMastered = 0;
@@ -3513,7 +3507,6 @@ function getKnowledgeMetrics() {
     const masteredGrammarTotal = beginnerMastered + intermediateMastered;
     const totalGrammarItems = beginnerTotal + intermediateTotal;
 
-    // Skuteczność z ostatnich 7 dni (weeklyRetentionRate)
     const todayObj = new Date(getLocalToday());
     let sumGoodEasy = 0;
     let sumAllReviews = 0;
@@ -3593,7 +3586,6 @@ function updateActivityStats() {
         }
     }
 
-    // 1. Aktualizacja Kompaktowego Paska Streaka (+ fallback dla starszych ID)
     const setElText = (id, val) => {
         const el = document.getElementById(id);
         if (el) el.textContent = val;
@@ -3607,7 +3599,6 @@ function updateActivityStats() {
     setElText('streak-max', maxStreak);
     setElText('streak-total', totalDays);
 
-    // 2. Aktualizacja Dashboardu Kapitału Wiedzy
     const metrics = getKnowledgeMetrics();
     const g = metrics.grammarStats;
 
@@ -3634,7 +3625,6 @@ function updateActivityStats() {
     setElText('statStoriesRead', storiesRead);
     setElText('statWordsReadVolume', wordsVolume.toLocaleString('pl-PL'));
 
-    // 3. Pasek Dojrzałości Pamięci (Memory Maturity Bar)
     const totalVocab = metrics.totalCards;
     const pctMastered = totalVocab > 0 ? (metrics.masteredWordsTotal / totalVocab) * 100 : 0;
     const pctLearning = totalVocab > 0 ? (metrics.learningWordsTotal / totalVocab) * 100 : 0;
@@ -3654,7 +3644,6 @@ function updateActivityStats() {
     setElText('legLearning', metrics.learningWordsTotal);
     setElText('legNew', metrics.newOrHardWordsTotal);
 
-    // 4. Skuteczność tygodniowa nad wykresem
     setElText('statWeeklyRetention', `${metrics.weeklyRetentionRate}%`);
 
     render7DayChart();
@@ -3919,7 +3908,6 @@ window.addEventListener('DOMContentLoaded', () => {
     setupNavigation();
     loadState();
 
-    // Obsługa klawisza Enter w Hard Mode dla kart klasycznych
     const hmInput = document.getElementById('hardModeInput');
     if (hmInput) {
         hmInput.addEventListener('keydown', (e) => {
@@ -3930,7 +3918,6 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Obsługa klawisza Enter w polu wpisywania Cloze Deletion
     const clInput = document.getElementById('clozeInput');
     if (clInput) {
         clInput.addEventListener('keydown', (e) => {
