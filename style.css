@@ -869,7 +869,7 @@ input:focus, textarea:focus { border-color: var(--primary); }
 /* === GRAMATYKA: Podzakładki Beginner / Intermediate === */
 .grammar-level-tabs {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   background: #f1f5f9;
   padding: 4px;
   border-radius: 12px;
@@ -879,17 +879,46 @@ input:focus, textarea:focus { border-color: var(--primary); }
 .level-tab-btn {
   background: transparent;
   border: none;
-  padding: 10px 8px;
+  padding: 10px 4px;
   border-radius: 9px;
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #64748b;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
   transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+/* === GRAMATYKA: Produkcja Zdań === */
+.prod-prompt-card {
+  background: #F8FAFC;
+  border: 2px dashed var(--primary);
+  border-radius: 14px;
+  padding: 24px 16px;
+  text-align: center;
+  margin-bottom: 14px;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.prod-prompt-text {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary);
+  word-break: keep-all;
+  line-height: 1.4;
+}
+.prod-prompt-note {
+  font-size: 14px;
+  color: var(--text-light);
+  font-style: italic;
 }
 .level-tab-btn.active {
   background: #ffffff;
