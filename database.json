@@ -5964,7 +5964,7 @@
       "rep": 0,
       "interval": 1,
       "ef": 1.3,
-      "nextReview": "2026-11-23T23:00:00.000Z",
+      "nextReview": "2026-11-25T23:00:00.000Z",
       "type": "standard",
       "learningStep": 0,
       "intraDayDue": null
@@ -6006,10 +6006,10 @@
       "exampleSentence": "밤을 꼬박 새웠다",
       "clozeSentence": "",
       "clozeAnswer": "",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
-      "nextReview": "2026-11-23T23:00:00.000Z",
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
+      "nextReview": "2026-11-29T23:00:00.000Z",
       "type": "standard",
       "learningStep": 0,
       "intraDayDue": null
@@ -6053,13 +6053,13 @@
       "front": "Fryzura",
       "back": "머리 모양",
       "exampleSentence": "",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.5000000000000002,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-23T23:00:00.000Z"
+      "nextReview": "2026-12-02T23:00:00.000Z"
     },
     {
       "id": 1793820429837.8816,
@@ -6071,13 +6071,13 @@
       "note": "",
       "front": "Wyglądasz dużo młodziej po zmianie fryzury",
       "back": "머리 모양을",
-      "rep": 0,
-      "interval": 1,
-      "ef": 1.3,
+      "rep": 1,
+      "interval": 5,
+      "ef": 1.4000000000000001,
       "learningStep": 2,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-23T23:00:00.000Z"
+      "nextReview": "2026-11-29T23:00:00.000Z"
     },
     {
       "id": 1793827807610.5718,
@@ -6089,13 +6089,13 @@
       "note": "",
       "front": "Nauczycielka lubi pokornych uczniów",
       "back": "겸손한",
-      "rep": 2,
-      "interval": 8,
+      "rep": 3,
+      "interval": 21,
       "ef": 2.6,
       "learningStep": 2,
       "intraDayDue": null,
-      "masteredAt": null,
-      "nextReview": "2026-11-24T23:00:00.000Z"
+      "masteredAt": "2026-11-25",
+      "nextReview": "2026-12-15T23:00:00.000Z"
     },
     {
       "id": 1793828168547.8372,
@@ -9026,10 +9026,10 @@
       "practicedMistakes": []
     },
     "2026-11-25": {
-      "again": 14,
+      "again": 15,
       "hard": 1,
-      "good": 1,
-      "easy": 31,
+      "good": 2,
+      "easy": 34,
       "completedAll": false,
       "newCardsDone": 0,
       "newGrammarDone": 0,
@@ -9223,6 +9223,21 @@
         "learningStep": 0,
         "intraDayDue": null,
         "exampleSentence": ""
+      },
+      {
+        "id": 1792925187861.1267,
+        "front": "Za każdym razem",
+        "back": "번번이",
+        "exampleSentence": "",
+        "clozeSentence": "",
+        "clozeAnswer": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-11-23T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null
       }
     ],
     "hard": [
@@ -9254,6 +9269,24 @@
         "learningStep": 2,
         "intraDayDue": null,
         "exampleSentence": ""
+      },
+      {
+        "id": 1793827807610.5718,
+        "type": "cloze",
+        "parentId": "cloze_1793827807608_ytmv5",
+        "clozeIndex": 0,
+        "rawSentence": "선생님은 {{겸손한|pokornych::겸손한}} 사람을 좋아하세요",
+        "fullTranslation": "Nauczycielka lubi pokornych uczniów",
+        "note": "",
+        "front": "Nauczycielka lubi pokornych uczniów",
+        "back": "겸손한",
+        "rep": 2,
+        "interval": 8,
+        "ef": 2.6,
+        "learningStep": 2,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-24T23:00:00.000Z"
       }
     ],
     "easy": [
@@ -9680,6 +9713,53 @@
         "type": "standard",
         "learningStep": 0,
         "intraDayDue": null
+      },
+      {
+        "id": 1792925525160.6768,
+        "front": "Od początku do konća",
+        "back": "꼬박",
+        "exampleSentence": "밤을 꼬박 새웠다",
+        "clozeSentence": "",
+        "clozeAnswer": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "nextReview": "2026-11-23T23:00:00.000Z",
+        "type": "standard",
+        "learningStep": 0,
+        "intraDayDue": null
+      },
+      {
+        "id": 1793820328163.9192,
+        "type": "standard",
+        "front": "Fryzura",
+        "back": "머리 모양",
+        "exampleSentence": "",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-23T23:00:00.000Z"
+      },
+      {
+        "id": 1793820429837.8816,
+        "type": "cloze",
+        "parentId": "cloze_1793820429836_jyzq6",
+        "clozeIndex": 0,
+        "rawSentence": "{{머리 모양을|fryzura::머리 모양을}} 바꾸니까 훨씬 어려 보이네요",
+        "fullTranslation": "Wyglądasz dużo młodziej po zmianie fryzury",
+        "note": "",
+        "front": "Wyglądasz dużo młodziej po zmianie fryzury",
+        "back": "머리 모양을",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 2,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-23T23:00:00.000Z"
       }
     ]
   }
