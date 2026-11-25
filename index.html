@@ -17,7 +17,7 @@
             <header class="section-header">
                 <h2>Aktywność</h2>
             </header>
-            
+
             <!-- 1. Kompaktowy Pasek Streaka (1 wiersz, 3 kolumny) -->
             <div class="streak-compact-bar">
                 <div class="streak-pill">
@@ -97,16 +97,16 @@
                 </div>
             </div>
 
-            <!-- 4. Nagłówek nad istniejącym wykresem tygodniowym -->
-            <div class="weekly-chart-header">
-                <span>Powtórki (7 dni)</span>
-                <span>Skuteczność: <strong id="statWeeklyRetention">0%</strong></span>
-            </div>
-            
+            <!-- 4. Wykres tygodniowy (7 dni) + Skuteczność -->
             <div class="card pb-0">
+                <div class="weekly-chart-header">
+                    <span>Powtórki (7 dni)</span>
+                    <span>Skuteczność: <strong id="statWeeklyRetention">0%</strong></span>
+                </div>
                 <div class="chart-container" id="chart-7days"></div>
             </div>
             
+            <!-- 5. Kalendarz miesięczny -->
             <div class="card mt-3">
                 <div class="flex-between">
                     <button class="btn btn-outline btn-sm" onclick="changeMonth(-1)">❮</button>
@@ -158,7 +158,7 @@
                     <p class="hint">Klikaj nieznane słowa (żółte). Znane fiszki są zielone, a uczone niebieskie. Wybrane struktury będą <b>pogrubione</b>.</p>
                     <div id="reader-content" class="reader-text"></div>
                     <div id="reader-actions" class="mt-4">
-                        <button id="btnMarkStoryRead" class="btn btn-secondary w-100 mb-2" onclick="markStoryAsRead()">✅ Oznacz historię jako przeczytaną</button>
+                        <button id="btnMarkStoryRead" class="btn btn-success w-100 mb-2">✅ Oznacz historię jako przeczytaną</button>
                         <button class="btn btn-primary w-100 mb-2" onclick="sumUpWords()">Wyodrębnij zaznaczone do słownika</button>
                         <button class="btn btn-outline w-100" onclick="closeReader()">Zakończ czytanie</button>
                     </div>
@@ -166,7 +166,7 @@
                 </div>
             </div>
 
-            <!-- PODZAKŁADKA: WYŁAPANE SŁÓWKA (KARTY ROBOCZE BEZ TABELI) -->
+            <!-- PODZAKŁADKA: WYŁAPANE SŁÓWKA -->
             <div id="czytelnia-words-container" class="hidden">
                 <div class="card">
                     <div class="flex-between mb-2">
@@ -181,26 +181,25 @@
 
         <!-- ZAKŁADKA 3: GRAMATYKA -->
         <section id="tab-gramatyka" class="tab-content">
-            <header class="section-header flex-between">
-                <h2 style="margin:0;">Gramatyka (KGIU)</h2>
-                <button class="btn btn-outline btn-sm" onclick="openAddGrammarModal()">+ Dodaj własną</button>
+            <header class="section-header">
+                <h2>Gramatyka (KGIU)</h2>
             </header>
             
             <div class="grammar-widget card mb-3">
                 <h3 style="margin-bottom: 5px;">Trening Gramatyki</h3>
-                <p>Opanowane karty Cloze: <span id="grammar-mastered-count" style="font-weight: bold; color: #FFF;">0 / 0</span></p>
+                <p>Opanowane karty: <span id="grammar-mastered-count" style="font-weight: bold; color: #FFF;">0 / 0</span></p>
                 <div class="progress-bar-bg mb-3">
                     <div id="grammar-progress-bar" style="background: var(--success); width: 0%; height: 100%;"></div>
                 </div>
                 <button class="btn btn-primary w-100" onclick="startSession('grammar')">Ucz się: <span id="grammar-due-count">0</span> kart</button>
             </div>
 
-            <!-- Przełącznik poziomów (Segmented Control: Beginner / Intermediate) -->
+            <!-- Przełącznik poziomów Beginner / Intermediate -->
             <div class="grammar-level-tabs">
-                <button type="button" class="level-tab-btn active" data-level="beginner" id="tabGrammarBeginner" onclick="switchGrammarLevel('beginner')">
+                <button type="button" class="level-tab-btn active" data-level="beginner" id="tabGrammarBeginner">
                     Beginner <span class="level-tab-counter" id="countBeginner">0/112</span>
                 </button>
-                <button type="button" class="level-tab-btn" data-level="intermediate" id="tabGrammarIntermediate" onclick="switchGrammarLevel('intermediate')">
+                <button type="button" class="level-tab-btn" data-level="intermediate" id="tabGrammarIntermediate">
                     Intermediate <span class="level-tab-counter" id="countIntermediate">0/0</span>
                 </button>
             </div>
@@ -264,7 +263,7 @@
                         </div>
                     </div>
 
-                    <!-- KONTENER 2: Moduł CLOZE DELETION (Wymuszone wpisywanie + 4 Próby) -->
+                    <!-- KONTENER 2: Moduł CLOZE DELETION (Ujednolicony układ przycisków z tradycyjnymi) -->
                     <div id="study-cloze-container" class="hidden w-100">
                         <div class="study-card cloze-card">
                             <div id="cloze-sentence-display" class="cloze-sentence"></div>
@@ -274,15 +273,15 @@
                         </div>
 
                         <div id="cloze-input-section" class="mt-3">
+                            <div id="attemptCounter" class="attempt-counter">Próba: 1 / 4</div>
                             <input type="text" id="clozeInput" placeholder="Wpisz brakujący fragment..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-                            <button id="btnCheckCloze" class="btn-primary-full" onclick="checkCloze()">Sprawdź</button>
-                            <div class="flex-between mt-2">
-                                <button id="btnGiveUpCloze" class="btn-text-only" onclick="giveUpCloze()">Poddaję się</button>
-                                <div id="attemptCounter" class="attempt-counter" style="margin:0;">Próba: 1 / 4</div>
+                            <div class="flex-between gap-2 mt-2">
+                                <button id="btnCheckCloze" class="btn btn-primary w-100" onclick="checkCloze()">Sprawdź</button>
+                                <button id="btnGiveUpCloze" class="btn btn-danger w-100" onclick="giveUpCloze()">Poddaję się</button>
                             </div>
                         </div>
 
-                        <button id="btnNextCard" class="btn-primary-full mt-3 hidden" onclick="advanceStudyView()">Dalej ➔</button>
+                        <button id="btnNextCard" class="btn btn-primary w-100 mt-3 hidden" onclick="advanceStudyView()">Dalej ➔</button>
                     </div>
 
                     <!-- Przyciski oceny widoczne tylko po odsłonięciu dla kart standardowych (bez Hard Mode) -->
@@ -305,7 +304,7 @@
                 </div>
             </div>
 
-            <!-- SEKCJA: BAZA FISZEK (Karty mobilne, wyszukiwarka, filtry) -->
+            <!-- BAZA FISZEK (Karty mobilne, wyszukiwarka, filtry) -->
             <div id="deck-management-section">
                 <div class="card">
                     <div class="flex-between mb-3">
@@ -457,32 +456,6 @@
             <div class="flex-between mt-3 gap-2">
                 <button class="btn btn-outline w-100" onclick="closeModal('modal-card-editor')">Anuluj</button>
                 <button class="btn btn-primary w-100" onclick="saveCardFromModal()">💾 Zapisz</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL: DODAJ WŁASNĄ GRAMATYKĘ -->
-    <div id="modal-add-grammar" class="modal hidden">
-        <div class="modal-content">
-            <div class="flex-between mb-3">
-                <h3 style="margin:0;">Dodaj własną gramatykę</h3>
-                <button class="btn btn-outline btn-sm" onclick="closeModal('modal-add-grammar')">✕</button>
-            </div>
-            <label class="field-label">Kategoria (Dział)</label>
-            <select id="add-grammar-category" class="select-input"></select>
-
-            <label class="field-label">Nazwa struktury (np. -기 마련이다)</label>
-            <input type="text" id="add-grammar-title" placeholder="Wpisz strukturę gramatyczną...">
-
-            <label class="field-label">Znaczenie po polsku (opcjonalnie)</label>
-            <input type="text" id="add-grammar-meaning" placeholder="np. jest rzeczą naturalną, że...">
-
-            <label class="field-label">Reguła tworzenia (opcjonalnie)</label>
-            <textarea id="add-grammar-rule" rows="2" placeholder="np. Czasownik / Przymiotnik + -기 마련이다"></textarea>
-
-            <div class="flex-between mt-3 gap-2">
-                <button class="btn btn-outline w-100" onclick="closeModal('modal-add-grammar')">Anuluj</button>
-                <button class="btn btn-primary w-100" onclick="saveCustomGrammar()">💾 Dodaj</button>
             </div>
         </div>
     </div>
