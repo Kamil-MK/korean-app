@@ -194,26 +194,62 @@
                 <button class="btn btn-primary w-100" onclick="startSession('grammar')">Ucz się: <span id="grammar-due-count">0</span> kart</button>
             </div>
 
-            <!-- Przełącznik poziomów Beginner / Intermediate -->
+            <!-- Przełącznik poziomów Beginner / Intermediate / Produkcja -->
             <div class="grammar-level-tabs">
                 <button type="button" class="level-tab-btn active" data-level="beginner" id="tabGrammarBeginner">
                     Beginner <span class="level-tab-counter" id="countBeginner">0/112</span>
                 </button>
                 <button type="button" class="level-tab-btn" data-level="intermediate" id="tabGrammarIntermediate">
-                    Intermediate <span class="level-tab-counter" id="countIntermediate">0/0</span>
+                    Interm. <span class="level-tab-counter" id="countIntermediate">0/0</span>
+                </button>
+                <button type="button" class="level-tab-btn" data-level="production" id="tabGrammarProduction">
+                    ✍️ Produkcja <span class="level-tab-counter" id="countProduction">0</span>
                 </button>
             </div>
 
-            <div class="card mb-3">
-                <h4 style="color: var(--text-dark);">Baza struktur (Filtruj status):</h4>
-                <div class="grammar-filters flex-wrap gap-2">
-                    <label class="filter-label"><input type="checkbox" id="filter-g0" checked onchange="renderGrammarTab()"> <span class="status-dot status-0"></span> Nie umiem</label>
-                    <label class="filter-label"><input type="checkbox" id="filter-g1" checked onchange="renderGrammarTab()"> <span class="status-dot status-1"></span> Średnio</label>
-                    <label class="filter-label"><input type="checkbox" id="filter-g2" checked onchange="renderGrammarTab()"> <span class="status-dot status-2"></span> Dobrze</label>
+            <!-- KONTENER KGIU (Beginner & Intermediate) -->
+            <div id="grammar-kgiu-container">
+                <div class="card mb-3">
+                    <h4 style="color: var(--text-dark);">Baza struktur (Filtruj status):</h4>
+                    <div class="grammar-filters flex-wrap gap-2">
+                        <label class="filter-label"><input type="checkbox" id="filter-g0" checked onchange="renderGrammarTab()"> <span class="status-dot status-0"></span> Nie umiem</label>
+                        <label class="filter-label"><input type="checkbox" id="filter-g1" checked onchange="renderGrammarTab()"> <span class="status-dot status-1"></span> Średnio</label>
+                        <label class="filter-label"><input type="checkbox" id="filter-g2" checked onchange="renderGrammarTab()"> <span class="status-dot status-2"></span> Dobrze</label>
+                    </div>
                 </div>
+
+                <div id="grammar-list-container"></div>
             </div>
 
-            <div id="grammar-list-container"></div>
+            <!-- KONTENER PRODUKCJI ZDAŃ (Nowy rodzaj fiszek) -->
+            <div id="grammar-production-container" class="hidden">
+                <div class="card">
+                    <h3>Trening Produkcji Zdań</h3>
+                    <p class="hint">Wylosuj parę lub konstrukcję gramatyczną i napisz własne zdanie po koreańsku.</p>
+                    
+                    <div id="prod-card-display" class="prod-prompt-card">
+                        <div id="prod-current-prompt" class="prod-prompt-text">Kliknij „Losuj”, aby zacząć</div>
+                        <div id="prod-current-note" class="prod-prompt-note hidden"></div>
+                    </div>
+
+                    <textarea id="prod-sentence-input" rows="3" placeholder="Wpisz własne zdanie po koreańsku z wylosowaną konstrukcją..."></textarea>
+                    <button type="button" id="btnDrawProduction" class="btn btn-primary w-100" onclick="drawProductionCard()">🎲 Losuj konstrukcję</button>
+                </div>
+
+                <div class="card">
+                    <h3>Dodaj fiszkę do produkcji</h3>
+                    <input type="text" id="prod-new-prompt" placeholder="Para / konstrukcja po koreańsku (np. -느라고 / -는 바람에)">
+                    <input type="text" id="prod-new-note" placeholder="Krótka wskazówka / znaczenie (opcjonalnie)">
+                    <button type="button" class="btn btn-success w-100" onclick="addProductionCard()">+ Dodaj do bazy</button>
+                </div>
+
+                <div class="card">
+                    <div class="flex-between mb-3">
+                        <h3 style="margin:0;">Twoja baza (<span id="prod-total-count">0</span>)</h3>
+                    </div>
+                    <div id="prod-cards-list" class="deck-cards-list"></div>
+                </div>
+            </div>
         </section>
 
         <!-- ZAKŁADKA 4: FISZKI -->
