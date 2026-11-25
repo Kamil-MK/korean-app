@@ -6161,13 +6161,13 @@
       "note": "",
       "front": "Alarm nie zadzwonił, więc zaspałem",
       "back": "는 바람에",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.5000000000000002,
       "learningStep": 2,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-24T23:00:00.000Z"
+      "nextReview": "2026-12-02T23:00:00.000Z"
     },
     {
       "id": 1794744499787.404,
@@ -6195,7 +6195,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-23T23:00:00.000Z"
+      "nextReview": "2026-11-25T23:00:00.000Z"
     },
     {
       "id": 1794765640030.1462,
@@ -6223,7 +6223,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-23T23:00:00.000Z"
+      "nextReview": "2026-11-25T23:00:00.000Z"
     },
     {
       "id": 1794766022549.213,
@@ -6237,7 +6237,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-23T23:00:00.000Z"
+      "nextReview": "2026-11-25T23:00:00.000Z"
     },
     {
       "id": 1794766140595.6345,
@@ -6245,13 +6245,13 @@
       "front": "Be hospitalized",
       "back": "입원하다",
       "exampleSentence": "",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.5000000000000002,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-24T23:00:00.000Z"
+      "nextReview": "2026-12-02T23:00:00.000Z"
     },
     {
       "id": 1794766214377.2659,
@@ -6259,13 +6259,13 @@
       "front": "Traffic accident",
       "back": "교통사고",
       "exampleSentence": "",
-      "rep": 1,
-      "interval": 5,
-      "ef": 1.4000000000000001,
+      "rep": 2,
+      "interval": 8,
+      "ef": 1.5000000000000002,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-24T23:00:00.000Z"
+      "nextReview": "2026-12-02T23:00:00.000Z"
     },
     {
       "id": 1794766311043.8022,
@@ -6323,13 +6323,13 @@
       "front": "nastawić",
       "back": "맞추다",
       "exampleSentence": "게다가 알람을 맞추지 않은 채로 잠드는 바람에 아침 여덟 시가 되어서야 눈을 떴습니다.",
-      "rep": 1,
-      "interval": 5,
-      "ef": 2.6,
+      "rep": 0,
+      "interval": 1,
+      "ef": 1.8000000000000003,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-24T23:00:00.000Z"
+      "nextReview": "2026-11-25T23:00:00.000Z"
     },
     {
       "id": 1795210949675.6553,
@@ -9026,10 +9026,10 @@
       "practicedMistakes": []
     },
     "2026-11-25": {
-      "again": 16,
+      "again": 20,
       "hard": 1,
       "good": 2,
-      "easy": 35,
+      "easy": 38,
       "completedAll": false,
       "newCardsDone": 0,
       "newGrammarDone": 0,
@@ -9253,6 +9253,62 @@
         "interval": 8,
         "ef": 2.6,
         "learningStep": 2,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-24T23:00:00.000Z"
+      },
+      {
+        "id": 1794765516081.796,
+        "type": "standard",
+        "front": "To wrap up",
+        "back": "마무리하다",
+        "exampleSentence": "보고시를 마무리하느라고 야근했어요",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-23T23:00:00.000Z"
+      },
+      {
+        "id": 1794765856474.5518,
+        "type": "standard",
+        "front": "Przedwczoraj",
+        "back": "그저께",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-23T23:00:00.000Z"
+      },
+      {
+        "id": 1794766022549.213,
+        "type": "standard",
+        "front": "To clean up",
+        "back": "치우다",
+        "exampleSentence": "",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-23T23:00:00.000Z"
+      },
+      {
+        "id": 1795210450101.945,
+        "type": "standard",
+        "front": "nastawić",
+        "back": "맞추다",
+        "exampleSentence": "게다가 알람을 맞추지 않은 채로 잠드는 바람에 아침 여덟 시가 되어서야 눈을 떴습니다.",
+        "rep": 1,
+        "interval": 5,
+        "ef": 2.6,
+        "learningStep": 0,
         "intraDayDue": null,
         "masteredAt": null,
         "nextReview": "2026-11-24T23:00:00.000Z"
@@ -9796,6 +9852,52 @@
         "intraDayDue": null,
         "masteredAt": null,
         "nextReview": "2026-11-23T23:00:00.000Z"
+      },
+      {
+        "id": 1794744439034.3052,
+        "type": "cloze",
+        "parentId": "cloze_1794744439031_e4djt",
+        "clozeIndex": 0,
+        "rawSentence": "알람이 울리지 않{{는 바람에|więc::는 바람에}} 늦잠을 잤어요",
+        "fullTranslation": "Alarm nie zadzwonił, więc zaspałem",
+        "note": "",
+        "front": "Alarm nie zadzwonił, więc zaspałem",
+        "back": "는 바람에",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "learningStep": 2,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-24T23:00:00.000Z"
+      },
+      {
+        "id": 1794766140595.6345,
+        "type": "standard",
+        "front": "Be hospitalized",
+        "back": "입원하다",
+        "exampleSentence": "",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-24T23:00:00.000Z"
+      },
+      {
+        "id": 1794766214377.2659,
+        "type": "standard",
+        "front": "Traffic accident",
+        "back": "교통사고",
+        "exampleSentence": "",
+        "rep": 1,
+        "interval": 5,
+        "ef": 1.4000000000000001,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-24T23:00:00.000Z"
       }
     ]
   }
