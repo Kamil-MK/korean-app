@@ -6313,7 +6313,7 @@
       "interval": 0,
       "ef": 2.5,
       "learningStep": 1,
-      "intraDayDue": 1795647181092,
+      "intraDayDue": 1795730380670,
       "masteredAt": null,
       "nextReview": "2026-11-19T23:00:00.000Z"
     },
@@ -6377,7 +6377,7 @@
       "interval": 0,
       "ef": 2.5,
       "learningStep": 1,
-      "intraDayDue": 1795647185814,
+      "intraDayDue": 1795730386776,
       "masteredAt": null,
       "nextReview": "2026-11-20T23:00:00.000Z"
     },
@@ -6393,7 +6393,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-25T23:00:00.000Z"
+      "nextReview": "2026-11-26T23:00:00.000Z"
     },
     {
       "id": 1795211294312.9058,
@@ -6407,7 +6407,7 @@
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-25T23:00:00.000Z"
+      "nextReview": "2026-11-26T23:00:00.000Z"
     },
     {
       "id": 1795211331681.9143,
@@ -6437,7 +6437,7 @@
       "interval": 0,
       "ef": 2.5,
       "learningStep": 1,
-      "intraDayDue": 1795647204955,
+      "intraDayDue": 1795730396259,
       "masteredAt": null,
       "nextReview": "2026-11-20T23:00:00.000Z"
     }
@@ -9036,11 +9036,11 @@
       "practicedMistakes": []
     },
     "2026-11-26": {
-      "again": 21,
+      "again": 26,
       "hard": 1,
       "good": 3,
       "easy": 22,
-      "completedAll": false,
+      "completedAll": true,
       "newCardsDone": 0,
       "newGrammarDone": 0,
       "practicedMistakes": []
@@ -9336,6 +9336,88 @@
         "intraDayDue": null,
         "masteredAt": null,
         "nextReview": "2026-11-25T23:00:00.000Z"
+      },
+      {
+        "id": 1795211167978.701,
+        "type": "standard",
+        "front": "Koledzy z pracy",
+        "back": "동료들",
+        "exampleSentence": "회사에 도착했을 때 사무실 문은 이미 닫혀 있었고, 동료들은 모두 회의실에 앉아 있었습니다.",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-25T23:00:00.000Z"
+      },
+      {
+        "id": 1795211294312.9058,
+        "type": "standard",
+        "front": "biegac tam i z powrotem",
+        "back": "뛰어다니다",
+        "exampleSentence": "설상가상으로 비까지 갑자기 내리는 바람에 우산도 없이 빗속을 뛰어다녀야 했습니다.",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.3,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-25T23:00:00.000Z"
+      },
+      {
+        "id": 1795210355374.7954,
+        "type": "cloze",
+        "parentId": "cloze_1795210355374_vdlxs",
+        "clozeIndex": 0,
+        "rawSentence": "어제 아침에 민수 씨는 정말 {{정신이 없었어요|mieć urwanie głowy::정신이 없다}}.",
+        "fullTranslation": "wczoraj Minsu mial urwanie glowy",
+        "note": "",
+        "front": "wczoraj Minsu mial urwanie glowy",
+        "back": "정신이 없었어요",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 1,
+        "intraDayDue": 1795647181092,
+        "masteredAt": null,
+        "nextReview": "2026-11-19T23:00:00.000Z"
+      },
+      {
+        "id": 1795211130385.2087,
+        "type": "cloze",
+        "parentId": "cloze_1795211130385_f8i8z",
+        "clozeIndex": 0,
+        "rawSentence": "{{설상가상으로|Na domiar zlego::설상가상으로}} 비까지 갑자기 내리는 바람에 우산도 없이 빗속을 뛰어다녀야 했습니다.",
+        "fullTranslation": "To make matters worse, it suddenly started raining, so I had to run in the rain without an umbrella",
+        "note": "",
+        "front": "To make matters worse, it suddenly started raining, so I had to run in the rain without an umbrella",
+        "back": "설상가상으로",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 1,
+        "intraDayDue": 1795647185814,
+        "masteredAt": null,
+        "nextReview": "2026-11-20T23:00:00.000Z"
+      },
+      {
+        "id": 1795300758222.4326,
+        "type": "cloze",
+        "parentId": "cloze_1795300758222_cza15",
+        "clozeIndex": 0,
+        "rawSentence": "영화는 무서워서 {{중간에|w trakcie::중간에}} TV를 껐어요",
+        "fullTranslation": "film byl straszny, wiec w trakcie wylaczylem TV",
+        "note": "",
+        "front": "film byl straszny, wiec w trakcie wylaczylem TV",
+        "back": "중간에",
+        "rep": 0,
+        "interval": 0,
+        "ef": 2.5,
+        "learningStep": 1,
+        "intraDayDue": 1795647204955,
+        "masteredAt": null,
+        "nextReview": "2026-11-20T23:00:00.000Z"
       }
     ],
     "hard": [
