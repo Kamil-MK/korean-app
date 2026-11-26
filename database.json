@@ -6357,11 +6357,11 @@
       "exampleSentence": "",
       "rep": 0,
       "interval": 1,
-      "ef": 1.8000000000000003,
+      "ef": 1.3,
       "learningStep": 0,
       "intraDayDue": null,
       "masteredAt": null,
-      "nextReview": "2026-11-25T23:00:00.000Z"
+      "nextReview": "2026-11-26T23:00:00.000Z"
     },
     {
       "id": 1795211130385.2087,
@@ -9036,7 +9036,7 @@
       "practicedMistakes": []
     },
     "2026-11-26": {
-      "again": 20,
+      "again": 21,
       "hard": 1,
       "good": 3,
       "easy": 22,
@@ -9315,6 +9315,20 @@
         "front": "nastawić",
         "back": "맞추다",
         "exampleSentence": "게다가 알람을 맞추지 않은 채로 잠드는 바람에 아침 여덟 시가 되어서야 눈을 떴습니다.",
+        "rep": 0,
+        "interval": 1,
+        "ef": 1.8000000000000003,
+        "learningStep": 0,
+        "intraDayDue": null,
+        "masteredAt": null,
+        "nextReview": "2026-11-25T23:00:00.000Z"
+      },
+      {
+        "id": 1795211001960.2524,
+        "type": "standard",
+        "front": "Zamknac oczy",
+        "back": "눈을 감다",
+        "exampleSentence": "",
         "rep": 0,
         "interval": 1,
         "ef": 1.8000000000000003,
